@@ -1,0 +1,4103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Layer</title>
+<desc>
+　Layer class is a class for managing <kw>layers</kw>.<r/>
+</desc>
+
+<member>
+	<name>Layer</name>
+	<type>constructor</type>
+	<shortdesc>Construction of Layer object</shortdesc>
+	<arg>
+		<argitem>
+			<name>window</name>
+			<default></default>
+			<desc>
+				　Specify the window (object of class <ref>Window</ref>) that will hold this layer.<r/>
+				　The window cannot be changed once it has been determined.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>parent</name>
+			<default></default>
+			<desc>
+				　Specifies the parent layer of this layer.<r/>
+				　If you specify null, it will be the primary layer.<r/>
+				　There can be only one primary layer in a window, and if a layer is used, there must always be one, and it is the parent layer of all layers.<r/>
+				　However, depending on the drawing device (configurable with <ref>Window.drawDevice</ref>), the window can have multiple primary layers.<r/>
+				　The parent of the layer can be changed with the <ref>Layer.parent</ref> property.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Constructs an object of the Layer class.<r/>
+		　The Layer class is built hidden.<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>onClick</name>
+	<type>event</type>
+	<shortdesc>Layer clicked</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　The value of the x coordinate (in view coordinates of the layer) of where the layer was clicked.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　The value of the y coordinate (in the layer's display coordinates) of where the layer was clicked.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when the layer has been clicked.<r/>
+	</desc>
+	<ref>Layer.onMouseDown</ref>
+	<ref>Layer.onDoubleClick</ref>
+</member>
+
+<member>
+	<name>onDoubleClick</name>
+	<type>event</type>
+	<shortdesc>Layer is double-clicked</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　The value of the x coordinate (in the layer's display coordinates) of where the layer was double-clicked.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　The value of the y-coordinate (in the display coordinates of the layer) where the layer was double-clicked.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when a layer is double-clicked.<r/>
+	</desc>
+	<ref>Layer.onClick</ref>
+</member>
+
+<member>
+	<name>onMouseDown</name>
+	<type>event</type>
+	<shortdesc>Mouse button pressed</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　The value of the x coordinate (in layer display coordinates) of the position where the mouse button was pressed.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　The value of the y coordinate (in the display coordinates of the layer) of the position where the mouse button was pressed.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>button</name>
+			<default></default>
+			<desc>
+				　The mouse button that was pressed. One of the following values:<r/>
+				<tt><kw>mbLeft</kw>    : </tt>Left mouse button pressed<r/>
+				<tt><kw>mbMiddle</kw>  : </tt>Middle mouse button pressed<r/>
+				<tt><kw>mbRight</kw>   : </tt>Right mouse button pressed<r/>
+				<tt><kw>mbX1</kw>      : </tt>The first button of the mouse's side key is pressed<r/>
+				<tt><kw>mbX2</kw>      : </tt>The second button of the mouse's side key is pressed<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shift</name>
+			<default></default>
+			<desc>
+				　The state of the shift key that was pressed at the same time when the mouse button was pressed.
+				It is a combination of the following values by bit OR.<r/>
+				<tt><kw>ssAlt</kw>     : </tt>ALT key was pressed<r/>
+				<tt><kw>ssShift</kw>   : </tt>SHIFT key was pressed<r/>
+				<tt><kw>ssCtrl</kw>    : </tt>CTRL key was pressed<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when the mouse button is pressed.<r/>
+	</desc>
+	<ref>Layer.onClick</ref>
+</member>
+
+<member>
+	<name>onMouseUp</name>
+	<type>event</type>
+	<shortdesc>Mouse button released</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　The value of the x coordinate (in view coordinates of the layer) of the position where the mouse button was released.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　The value of the y-coordinate (in the display coordinates of the layer) where the mouse button was released.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>button</name>
+			<default></default>
+			<desc>
+				　The mouse button that was released. One of the following values:<r/>
+				<tt><kw>mbLeft</kw>    : </tt>Left mouse button released<r/>
+				<tt><kw>mbMiddle</kw>  : </tt>Middle mouse button released<r/>
+				<tt><kw>mbRight</kw>   : </tt>Right mouse button released<r/>
+				<tt><kw>mbX1</kw>      : </tt>Mouse side key first button released<r/>
+				<tt><kw>mbX2</kw>      : </tt>Mouse side key second button released<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shift</name>
+			<default></default>
+			<desc>
+				　The state of the shift key that was pressed at the same time when the mouse button was released.
+				It is a combination of the following values by bit OR.<r/>
+				<tt><kw>ssAlt</kw>     : </tt>ALT key was pressed<r/>
+				<tt><kw>ssShift</kw>   : </tt>SHIFT key was pressed<r/>
+				<tt><kw>ssCtrl</kw>    : </tt>CTRL key was pressed<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when the mouse button is released.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onMouseMove</name>
+	<type>event</type>
+	<shortdesc>Mouse moved</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　The value of the x coordinate (in the display coordinates of the layer) of the position where the mouse moved.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　The y-coordinate value (in layer display coordinates) of the position where the mouse has moved.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shift</name>
+			<default></default>
+			<desc>
+				　The state of the shift keys and mouse buttons that were pressed at the same time when the mouse was moving.
+				It is a combination of the following values by bit OR.<r/>
+				<tt><kw>ssAlt</kw>     : </tt>ALT key was pressed<r/>
+				<tt><kw>ssShift</kw>   : </tt>SHIFT key was pressed<r/>
+				<tt><kw>ssCtrl</kw>    : </tt>CTRL key was pressed<r/>
+				<tt><kw>ssLeft</kw>    : </tt>Left mouse button was pressed<r/>
+				<tt><kw>ssMiddle</kw>  : </tt>The middle mouse button was pressed<r/>
+				<tt><kw>ssRight</kw>   : </tt>The right mouse button was pressed<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when the mouse moves.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onMouseEnter</name>
+	<type>event</type>
+	<shortdesc>Mouse came in</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when the mouse enters the area of the layer.<r/>
+	</desc>
+	<ref>Layer.onMouseLeave</ref>
+</member>
+
+<member>
+	<name>onMouseLeave</name>
+	<type>event</type>
+	<shortdesc>Mouse came out</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when the mouse leaves the area of the layer.<r/>
+	</desc>
+	<ref>Layer.onMouseEnter</ref>
+</member>
+
+<member>
+	<name>onMouseWheel</name>
+	<type>event</type>
+	<shortdesc>Mouse wheel rotated</shortdesc>
+	<arg>
+		<argitem>
+			<name>shift</name>
+			<default></default>
+			<desc>
+				　The state of shift keys and mouse buttons that were pressed at the same time when the mouse was moving.
+				It is a combination of the following values by bit OR.<r/>
+				<tt><kw>ssAlt</kw>     : </tt>ALT key was pressed<r/>
+				<tt><kw>ssShift</kw>   : </tt>SHIFT key was pressed<r/>
+				<tt><kw>ssCtrl</kw>    : </tt>CTRL key was pressed<r/>
+				<tt><kw>ssLeft</kw>    : </tt>Left mouse button was pressed<r/>
+				<tt><kw>ssMiddle</kw>  : </tt>The middle mouse button was pressed<r/>
+				<tt><kw>ssRight</kw>   : </tt>The right mouse button was pressed<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>delta</name>
+			<default></default>
+			<desc>
+				　The rotation angle of the wheel. Positive when turned up (opposite to the user), negative when turned down (toward the user). Usually the minimum amount is 120.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　The value of the x-coordinate (in layer display coordinates) of where the wheel was rotated.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　The value of the y-coordinate (in layer display coordinates) of where the wheel has rotated.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when the mouse wheel rolls.<r/>
+		　This event, like the keyboard event, occurs only on the layer that has focus.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onKeyDown</name>
+	<type>event</type>
+	<shortdesc>Key pressed</shortdesc>
+	<arg>
+		<argitem>
+			<name>key</name>
+			<default></default>
+			<desc>
+				　The <kw>virtual key code</kw> value of the pressed key.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shift</name>
+			<default></default>
+			<desc>
+				　The state of the shift keys and mouse buttons that were pressed at the same time when the key was pressed.
+				It is a combination of the following values by bit OR.<r/>
+				<tt><kw>ssAlt</kw>     : </tt>ALT key was pressed<r/>
+				<tt><kw>ssShift</kw>   : </tt>SHIFT key was pressed<r/>
+				<tt><kw>ssCtrl</kw>    : </tt>CTRL key was pressed<r/>
+				<tt><kw>ssLeft</kw>    : </tt>The left mouse button was pressed<r/>
+				<tt><kw>ssMiddle</kw>  : </tt>The middle mouse button was pressed<r/>
+				<tt><kw>ssRight</kw>   : </tt>The right mouse button was pressed<r/>
+				　If the keyboard is pressed for a long time and a key repeat occurs, the following values are also combined.<r/>
+				<tt><kw>ssRepeat</kw>  : </tt>Key repeat occurred<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>process</name>
+			<default>true</default>
+			<desc>
+				　If you pass false for this parameter when calling the parent class's onKeyDown, the parent class will not perform default processing (such as moving focus) for that key.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when a key is pressed.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onKeyUp</name>
+	<type>event</type>
+	<shortdesc>Key released</shortdesc>
+	<arg>
+		<argitem>
+			<name>key</name>
+			<default></default>
+			<desc>
+				　The <kw>virtual key code</kw> value of the released key.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shift</name>
+			<default></default>
+			<desc>
+				　The state of the shift keys and mouse buttons that were pressed at the same time when the key was released.
+				It is a combination of the following values by bit OR.<r/>
+				<tt><kw>ssAlt</kw>     : </tt>ALT key was pressed<r/>
+				<tt><kw>ssShift</kw>   : </tt>SHIFT key was pressed<r/>
+				<tt><kw>ssCtrl</kw>    : </tt>CTRL key was pressed<r/>
+				<tt><kw>ssLeft</kw>    : </tt>The left mouse button was pressed<r/>
+				<tt><kw>ssMiddle</kw>  : </tt>The middle mouse button was pressed<r/>
+				<tt><kw>ssRight</kw>   : </tt>The right mouse button was pressed<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>process</name>
+			<default>true</default>
+			<desc>
+				　If you pass false for this parameter when calling the parent class's onKeyUp, the parent class will not perform default processing (such as moving focus) for that key.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when a key is released.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onKeyPress</name>
+	<type>event</type>
+	<shortdesc>Character entered</shortdesc>
+	<arg>
+		<argitem>
+			<name>key</name>
+			<default></default>
+			<desc>
+				　The character entered.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>process</name>
+			<default>true</default>
+			<desc>
+				　If you pass false for this argument when calling the parent class's onKeyPress, the parent class will not perform default processing (such as moving focus) for that key.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when a character is entered. Unlike <ref>Layer.onKeyDown</ref>, onKeyDown handles virtual key codes, whereas this event deals with the characters themselves. This event does not occur if the pressed key is a key that is not related to characters (such as a function key).<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>onHitTest</name>
+	<type>event</type>
+	<shortdesc>collision detection</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　The x-coordinate (within the layer's display coordinates) of the location at which to determine the hit.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　The y-coordinate (within the layer's display coordinates) of the location where the hit is to be determined.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>hit</name>
+			<default></default>
+			<desc>
+				　As a result of the hit judgment, it is true if it is hit, false if it is off.
+				Pass the result of the hit judgment to this argument of the superclass event of the same name.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Called when a hit judgment (hit test) is performed for a point in the layer.<r/>
+		　For the result of the hit judgment, pass the result of the hit judgment in the third argument of this event of the super class (pass the first argument and the second argument as they are).<r/>
+		　As a result of the hit judgment, if it hits, the mouse message will be opaque and will be processed in that layer.<r/>
+		　If not hit, it is transparent and mouse messages are processed in a deeper layer.<r/>
+		　This event is called after a hit has been determined in <ref>Layer.hitThreshold</ref> or <ref>Layer.hitType</ref>. Therefore, this event will not be called if it is judged as "Not hit" by Layer.hitThreshold or Layer.hitType.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onBlur</name>
+	<type>event</type>
+	<shortdesc>Lost focus</shortdesc>
+	<arg>
+		<argitem>
+			<name>focused</name>
+			<default></default>
+			<desc>
+				　The layer object that has gained the new focus.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Called when the layer loses focus.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onFocus</name>
+	<type>event</type>
+	<shortdesc>Got focus</shortdesc>
+	<arg>
+		<argitem>
+			<name>focused</name>
+			<default></default>
+			<desc>
+				　The layer object that has lost focus.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>direction</name>
+			<default></default>
+			<desc>
+				　True if the focus is changed by searching backwards, false if it is done by searching forwards.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Called when the layer gains focus.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onNodeDisabled</name>
+	<type>event</type>
+	<shortdesc>Node becomes inoperable</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Called when a layer becomes inoperable due to a change in the <ref>Layer.enabled</ref> property of that layer or a layer above it (in a parent-child relationship).<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onNodeEnabled</name>
+	<type>event</type>
+	<shortdesc>Node is operational</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Called when the layer becomes operable because the <ref>Layer.enabled</ref> property of that layer or a layer above it (in a parent-child relationship) has changed.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onSearchPrevFocusable</name>
+	<type>event</type>
+	<shortdesc>Search forward for focusable layers</shortdesc>
+	<arg>
+		<argitem>
+			<name>layer</name>
+			<default></default>
+			<desc>
+				　Layer object that receives focus.<r/>
+				　Specify as an argument when calling the method of the same name in the parent class.<r/>
+				　If null is passed, it will be treated as if there is no focusable layer.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Event that occurs when performing a forward search for a focusable layer.<r/>
+		　When specifying the layer that receives focus, specify that layer in the argument of the event of the same name in the super class.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onSearchNextFocusable</name>
+	<type>event</type>
+	<shortdesc>Search backward for focusable layers</shortdesc>
+	<arg>
+		<argitem>
+			<name>layer</name>
+			<default></default>
+			<desc>
+				　Layer object that receives focus.<r/>
+				　Specify as an argument when calling the method of the same name in the parent class.<r/>
+				　If null is passed, it will be treated as if there is no focusable layer.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Event fired when searching backward for focusable layer.<r/>
+		　When specifying the layer that receives focus, specify that layer in the argument of the event of the same name in the super class.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onBeforeFocus</name>
+	<type>event</type>
+	<shortdesc>Just before receiving focus</shortdesc>
+	<arg>
+		<argitem>
+			<name>layer</name>
+			<default></default>
+			<desc>
+				　Layer object that receives focus.<r/>
+				　Usually, this is passed, but you can specify a different layer object when you call the event of the same name in the superclass so that the focus is passed to that layer.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>blurred</name>
+			<default></default>
+			<desc>
+				　Layer object that loses focus.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>direction</name>
+			<default></default>
+			<desc>
+				　True if the focus is changed by searching backwards, false if it is done by searching forwards.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Event which occurs just before receiving focus.<r/>
+		　When specifying the layer to receive focus, you can specify that layer as the first argument of the event of the same name in the super class.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onPaint</name>
+	<type>event</type>
+	<shortdesc>When drawn</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Called just before the layer is actually drawn on the window.<r/>
+		　This event will only be called when the <ref>Layer.callOnPaint</ref> property is true, and Layer.callOnPaint will automatically be set to false after this event has finished executing.<r/>
+	</desc>
+	<ref>Layer.update</ref>
+</member>
+
+<member>
+	<name>onTransitionCompleted</name>
+	<type>event</type>
+	<shortdesc>Transition ended</shortdesc>
+	<arg>
+		<argitem>
+			<name>dest</name>
+			<default></default>
+			<desc>
+				　The layer object to transition to (usually this) is passed.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>src</name>
+			<default></default>
+			<desc>
+				　The source layer object of the transition is passed.<r/>
+				　Can be null for some transition types.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Called when the transition ends.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onTouchDown</name>
+	<type>event</type>
+	<shortdesc>Screen touched</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　The value of the x coordinate (in client coordinates) of the touched location.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　The value of the y coordinate (in client coordinates) of the touched location.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cx</name>
+			<default></default>
+			<desc>
+				　The number of horizontal pixels the finger is touching.<r/>
+				　Always 1 if the device is not compatible.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cy</name>
+			<default></default>
+			<desc>
+				　The number of vertical pixels the finger is touching.<r/>
+				　Always 1 if the device is not compatible.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>id</name>
+			<default></default>
+			<desc>
+				　Touch ID.<r/>
+				　At the time of multi-touch, a unique value is set for each position, and the position can be identified by this ID.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when the touch panel is touched.<r/>
+		　This event occurs when the X, Y coordinates are in this layer.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onTouchUp</name>
+	<type>event</type>
+	<shortdesc>Finger released from screen</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　The value of the x coordinate (in client coordinates) of the location that was released.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　The value of the y coordinate (in client coordinates) of the location that was released.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cx</name>
+			<default></default>
+			<desc>
+				　The number of horizontal pixels the finger is touching.<r/>
+				　Always 1 if the device is not compatible.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cy</name>
+			<default></default>
+			<desc>
+				　The number of vertical pixels the finger is touching.<r/>
+				　Always 1 if the device is not compatible.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>id</name>
+			<default></default>
+			<desc>
+				　Touch ID.<r/>
+				　At the time of multi-touch, a unique value is set for each position, and the position can be identified by this ID.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when a finger is released from the touch panel.<r/>
+		　This event occurs when the X, Y coordinates are in this layer.<r/>
+		　However, unlike the mouse, it is determined by the current coordinates, so it may not be the same as the layer where <ref>onTouchDown</ref> occurred.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onTouchMove</name>
+	<type>event</type>
+	<shortdesc>Finger moved</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　The value of the x coordinate (in client coordinates) of the touch location.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　The value of the y coordinate (in client coordinates) of the touch location.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cx</name>
+			<default></default>
+			<desc>
+				　The number of horizontal pixels the finger is touching.<r/>
+				　Always 1 if the device is not compatible.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cy</name>
+			<default></default>
+			<desc>
+				　The number of vertical pixels the finger is touching.<r/>
+				　Always 1 if the device is not compatible.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>id</name>
+			<default></default>
+			<desc>
+				　Touch ID.<r/>
+				　At the time of multi-touch, a unique value is set for each position, and the position can be identified by this ID.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when a finger on the touch panel moves.<r/>
+		　This event occurs when the X, Y coordinates are in this layer.<r/>
+		　However, unlike the mouse, it is determined by the current coordinates, so it may not be the same as the layer where <ref>onTouchDown</ref> occurred.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onTouchScaling</name>
+	<type>event</type>
+	<shortdesc>Enlarged operation</shortdesc>
+	<arg>
+		<argitem>
+			<name>startdistance</name>
+			<default></default>
+			<desc>
+				　Pixel distance when multi-touch started.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>currentdistance</name>
+			<default></default>
+			<desc>
+				　The pixel distance of the touch when the event occurred.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cx</name>
+			<default></default>
+			<desc>
+				　The value of the x coordinate (in client coordinates) of the center location.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cy</name>
+			<default></default>
+			<desc>
+				　The value of the y-coordinate (in client coordinates) of the center location.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>flag</name>
+			<default></default>
+			<desc>
+				　Multi-touch status flag.<r/>
+				<tt><kw>0x01</kw>     : </tt>Set to the first event when multi-touch is started.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when performing a multi-touch enlargement operation on the touch panel.<r/>
+		　This event fires on the layer that has focus.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onTouchRotate</name>
+	<type>event</type>
+	<shortdesc>Rotated</shortdesc>
+	<arg>
+		<argitem>
+			<name>startangle</name>
+			<default></default>
+			<desc>
+				　The radian angle when multi-touch was started.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>currentangle</name>
+			<default></default>
+			<desc>
+				　The radian angle of the touch when the event occurred.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>distance</name>
+			<default></default>
+			<desc>
+				　The pixel distance of the touch when the event occurred.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cx</name>
+			<default></default>
+			<desc>
+				　The value of the x coordinate (in client coordinates) of the center location.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cy</name>
+			<default></default>
+			<desc>
+				　The value of the y-coordinate (in client coordinates) of the center location.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>flag</name>
+			<default></default>
+			<desc>
+				　Multi-touch status flag.<r/>
+				<tt><kw>0x01</kw>     : </tt>Set to the first event when multi-touch is started.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when rotating by multi-touch on the touch panel.<r/>
+		　This event fires on the layer that has focus.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onMultiTouch</name>
+	<type>event</type>
+	<shortdesc>Multi-touch status changed</shortdesc>
+	<arg></arg>
+	<result></result>
+	<desc>
+		　Occurs when a multi-touch state has started, moved, or moved away.<r/>
+		　Coordinate information can be obtained with the <ref>Window.touchPointCount</ref> property and <ref>Window.getTouchPoint</ref> method.<r/>
+		　This event fires on the layer that has focus.<r/>
+	</desc>
+	<ref>Window.getTouchPoint</ref>
+	<ref>Window.touchPointCount</ref>
+</member>
+
+
+<member>
+	<name>moveBefore</name>
+	<type>method</type>
+	<shortdesc>Move to before specified layer</shortdesc>
+	<arg>
+		<argitem>
+			<name>layer</name>
+			<default></default>
+			<desc>
+				　Move to the position before the layer specified here.<r/>
+				　Only sibling layers (layers with the same parent) can be specified.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Move to the position before the specified layer in the stacking order.<r/>
+		　This method sets the <ref>Layer.absoluteOrderMode</ref> property to false.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>moveBehind</name>
+	<type>method</type>
+	<shortdesc>Move to the back of the specified layer</shortdesc>
+	<arg>
+		<argitem>
+			<name>layer</name>
+			<default></default>
+			<desc>
+				　Move to the back of the layer specified here.<r/>
+				　Only sibling layers (layers with the same parent) can be specified.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Moves to the depth of the specified layer in the stacking order.<r/>
+		　This method sets the <ref>Layer.absoluteOrderMode</ref> property to false.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>bringToBack</name>
+	<type>method</type>
+	<shortdesc>Move to the end</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　In the stacking order, move to the back of sibling layers (layers with the same parent).<r/>
+		　Executing this method sets the <ref>Layer.absoluteOrderMode</ref> property of the parent layer to false.<r/>
+	</desc>
+	<ref>Layer.order</ref>
+	<ref>Layer.absolute</ref>
+	<ref>Layer.absoluteOrderMode</ref>
+	<ref>Layer.bringToFront</ref>
+</member>
+
+<member>
+	<name>bringToFront</name>
+	<type>method</type>
+	<shortdesc>Move to the front</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　In the stacking order, move to the front of sibling layers (layers with the same parent).<r/>
+		　Executing this method sets the <ref>Layer.absoluteOrderMode</ref> property of the parent layer to false.<r/>
+	</desc>
+	<ref>Layer.order</ref>
+	<ref>Layer.absolute</ref>
+	<ref>Layer.absoluteOrderMode</ref>
+	<ref>Layer.bringToBack</ref>
+</member>
+
+<member>
+	<name>loadImages</name>
+	<type>method</type>
+	<shortdesc>Loading images</shortdesc>
+	<arg>
+		<argitem>
+			<name>image</name>
+			<default></default>
+			<desc>
+				　Specify the image storage to load.<r/>
+				　If there is an image storage with _m added to the storage name (excluding extension) specified here, it will be read as a mask (opacity) image.<r/>
+				　If there is an image storage with _p added to the storage name specified here (excluding the extension), it will be read as an area image.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>colorkey</name>
+			<default>clNone</default>
+			<desc>
+				　Specify the color key (transparent color) of the image to be read.<r/>
+				　If a color is specified in 0xRRGGBB format, that color will be used as the color key.<r/>
+				　If you specify a value obtained by adding an arbitrary palette index to <tt><kw>clPalIdx</kw></tt>, that palette index becomes transparent (for images with 256 colors or less).<r/>
+				　If you specify <tt><kw>clAdapt</kw></tt>, the most frequently used color in the top line of the image will automatically be transparent.<r/>
+				　If you specify a value obtained by adding a value representing a color in the form of 0xRRGGBB to <tt><kw>clAlphaMat</kw></tt>, the image will be superimposed on that color using alpha blending (ltAlpha method).
+				For example, (clAlphaMat + 0xffffff) overlays the imported image on a white color.
+				All images will be opaque (all images will be opaque, but note that tag information is not changed in this mode).<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Dictionary array of tag information</result>
+	<desc>
+		　Load an image into a layer.<r/>
+		　This method changes the image size of the layer, but does not change the display size of the layer unless the image size is smaller than the display size of the layer.<r/>
+		　A dictionary array of tag information (information about the image itself, such as the layer type and display position of the image) is returned as the return value. Be careful not to confuse this with the meaning of "tag" in KAG.<r/>
+		　If the image has no tag information, null is returned.<r/>
+		　In the current version, tag information can only be held in PNG and TLG5 / 6 formats. See <link href="TPC"/> for available information.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>loadProvinceImage</name>
+	<type>method</type>
+	<shortdesc>Load area image</shortdesc>
+	<arg>
+		<argitem>
+			<name>image</name>
+			<default></default>
+			<desc>
+				　Specify the image storage to be read as the area image.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Load the area image of the layer. Other images remain as they are.<r/>
+		　An exception will occur if the image you are trying to load is different from the layer image size.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>getMainPixel</name>
+	<type>method</type>
+	<shortdesc>Get main image color</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　Specifies the x coordinate (in image coordinates of the layer) from which to get the color.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　Specifies the y coordinate (in image coordinates of the layer) from which to get the color.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>0xRRGGBB format color number</result>
+	<desc>
+		　Gets the color at any position in the layer main image (the image that holds the color).<r/>
+		　Specifying an invalid (out of range) location as an image coordinate will raise an exception.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>setMainPixel</name>
+	<type>method</type>
+	<shortdesc>Setting the color of the main image</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　Specify the x coordinate (in layer image coordinates) to set the color.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　Set the color Specify the y-coordinate (in layer image coordinates).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>color</name>
+			<default></default>
+			<desc>
+				　Specify the color to be set in 0xRRGGBB format.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Set the color at any position of the layer main image (image that retains color).<r/>
+		　Specifying an invalid (out of range) location as an image coordinate will raise an exception.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>getMaskPixel</name>
+	<type>method</type>
+	<shortdesc>Get value of mask image</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　Specifies the x coordinate (in layer image coordinates) from which to get the value.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　The y coordinate (in image coordinates of the layer) to get the value for.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Mask image value (0 to 255)</result>
+	<desc>
+		　Gets the value (0-255) at an arbitrary position in the layer mask image (image that retains opacity).<r/>
+		　Specifying an invalid (out of range) location as an image coordinate will raise an exception.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>setMaskPixel</name>
+	<type>method</type>
+	<shortdesc>Setting mask image values</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　Set the value Specify the x coordinate (in layer image coordinates).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　Set the value Specify the y coordinate (in layer image coordinates).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>value</name>
+			<default></default>
+			<desc>
+				　Specify the value to be set (0 to 255).<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Set a value (0 to 255) at an arbitrary position in the layer mask image (image retaining opacity).<r/>
+		　Specifying an invalid (out of range) location as an image coordinate will raise an exception.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>getProvincePixel</name>
+	<type>method</type>
+	<shortdesc>Get area image values</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　Specifies the x coordinate (in layer image coordinates) from which to get the value.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　The y coordinate (in image coordinates of the layer) to get the value for.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Area image value (0 to 255)</result>
+	<desc>
+		　Gets the value (0-255) at any position in the layer area image.<r/>
+		　Specifying an invalid (out of range) location as an image coordinate will raise an exception.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>setProvincePixel</name>
+	<type>method</type>
+	<shortdesc>Setting the value of the area image</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　Set the value Specify the x coordinate (in layer image coordinates).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　Set the value Specify the y coordinate (in layer image coordinates).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>value</name>
+			<default></default>
+			<desc>
+				　Specify the value to be set (0 to 255).<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Set a value (0 to 255) at any position in the layer area image.<r/>
+		　Specifying an invalid (out of range) location as an image coordinate will raise an exception.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>getLayerAt</name>
+	<type>method</type>
+	<shortdesc>Get layer at specified position</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　Specify the x coordinate of the layer position you want to get on the display coordinates in pixels.<r/>
+				　The display coordinates of the layer that executes this method will be used (not the display coordinates on the primary layer)<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　Specify the y coordinate of the position of the layer you want to get on the display coordinates in pixels.<r/>
+				　The display coordinates of the layer that executes this method will be used (not the display coordinates on the primary layer)<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>exclude_self</name>
+			<default>false</default>
+			<desc>
+				　Specify whether to exclude yourself from searching for layers.<r/>
+				　If you specify false, your own layers will be included in the search.<r/>
+				　If set to true, your own layers will be excluded from the search and will be treated as if they do not exist.<r/>
+				　If this argument is omitted, false is assumed.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>get_disabled</name>
+			<default>false</default>
+			<desc>
+				　Specifies whether to get disabled layer objects.<r/>
+				　If false is specified, null is returned if there is an invalid layer (<ref>Layer.enabled</ref> property is false) at the specified position.<r/>
+				　If set to true, if a disabled layer is at the specified position, returns the layer object.<r/>
+				　If this argument is omitted, false is assumed.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Layer object at the specified position. If there is no layer at the specified position, null is returned.</result>
+	<desc>
+		　Returns the layer object at the position indicated by x, y.<r/>
+		　The hit judgment uses the same mechanism as the normal mouse event hit judgment. In other words, the specified position is viewed from the front in the layer stacking order, and the layer that hit first is returned.<r/>
+		　By specifying true in the exclude_self argument, you can exclude the layer that executes this method from the search.<r/>
+	</desc>
+	<ref>Layer.hitType</ref>
+	<ref>Layer.hitThreshold</ref>
+	<ref>Layer.onHitTest</ref>
+</member>
+
+<member>
+	<name>releaseCapture</name>
+	<type>method</type>
+	<shortdesc>Cancel mouse event capture</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Cancel mouse event capture.<r/>
+		　Mouse event capture is a function in which mouse events are exclusively sent to only the layer where the mouse button was first pressed until the mouse button is released.<r/>
+		　This method removes this functionality and returns to normal mouse event handling.<r/>
+		　When this method is executed, mouse capture of layers belonging to the same window is canceled even if the layer on which the method is executed is different from the layer being captured.<r/>
+		　This method does nothing if not in capture state.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>setPos</name>
+	<type>method</type>
+	<shortdesc>Setting the layer display position</shortdesc>
+	<arg>
+		<argitem>
+			<name>left</name>
+			<default></default>
+			<desc>
+				　Specifies the left edge position (in display coordinates of the parent layer) of the layer, in pixels.<r/>
+				　This value can also be obtained and set using the <ref>Layer.left</ref> property.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>top</name>
+			<default></default>
+			<desc>
+				　Specifies the top edge of the layer (in parent layer display coordinates) in pixels.<r/>
+				　This value can also be obtained and set using the <ref>Layer.top</ref> property.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>width</name>
+			<default>void</default>
+			<desc>
+				　Specifies the width of the layer in pixels.<r/>
+				　This value can also be obtained and set using the <ref>Layer.width</ref> property.<r/>
+				　If this parameter and height parameter are omitted, only the position is changed by the left parameter and top parameter.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>height</name>
+			<default>void</default>
+			<desc>
+				　Specifies the height of the layer in pixels.<r/>
+				　This value can also be obtained and set using the <ref>Layer.height</ref> property.<r/>
+				　If this parameter and the width parameter are omitted, only the position is changed by the left and top parameters.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Set the display position of the layer.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>setClip</name>
+	<type>method</type>
+	<shortdesc>Setting the drawing clip rectangle</shortdesc>
+	<arg>
+		<argitem>
+			<name>left</name>
+			<default></default>
+			<desc>
+				　Specifies the left edge of the drawing clip rectangle (in layer image coordinates) in pixels.<r/>
+				　This value can also be obtained and set using the <ref>Layer.clipLeft</ref> property.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>top</name>
+			<default></default>
+			<desc>
+				　Specifies the top edge of the drawing clip rectangle (in layer image coordinates) in pixels.<r/>
+				　This value can also be obtained and set using the <ref>Layer.clipTop</ref> property.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>width</name>
+			<default>void</default>
+			<desc>
+				　Specifies the width of the drawing clip rectangle in pixels.<r/>
+				　This value can also be obtained and set using the <ref>Layer.clipWidth</ref> property.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>height</name>
+			<default>void</default>
+			<desc>
+				　Specifies the height of the drawing clip rectangle in pixels.<r/>
+				　This value can also be obtained and set using the <ref>Layer.clipHeight</ref> property.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Sets the <kw>drawing clip rectangle</kw> for the layer.<r/>
+		　Drawing on the layer is limited to the drawing clip rectangle (the part outside the rectangle is not drawn). However, some methods, such as <ref>Layer.flipLR</ref> and <ref>Layer.flipUD</ref>, are not affected by the drawing clip rectangle.<r/>
+		　By default, the clip rectangle is set to the entire layer image area (it can be drawn on the entire layer).<r/>
+		　The drawing clip rectangle returns to the initial value when the image is read, the image size is changed, or the display type of the layer is changed.<r/>
+		　Call this method with no arguments to reset the drawing clip rectangle to its initial value.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>setSize</name>
+	<type>method</type>
+	<shortdesc>Setting the layer display size</shortdesc>
+	<arg>
+		<argitem>
+			<name>width</name>
+			<default></default>
+			<desc>
+				　Specifies the width of the layer display in pixels.<r/>
+				　This value can also be obtained and set using the <ref>Layer.width</ref> property.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>height</name>
+			<default></default>
+			<desc>
+				　Specifies the height of the layer display in pixels.<r/>
+				　This value can also be obtained and set using the <ref>Layer.height</ref> property.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Set the display size of the layer.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>setSizeToImageSize</name>
+	<type>method</type>
+	<shortdesc>Match layer display size to image size</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Make the display size of the layer the same as the image size.<r/>
+		　Many operations that change the image size do not change the display size, but you can use this method to make the display size the same as the image size.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>setImagePos</name>
+	<type>method</type>
+	<shortdesc>Set layer image offset</shortdesc>
+	<arg>
+		<argitem>
+			<name>left</name>
+			<default></default>
+			<desc>
+				　Specify the left edge position (x offset) of the image to be displayed on the layer in pixels.<r/>
+				　This value can also be obtained and set using the <ref>Layer.imageLeft</ref> property.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>top</name>
+			<default></default>
+			<desc>
+				　Specify the top position (y offset) of the image to be displayed on the layer in pixels.<r/>
+				　This value can also be obtained and set using the <ref>Layer.imageTop</ref> property.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Specify the layer image offset.<r/>
+		　The layer image size can be larger than the layer display size, but not all can be displayed, so the display offset is specified by this method and the <ref>Layer.imageLeft</ref> and <ref>Layer.imageTop</ref> properties.<r/>
+		　The offset can be 0 or a negative number.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>setImageSize</name>
+	<type>method</type>
+	<shortdesc>Setting the layer image size</shortdesc>
+	<arg>
+		<argitem>
+			<name>width</name>
+			<default></default>
+			<desc>
+				　Specifies the width of the layer image in pixels.<r/>
+				　This value can also be obtained and set using the <ref>Layer.imageWidth</ref> property.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>height</name>
+			<default></default>
+			<desc>
+				　Specifies the height of the layer image in pixels.<r/>
+				　This value can also be obtained and set using the <ref>Layer.imageHeight</ref> property.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Specify the layer image size.<r/>
+		　When the size is increased, the display size of the layer is not changed, but when the size is reduced, the display size of the layer is also reduced.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>independMainImage</name>
+	<type>method</type>
+	<shortdesc>Unshare main image</shortdesc>
+	<arg>
+		<argitem>
+			<name>copy</name>
+			<default>true</default>
+			<desc>
+				　Specify whether to copy the original image when releasing the sharing status.<r/>
+				　Specifying true copies the original image. If false is specified, the original image will not be copied and the contents of the image will be undefined.
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Forcibly cancels the sharing state of the layer image.<r/>
+		　Kirari Kirari will share the same image without actually copying the image buffer if the entire image is copied to another layer using assignImages.<r/>
+		　Normally, this sharing state is automatically released just before trying to make changes to the image, but this method can be forcibly released.<r/>
+		　If you specify false for the copy argument, the sharing of the image will be canceled, but it will not be guaranteed to inherit the original image (the contents of the image will be undefined), but the sharing will be canceled faster can do. When rewriting the entire layer image, it is not necessary to inherit the original image, so it may be more efficient to call this method with false specified before drawing.<r/>
+		　This method does nothing if the image is not shared.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>independProvinceImage</name>
+	<type>method</type>
+	<shortdesc>Unsharing area image</shortdesc>
+	<arg>
+		<argitem>
+			<name>copy</name>
+			<default>true</default>
+			<desc>
+				　Specify whether to copy the original image when releasing the sharing status.<r/>
+				　Specifying true copies the original image. If false is specified, the original image will not be copied and the contents of the image will be undefined.
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Forcibly cancels the sharing status of the area image.<r/>
+		　Kirari Kirari will share the same image without actually copying the image buffer if the entire image is copied to another layer using assignImages.<r/>
+		　Normally, this sharing state is automatically released just before trying to make changes to the image, but this method can be forcibly released.<r/>
+		　If you specify false for the copy argument, the sharing of the image will be canceled, but it will not be guaranteed to inherit the original image (the contents of the image will be undefined), but the sharing will be canceled faster can do. When rewriting the entire layer image, it is not necessary to inherit the original image, so it may be more efficient to call this method with false specified before drawing.<r/>
+		　This method does nothing if the image is not shared.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>fillRect</name>
+	<type>method</type>
+	<shortdesc>Rectangle fill</shortdesc>
+	<arg>
+		<argitem>
+			<name>left</name>
+			<default></default>
+			<desc>
+				　Specifies the left edge of the rectangle to be filled, in pixels (at the image location).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>top</name>
+			<default></default>
+			<desc>
+				　Specifies the top edge of the rectangle to be filled, in pixels (at the image location).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>width</name>
+			<default></default>
+			<desc>
+				　Specifies the width of the filled rectangle in pixels (at the image position).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>height</name>
+			<default></default>
+			<desc>
+				　Specifies the height of the filled rectangle in pixels (at the image position).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>value</name>
+			<default></default>
+			<desc>
+				　Specify the fill color and value.<r/>
+				　The meaning of this value depends on the value of the <ref>Layer.face</ref> property.<r/>
+				<tt><kw>dfAlpha</kw> (or <kw>dfBoth</kw>)  </tt> : Specify opacity and color in 0xAARRGGBB format. Both the main and the mask are filled.<r/>
+				<tt><kw>dfAddAlpha</kw>              </tt> : Specify opacity and color in 0xAARRGGBB format. Both the main and the mask are filled.<r/>
+				<tt><kw>dfOpaque</kw> (or <kw>dfMain</kw>) </tt> : Please specify the color in 0xRRGGBB format. When the <ref>Layer.holdAlpha</ref> property is true, only the main is filled and the mask remains. When false, as in dfAlpha and dfAddAlpha, the opacity and color specification in 0xAARRGGBB format is accepted, and both the main and mask are filled.<r/>
+				<tt><kw>dfMask</kw>                  </tt> : Specify the mask (opacity) value (0 to 255). Only the mask is filled, the main remains.<r/>
+				<tt><kw>dfProvince</kw>              </tt> : Specify an area value (0 to 255). Only the area is filled.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Fills the rectangle of the specified layer image with the specified method.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>colorRect</name>
+	<type>method</type>
+	<shortdesc>Rectangular translucent fill</shortdesc>
+	<arg>
+		<argitem>
+			<name>left</name>
+			<default></default>
+			<desc>
+				　Specifies the left edge of the rectangle to be filled, in pixels (at the image location).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>top</name>
+			<default></default>
+			<desc>
+				　Specifies the top edge of the rectangle to be filled, in pixels (at the image location).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>width</name>
+			<default></default>
+			<desc>
+				　Specifies the width of the filled rectangle in pixels (at the image position).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>height</name>
+			<default></default>
+			<desc>
+				　Specifies the height of the filled rectangle in pixels (at the image position).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>value</name>
+			<default></default>
+			<desc>
+				　Specify the fill color and value.<r/>
+				　The meaning of this value depends on the value of the <ref>Layer.face</ref> property.<r/>
+				<tt><kw>dfAlpha</kw> (or <kw>dfBoth</kw>)   </tt> : Specify color in 0xRRGGBB format<r/>
+				<tt><kw>dfAddAlpha</kw>                   </tt> : Specify color in 0xRRGGBB format<r/>
+				<tt><kw>dfOpaque</kw> (or <kw>dfMain</kw>)  </tt> : Specify color in 0xRRGGBB format<r/>
+				<tt><kw>dfMask</kw>                       </tt> : Specify the value of mask (opacity) (0 to 255)<r/>
+				<tt><kw>dfProvince</kw>                   </tt> : Please specify a value for the area (0-255)<r/>
+				　If dfOpaque is specified, the mask information is ignored (whether the mask information is retained or destroyed depends on the <ref>Layer.holdAlpha</ref> property). If dfMask is specified, the color information will remain as it is.<r/>
+				　This argument is ignored for dfAlpha and if opa is negative.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>opa</name>
+			<default>255</default>
+			<desc>
+				　Specifies the opacity to fill (-255 to 0 to 255).<r/>
+				　This argument is ignored if the value of the <ref>Layer.face</ref> property is dfMask or dfProvince (always completely opaque).<r/>
+				　Specifying a negative number is valid only when <ref>Layer.face</ref> is dfAlpha, in which case the value argument is ignored and opacity is removed from the image (specifying -255 makes the rectangle completely transparent).
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Fills the rectangle of the specified layer image with the specified method.<r/>
+		　Unlike <ref>Layer.fillRect</ref>, you can specify transparency and fill it with translucency.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>drawText</name>
+	<type>method</type>
+	<shortdesc>Character drawing</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　Specifies the x coordinate (at image position) of the origin at which to start drawing characters in pixels.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　Specifies the y coordinate (at the image position) of the origin at which to start drawing characters in pixels.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>text</name>
+			<default></default>
+			<desc>
+				　Specify the character to be drawn.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>color</name>
+			<default></default>
+			<desc>
+				　Specify the color of the text to be drawn in 0xRRGGBB format.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>opa</name>
+			<default>255</default>
+			<desc>
+				　Specify the opacity (-255 to 0 to 255) of the character to be drawn.<r/>
+				　Specifying a negative number is valid only when <ref>Layer.face</ref> is dfAlpha, in which case the opacity is removed from the character shape (the smaller the value, the greater the effect).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>aa</name>
+			<default>true</default>
+			<desc>
+				　Specify whether to perform anti-aliasing.<r/>
+				　Specifying true performs anti-aliasing. If you specify false, it will not be performed.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shadowlevel</name>
+			<default>0</default>
+			<desc>
+				　Specifies the opacity of the shadow. The appropriate value depends on the value of the shadowwidth argument.<r/>
+				If 0 is specified, no shadow is drawn.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shadowcolor</name>
+			<default>0x000000</default>
+			<desc>
+				　Specifies the color of the shadow in 0xRRGGBB format.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shadowwidth</name>
+			<default>0</default>
+			<desc>
+				　Specifies the width (blur) of the shadow. 0 is the sharpest (no blurring), and higher values can blur shadows.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shadowofsx</name>
+			<default>0</default>
+			<desc>
+				　Specifies the x-coordinate value of the shadow location in pixels. If 0 is specified, the shadow is drawn directly below.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shadowofsy</name>
+			<default>0</default>
+			<desc>
+				　Specifies the y-coordinate value of the shadow location in pixels. If 0 is specified, the shadow is drawn directly below.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Draw text on the layer. Only draws when <ref>Layer.face</ref> is dfAlpha (or dfBoth) or dfAddAlpha or dfOpaque (or dfMain).<r/>
+		　If dfOpaque (or dfMain) is specified, whether the destination mask is destroyed or protected depends on the <ref>Layer.holdAlpha</ref> property.<r/>
+		　The font specified by <ref>Layer.font</ref> is used.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>drawGlyph</name>
+	<type>method</type>
+	<shortdesc>Character drawing</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　Specifies the x coordinate (at image position) of the origin at which to start drawing characters in pixels.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　Specifies the y coordinate (at the image position) of the origin at which to start drawing characters in pixels.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>glyph</name>
+			<default></default>
+			<desc>
+				　Specifies the glyph to draw.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>color</name>
+			<default></default>
+			<desc>
+				　Specify the color of the text to be drawn in 0xRRGGBB format.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>opa</name>
+			<default>255</default>
+			<desc>
+				　Specify the opacity (-255 to 0 to 255) of the character to be drawn.<r/>
+				　Specifying a negative number is valid only when face is dfAlpha, in which case the opacity is removed from the character shape (the smaller the value, the greater the effect).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>aa</name>
+			<default>true</default>
+			<desc>
+				　Specify whether to perform anti-aliasing.<r/>
+				　Specifying true performs anti-aliasing. If you specify false, it will not be performed.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shadowlevel</name>
+			<default>0</default>
+			<desc>
+				　Specifies the opacity of the shadow. The appropriate value depends on the value of the shadowwidth argument.<r/>
+				If 0 is specified, no shadow is drawn.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shadowcolor</name>
+			<default>0x000000</default>
+			<desc>
+				　Specifies the color of the shadow in 0xRRGGBB format.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shadowwidth</name>
+			<default>0</default>
+			<desc>
+				　Specifies the width (blur) of the shadow. 0 is the sharpest (no blurring), and higher values can blur shadows.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shadowofsx</name>
+			<default>0</default>
+			<desc>
+				　Specifies the x-coordinate value of the shadow location in pixels. If 0 is specified, the shadow is drawn directly below.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shadowofsy</name>
+			<default>0</default>
+			<desc>
+				　Specifies the y-coordinate value of the shadow location in pixels. If 0 is specified, the shadow is drawn directly below.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Draws a glyph on a layer.<r/>
+		　A glyph specifies an array of the form glyph: Array [9] = [width, height, originx, originy, incx, incy, inc, bitmap (Octet), colors].<r/>
+		　If the color of the glyph is omitted, it will be determined to be 256 shades.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>copyRect</name>
+	<type>method</type>
+	<shortdesc>Rectangle copy</shortdesc>
+	<arg>
+		<argitem>
+			<name>dleft</name>
+			<default></default>
+			<desc>
+				　Specifies the left edge of the destination rectangle in pixels (at the image location of the destination layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>dtop</name>
+			<default></default>
+			<desc>
+				　Specifies the top edge of the destination rectangle in pixels (at the image location of the destination layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>src</name>
+			<default></default>
+			<desc>
+				　Specify the copy source layer object.<r/>
+				　Bitmap class objects can also be specified. (1.1.0 or later)<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>sleft</name>
+			<default></default>
+			<desc>
+				　Specifies the left edge of the rectangle to be copied in pixels (at the image position of the source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>stop</name>
+			<default></default>
+			<desc>
+				　Specifies the top edge of the rectangle to be copied in pixels (at the image position of the source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>swidth</name>
+			<default></default>
+			<desc>
+				　Specifies the width of the rectangle to be copied in pixels (at the image position of the source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>sheight</name>
+			<default></default>
+			<desc>
+				　Specifies the height of the rectangle to be copied in pixels (at the image position of the source layer).<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Copies the rectangular portion of the specified copy source layer to the specified position on your layer.<r/>
+		　The image to be copied depends on the value of the <ref>Layer.face</ref> property of the destination layer (the layer that executes the method).<r/>
+		<tt><kw>dfAlpha</kw> (or dfBoth)    </tt> : The main image and mask image are copied<r/>
+		<tt><kw>dfAddAlpha</kw>             </tt> : The main image and mask image are copied<r/>
+		<tt><kw>dfOpaque</kw> (or dfMain)   </tt> : If the <ref>Layer.holdAlpha</ref> property is true, only the main image is copied (the mask image is not copied). If false, the main image and mask image will be copied<r/>
+		<tt><kw>dfMask</kw>                 </tt> : Only the mask image is copied (the main image is not copied)<r/>
+		<tt><kw>dfProvince</kw>             </tt> : Only the area image is copied (the mask image and main image are not copied)<r/>
+		　The Layer.face property of the source layer is ignored.<r/>
+		　This method is not affected by <ref>Layer.holdAlpha</ref> (in the case of dfAlpha or dfAddAlpha, the mask image is copied regardless of holdAlpha)<r/>
+	</desc>
+</member>
+
+<member>
+	<name>copy9Patch</name>
+	<type>method</type>
+	<shortdesc>9 Image copy using path (1.3.0 or later)</shortdesc>
+	<arg>
+		<argitem>
+			<name>src</name>
+			<default></default>
+			<desc>
+				　Specify the copy source layer object.<r/>
+				　Bitmap class objects can also be specified.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Margin information</result>
+	<desc>
+		　9 Copy the image using path (slice).<r/>
+		　The returned margin information is a Rect class object.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>piledCopy</name>
+	<type>method</type>
+	<shortdesc>Copy the image with the layers superimposed</shortdesc>
+	<arg>
+		<argitem>
+			<name>dleft</name>
+			<default></default>
+			<desc>
+				　Specifies the left edge of the destination rectangle in pixels (at the image location of the destination layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>dtop</name>
+			<default></default>
+			<desc>
+				　Specifies the top edge of the destination rectangle in pixels (at the image location of the destination layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>src</name>
+			<default></default>
+			<desc>
+				　Specify the copy source layer object.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>sleft</name>
+			<default></default>
+			<desc>
+				　Specifies the left edge of the rectangle to be copied in pixels (at the display position of the source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>stop</name>
+			<default></default>
+			<desc>
+				　Specify the top position of the rectangle to be copied in pixels (at the display position of the source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>swidth</name>
+			<default></default>
+			<desc>
+				　Specifies the width of the rectangle to be copied in pixels (at the display position of the source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>sheight</name>
+			<default></default>
+			<desc>
+				　Specifies the height of the rectangle to be copied in pixels (at the display position of the source layer).<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Overlays the specified rectangular part of the specified copy source layer including the child layer, and copies the resulting image to the specified position of your layer.<r/>
+		　This method is not affected by the <ref>Layer.face</ref> properties of the source or destination layer.
+	</desc>
+</member>
+
+
+<member>
+	<name>operateRect</name>
+	<type>method</type>
+	<shortdesc>Rectangle operation composition</shortdesc>
+	<arg>
+		<argitem>
+			<name>dleft</name>
+			<default></default>
+			<desc>
+				　Specify the left end position of the destination rectangle in pixels (at the image position of the destination layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>dtop</name>
+			<default></default>
+			<desc>
+				　Specify the top position of the destination rectangle in pixels (at the destination layer image position).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>src</name>
+			<default></default>
+			<desc>
+				　Specify the layer object of the calculation source.<r/>
+				　Bitmap class objects can also be specified. (1.1.0 or later)<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>sleft</name>
+			<default></default>
+			<desc>
+				　Specify the left edge position of the rectangle to be calculated in pixels (at the image position of the calculation source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>stop</name>
+			<default></default>
+			<desc>
+				　Specify the top position of the rectangle to be computed in pixels (at the image position of the computation source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>swidth</name>
+			<default></default>
+			<desc>
+				　Specify the width of the rectangle to be calculated in pixels (at the image position of the calculation source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>sheight</name>
+			<default></default>
+			<desc>
+				　Specifies the vertical width of the rectangle to be calculated in pixels (at the image position of the calculation source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>mode</name>
+			<default>omAuto</default>
+			<desc>
+				　Specify the operation mode.<r/>
+				When <tt><kw>omAuto</kw></tt> is specified, the type of operation is automatically determined according to the <ref>Layer.type</ref> property of the operation source layer.<r/>
+				If <tt><kw>omPsNormal</kw></tt> is specified, Photoshop compatible alpha compositing will be performed.<r/>
+				If <tt><kw>omPsAdditive</kw></tt> is specified, dodging (linear) synthesis compatible with Photoshop is performed.<r/>
+				If <tt><kw>omPsSubtractive</kw></tt> is specified, burning (linear) synthesis compatible with Photoshop is performed.<r/>
+				If <tt><kw>omPsMultiplicative</kw></tt> is specified, Photoshop compatible multiplication and synthesis will be performed.<r/>
+				When <tt><kw>omPsScreen</kw></tt> is specified, Photoshop compatible screen composition is performed.<r/>
+				If <tt><kw>omPsOverlay</kw></tt> is specified, Photoshop compatible overlay composition is performed.<r/>
+				If <tt><kw>omPsHardLight</kw></tt> is specified, Photoshop compatible hard light composition is performed.<r/>
+				If <tt><kw>omPsSoftLight</kw></tt> is specified, Photoshop compatible soft light composition is performed.<r/>
+				If <tt><kw>omPsColorDodge</kw></tt> is specified, dodge color composition compatible with Photoshop is performed.<r/>
+				If <tt><kw>omPsColorDodge5</kw></tt> is specified, dodging color composition compatible with Photoshop version 5.x or lower is performed.<r/>
+				If <tt><kw>omPsColorBurn</kw></tt> is specified, burn-in color composition compatible with Photoshop is performed.<r/>
+				When <tt><kw>omPsLighten</kw></tt> is specified, Photoshop compatible comparison (bright) synthesis is performed.<r/>
+				When <tt><kw>omPsDarken</kw></tt> is specified, Photoshop compatible comparison (dark) composition is performed.<r/>
+				If <tt><kw>omPsDifference</kw></tt> is specified, the absolute value of the difference compatible with Photoshop is synthesized.<r/>
+				If <tt><kw>omPsDifference5</kw></tt> is specified, the absolute value of the difference in compatibility with Photoshop version 5.x or lower is synthesized.<r/>
+				If <tt><kw>omPsExclusion</kw></tt> is specified, Photoshop compatible exclusion synthesis is performed.<r/>
+				When <tt><kw>omAdditive</kw></tt> is specified, addition synthesis is performed.<r/>
+				If <tt><kw>omSubtractive</kw></tt> is specified, subtraction synthesis is performed.<r/>
+				When <tt><kw>omMultiplicative</kw></tt> is specified, multiplication and synthesis are performed.<r/>
+				If <tt><kw>omDodge</kw></tt> is specified, dodging synthesis is performed.<r/>
+				If <tt><kw>omDarken</kw></tt> is specified, comparison (dark) synthesis is performed.<r/>
+				If <tt><kw>omLighten</kw></tt> is specified, comparison (bright) synthesis is performed.<r/>
+				If <tt><kw>omScreen</kw></tt> is specified, screen multiplication is performed.<r/>
+				If <tt><kw>omAlpha</kw></tt> is specified, alpha synthesis will be performed.<r/>
+				If <tt><kw>omAddAlpha</kw></tt> is specified, additive alpha synthesis is performed.<r/>
+				If <tt><kw>omOpaque</kw></tt> is specified, the alpha information of src is ignored, and src is always assumed to be completely opaque.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>opa</name>
+			<default>255</default>
+			<desc>
+				　Specifies the strength of the operation (0-255).<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Performs arithmetic synthesis of the rectangular part of the specified operation source layer at the specified position of the own layer in the specified mode.<r/>
+		　The value of the <ref>Layer.face</ref> property of the layer of the operation destination (where the method is executed) or the layer of the operation source is ignored.<r/>
+		　When omAuto is specified for mode, the type of operation is automatically determined according to the <ref>Layer.type</ref> property of the source layer.<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>stretchCopy</name>
+	<type>method</type>
+	<shortdesc>Scaling copy</shortdesc>
+	<arg>
+		<argitem>
+			<name>dleft</name>
+			<default></default>
+			<desc>
+				　Specifies the left edge of the destination rectangle in pixels (at the image location of the destination layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>dtop</name>
+			<default></default>
+			<desc>
+				　Specifies the top edge of the destination rectangle in pixels (at the image location of the destination layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>dwidth</name>
+			<default></default>
+			<desc>
+				　Specifies the width of the destination rectangle in pixels (at the image location of the destination layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>dheight</name>
+			<default></default>
+			<desc>
+				　Specifies the height of the destination rectangle in pixels (at the image location of the destination layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>src</name>
+			<default></default>
+			<desc>
+				　Specify the copy source layer object.<r/>
+				　Bitmap class objects can also be specified. (1.1.0 or later)<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>sleft</name>
+			<default></default>
+			<desc>
+				　Specifies the left edge of the rectangle to be copied in pixels (at the image position of the source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>stop</name>
+			<default></default>
+			<desc>
+				　Specifies the top edge of the rectangle to be copied in pixels (at the image position of the source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>swidth</name>
+			<default></default>
+			<desc>
+				　Specifies the width of the rectangle to be copied in pixels (at the image position of the source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>sheight</name>
+			<default></default>
+			<desc>
+				　Specifies the height of the rectangle to be copied in pixels (at the image position of the source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>type</name>
+			<default>stNearest</default>
+			<desc>
+				　Specifies the type of scaling.<r/>
+				<tt><kw>stNearest</kw>          </tt> : Nearest neighbor method is used<r/>
+				<tt><kw>stFastLinear</kw>       </tt> : Low-precision linear interpolation is used (partially implemented)<r/>
+				<tt><kw>stSemiFastLinear</kw>   </tt> : Fixed decimal linear interpolation is used (since 1.3)<r/>
+				<tt><kw>stLinear</kw>           </tt> : Linear interpolation is used (implementation change since 1.3)<r/>
+				<tt><kw>stFastCubic</kw>        </tt> : Fixed decimal 3D interpolation is used (since 1.3)<r/>
+				<tt><kw>stCubic</kw>            </tt> : Three-dimensional interpolation is used (implementation change since 1.3)<r/>
+				<tt><kw>stFastLanczos2</kw>     </tt> : Fixed decimal area Lanczos interpolation range 4x4 is used (since 1.3)<r/>
+				<tt><kw>stLanczos2</kw>         </tt> : Lanczos interpolation range 4x4 is used (since 1.3)<r/>
+				<tt><kw>stFastLanczos3</kw>     </tt> : Fixed decimal area Lanczos interpolation range 6x6 is used (since 1.3)<r/>
+				<tt><kw>stLanczos3</kw>         </tt> : Lanczos interpolation range 6x6 is used (since 1.3)<r/>
+				<tt><kw>stFastSpline16</kw>     </tt> : Fixed decimal spline interpolation 4x4 is used (since 1.3)<r/>
+				<tt><kw>stSpline16</kw>         </tt> : 4x4 spline interpolation is used (since 1.3)<r/>
+				<tt><kw>stFastSpline36</kw>     </tt> : Fixed decimal spline interpolation 6x6 is used (since 1.3)<r/>
+				<tt><kw>stSpline36</kw>         </tt> : 6x6 spline interpolation is used (since 1.3)<r/>
+				<tt><kw>stFastAreaAvg</kw>      </tt> : Fixed decimal area average reduction is used. Cannot be expanded (since 1.3)<r/>
+				<tt><kw>stAreaAvg</kw>          </tt> : Area average reduction is used. Cannot be expanded (since 1.3)<r/>
+				<tt><kw>stFastGaussian</kw>     </tt> : Fixed decimal Gaussian interpolation 4x4 is used (since 1.3)<r/>
+				<tt><kw>stGaussian</kw>         </tt> : Gaussian interpolation 4x4 is used (since 1.3)<r/>
+				<tt><kw>stFastBlackmanSinc</kw> </tt> : Fixed-point Blackman-Sinc interpolation 8x8 is used (since 1.3)<r/>
+				<tt><kw>stBlackmanSinc</kw>     </tt> : Blackman-Sinc interpolation 8x8 is used (1.3 or later)<r/>
+				　The speed is higher in the order of stNearest> stFastLinear> stLinear> stCubic, but the higher the speed, the lower the quality.<r/>
+				The interpolation method after stCubic is sufficiently high quality and it can be said that it is a difference of preference.<r/>
+				However, Gaussian interpolation results in blurry image quality.<r/>
+				The difference between stFastLinear and other linear interpolations (stSemiFastLinear and stLinear) is significant when reducing.<r/>
+				stFastLinear always refers to the surrounding four pixels, whereas stSemiFastLinear and stLinear refer to and interpolate a range in which the affected area at equal magnification is 4 pixels when reducing, that is, a wider range of pixels. Higher image quality (algorithm is the original linear interpolation algorithmically).<r/>
+				　For stFastLinear, stRefNoClip can be additionally specified by bitwise OR, and in this case, it is permitted to refer to outside the area of the bitmap to be copied and synthesize the color. If this is not specified, there will be no reference outside the range of the source bitmap, even if there is room around the source bitmap. Is considered a color).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>option</name>
+			<default>-1.0</default>
+			<desc>
+				　Added since 1.3.<r/>
+				　Sharpness for 3D interpolation. Other interpolation methods currently have no meaning.<r/>
+				　Increasing the sharpness value in the positive direction blurs the image, and increasing the value in the negative direction increases the sharpness.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Copies the specified rectangle of the copy source layer to the rectangle of the copy destination (layer on which the method is executed). If the size of the source rectangle and the destination rectangle are different, enlargement or reduction is performed.<r/>
+		　In the current version, linear interpolation is effective when stFastLinear is specified when the <ref>Layer.face</ref> property of the layer to be overlaid (executing the method) is dfAlpha (or dfBoth) or dfAddAlpha. Also, when the Layer.face property is dfOpaque and the <ref>Layer.holdAlpha</ref> property is false, linear interpolation is possible.<r/>
+		　Also, in the current version, stLinear or stCubic is valid only when the destination rectangle does not extend beyond the layer without horizontal / vertical flip.<r/>
+		　If the <ref>Layer.face</ref> property of the destination layer (executing the method) is dfAlpha (or dfBoth) or dfAddAlpha, both the main and mask images are copied.<r/>
+		　For dfOpaque (or dfMain), if the <ref>Layer.holdAlpha</ref> property is true, only the main image will be copied; if false, both the main image and the mask image will be copied.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>operateStretch</name>
+	<type>method</type>
+	<shortdesc>Scaling operation synthesis</shortdesc>
+	<arg>
+		<argitem>
+			<name>dleft</name>
+			<default></default>
+			<desc>
+				　Specifies the left edge position of the destination rectangle in pixels (at the image position of the destination layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>dtop</name>
+			<default></default>
+			<desc>
+				　Specifies the top position of the destination rectangle in pixels (at the image position of the destination layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>dwidth</name>
+			<default></default>
+			<desc>
+				　Specifies the width of the destination rectangle in pixels (at the location of the destination layer image).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>dheight</name>
+			<default></default>
+			<desc>
+				　Specifies the vertical width of the destination rectangle in pixels (at the image position of the destination layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>src</name>
+			<default></default>
+			<desc>
+				　Specify the layer object to be superimposed.<r/>
+				　Bitmap class objects can also be specified. (1.1.0 or later)<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>sleft</name>
+			<default></default>
+			<desc>
+				　Specifies the left edge of the rectangle to be overlaid in pixels (at the image position of the overlay source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>stop</name>
+			<default></default>
+			<desc>
+				　Specifies the top position of the rectangle to be overlaid in pixels (at the image position of the overlay source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>swidth</name>
+			<default></default>
+			<desc>
+				　Specifies the width of the overlapping rectangle in pixels (at the image position of the source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>sheight</name>
+			<default></default>
+			<desc>
+				　Specifies the vertical width of the rectangle to be overlaid in pixels (at the image position of the overlay source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>mode</name>
+			<default>omAuto</default>
+			<desc>
+				　Specify the operation mode.<r/>
+				If <tt><kw>omAuto</kw></tt> is specified, the type of operation will be automatically determined according to the <ref>Layer.type</ref> properties of the source layer.<r/>
+				When <tt><kw>omPsNormal</kw></tt> is specified, Photoshop compatible alpha composition is performed (implemented in 1.3 or later except stNearest and stFastLinear).<r/>
+				If <tt><kw>omPsAdditive</kw></tt> is specified, dodging (linear) composition compatible with Photoshop will be performed (implemented in other than stNearest and stFastLinear in 1.3 or later).<r/>
+				If <tt><kw>omPsSubtractive</kw></tt> is specified, Photoshop compatible burn-in (linear) synthesis is performed. (Since 1.3, it is implemented by other than stNearest and stFastLinear.)<r/>
+				If <tt><kw>omPsMultiplicative</kw></tt> is specified, Photoshop compatible multiplication and synthesis will be performed. (Since 1.3, it is implemented by other than stNearest and stFastLinear.)<r/>
+				If <tt><kw>omPsScreen</kw></tt> is specified, screen composition compatible with Photoshop will be performed. (Since 1.3, it is implemented by other than stNearest and stFastLinear.)<r/>
+				If <tt><kw>omPsOverlay</kw></tt> is specified, overlay composition compatible with Photoshop will be performed. (In 1.3 or later, implemented with other than stNearest and stFastLinear.)<r/>
+				If <tt><kw>omPsHardLight</kw></tt> is specified, Photoshop compatible hard light composition is performed (implemented in 1.3 or later except stNearest and stFastLinear).<r/>
+				If <tt><kw>omPsSoftLight</kw></tt> is specified, Photoshop compatible soft light composition will be performed (implemented in 1.3 or later except stNearest and stFastLinear).<r/>
+				If <tt><kw>omPsColorDodge</kw></tt> is specified, dodge color composition compatible with Photoshop is performed. (Since 1.3, it is implemented by other than stNearest and stFastLinear.)<r/>
+				If <tt><kw>omPsColorDodge5</kw></tt> is specified, dodging color composition compatible with Photoshop version 5.x or less is performed (implemented in 1.3 or later except stNearest and stFastLinear).<r/>
+				If <tt><kw>omPsColorBurn</kw></tt> is specified, Photoshop-compatible burn-in color composition is performed. (Since 1.3, it is implemented by other than stNearest and stFastLinear.)<r/>
+				If <tt><kw>omPsLighten</kw></tt> is specified, Photoshop compatible comparison (bright) composition will be performed (implemented in 1.3 or later except stNearest and stFastLinear).<r/>
+				When <tt><kw>omPsDarken</kw></tt> is specified, comparison (dark) composition compatible with Photoshop is performed. (Since 1.3, it is implemented by other than stNearest and stFastLinear.)<r/>
+				If <tt><kw>omPsDifference</kw></tt> is specified, the absolute value of the difference compatible with Photoshop will be synthesized (Since 1.3, it is implemented by other than stNearest and stFastLinear).<r/>
+				If <tt><kw>omPsDifference5</kw></tt> is specified, the absolute value of the difference in compatibility with Photoshop version 5.x or lower will be synthesized.<r/>
+				If <tt><kw>omPsExclusion</kw></tt> is specified, Photoshop compatible exclusion synthesis will be performed. (Since 1.3, it is implemented by other than stNearest and stFastLinear.)<r/>
+				When <tt><kw>omAdditive</kw></tt> is specified, addition synthesis is performed (implemented in other than stNearest and stFastLinear in 1.3 or later).<r/>
+				If <tt><kw>omSubtractive</kw></tt> is specified, subtraction synthesis is performed (implemented in other than stNearest and stFastLinear in 1.3 and later).<r/>
+				When <tt><kw>omMultiplicative</kw></tt> is specified, multiplication and synthesis are performed (implemented in other than stNearest and stFastLinear in 1.3 or later).<r/>
+				If <tt><kw>omDodge</kw></tt> is specified, dodging synthesis is performed. (In 1.3 or later, implemented by other than stNearest and stFastLinear.)<r/>
+				If <tt><kw>omDarken</kw></tt> is specified, comparison (dark) synthesis will be performed (implemented in other than stNearest and stFastLinear in 1.3 or later).<r/>
+				If <tt><kw>omLighten</kw></tt> is specified, comparison (light) synthesis is performed (implemented in 1.3 and later except stNearest and stFastLinear).<r/>
+				If <tt><kw>omScreen</kw></tt> is specified, screen multiplication is performed. (Since 1.3, it is implemented by other than stNearest and stFastLinear.)<r/>
+				If <tt><kw>omAlpha</kw></tt> is specified, alpha synthesis will be performed.<r/>
+				If <tt><kw>omAddAlpha</kw></tt> is specified, additive alpha synthesis is performed. In this case, when the destination <ref>Layer.face</ref> property is dfOpaque and the <ref>Layer.holdAlpha</ref> property is false, linear interpolation can be performed by specifying stFastLinear in the type argument.<r/>
+				If <tt><kw>omOpaque</kw></tt> is specified, the alpha information of src is ignored, and src is always assumed to be completely opaque. In this case, when the destination <ref>Layer.face</ref> property is dfOpaque and the <ref>Layer.holdAlpha</ref> property is false, linear interpolation can be performed by specifying stFastLinear in the type argument.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>opa</name>
+			<default>255</default>
+			<desc>
+				　Specifies the strength of the operation (0-255).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>type</name>
+			<default>stNearest</default>
+			<desc>
+				　Specifies the type of scaling.<r/>
+				<tt><kw>stNearest</kw>          </tt> : Nearest neighbor method is used<r/>
+				<tt><kw>stFastLinear</kw>       </tt> : Low-precision linear interpolation is used (partially implemented)<r/>
+				<tt><kw>stSemiFastLinear</kw>   </tt> : Fixed decimal linear interpolation is used (since 1.3)<r/>
+				<tt><kw>stLinear</kw>           </tt> : Linear interpolation is used (implementation change since 1.3)<r/>
+				<tt><kw>stFastCubic</kw>        </tt> : Fixed decimal 3D interpolation is used (since 1.3)<r/>
+				<tt><kw>stCubic</kw>            </tt> : Three-dimensional interpolation is used (implementation change since 1.3)<r/>
+				<tt><kw>stFastLanczos2</kw>     </tt> : Fixed decimal area Lanczos interpolation range 4x4 is used (since 1.3)<r/>
+				<tt><kw>stLanczos2</kw>         </tt> : Lanczos interpolation range 4x4 is used (since 1.3)<r/>
+				<tt><kw>stFastLanczos3</kw>     </tt> : Fixed decimal area Lanczos interpolation range 6x6 is used (since 1.3)<r/>
+				<tt><kw>stLanczos3</kw>         </tt> : Lanczos interpolation range 6x6 is used (since 1.3)<r/>
+				<tt><kw>stFastSpline16</kw>     </tt> : Fixed decimal spline interpolation 4x4 is used (since 1.3)<r/>
+				<tt><kw>stSpline16</kw>         </tt> : 4x4 spline interpolation is used (since 1.3)<r/>
+				<tt><kw>stFastSpline36</kw>     </tt> : Fixed decimal spline interpolation 6x6 is used (since 1.3)<r/>
+				<tt><kw>stSpline36</kw>         </tt> : 6x6 spline interpolation is used (since 1.3)<r/>
+				<tt><kw>stFastAreaAvg</kw>      </tt> : Fixed decimal area average reduction is used. Cannot be expanded (since 1.3)<r/>
+				<tt><kw>stAreaAvg</kw>          </tt> : Area average reduction is used. Cannot be expanded (since 1.3)<r/>
+				<tt><kw>stFastGaussian</kw>     </tt> : Fixed decimal Gaussian interpolation 4x4 is used (since 1.3)<r/>
+				<tt><kw>stGaussian</kw>         </tt> : Gaussian interpolation 4x4 is used (since 1.3)<r/>
+				<tt><kw>stFastBlackmanSinc</kw> </tt> : Fixed-point Blackman-Sinc interpolation 8x8 is used (since 1.3)<r/>
+				<tt><kw>stBlackmanSinc</kw>     </tt> : Blackman-Sinc interpolation 8x8 is used (1.3 or later)<r/>
+				　The speed is higher in the order of stNearest> stFastLinear> stLinear> stCubic, but the higher the speed, the lower the quality.<r/>
+				The interpolation method after stCubic is sufficiently high quality and it can be said that it is a difference of preference.<r/>
+				However, Gaussian interpolation results in blurry image quality.<r/>
+				The difference between stFastLinear and other linear interpolations (stSemiFastLinear and stLinear) is significant when reducing.<r/>
+				stFastLinear always refers to the surrounding four pixels, whereas stSemiFastLinear and stLinear refer to and interpolate a range in which the affected area at equal magnification is 4 pixels when reducing, that is, a wider range of pixels. Higher image quality (algorithm is the original linear interpolation algorithmically).<r/>
+				　For stFastLinear, stRefNoClip can be additionally specified by bitwise OR, and in this case, it is permitted to refer to outside the area of the bitmap to be copied and synthesize the color. If this is not specified, there will be no reference outside the range of the source bitmap, even if there is room around the source bitmap. Is considered a color).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>option</name>
+			<default>-1.0</default>
+			<desc>
+				　Added since 1.3.<r/>
+				　Sharpness for 3D interpolation. Other interpolation methods currently have no meaning.<r/>
+				　Increasing the sharpness value in the positive direction blurs the image, and increasing the value in the negative direction increases the sharpness.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Performs arithmetic synthesis on the rectangle of the specified overlay source layer with the rectangle of the overlay destination (layer on which the method is executed). If the size of the source rectangle and the destination rectangle are different, the size is enlarged or reduced.<r/>
+		　When omAuto is specified for mode, the type of operation is automatically determined according to the <ref>Layer.type</ref> property of the source layer.<r/>
+	</desc>
+</member>
+
+
+
+
+<member>
+	<name>affineCopy</name>
+	<type>method</type>
+	<shortdesc>Affine transformation copy</shortdesc>
+	<arg>
+		<argitem>
+			<name>src</name>
+			<default></default>
+			<desc>
+				　Specify the copy source layer object.<r/>
+				　Bitmap class objects can also be specified. (1.1.0 or later)<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>sleft</name>
+			<default></default>
+			<desc>
+				　Specifies the left edge of the rectangle to be copied in pixels (at the image position of the source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>stop</name>
+			<default></default>
+			<desc>
+				　Specifies the top edge of the rectangle to be copied in pixels (at the image position of the source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>swidth</name>
+			<default></default>
+			<desc>
+				　Specifies the width of the rectangle to be copied in pixels (at the image position of the source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>sheight</name>
+			<default></default>
+			<desc>
+				　Specifies the height of the rectangle to be copied in pixels (at the image position of the source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>affine</name>
+			<default></default>
+			<desc>
+				　Specify how to handle the following six arguments (A to F parameters).<r/>
+				　If you specify true, each of the six parameters is interpreted as follows:<r/>
+				<tt>A   : A of the 2D affine transformation matrix</tt><r/>
+				<tt>B   : B of the 2D affine transformation matrix</tt><r/>
+				<tt>C   : C of 2D affine transformation matrix</tt><r/>
+				<tt>D   : D of 2D affine transformation matrix</tt><r/>
+				<tt>E   : Tx of 2D affine transformation matrix</tt><r/>
+				<tt>F   : Ty of 2D affine transformation matrix</tt><r/>
+				<r/>
+				　By the affine transformation, the image position (x, y) of the copy source (where the upper left corner of the copy source rectangle is (0, 0)) is calculated by the following equation using the image position (x ', y') of the copy destination. Is converted to<r/>
+				x' =  a*x + c*y + tx<r/>
+				y' =  b*x + d*y + ty<r/>
+				<r/>
+				　If false is specified, each of the six parameters is interpreted as follows: These parameters also accept real numbers.<r/>
+				<tt>A   : X coordinate position (x0) of the upper left corner of the source rectangle in the image position at the destination</tt><r/>
+				<tt>B   : Y coordinate position (y0) of the upper left corner of the source rectangle in the image position at the destination</tt><r/>
+				<tt>C   : X coordinate position (x1) of the upper right corner point of the source rectangle in the image position at the destination</tt><r/>
+				<tt>D   : Y coordinate position (y1) of the point at the upper right corner of the copy source rectangle in the image position at the copy destination</tt><r/>
+				<tt>E   : X coordinate position (x2) of the lower left corner point of the source rectangle in the image position at the destination</tt><r/>
+				<tt>F   : Y coordinate position of the lower left corner point of the source rectangle in the image position at the destination (y2)</tt><r/>
+				<r/>
+				　If false is specified, the copy destination position (x3, y3) corresponding to the lower right corner of the copy source is automatically calculated by the following formula.<r/>
+				x3 = x1 - x0 + x2<r/>
+				y3 = y1 - y0 + y2<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>A</name>
+			<default></default>
+			<desc>
+				　A parameter. The interpretation depends on the affine argument.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>B</name>
+			<default></default>
+			<desc>
+				　B parameter. The interpretation depends on the affine argument.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>C</name>
+			<default></default>
+			<desc>
+				　C parameter. The interpretation depends on the affine argument.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>D</name>
+			<default></default>
+			<desc>
+				　D parameter. The interpretation depends on the affine argument.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>E</name>
+			<default></default>
+			<desc>
+				　The E parameter. The interpretation depends on the affine argument.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>F</name>
+			<default></default>
+			<desc>
+				　The F parameter. The interpretation depends on the affine argument.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>type</name>
+			<default>stNearest</default>
+			<desc>
+				　Specifies the type of affine transformation.<r/>
+				<tt><kw>stNearest</kw>    </tt> : Nearest neighbor method is used<r/>
+				<tt><kw>stFastLinear</kw> </tt> : Low-precision linear interpolation is used (partially implemented)<r/>
+				<tt><kw>stLinear</kw>     </tt> : Linear interpolation is used (not implemented)<r/>
+				<tt><kw>stCubic</kw>      </tt> : 3D interpolation is used (not implemented)<r/>
+				　For stFastLinear, stLinear, and stCubic, stRefNoClip can be additionally specified by bitwise OR, and in this case, it is allowed to refer to outside the area of the bitmap to be copied and combine colors. If this is not specified, there will be no reference outside the range of the source bitmap, even if there is room around the source bitmap. Is considered a color).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>clear</name>
+			<default>false</default>
+			<desc>
+				　Specifies whether to clear around the affine-transformed image of the destination layer with the color and transparency indicated by the <ref>Layer.neutralColor</ref> property. If you specify true, it will be cleared. If you omit this argument or pass false, it will not be cleared.<r/>
+				　The area to be cleared can be limited by the <ref>Layer.setClip</ref> method.<r/>
+				　When this clear function is used, when the transfer destination layer is cleared and the image is overwritten and transferred by affine transformation, the area to be overwritten (the part overwritten by affine transformation in the cleared place) is wasted. Can be omitted.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Copies the rectangle of the specified copy source layer to the copy destination (layer where the method is executed) while performing affine transformation.<r/>
+		　With the affine argument, you can choose whether to specify a two-dimensional affine transformation matrix as the deformation parameter or directly specify the transformed point.<r/>
+		　In the current version, linear interpolation is effective when stFastLinear is specified when the <ref>Layer.face</ref> property of the layer to be overlaid (executing the method) is dfAlpha (or dfBoth) or dfAddAlpha. Also, when the Layer.face property is dfOpaque and the <ref>Layer.holdAlpha</ref> property is false, linear interpolation is possible.<r/>
+		　If the <ref>Layer.face</ref> property of the destination layer (executing the method) is dfAlpha (or dfBoth) or dfAddAlpha, both the main and mask images are copied.<r/>
+		　If the Layer.face property of the layer to be superimposed (executing the method) is dfOpaque (or dfMain), only the main image is copied when the <ref>Layer.holdAlpha</ref> property is true, and when the <ref>Layer.holdAlpha</ref> property is false, the main image and mask image are copied. Both are copied.<r/>
+		<r/>
+		　The transformation using the 2D affine transformation matrix is defined as follows, with the origin (0, 0) at the upper left corner of the source rectangle.<r/>
+		<img src="2DAffineMatrix.png"/><r/>
+		　By performing a two-dimensional affine transformation, you can scale, rotate, shear (tilt), translate, flip, or any combination of these.<r/>
+		　In the method that performs 2D affine transformation, you can specify the transformation by directly specifying each transformed vertex instead of the 2D affine matrix, but even in this case, perform transformation that can not be defined by 2D affine transformation You can not.<r/>
+		<r/>
+		　For affine transformations, pixels are assumed to have a size of 1.0 x 1.0. That is, the pixel at (0, 0) is considered to be in the range (-0.5, -0.5)-(0.5, 0.5).<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>operateAffine</name>
+	<type>method</type>
+	<shortdesc>Affine transform arithmetic synthesis</shortdesc>
+	<arg>
+		<argitem>
+			<name>src</name>
+			<default></default>
+			<desc>
+				　Specify the layer object to be superimposed.<r/>
+				　Bitmap class objects can also be specified. (1.1.0 or later)<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>sleft</name>
+			<default></default>
+			<desc>
+				　Specifies the left edge of the rectangle to be overlaid in pixels (at the image position of the overlay source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>stop</name>
+			<default></default>
+			<desc>
+				　Specifies the top position of the rectangle to be overlaid in pixels (at the image position of the overlay source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>swidth</name>
+			<default></default>
+			<desc>
+				　Specifies the width of the overlapping rectangle in pixels (at the image position of the source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>sheight</name>
+			<default></default>
+			<desc>
+				　Specifies the vertical width of the rectangle to be overlaid in pixels (at the image position of the overlay source layer).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>affine</name>
+			<default></default>
+			<desc>
+				　Specify how to handle the following six arguments (A to F parameters).<r/>
+				　If you specify true, each of the six parameters is interpreted as follows:<r/>
+				<tt>A   : A of the 2D affine transformation matrix</tt><r/>
+				<tt>B   : B of the 2D affine transformation matrix</tt><r/>
+				<tt>C   : C of 2D affine transformation matrix</tt><r/>
+				<tt>D   : D of 2D affine transformation matrix</tt><r/>
+				<tt>E   : Tx of 2D affine transformation matrix</tt><r/>
+				<tt>F   : Ty of 2D affine transformation matrix</tt><r/>
+				<r/>
+				　By the affine transformation, the image position (x, y) of the superimposition source (where the upper left corner of the rectangle of the superimposition source is (0, 0)) is calculated by the following equation using the image position (x ', y ').<r/>
+				x' =  a*x + c*y + tx<r/>
+				y' =  b*x + d*y + ty<r/>
+				<r/>
+				　If false is specified, each of the six parameters is interpreted as follows:<r/>
+				<tt>A   : X coordinate position (x0) of the upper left corner point of the source rectangle in the image position at the destination</tt><r/>
+				<tt>B   : Y coordinate position (y0) of the upper left corner of the source rectangle in the image position at the destination</tt><r/>
+				<tt>C   : X coordinate position (x1) of the upper right corner point of the source rectangle in the image position at the destination</tt><r/>
+				<tt>D   : Y coordinate position (y1) of the point at the upper right corner of the copy source rectangle in the image position at the copy destination</tt><r/>
+				<tt>E   : X coordinate position (x2) of the lower left corner point of the source rectangle in the image position at the destination</tt><r/>
+				<tt>F   : Y coordinate position of the lower left corner point of the source rectangle in the image position at the destination (y2)</tt><r/>
+				<r/>
+				　If false is specified, the overlay destination position (x3, y3) corresponding to the lower right corner of the overlay source is automatically calculated by the following formula.<r/>
+				x3 = x1 - x0 + x2<r/>
+				y3 = y1 - y0 + y2<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>A</name>
+			<default></default>
+			<desc>
+				　A parameter. The interpretation depends on the affine argument.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>B</name>
+			<default></default>
+			<desc>
+				　B parameter. The interpretation depends on the affine argument.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>C</name>
+			<default></default>
+			<desc>
+				　C parameter. The interpretation depends on the affine argument.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>D</name>
+			<default></default>
+			<desc>
+				　D parameter. The interpretation depends on the affine argument.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>E</name>
+			<default></default>
+			<desc>
+				　The E parameter. The interpretation depends on the affine argument.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>F</name>
+			<default></default>
+			<desc>
+				　The F parameter. The interpretation depends on the affine argument.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>mode</name>
+			<default>omAuto</default>
+			<desc>
+				　Specify the operation mode.<r/>
+				If <tt><kw>omAuto</kw></tt> is specified, the type of operation will be automatically determined according to the <ref>Layer.type</ref> properties of the source layer.<r/>
+				If <tt><kw>omPsNormal</kw></tt> is specified, Photoshop compatible alpha compositing is performed (not implemented in the current version).<r/>
+				If <tt><kw>omPsAdditive</kw></tt> is specified, dodge (linear) synthesis compatible with Photoshop is performed (not implemented in the current version).<r/>
+				When <tt><kw>omPsSubtractive</kw></tt> is specified, burn-in (linear) synthesis compatible with Photoshop is performed (not implemented in the current version).<r/>
+				If <tt><kw>omPsMultiplicative</kw></tt> is specified, Photoshop compatible multiplication will be performed (not implemented in the current version).<r/>
+				If <tt><kw>omPsScreen</kw></tt> is specified, Photoshop compatible screen composition is performed (not implemented in the current version).<r/>
+				When <tt><kw>omPsOverlay</kw></tt> is specified, overlay compatible with Photoshop is performed (not implemented in the current version).<r/>
+				If <tt><kw>omPsHardLight</kw></tt> is specified, Photoshop compatible hard light composition will be performed (not implemented in the current version).<r/>
+				If <tt><kw>omPsSoftLight</kw></tt> is specified, Photoshop compatible soft light synthesis is performed (not implemented in the current version).<r/>
+				If <tt><kw>omPsColorDodge</kw></tt> is specified, dodge color composition compatible with Photoshop is performed (not implemented in the current version).<r/>
+				If <tt><kw>omPsColorDodge5</kw></tt> is specified, dodging color composition compatible with Photoshop version 5.x or lower is performed (not implemented in the current version).<r/>
+				If <tt><kw>omPsColorBurn</kw></tt> is specified, burn-in color composition compatible with Photoshop is performed (not implemented in the current version).<r/>
+				When <tt><kw>omPsLighten</kw></tt> is specified, comparison (bright) composition compatible with Photoshop is performed (not implemented in the current version).<r/>
+				If <tt><kw>omPsDarken</kw></tt> is specified, comparison (dark) composition compatible with Photoshop is performed (not implemented in the current version).<r/>
+				When <tt><kw>omPsDifference</kw></tt> is specified, the absolute value of the difference compatible with Photoshop is synthesized (not implemented in the current version).<r/>
+				If <tt><kw>omPsDifference5</kw></tt> is specified, the absolute value of the difference in compatibility with Photoshop version 5.x or less will be synthesized (not implemented in the current version).<r/>
+				If <tt><kw>omPsExclusion</kw></tt> is specified, Photoshop compatible exclusion synthesis will be performed (not implemented in the current version).<r/>
+				If <tt><kw>omAdditive</kw></tt> is specified, addition synthesis is performed (not implemented in the current version).<r/>
+				If <tt><kw>omSubtractive</kw></tt> is specified, subtraction synthesis is performed (not implemented in the current version).<r/>
+				If <tt><kw>omMultiplicative</kw></tt> is specified, multiplication will be performed (not implemented in the current version).<r/>
+				If <tt><kw>omDodge</kw></tt> is specified, dodging synthesis is performed (not implemented in the current version).<r/>
+				If <tt><kw>omDarken</kw></tt> is specified, comparison (dark) synthesis is performed (not implemented in the current version).<r/>
+				If <tt><kw>omLighten</kw></tt> is specified, comparison (bright) synthesis is performed (not implemented in the current version).<r/>
+				If <tt><kw>omScreen</kw></tt> is specified, screen multiplication will be performed (not implemented in the current version).<r/>
+				If <tt><kw>omAlpha</kw></tt> is specified, alpha synthesis will be performed.<r/>
+				If <tt><kw>omAddAlpha</kw></tt> is specified, additive alpha synthesis is performed. In this case, when the destination <ref>Layer.face</ref> property is dfOpaque and the <ref>Layer.holdAlpha</ref> property is false, linear interpolation can be performed by specifying stFastLinear in the type argument.<r/>
+				If <tt><kw>omOpaque</kw></tt> is specified, the alpha information of src is ignored, and src is always assumed to be completely opaque. In this case, when the destination <ref>Layer.face</ref> property is dfOpaque and the <ref>Layer.holdAlpha</ref> property is false, linear interpolation can be performed by specifying stFastLinear in the type argument.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>opa</name>
+			<default>255</default>
+			<desc>
+				　Specifies the opacity of the overlay (0-255).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>type</name>
+			<default>stNearest</default>
+			<desc>
+				　Specifies the type of affine transformation.<r/>
+				<tt><kw>stNearest</kw>    </tt> : Nearest neighbor method is used<r/>
+				<tt><kw>stFastLinear</kw> </tt> : Low-precision linear interpolation is used (partially implemented)<r/>
+				<tt><kw>stLinear</kw>     </tt> : Linear interpolation is used (not implemented)<r/>
+				<tt><kw>stCubic</kw>      </tt> : 3D interpolation is used (not implemented)<r/>
+				　The speed is higher in the order of stNearest> stFastLinear> stLinear> stCubic, but the higher the speed, the lower the quality in the faster mode.<r/>
+				　For stFastLinear, stLinear, and stCubic, stRefNoClip can be additionally specified by bitwise OR, and in this case, it is allowed to refer to outside the area of the bitmap to be copied and combine colors. If this is not specified, there will be no reference outside the range of the source bitmap, even if there is room around the source bitmap. Is considered a color).<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Performs arithmetic synthesis on the rectangle of the specified overlay source layer while performing affine transformation on the overlay destination (layer on which the method is executed).<r/>
+		　See also <ref>Layer.affineCopy</ref> for affine transformations.<r/>
+		　When omAuto is specified for mode, the type of operation is automatically determined according to the <ref>Layer.type</ref> property of the source layer.<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>doBoxBlur</name>
+	<type>method</type>
+	<shortdesc>Apply a rectangular blur</shortdesc>
+	<arg>
+		<argitem>
+			<name>xblur</name>
+			<default>1</default>
+			<desc>
+				Specifies the horizontal blur range.
+			</desc>
+		</argitem>
+		<argitem>
+			<name>yblur</name>
+			<default>1</default>
+			<desc>
+				Specifies the vertical blur range.
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Apply a blur. The algorithm is "box blur".<r/>
+		　Rectangle blur is the average of the brightness of the pixels in the "range" represented by two parameters, xblur and yblur. For example, if xblur = 10 yblur = 2, the average brightness of the pixels in the rectangular range -10 to 10 in the horizontal direction and -2 to 2 in the vertical direction around the target pixel is calculated, It is the brightness of that pixel.<r/>
+		　The area of the range can be calculated by (xblur × 2 + 1) × (yblur × 2 + 1). In the current version, if the area is less than 256, the algorithm will be faster than if the area is more than 256.<r/>
+		　If the <ref>Layer.face</ref> property is dfAlpha, it uses a special algorithm for alpha compositing, which is a bit slower. For dfAddAlpha and other drawing methods, it is a faster algorithm.<r/>
+	</desc>
+</member>
+
+
+
+<member>
+	<name>adjustGamma</name>
+	<type>method</type>
+	<shortdesc>Gamma correction</shortdesc>
+	<arg>
+		<argitem>
+			<name>rgamma</name>
+			<default>1.0</default>
+			<desc>
+				　Specify the gamma value of the red component (0.0 to 1.0 to 9.0).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>rfloor</name>
+			<default>0</default>
+			<desc>
+				　Specify the minimum output value of the red component (0 to 255).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>rceil</name>
+			<default>255</default>
+			<desc>
+				　Specify the maximum output value of the red component (0 to 255).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>ggamma</name>
+			<default>1.0</default>
+			<desc>
+				　Specify the gamma value of the green component (0.0 to 1.0 to 9.0).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>gfloor</name>
+			<default>0</default>
+			<desc>
+				　Specify the minimum output value of the green component (0 to 255).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>gceil</name>
+			<default>255</default>
+			<desc>
+				　Specify the maximum output value of the green component (0 to 255).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>bgamma</name>
+			<default>1.0</default>
+			<desc>
+				　Specify the gamma value of the blue component (0.0 to 1.0 to 9.0).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>bfloor</name>
+			<default>0</default>
+			<desc>
+				　Specify the minimum output value of the blue component (0 to 255).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>bceil</name>
+			<default>255</default>
+			<desc>
+				　Specify the maximum output value of the blue component (0 to 255).<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Performs gamma correction on the image.<r/>
+		　Specifying 1.0 as the gamma value makes the gamma curve a straight line.<r/>
+		　The output minimum and output maximum specify the minimum and maximum brightness of each component.<r/>
+		　You can invert the image by setting the highest value lower than the lowest value.<r/>
+		　This method references the <ref>Layer.face</ref> property. If this is dfAddAlpha, this method uses a special gamma correction routine for additive alpha compositing. This routine performs gamma correction on components equivalent to alpha synthesis in additive alpha synthesis, but does not perform gamma correction on components equivalent to additive synthesis.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>doGrayScale</name>
+	<type>method</type>
+	<shortdesc>Grayscale conversion</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Convert the image to grayscale.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>flipLR</name>
+	<type>method</type>
+	<shortdesc>Flip horizontal</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Inverts the image horizontally.<r/>
+		　This method is not affected by the drawing clip rectangle by the <ref>Layer.setClip</ref> method (always flipping the entire layer image).<r/>
+		　It is not affected by <ref>Layer.face</ref> or <ref>Layer.holdAlpha</ref> properties.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>flipUD</name>
+	<type>method</type>
+	<shortdesc>flip upside down</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Flip the image upside down.<r/>
+		　This method is not affected by the drawing clip rectangle by the <ref>Layer.setClip</ref> method (always flipping the entire layer image).<r/>
+		　It is not affected by <ref>Layer.face</ref> or <ref>Layer.holdAlpha</ref> properties.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>convertType</name>
+	<type>method</type>
+	<shortdesc>Conversion of layer image representation format</shortdesc>
+	<arg>
+		<argitem>
+			<name>from</name>
+			<default></default>
+			<desc>
+				Specify the drawing method type to be converted.
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Convert the layer image format.<r/>
+		　This method converts the image representation between "types with different image representations of layers but capable of similar representation", such as ltAlpha (dfAlpha) and ltAddAlpha (dfAddAlpha).<r/>
+		　For example, simply changing the type of the layer displayed by ltAlpha to ltAddAlpha as it is will not be displayed correctly because the handling of the alpha channel and color information will be different. Therefore, you need to use this method to convert from dfAlpha to dfAddAlpha.<r/>
+		　In this method, the image representation format of the conversion destination will be the format corresponding to the drawing method specified by the <ref>Layer.face</ref> property (note that it is not the layer type specified by <ref>Layer.type</ref>, but the drawing method).<r/>
+		　For the from argument, specify the drawing method (constants starting with df; see <ref>Layer.face</ref>) corresponding to the image representation format of the conversion source. <tt>dfAuto</tt> cannot be specified in the from argument.<r/>
+		　Currently supported conversions are dfAlpha → dfAddAlpha and dfAddAlpha → dfAlpha. In dfAddAlpha → dfAlpha, color information may be lost due to conversion.<r/>
+		　This method is not affected by the drawing clip rectangle (always the entire layer image).<r/>
+	</desc>
+</member>
+
+<member>
+	<name>update</name>
+	<type>method</type>
+	<shortdesc>Update image</shortdesc>
+	<arg>
+		<argitem>
+			<name>left</name>
+			<default></default>
+			<desc>
+				　Specifies the left edge of the rectangle to be updated, in pixels, in display coordinates.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>top</name>
+			<default></default>
+			<desc>
+				　Specifies the top position of the rectangle to be updated, in pixels in display coordinates.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>width</name>
+			<default></default>
+			<desc>
+				　Specifies the width of the rectangle to be updated, in pixels in display coordinates.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>height</name>
+			<default></default>
+			<desc>
+				　Specifies the height of the rectangle to be updated, in pixels in display coordinates.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　This method forces the layer to be drawn on the screen.<r/>
+		　When a drawing method is executed, the screen is automatically updated, but this method can be used to force the screen to be drawn.<r/>
+		　If all arguments are omitted, the entire layer will be redrawn.<r/>
+		　This method sets the <ref>Layer.callOnPaint</ref> property to true.<r/>
+		　Until it is actually drawn on the screen, no matter how many times this method is executed, screen drawing will occur only once (cached).<r/>
+	</desc>
+</member>
+
+<member>
+	<name>setCursorPos</name>
+	<type>method</type>
+	<shortdesc>Specify mouse cursor position</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　Specifies the x-coordinate value (in pixels) of the mouse cursor (in the display coordinates of this layer).<r/>
+				　This value can also be set / get with the <ref>Layer.cursorX</ref> property.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　Specifies the y-coordinate value of the mouse cursor (in the display coordinates of this layer) in pixels.<r/>
+				　This value can also be set / get with the <ref>Layer.cursorX</ref> property.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Specify the position of the mouse cursor.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>focus</name>
+	<type>method</type>
+	<shortdesc>Set focus</shortdesc>
+	<arg>
+		<argitem>
+			<name>direction</name>
+			<default>true</default>
+			<desc>
+				　The value passed to the direction argument of the <ref>Layer.onBeforeFocus</ref> or <ref>Layer.onFocus</ref> event.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Specifies <kw>focus</kw> on the layer. Keyboard input is enabled when the layer receives focus.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>focusPrev</name>
+	<type>method</type>
+	<shortdesc>Set focus on the previous layer</shortdesc>
+	<arg>
+	</arg>
+	<result>Layer object with new focus</result>
+	<desc>
+		　Performs a forward search for a focusable layer, and if a layer is found, sets focus on that layer.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>focusNext</name>
+	<type>method</type>
+	<shortdesc>Set focus on layer behind</shortdesc>
+	<arg>
+	</arg>
+	<result>Layer object with new focus</result>
+	<desc>
+		　Search backwards for a focusable layer and set focus on that layer if it is found.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>setMode</name>
+	<type>method</type>
+	<shortdesc>Enter modal state</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Set the <kw>mode</kw> for the layer. Once the mode is set (<kw>modal</kw>), only child layers of that layer can receive focus and mouse messages.
+	</desc>
+</member>
+
+<member>
+	<name>removeMode</name>
+	<type>method</type>
+	<shortdesc>Cancel modal state</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		Cancel the modal state set with <ref>Layer.setMode</ref>.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>setAttentionPos</name>
+	<type>method</type>
+	<shortdesc>Gaze position designation</shortdesc>
+	<arg>
+		<argitem>
+			<name>left</name>
+			<default></default>
+			<desc>
+				　Specifies the x coordinate value (in display coordinates of this layer) to watch, in pixels.<r/>
+				　This value can also be set / get with the <ref>Layer.attentionLeft</ref> property.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>top</name>
+			<default></default>
+			<desc>
+				　Specifies the x coordinate value (in display coordinates of this layer) to watch, in pixels.<r/>
+				　This value can also be set / get with the <ref>Layer.attentionTop</ref> property.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Specify the <kw>gaze position</kw>. The gaze position is usually set to the position of the caret (a flashing bar in a text editor to indicate the character input position from the keyboard). Undetermined characters of the IME are displayed at this gaze position.<r/>
+	</desc>
+	<ref>Layer.useAttention</ref>
+</member>
+
+
+<member>
+	<name>beginTransition</name>
+	<type>method</type>
+	<shortdesc>Start transition</shortdesc>
+	<arg>
+		<argitem>
+			<name>name</name>
+			<default></default>
+			<desc>
+				　Specify the transition name.<r/>
+				　By default, 'crossfade' (crossfade), 'universal' (universal transition) and 'scroll' (scroll transition) are defined.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>withchildren</name>
+			<default>true</default>
+			<desc>
+				　Whether the child layers will transition together. If true is specified, transition will be performed for each child layer. If false, only the layer that executes the method will transition.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>transsrc</name>
+			<default>null</default>
+			<desc>
+				　Specify the layer to switch to. Some transitions do not need to be specified (such as transitions by themselves).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>options</name>
+			<default>%[ ]</default>
+			<desc>
+				　Specify the transition options in a dictionary array.<r/>
+				　The options you need depend on the type of transition.<r/>
+				　Regardless of the type of transition, the options that can be specified in common are the 'selfupdate' and 'callback' members.<r/>
+				<r/>
+				　If the 'selfupdate' member is true, Kirikiri will not update the screen automatically.
+				In this case, the screen must be updated appropriately by the program using the <ref>Layer.update</ref> method. This feature is useful when you want to completely synchronize transition drawing and program drawing.<r/>
+				<r/>
+				　If you specify a TJS2 method in the 'callback' member, that method will be called every time the drawing is actually performed.
+				In this method (the method that is called back), return the 'tick' value as a value greater than or equal to 0.
+				Many transitions make transitions based on the 'tick' value, which is the actual time in milliseconds. You can rewind the effect at any point or fast-forward in the middle, allowing you to control the transition regardless of the actual time.
+				Many transitions consider the value specified in the optional 'time' member to be the end of the transition.
+				Therefore, for example, specify an appropriate value such as 1000 for the option 'time', and display a transition at any stage by returning a value less than 1000 with this callback method. Will be able to
+				Also, for many transitions, the transition will stop when the 'tick' value reaches the value specified in the optional 'time', so if you do not want to stop the transition, the value specified in 'time' Always specify a value less than.
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Start the transition.<r/>
+		　When the transition when children = true ends, the tree structure of the parent-child relationship is completely replaced with the transition source specified by transsrc.<r/>
+		　If children = false, only the transition source layer and the layer that executed the method (transition destination layer) are replaced.<r/>
+		　Note that in both cases, the tree structure is replaced.<r/>
+		　This method just initiates the transition and returns immediately.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>stopTransition</name>
+	<type>method</type>
+	<shortdesc>Stop transition</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		Stop a transition in progress.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>assignImages</name>
+	<type>method</type>
+	<shortdesc>Copy image</shortdesc>
+	<arg>
+		<argitem>
+			<name>src</name>
+			<default></default>
+			<desc>
+				　Specify the copy source layer.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Copy the main image, mask image, and area image of the layer specified by src.<r/>
+		　The image size is the same as the image size of the copy source layer. No other information is copied.<r/>
+		　This method takes almost no execution time, because it is just a state that "the same image is shared by two or more layers".<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>saveLayerImage</name>
+	<type>method</type>
+	<shortdesc>Saving images</shortdesc>
+	<arg>
+		<argitem>
+			<name>name</name>
+			<default></default>
+			<desc>
+				　Specify the storage name to save.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>type</name>
+			<default>"bmp"</default>
+			<desc>
+				　Specify the image format to save as a character string. In the current version, the following formats can be specified.<r/>
+				<r/>
+				<dl>
+				<dt>"<kw>bmp</kw>" or "<kw>bmp32</kw>"</dt>
+				<dd>
+					　32bpp BMP. Also save the alpha channel (mask).<r/>
+				</dd>
+				<r/>
+				<dt>"<kw>bmp24</kw>"</dt>
+				<dd>
+					　24bpp BMP. Alpha channels (masks) are not saved.<r/>
+				</dd>
+				<r/>
+				<dt>"<kw>bmp8</kw>"</dt>
+				<dd>
+					　8bpp BMP. Alpha channels (masks) are not saved. Images are color-reduced using 4x4 organized dithering with a fixed palette of 252 colors.<r/>
+				</dd>
+				<r/>
+				<dt>"<kw>jpg</kw>"</dt>
+				<dd>
+					　JPEG. Alpha channels (masks) are not saved. Images are stored at 90% quality.<r/>
+				</dd>
+				<r/>
+				<dt>"<kw>jpg###</kw>"</dt>
+				<dd>
+					　JPEG. Alpha channels (masks) are not saved. The image will be saved with the quality specified by ###. "jpg010" is 10%, "jpg100" is 100%, and "jpg080" is 80%.<r/>
+				</dd>
+				<r/>
+				<dt>"<kw>png</kw>"</dt>
+				<dd>
+					　32bpp PNG. Also save the alpha channel (mask).<r/>
+				</dd>
+				<r/>
+				<dt>"<kw>png24</kw>"</dt>
+				<dd>
+					　24bpp PNG. Alpha channels (masks) are not saved.<r/>
+				</dd>
+				<r/>
+				<dt>"<kw>tlg5</kw>"</dt>
+				<dd>
+					　It is TLG5 of 32bpp. Also save the alpha channel (mask).<r/>
+				</dd>
+				<r/>
+				<dt>"<kw>tlg524</kw>"</dt>
+				<dd>
+					　It is TLG5 of 24bpp. Alpha channels (masks) are not saved.<r/>
+				</dd>
+				<r/>
+				<dt>"<kw>tlg6</kw>"</dt>
+				<dd>
+					　It is TLG6 of 32bpp. Also save the alpha channel (mask).<r/>
+				</dd>
+				<r/>
+				<dt>"<kw>tlg624</kw>"</dt>
+				<dd>
+					　24bpp TLG6. Alpha channels (masks) are not saved.<r/>
+				</dd>
+				</dl>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Saves a file in the image format specified by type to the storage (file) specified by name.<r/>
+		　The image of the layer is saved, and the area image cannot be saved.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>copyToBitmapFromMainImage</name>
+	<type>method</type>
+	<shortdesc>Copy image to Bitmap</shortdesc>
+	<arg>
+		<argitem>
+			<name>dest</name>
+			<default></default>
+			<desc>
+				　Specify the destination <ref>Bitmap</ref> object.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Copies the layer's main image to the Bitmap object specified by dest.<r/>
+		　The image size is the same as the image size of the copy source layer.<r/>
+		　This method takes almost no execution time, because it is just a state that "the same image is shared by two or more layers".<r/>
+	</desc>
+	<ref>Layer.copyFromBitmapToMainImage</ref>
+</member>
+
+<member>
+	<name>copyFromBitmapToMainImage</name>
+	<type>method</type>
+	<shortdesc>Copy image from Bitmap</shortdesc>
+	<arg>
+		<argitem>
+			<name>src</name>
+			<default></default>
+			<desc>
+				　Specify the <ref>Bitmap</ref> object to copy.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Copies an image from the Bitmap object specified by src to the main image of the layer.<r/>
+		　The image size is the same as the image size of the source Bitmap object.<r/>
+		　This method takes almost no execution time, because it is just a state that "the same image is shared by two or more layers".<r/>
+	</desc>
+	<ref>Layer.copyToBitmapFromMainImage</ref>
+</member>
+
+
+<member>
+	<name>parent</name>
+	<type>property</type>
+	<shortdesc>Parent layer</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the parent layer object.<r/>
+		　You can also set a value. Setting a value makes it a child of that layer.<r/>
+		　You cannot be a child of a layer that belongs to a different window or different primary layer, or you can be a child of yourself or your descendants.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>children</name>
+	<type>property</type>
+	<shortdesc>Child layer array</shortdesc>
+	<access>r</access>
+	<desc>
+		　Represents the stored array object of the child layer.<r/>
+		　Writing values to the array obtained here or deleting or adding items will not be reflected in the actual layer state. Think that you can only read.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>order</name>
+	<type>property</type>
+	<shortdesc>relative position</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the rank among sibling layers with the same parent. The lower the value, the deeper it is displayed.<r/>
+		　By setting a value, you can change the order between sibling layers. Setting a value sets the <ref>Layer.absoluteOrderMode</ref> property of the parent layer to false.<r/>
+	</desc>
+	<ref>Layer.absolute</ref>
+	<ref>Layer.absoluteOrderMode</ref>
+	<ref>Layer.bringToBack</ref>
+	<ref>Layer.bringToFront</ref>
+</member>
+
+<member>
+	<name>absolute</name>
+	<type>property</type>
+	<shortdesc>Absolute position</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the order of superposition between sibling layers with the same parent. The lower the value, the deeper it is displayed.<r/>
+		Unlike <ref>Layer.order</ref> properties, values do not need to be consecutive between the same siblings.<r/>
+		　By setting a value, you can change the order between sibling layers. Setting the value sets the <ref>Layer.absoluteOrderMode</ref> property of the parent layer to true.<r/>
+	</desc>
+	<ref>Layer.order</ref>
+	<ref>Layer.absoluteOrderMode</ref>
+	<ref>Layer.bringToBack</ref>
+	<ref>Layer.bringToFront</ref>
+</member>
+
+<member>
+	<name>absoluteOrderMode</name>
+	<type>property</type>
+	<shortdesc>Whether to use the absolute position mode</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the stacking mode of the immediate child layers. You can also set a value.<r/>
+		　If false is specified, the relative position is specified, and the <ref>Layer.order</ref> property indicates the order.<r/>
+		　If true is specified, absolute position is specified, and the <ref>Layer.absolute</ref> property indicates the order.<r/>
+	</desc>
+	<ref>Layer.order</ref>
+	<ref>Layer.absolute</ref>
+	<ref>Layer.bringToBack</ref>
+	<ref>Layer.bringToFront</ref>
+</member>
+
+<member>
+	<name>visible</name>
+	<type>property</type>
+	<shortdesc>Visible</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether it is visible. You can also set a value.<r/>
+		　Specify false to make it invisible. If you specify true, it will be visible.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>cached</name>
+	<type>property</type>
+	<shortdesc>Whether to cache</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether to cache. You can also set a value.<r/>
+		　In the case of setting to cache, you will have an image in which you and your child layer are all superimposed in advance, and unless you or your child layer is changed, you will superimpose yourself and the child layer Do not perform image operations on (reconfigure cache automatically if changed).<r/>
+		　In the case of setting not to cache, the superposition calculation is performed every time the screen is updated.<r/>
+		　By default, caching is not performed, but caching is automatically enabled during a transition (however, this property does not indicate whether caching is enabled automatically during a transition, etc.).<r/>
+		　If you know that there is no change between the image and state of the image of one layer and its child layers, and the screen is frequently rewritten, caching will improve the overall performance of that layer.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>nodeVisible</name>
+	<type>property</type>
+	<shortdesc>Whether the node is visible</shortdesc>
+	<access>r</access>
+	<desc>
+		　Indicates whether the node is visible.<r/>
+		　False if any parent layer is invisible.<r/>
+		　True if all parent layers are visible.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>neutralColor</name>
+	<type>property</type>
+	<shortdesc>Neutral color</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the neutral color of the layer in 0xAARRGGBB format. You can also set a value.<r/>
+		　The neutral color of the layer is set to that type of neutral color when you change the <ref>Layer.type</ref> property.<r/>
+		　The neutral color is the default value that fills the expanded area when the size of the layer image is expanded.<r/>
+		　By setting the value, you can specify the initial color when expanding the size of the layer image.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>hasImage</name>
+	<type>property</type>
+	<shortdesc>Whether the layer has an image</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether the layer has an image. You can also set a value.<r/>
+		　If true, the layer will have an image. This is the default.<r/>
+		　If false is specified, the layer image will be released and the layer will have no image.<r/>
+		　Setting the <ref>Layer.type</ref> property resets hasImage to true.<r/>
+		　If the layer has no image, if <ref>Layer.type</ref> is <kw>ltOpaque</kw>, the layer will be displayed as full <ref>Layer.neutralColor</ref>.<r/>
+		　All other types are treated as completely transparent.<r/>
+		　Layers with this property false are considered to have a full opacity of 0 (fully transparent) if <ref>Layer.hitType</ref> is htMask. Also, drawing and fonts cannot be manipulated.<r/>
+		　Layers with this property false usually combine multiple child layers and use themselves as only transparent layers.
+	</desc>
+</member>
+
+<member>
+	<name>opacity</name>
+	<type>property</type>
+	<shortdesc>Opacity</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the opacity of the layer. You can set the value.<r/>
+		　The value is an integer between 0 and 255, with higher values giving a more opaque display.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>window</name>
+	<type>property</type>
+	<shortdesc>Window object</shortdesc>
+	<access>r</access>
+	<desc>
+		　Represents the window object holding this layer.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>isPrimary</name>
+	<type>property</type>
+	<shortdesc>Whether it is a primary layer</shortdesc>
+	<access>r</access>
+	<desc>
+		　Indicates whether this is the primary layer.<r/>
+		　The primary layer is a layer that has no parent and is the layer displayed at the back.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>left</name>
+	<type>property</type>
+	<shortdesc>Left end position</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Specifies the layer's left edge position in pixels at the display coordinates of the parent layer.<r/>
+		　You can also set a value.<r/>
+	</desc>
+	<ref>Layer.setPos</ref>
+</member>
+
+<member>
+	<name>top</name>
+	<type>property</type>
+	<shortdesc>Top position</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Specifies the top position of the layer in pixels at the display coordinates of the parent layer.<r/>
+		　You can also set a value.<r/>
+	</desc>
+	<ref>Layer.setPos</ref>
+</member>
+
+<member>
+	<name>width</name>
+	<type>property</type>
+	<shortdesc>Width</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Specifies the display width of the layer in pixels.<r/>
+		　You can also set a value.<r/>
+	</desc>
+	<ref>Layer.setSize</ref>
+</member>
+
+<member>
+	<name>height</name>
+	<type>property</type>
+	<shortdesc>Vertical width</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Specifies the display height of the layer in pixels.<r/>
+		　You can also set a value.<r/>
+	</desc>
+	<ref>Layer.setSize</ref>
+</member>
+
+<member>
+	<name>imageLeft</name>
+	<type>property</type>
+	<shortdesc>Layer image left edge offset</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Specifies the left edge of the layer's display offset in pixels.<r/>
+		　You can also set a value.<r/>
+	</desc>
+	<ref>Layer.setImagePos</ref>
+</member>
+
+<member>
+	<name>imageTop</name>
+	<type>property</type>
+	<shortdesc>Layer image top offset</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Specifies the top of the display offset of the layer in pixels.<r/>
+		　You can also set a value.<r/>
+	</desc>
+	<ref>Layer.setImagePos</ref>
+</member>
+
+
+<member>
+	<name>imageWidth</name>
+	<type>property</type>
+	<shortdesc>Image width</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Specifies the width of the layer image in pixels.<r/>
+		　You can also set a value.<r/>
+	</desc>
+	<ref>Layer.setImageSize</ref>
+</member>
+
+<member>
+	<name>imageHeight</name>
+	<type>property</type>
+	<shortdesc>Image vertical width</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Specifies the height of the layer image in pixels.<r/>
+		　You can also set a value.<r/>
+	</desc>
+	<ref>Layer.setSize</ref>
+</member>
+
+<member>
+	<name>clipLeft</name>
+	<type>property</type>
+	<shortdesc>Left edge position of drawing clip rectangle</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Specifies the left edge of the drawing clip rectangle in pixels.<r/>
+		　You can also set a value.<r/>
+	</desc>
+	<ref>Layer.setClip</ref>
+</member>
+
+<member>
+	<name>clipTop</name>
+	<type>property</type>
+	<shortdesc>Draw clip rectangle top position</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Specifies the top edge of the drawing clip rectangle in pixels.<r/>
+		　You can also set a value.<r/>
+	</desc>
+	<ref>Layer.setClip</ref>
+</member>
+
+
+<member>
+	<name>clipWidth</name>
+	<type>property</type>
+	<shortdesc>Drawing clip rectangle width</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Specifies the width of the drawing clip rectangle in pixels.<r/>
+		　You can also set a value.<r/>
+	</desc>
+	<ref>Layer.setClip</ref>
+</member>
+
+<member>
+	<name>clipHeight</name>
+	<type>property</type>
+	<shortdesc>Drawing clip rectangle vertical width</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Specifies the height of the drawing clip rectangle in pixels.<r/>
+		　You can also set a value.<r/>
+	</desc>
+	<ref>Layer.setClip</ref>
+</member>
+
+
+<member>
+	<name>type</name>
+	<type>property</type>
+	<shortdesc>Layer display type</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the display type of the layer. You can also set a value.<r/>
+		<ul>
+		<li>Specifying <tt><kw>ltOpaque</kw></tt> or <tt><kw>ltCoverRect</kw></tt> disables per-pixel alpha blending. <tt>ltCoverRect</tt> and <tt>ltOpaque</tt> have the same meaning.
+		If the <ref>Layer.opacity</ref> property is 255, it will be displayed as a completely opaque rectangle. Mask images are ignored. The drawing method (specified by <ref>Layer.face</ref>) suitable for this type is <tt><kw>dfOpaque</kw></tt>.</li>
+		<li>Specifying <tt><kw>ltAlpha</kw></tt> or <tt><kw>ltTransparent</kw></tt> enables per-pixel alpha blending. <tt>ltTransparent</tt> and <tt>ltAlpha</tt> have the same meaning.
+		The mask image is used for transmission. <tt><kw>dfAlpha</kw></tt> is the preferred drawing method for this type.</li>
+		<li>Specifying <tt><kw>ltAddAlpha</kw></tt> enables pixel-by-pixel additive alpha blending. The preferred drawing method for this type is <tt><kw>dfAddAlpha</kw></tt>.</li>
+		<li>If <tt><kw>ltAdditive</kw></tt> is specified, additive composition is performed. Mask images are ignored. The preferred drawing method for this type is <tt><kw>dfOpaque</kw></tt>.</li>
+		<li>If <tt><kw>ltSubtractive</kw></tt> is specified, subtractive synthesis is performed. Mask images are ignored. The preferred drawing method for this type is <tt><kw>dfOpaque</kw></tt>.</li>
+		<li>If <tt><kw>ltMultiplicative</kw></tt> is specified, multiplication synthesis is performed. Mask images are ignored. The preferred drawing method for this type is <tt><kw>dfOpaque</kw></tt>.</li>
+		<li>If <tt><kw>ltDodge</kw></tt> is specified, dodging is performed. Mask images are ignored. The preferred drawing method for this type is <tt><kw>dfOpaque</kw></tt>.</li>
+		<li>If <tt><kw>ltDarken</kw></tt> is specified, comparison (dark) synthesis is performed. Mask images are ignored. The preferred drawing method for this type is <tt><kw>dfOpaque</kw></tt>.</li>
+		<li>If <tt><kw>ltLighten</kw></tt> is specified, comparison (bright) synthesis is performed. Mask images are ignored. The preferred drawing method for this type is <tt><kw>dfOpaque</kw></tt>.</li>
+		<li>If <tt><kw>ltScreen</kw></tt> is specified, screen multiplication is performed. Mask images are ignored. The preferred drawing method for this type is <tt><kw>dfOpaque</kw></tt>.</li>
+		</ul>
+		　See <link href="GraphicSystem" /> for other layer display types.<r/>
+	</desc>
+	<ref>Layer.face</ref>
+</member>
+
+<member>
+	<name>face</name>
+	<type>property</type>
+	<shortdesc>Drawing method</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the drawing method for the layer. You can also set a value.<r/>
+		　Before Kirikiri 2.23 beta 1, it was called "drawing surface".<r/>
+		<ul>
+		<li>If <tt><kw>dfAlpha</kw></tt> or <tt><kw>dfBoth</kw></tt> is specified, the image is assumed to be an image with an alpha channel and is drawn. The same is true for <tt>dfBoth</tt> and <tt>dfAlpha</tt>. The layer type corresponding to this drawing method is <tt>ltTransparent</tt> or <tt>ltAlpha</tt>.</li>
+		<li>If <tt><kw>dfAddAlpha</kw></tt> is specified, the image will be considered as an image with an added alpha channel and drawn. The layer type corresponding to this drawing method is <tt>ltAddAlpha</tt>.</li>
+		<li>If <tt><kw>dfOpaque</kw></tt> or <tt><kw>dfMain</kw></tt> is specified, all layer images are considered completely opaque and are drawn. Layer types that support this drawing method are those that perform arithmetic / logical operations such as <tt>ltOpaque</tt> or <tt>ltCoverRect</tt>, or <tt>ltAdditive</tt>.</li>
+		<li>If <tt><kw>dfMask</kw></tt> is specified, the mask image (alpha channel) will be the target of drawing.</li>
+		<li>If <tt><kw>dfProvince</kw></tt> is specified, the area image will be drawn.</li>
+		<li>If you specify <tt><kw>dfAuto</kw></tt>, the drawing method is automatically determined according to the current <ref>Layer.type</ref> properties. The drawing method of the layer immediately after it is created is dfAuto.</li>
+		</ul>
+		　Some methods cannot be operated depending on the value of this property.<r/>
+	</desc>
+	<ref>Layer.type</ref>
+</member>
+
+<member>
+	<name>holdAlpha</name>
+	<type>property</type>
+	<shortdesc>Whether to protect the alpha channel</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Specifies whether to protect the alpha channel in the drawing. You can also set a value.<r/>
+		　False by default.<r/>
+		　Prior to Kirikiri 2.23 beta 1, each drawing method had a parameter named hda, which behaved the same as this property, but has been separated as a property from 2.23 beta 2.<r/>
+		　For some drawing operations, when the <ref>Layer.face</ref> property is <kw>dfOpaque</kw>, this property can specify whether to keep the alpha channel (mask image) of the image. For many methods, setting this property to false will result in faster drawing. If the <ref>Layer.type</ref> is neither <kw>ltAlpha</kw> nor <kw>ltAddAlpha</kw>, the alpha channel of the image is not used, so it is safe to set this property to false. However, if this property is false, the alpha channel will be destroyed.<r/>
+		<r/>
+		　The following methods are not affected by this property:<r/>
+		<ref>Layer.loadImages</ref><r/>
+		<ref>Layer.loadProvinceImage</ref><r/>
+		<ref>Layer.setMainPixel</ref><r/>
+		<ref>Layer.setMaskPixel</ref><r/>
+		<ref>Layer.setProvincePixel</ref><r/>
+		<ref>Layer.piledCopy</ref><r/>
+		<ref>Layer.adjustGamma</ref>(Alpha channel is always protected)<r/>
+		<ref>Layer.doGrayScale</ref>(Alpha channel is always protected)<r/>
+		<ref>Layer.flipLR</ref><r/>
+		<ref>Layer.flipUD</ref><r/>
+		<ref>Layer.assignImages</ref><r/>
+		<r/>
+		　The following methods are affected by this property:<r/>
+		<ref>Layer.copyRect</ref><r/>
+		<ref>Layer.stretchCopy</ref><r/>
+		<ref>Layer.affineCopy</ref><r/>
+		<ref>Layer.fillRect</ref><r/>
+		<ref>Layer.colorRect</ref><r/>
+		<ref>Layer.drawText</ref><r/>
+		<ref>Layer.operateRect</ref><r/>
+		<ref>Layer.operateStretch</ref><r/>
+		<ref>Layer.operateAffine</ref><r/>
+	</desc>
+</member>
+
+<member>
+	<name>imageModified</name>
+	<type>property</type>
+	<shortdesc>Whether the image has changed</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether the image of the layer has changed. You can also set a value.<r/>
+		　It is automatically set to true when you draw on the layer image or change the size of the layer image.<r/>
+		　If you set this property to false, it will be true when the layer image changes, so you can know if the layer image has changed.<r/>
+		　This property itself does not affect the behavior of the layer.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>hitType</name>
+	<type>property</type>
+	<shortdesc>Type of hit judgment</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the type of hit judgment of mouse event. You can also set a value.<r/>
+		　If <tt><kw>htProvince</kw></tt> is specified, mouse events will be received only in non-zero areas in the area image.<r/>
+		　If <tt><kw>htMask</kw></tt> is specified, mouse events will be received only when the value of the mask (opacity) image is greater than or equal to the value specified in the <ref>Layer.hitThreshold</ref> property.<r/>
+		　Mouse events that are not received are processed in a deeper layer.<r/>
+		　The default is <tt>htMask</tt>.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>hitThreshold</name>
+	<type>property</type>
+	<shortdesc>Threshold for hit judgment</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the expression position of the mouse event hit judgment. You can also set a value.<r/>
+		　This property is valid only when the <ref>Layer.hitType</ref> property is htMask, and the mouse message will be received if the value of the mask (opacity) image is more than the value specified by this property.<r/>
+		Specify 0 to receive all mouse messages. If you specify 256, no mouse messages will be received.<r/>
+		　It is 16 by default.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>cursor</name>
+	<type>property</type>
+	<shortdesc>Mouse cursor</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the mouse cursor for the layer. You can also set a value.<r/>
+		　For the mouse cursor, you can specify either a <kw>mouse cursor constant</kw> starting with cr, or the storage name of a mouse cursor with a .cur extension or an animated mouse cursor with a .ani extension.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>cursorX</name>
+	<type>property</type>
+	<shortdesc>Mouse cursor x position</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　The x coordinate value of the layer's mouse cursor in pixels at the display coordinates. You can also set a value.<r/>
+		　When setting the value, setting the cursorX property does not move the mouse cursor.
+		Subsequently, the mouse cursor moves when the cursorY property is set.<r/>
+	</desc>
+	<ref>Layer.setCursorPos</ref>
+</member>
+
+<member>
+	<name>cursorY</name>
+	<type>property</type>
+	<shortdesc>Mouse cursor y position</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　The y coordinate value of the layer's mouse cursor in pixels at the display coordinates. You can also set a value.<r/>
+		　When setting the value, setting the cursorX property does not move the mouse cursor.
+		Subsequently, the mouse cursor moves when the cursorY property is set.<r/>
+	</desc>
+	<ref>Layer.setCursorPos</ref>
+</member>
+
+
+<member>
+	<name>hint</name>
+	<type>property</type>
+	<shortdesc>Hint</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents a hint string for the layer. You can also set a value.<r/>
+		　The hint string is the string that is displayed near the mouse cursor when the mouse cursor is slightly rested on the layer.<r/>
+		　Specify an empty string if you do not want to display hints.<r/>
+	</desc>
+	<ref>Layer.showParentHint</ref>
+</member>
+
+<member>
+	<name>showParentHint</name>
+	<type>property</type>
+	<shortdesc>Keep parent layer hints</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Whether to inherit parent layer hints. You can also set a value.<r/>
+		　If true, if the <ref>Layer.hint</ref> property is an empty string, go back to the parent layer and take over the hints of the hinted layer. Displays the Layer.hint property if it is not an empty string.<r/> 
+		　If false, display the Layer.hint property if it is not an empty string, otherwise display no hint.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>focusable</name>
+	<type>property</type>
+	<shortdesc>Whether to receive focus</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether focus can be received. You can also set a value.<r/>
+		　If true, the layer receives focus.<r/>
+		　If false, the layer will not receive focus.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>prevFocusable</name>
+	<type>property</type>
+	<shortdesc>Layer to receive forward focus</shortdesc>
+	<access>r</access>
+	<desc>
+		　Search forward for layers that can receive focus.<r/>
+		　It is null if there is no corresponding layer.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>nextFocusable</name>
+	<type>property</type>
+	<shortdesc>Layer that can receive backward focus</shortdesc>
+	<access>r</access>
+	<desc>
+		　Search backward for layers that can receive focus.<r/>
+		　It is null if there is no corresponding layer.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>joinFocusChain</name>
+	<type>property</type>
+	<shortdesc>Whether to join the focus chain</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether to participate in the focus chain.<r/>
+		　If you specify true, you can join the focus chain, appear in <ref>Layer.prevFocusable</ref> etc., and move the focus to that layer with TAB key etc.<r/>
+		　If you specify false, it will not participate in the focus chain, but you can receive focus with <ref>Layer.focus</ref> method etc.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>focused</name>
+	<type>property</type>
+	<shortdesc>Whether it is focused</shortdesc>
+	<access>r</access>
+	<desc>
+		　Indicates whether focus is on.<r/>
+		　If true, you have focus. If not false.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>enabled</name>
+	<type>property</type>
+	<shortdesc>Operable</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether the layer can be operated. You can also set a value.<r/>
+		　If true, you can operate and receive focus etc.<r/>
+		　If false, it is inoperable and cannot receive focus etc.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>nodeEnabled</name>
+	<type>property</type>
+	<shortdesc>Whether the layer node is operable</shortdesc>
+	<access>r</access>
+	<desc>
+		　Indicates whether the layer node can be operated.<r/>
+		　False if you are inoperable, or if you have inoperable layers in the parent layer.<r/>
+		　Otherwise, it is true.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>attentionLeft</name>
+	<type>property</type>
+	<shortdesc>Gaze left end position</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　The gaze left end position is expressed in pixel units in display coordinates. You can also set a value.<r/>
+	</desc>
+	<ref>Layer.setAttentionPos</ref>
+	<ref>Layer.useAttention</ref>
+</member>
+
+<member>
+	<name>attentionTop</name>
+	<type>property</type>
+	<shortdesc>Gaze top position</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　The gaze top position is expressed in display coordinates in pixels. You can also set a value.<r/>
+	</desc>
+	<ref>Layer.setAttentionPos</ref>
+	<ref>Layer.useAttention</ref>
+</member>
+
+
+<member>
+	<name>useAttention</name>
+	<type>property</type>
+	<shortdesc>Whether to use fixation information</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether to use gaze information. You can also set a value.<r/>
+		　If true, the gaze information for that layer is used.<r/>
+		　If false, the parental gaze information of the layer (if any) is used.<r/>
+	</desc>
+	<ref>Layer.setAttentionPos</ref>
+	<ref>Layer.attentionLeft</ref>
+	<ref>Layer.attentionTop</ref>
+</member>
+
+<member>
+	<name>imeMode</name>
+	<type>property</type>
+	<shortdesc>IME mode</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates the IME mode. You can also set a value.<r/>
+		　When the focus is set on the layer, the IME switches to the mode specified here.<r/>
+		　The values that can be set are as follows.<r/>
+		<ul>
+		Specifying <li><tt><kw>imDisable</kw></tt> disables IME. Input using IME is not possible, and IME cannot be enabled by user operation.<r/></li>
+		Specifying <li><tt><kw>imClose</kw></tt> disables IME. Unlike imDisable, IME can be enabled by user operation.<r/></li>
+		Specify <li><tt><kw>imOpen</kw></tt> to enable IME.<r/></li>
+		If <li><tt><kw>imDontCare</kw></tt> is specified, the valid / invalid status of IME is inherited from the previous status. IME can be enabled or disabled by user operation. In Japanese input, this is a general mode for letting the user freely enter half-width / full-width characters.<r/></li>
+		When <li><tt><kw>imSAlpha</kw></tt> is specified, IME is enabled and the mode switches to single-byte alphabet input mode.<r/></li>
+		When <li><tt><kw>imAlpha</kw></tt> is specified, IME is enabled and the mode switches to full-width alphabet input mode.<r/></li>
+		If you specify <li><tt><kw>imHira</kw></tt>, IME will be enabled and you will be in Hiragana input mode.<r/></li>
+		If <li><tt><kw>imSKata</kw></tt> is specified, IME will be enabled and it will be in half-width katakana input mode.<r/></li>
+		If <li><tt><kw>imKata</kw></tt> is specified, IME will be enabled and it will be in full-width katakana input mode.<r/></li>
+		If <li><tt><kw>imChinese</kw></tt> is specified, IME will be enabled and the mode will accept double-byte Chinese input. Cannot be used in a Japanese environment.<r/></li>
+		If <li><tt><kw>imSHanguel</kw></tt> is specified, IME will be enabled and the mode will accept 1-byte Korean input. Cannot be used in a Japanese environment.<r/></li>
+		If <li><tt><kw>imHanguel</kw></tt> is specified, IME will be enabled and the mode will accept 2-byte Korean input. Cannot be used in a Japanese environment.<r/></li>
+		</ul>
+		If not specified, it will be imDisable.<r/>
+	</desc>
+	<ref>Window.imeMode</ref>
+</member>
+
+<member>
+	<name>callOnPaint</name>
+	<type>property</type>
+	<shortdesc>whether to call the onPaint event</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether to call the <ref>Layer.onPaint</ref> event. You can also set a value.<r/>
+		　Specifying true causes the onPaint event to be called just before the next drawing on the screen. This property is automatically set back to false after the onPaint event has been processed.<r/>
+		　The onPaint event does not occur when false is specified.<r/>
+		　The <ref>Layer.update</ref> methods set this property to true.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>font</name>
+	<type>property</type>
+	<shortdesc>font</shortdesc>
+	<access>r</access>
+	<desc>
+		　An object of class <ref>Font</ref> that represents the font used for drawing with the <ref>Layer.drawText</ref> methods.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>name</name>
+	<type>property</type>
+	<shortdesc>Layer name</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the layer name. You can also set a value.<r/>
+		　The content set by this property does not affect the operation of the Layer class.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>mainImageBuffer</name>
+	<type>property</type>
+	<shortdesc>Main image buffer pointer</shortdesc>
+	<access>r</access>
+	<desc>
+		　Represents a pointer to the upper left corner of the main image buffer (a 32bpp bitmap containing color and mask (opacity) information).<r/>
+		　This property is to provide a means of direct access to the image buffer for plugins etc.<r/>
+		　It is returned as an integer type, but please use it by casting it to an appropriate type (such as const unsigned long *) in plug-ins.<r/>
+		　Do not write a value to the pointer obtained by this property.
+		Any pointer obtained with <ref>Layer.mainImageBufferForWrite</ref> can be written.<r/>
+		　Returns NULL (0) if no image is assigned to the layer.<r/>
+		　The image size is represented by the <ref>Layer.imageWidth</ref> and <ref>Layer.imageHeight</ref> properties.<r/>
+		　See <ref>Layer.mainImageBufferPitch</ref> for pointer calculation.<r/>
+	</desc>
+	<ref>Layer.mainImageBufferForWrite</ref>
+	<ref>Layer.mainImageBufferPitch</ref>
+</member>
+
+<member>
+	<name>mainImageBufferForWrite</name>
+	<type>property</type>
+	<shortdesc>Main image buffer pointer (for writing)</shortdesc>
+	<access>r</access>
+	<desc>
+		　Represents a pointer to the upper left corner of the main image buffer (a 32bpp bitmap containing color and mask (opacity) information).<r/>
+		　This property is to provide a means of direct access to the image buffer for plugins etc.<r/>
+		　It is returned as an integer type, but please use it by casting it to an appropriate type (unsigned long * etc.) in plug-ins.<r/>
+		　Unlike <ref>Layer.mainImageBuffer</ref>, the value obtained can be written to the pointer obtained by this property. The same image is shared between multiple layers inside Kirikiri, but if you refer to this property, the sharing state will be released.<r/>
+		　Returns NULL (0) if no image is assigned to the layer.<r/>
+		　The image size is represented by the <ref>Layer.imageWidth</ref> and <ref>Layer.imageHeight</ref> properties.<r/>
+		　See <ref>Layer.mainImageBufferPitch</ref> for pointer calculation.<r/>
+	</desc>
+	<ref>Layer.mainImageBuffer</ref>
+	<ref>Layer.mainImageBufferPitch</ref>
+</member>
+
+<member>
+	<name>mainImageBufferPitch</name>
+	<type>property</type>
+	<shortdesc>Main image buffer pitch</shortdesc>
+	<access>r</access>
+	<desc>
+		　Represents the pitch (number of bytes to the next lower scanline) of the image buffer of the main image (a 32bpp bitmap containing color and mask (opacity) information).<r/>
+		　This property is to provide a means of direct access to the image buffer for plugins etc.<r/>
+		　Assuming that tjs_uint32 is a 32-bit integer type and tjs_uint8 is an 8-bit (1 byte) integer type, the pointer to the image position (x, y) can be calculated as follows by writing in C language.<r/>
+		<tt>( (tjs_uint32*)( (tjs_uint8*)mainImageBuffer + y*mainImageBufferPitch )) + x</tt><r/>
+		　Note that this property returns the number of bytes, not the number of pixels until the next scanline. This number may be slightly larger than the exact number of bytes required for the image width.<r/>
+		　Note that this property can be negative.<r/>
+	</desc>
+	<ref>Layer.mainImageBuffer</ref>
+	<ref>Layer.mainImageBufferForWrite</ref>
+</member>
+
+<member>
+	<name>provinceImageBuffer</name>
+	<type>property</type>
+	<shortdesc>Area image buffer pointer</shortdesc>
+	<access>r</access>
+	<desc>
+		　Represents a pointer to the upper left corner of the image buffer for the region image (8bpp bitmap containing region information).<r/>
+		　This property is to provide a means of direct access to the image buffer for plugins etc.<r/>
+		　It is returned as an integer type, but please use it by casting it to an appropriate type (such as const unsigned char *) in plug-ins.<r/>
+		　Do not write a value to the pointer obtained by this property.
+		Any pointer obtained with <ref>Layer.provinceImageBufferForWrite</ref> can be written.<r/>
+		　Returns NULL (0) if no image has been assigned. If no image has been assigned, the entire area must be assumed to be area number 0.<r/>
+		　The image size is represented by the <ref>Layer.imageWidth</ref> and <ref>Layer.imageHeight</ref> properties.<r/>
+		　See <ref>Layer.provinceImageBufferPitch</ref> for pointer calculation.<r/>
+	</desc>
+	<ref>Layer.provinceImageBufferForWrite</ref>
+	<ref>Layer.provinceImageBufferPitch</ref>
+</member>
+
+<member>
+	<name>provinceImageBufferForWrite</name>
+	<type>property</type>
+	<shortdesc>Area image buffer pointer (for writing)</shortdesc>
+	<access>r</access>
+	<desc>
+		　Represents a pointer to the upper left corner of the image buffer for the region image (8bpp bitmap containing region information).<r/>
+		　This property is to provide a means of direct access to the image buffer for plugins etc.<r/>
+		　It is returned as an integer type, but please use it by casting it to an appropriate type (unsigned char * etc.) in plug-ins.<r/>
+		　Unlike <ref>Layer.provinceImageBuffer</ref>, the value obtained can be written to the pointer obtained by this property. The same image is shared between multiple layers inside Kirikiri, but if you refer to this property, the sharing state will be released.<r/>
+		　If no image is assigned to the layer, it is automatically assigned when this property is referenced, and the entire area is initialized with area number 0.<r/>
+		　The image size is represented by the <ref>Layer.imageWidth</ref> and <ref>Layer.imageHeight</ref> properties.<r/>
+		　See <ref>Layer.provinceImageBufferPitch</ref> for pointer calculation.<r/>
+	</desc>
+	<ref>Layer.provinceImageBuffer</ref>
+	<ref>Layer.provinceImageBufferPitch</ref>
+</member>
+
+<member>
+	<name>provinceImageBufferPitch</name>
+	<type>property</type>
+	<shortdesc>Area image buffer pitch</shortdesc>
+	<access>r</access>
+	<desc>
+		　Indicates the pitch (number of bytes to the next lower scan line) of the image buffer of the area image (8bpp bitmap containing area information).<r/>
+		　This property is provided to provide a direct access to the image buffer for plugins etc.<r/>
+		　If tjs_uint8 is an 8-bit (1 byte) integer type, the pointer to the image position (x, y) can be calculated as follows by writing in C language.<r/>
+		<tt>(tjs_uint8*)provinceImageBuffer + y*provinceImageBufferPitch + x</tt><r/>
+		　The number in this property may be slightly larger than the exact number of bytes required for the image width.<r/>
+		　Note that this property can be negative.<r/>
+	</desc>
+	<ref>Layer.provinceImageBuffer</ref>
+	<ref>Layer.provinceImageBufferForWrite</ref>
+</member>
+
+
+<member>
+	<name>ignoreHintSensing</name>
+	<type>property</type>
+	<shortdesc>Hint display judgment</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates the presence or absence of hint display judgment.<r/>
+		　If true is set, hint judgment is not performed in this layer.<r/>
+		　Judgment is performed if set to false.<r/>
+	</desc>
+	<ref>Window.onHintChanged</ref>
+</member>
+
+
+</doc>

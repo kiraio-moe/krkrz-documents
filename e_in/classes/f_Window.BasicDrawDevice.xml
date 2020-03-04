@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Window.BasicDrawDevice</title>
+<desc>
+　The Window.BasicDrawDevice class is a DrawDevice that registers this instance with <ref>Window.drawDevice</ref> and provides standard drawing functions.<r/>
+</desc>
+
+<member>
+	<name>BasicDrawDevice</name>
+	<type>constructor</type>
+	<shortdesc>Constructing BasicDrawDevice object</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Constructs an object of class Window.BasicDrawDevice.<r/>
+		　An instance of this class is registered in Window.drawDevice in the initial state, so there is no need to register a new one.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>recreate</name>
+	<type>method</type>
+	<shortdesc>Internal device regeneration</shortdesc>
+	<arg></arg>
+	<result></result>
+	<desc>
+		　Regenerate the internal device.<r/>
+		　It is not usually used.<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>onDisplayRotate</name>
+	<type>event</type>
+	<shortdesc>When the screen is rotated (1.1.0 or later)</shortdesc>
+	<arg>
+		<argitem>
+			<name>orientation</name>
+			<default></default>
+			<desc>
+				　The screen orientation.<r/>
+				　One of the following values:<r/>
+				　oriUnknown (acquisition failure / unknown), oriPortrait (portrait), oriLandscape (landscape)<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>angle</name>
+			<default></default>
+			<desc>
+				　Angle.<r/>
+				　The angle (angle) is 0, 90, 180, 270, or -1. If it cannot be obtained, it becomes -1.<r/>
+				　The angle is the rotation angle from the device default, so it will be 0 vertically in portrait devices.<r/>
+				　On a normal device, there are many 0s in landscape.<r/>
+				　The vertical orientation is 0 for recent 8-inch tablets, etc., and the vertical orientation is the standard orientation.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>bpp</name>
+			<default></default>
+			<desc>
+				　 bits per pixel.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>width</name>
+			<default></default>
+			<desc>
+				　Screen width.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>height</name>
+			<default></default>
+			<desc>
+				　The height of the screen.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Represents the event function called when the screen is rotated.<r/>
+	</desc>
+	<ref>Window.onDisplayRotate</ref>
+	<ref>Window.displayOrientation</ref>
+	<ref>Window.displayRotate</ref>
+</member>
+
+
+<member>
+	<name>interface</name>
+	<type>property</type>
+	<shortdesc>Get interface object</shortdesc>
+	<access>r</access>
+	<desc>
+		　It is for using DrawDevice object in plugins.<r/>
+	</desc>
+</member>
+
+</doc>

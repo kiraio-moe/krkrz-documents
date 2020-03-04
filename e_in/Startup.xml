@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>How to start</title>
+
+<para>
+<ptitle>About launching Kirikiri</ptitle>
+　To start Kirikiri and specify a script, you usually need to determine the <kw>project folder</kw> (see <link href="StorageSystem"/>).<r/>
+　There are several ways to determine the project folder, but they take precedence in the order listed below (applied if applicable at the top).<r/>
+　See <link href="CommandLine"/> for options to pass to Kirikiri at startup.<r/>
+</para>
+
+<para>
+<ptitle>Project folder determination order</ptitle>
+<dl>
+<dt>Folders and archives specified on the command line</dt>
+<dd>
+　If a folder is specified as a command line argument, it is assumed to be a project folder and executed.<r/>
+　If an XP3 archive is specified as a command line argument, it will assume that the project folder is in it and execute it.<r/>
+　You can also specify a file or folder as a command line argument from the command prompt, but the easiest is to drop the project folder or file on the executable file icon of Kirikiri with Explorer or Open. It is to do.<r/>
+　It may also be useful to have a shortcut on the desktop, such as a specific project folder, as an argument to the Kirikiri executable.
+</dd>
+
+<dt>content-data folder in the same location as the executable</dt>
+<dd>
+　If there is a folder named "content-data" in the same location as the executable file, it will be regarded as the project folder and executed.
+</dd>
+
+<dt>"data.xp3" file in the same location as the executable</dt>
+<dd>
+　If there is an archive file named data.xp3 in the same location as the executable file, it will assume that the project folder is in it as XP3 archive format and execute it.
+</dd>
+
+<!--
+<dt>When an XP3 archive is attached to itself</dt>
+<dd>
+　XP3 format archives can be combined with executable files, but if they are themselves combined with an XP3 archive, they will assume they have a project folder and will execute.
+</dd>
+-->
+
+<dt>The data folder in the same location as the executable</dt>
+<dd>
+　If there is a folder named "data" in the same location as the executable file, it will be regarded as the project folder and executed.
+</dd>
+</dl>
+<r/>
+　If you can not decide by any of the methods, the folder / archive selection screen will appear.<r/>
+　However, if "Run from XP3 archive only" is specified in the release option, only the operation in the case of data.xp3 file, data.exe file, and "When XP3 archive is combined with itself" (see <link href="Configure"/>).<r/>
+</para>
+
+<para>
+<ptitle>Select folder / archive</ptitle>
+　The folder / archive selection screen is as follows.<r/>
+<img src="FolderSelector.png"/><r/><r/>
+<dl>
+
+<dt>"OK" button</dt>
+<dd>
+　Starts execution of the currently selected folder or file.
+</dd>
+
+<dt>"Cancel" button</dt>
+<dd>
+　Quit Kirikiri without doing anything.
+</dd>
+</dl>
+</para>
+
+<para>
+<ptitle>File to be executed first</ptitle>
+　After the project folder is determined, the first thing executed is startup.tjs in the project folder. Otherwise, an error occurs.<r/>
+　The file to be executed first can be specified with -startup. See <link href="CommandLine"/>.<r/>
+</para>
+
+<para>
+<ptitle>Message map file</ptitle>
+　Kirikiri checks whether msgmap.tjs exists in the same folder as Kirikiri immediately after startup, and executes it if it exists. Unless the release option specifies that this should not be read (see <link href="Configure"/>). You can use <at href="f_System_assignMessage.html">System.assignMessage</at> in msgmap.tjs to change message assignments. msgmap.tjs can also be created in <link href="Controller" />.<r/>
+</para>
+
+<para>
+<ptitle>Setting file</ptitle>
+　Kirikiri reads the configuration file (.cf file or .cfu file) created by <link href="Configure"/> and operates according to the settings described there.<r/>
+　See <link href="Configure"/> for file names and locations where the files are created.<r/>
+</para>
+
+</doc>
+

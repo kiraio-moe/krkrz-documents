@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Sound system</title>
+
+<para>
+<ptitle>About sound system</ptitle>
+　Kirikiri's sound system can play Wave (PCM).<r/>
+　Wave playback can be performed simultaneously, multiple streams can be played (playing long sounds while reading them little by little), and seamless loop playback using a sound loop information file (.sli file) that does not make you feel like a second stop (The sound loop information file is created with the loop tuner).<r/>
+</para>
+
+
+<para>
+<ptitle>WaveSoundBuffer playable format</ptitle>
+　<at href="f_WaveSoundBuffer.html">WaveSoundBuffer</at> can play standard uncompressed RIFF Wave format (extension is .wav, Windows standard format). The accepted formats are as follows.<r/>
+<r/>
+<ul>
+<li>WAVE_FORMAT_PCM format, integer PCM between 8 bits and 32 bits, with 1 (monaural), 2 (stereo), 4 (quadraphonic), 6 (5.1ch) channels</li>
+<li>WAVE_FORMAT_IEEE_FLOAT format, 32-bit floating point number PCM with 1 (monaural), 2 (stereo), 4 (quadraphonic), 6 (5.1ch) channels</li>
+<li>WAVE_FORMAT_EXTENSIBLE format, subtype KSDATAFORMAT_SUBTYPE_PCM format, integer between 8 and 32 bits PCM</li>
+<li>WAVE_FORMAT_EXTENSIBLE format, subtype KSDATAFORMAT_SUBTYPE_IEEE_FLOAT format, 32-bit floating point PCM</li>
+</ul>
+<r/>
+　The formats playable by WaveSoundBuffer can be extended by plugins.<r/>
+</para>
+
+<para>
+<ptitle>Handling 4ch and 6ch in WaveSoundBuffer</ptitle>
+　WAVE_FORMAT_EXTENSIBLE has information on "Which channel is assigned to which speaker" in the data, but WAVE_FORMAT_PCM and WAVE_FORMAT_IEEE_FLOAT do not have this information. When Kirikiri handles 4ch or 6ch data with WAVE_FORMAT_PCM or WAVE_FORMAT_IEEE_FLOAT, it is interpreted as follows.<r/>
+<r/>
+<dl>
+<dt>For 4ch</dt>
+<dd>From the beginning of the channel, it is assumed that the data is for the front left, front right, rear left, and rear right speakers, respectively.</dd>
+<dt>For 6ch</dt>
+<dd>From the beginning of the channel, it is regarded as the data for the front left, front center, front right, back left, back right, and low frequency speakers, respectively.</dd>
+</dl>
+<r/>
+The same rules apply when playing 4ch or 6ch sound with OggVorbis.<r/>
+
+</para>
+
+</doc>
+
+

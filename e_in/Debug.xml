@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>debug</title>
+
+<para>
+<ptitle>About debugging applications</ptitle>
+　Debugging is the work of identifying and fixing bugs (causes of malfunction or unexpected behavior) in an application.<r/>
+　Kirikiri has several debugging support functions, and I will debug applications using those functions. Here's how.
+</para>
+
+<para>
+<ptitle>Debug message output</ptitle>
+Kirikiri provides several windows to help with debugging. See the description of each link for details.<r/>
+<dl>
+<dt><link href="Console"/></dt>
+<dd>You can display various debugging messages output by the Kirikiri system and user scripts.</dd>
+</dl>
+<r/>
+　Especially on the console, <at href="f_Debug_message.html">Debug.message</at> displays the message output by the user program in the program. You can call methods anywhere in the program, display the contents of variables on the console, and see the contents of running variables.<r/>
+　For details on how to display messages on the console and how to write logs to a file, see "Debug-related Options" in <link href="CommandLine"/> and <at href="f_Debug.html">Debug class</at>.<r/>
+</para>
+
+
+<para>
+<ptitle>Debug mode</ptitle>
+　If you specify '-debug' with <link href="CommandLine"/> ("Enable" the "debug mode"), you can run Kirikiri in debug mode.<r/>
+　In debug mode, TJS2 runs slowly, but some features useful for debugging are enabled.<r/>
+<r/>
+<dl>
+<dt>Type information tracking function</dt>
+<dd>
+　Information about TJS2 objects is enhanced.<r/>
+　If you are not in debug mode, try to get information on kag.saveSystemVariables with KAG, for example.
+<bq>
+Console: kag.saveSystemVariables = (object)(object 0x0279E130:0x01EB0BD4)
+</bq>
+　But only if debug mode is enabled
+<bq>
+Console: kag.saveSystemVariables = (object)(object 0x0279E130[(function) KAGWindow.saveSystemVariables]:0x01EB0BD4[instance of class KAGWindow])
+</bq>
+　You can get the type information as follows. (Of the two parts separated by ':', the first part is the type of the object, and the last part is the context in which the object operates).<r/>
+　This is almost a required option when using a debugger.<r/>
+　This feature is enabled everywhere (in the current version) an object is converted to a string.<r/>
+</dd>
+<dt>Object leak detection function</dt>
+<dd>
+　Enables a function to warn on termination of objects that have not been deleted (not released).<r/>
+　Originally, created objects are automatically deleted by the garbage collection function in TJS2, and there is no need to explicitly specify the deletion. However, due to bugs in plugins, the Kirikiri body, and circular references, objects may be left undeleted (leaked).<r/>
+　In debug mode, objects that have not yet been freed at the end are written to the console log file.<r/>
+　Note that even if only one object is not released, the log file can be huge because all objects related to that object are detected.<r/>
+<r/>
+　Note that the <at href="f_System_exit.html">System.exit</at> method terminates the application in a manner similar to a forced termination. Terminating the application with this method will result in many objects leaking and a large amount of logging.<r/>
+<note>
+A circular reference is a situation where A refers to B, and B refers to A.<r/>
+For example, the following script generates a circular reference.
+<bq>
+var a = %[], b = %[];<r/>
+a.b = b; b.a = a;
+</bq>
+In such a situation, object a needs b and object b needs a. TJS2 does not detect such situations because the garbage collection method (reference counter) employed by TJS2 is difficult to detect and release objects. Therefore, these objects will not be deleted indefinitely (you can break circular references by explicitly invalidating either object with the invalidate operator).<r/>
+<r/>
+Plug-ins can leak objects if mishandled reference counters. When creating a plug-in and handling TJS2 objects in it, be very careful with reference counters.<r/>
+</note>
+</dd>
+<dt>Script execution warning on object being deleted</dt>
+<dd>
+　When an object is deleted or invalidated, its finalize method is called.<r/>
+　In TJS2, the timing of deleting an object is "I don't know when", so the finalize method is called at an odd timing and may exhibit unexpected behavior. In debug mode, these "unstable timings", i.e. objects that have not been invalidated, are removed by garbage collection and a warning is displayed on the console when the finalize method is called.<r/>
+　The warning is as follows:<r/>
+<bq>
+Warning: Function anonymous@0x016DFA7C(9)[(function) finalize] running on object 0x0167DD44[instance of class A] being deleted. The call stack when creating this object is as follows:<r/>
+                     anonymous@0x016DFA7C(13)[(top level script) global]
+</bq>
+　To avoid this situation, it is recommended that objects created with new be explicitly invalidated with the invalidate operator after use.<r/>
+　However, it may not be necessary to explicitly invalidate objects of classes that do not have a finalize method, such as Array, Dictionary, and Date, or that do not behave in the finalize method.<r/>
+　The above warning appears when an object is being deleted without explicit invalidation and a TJS2 script is being executed in that context.
+</dd>
+
+<dt>Call history acquisition function</dt>
+<dd>
+　Function / method call history of TJS2 can be obtained from script.<r/>
+　This is done using the <at href="f_Scripts_getTraceString.html">Scripts.getTraceString</at> method.<r/>
+　If you have a problem in the middle of a program and you don't know where the method was called from, you can use this method to print the call stack to the console.<r/>
+</dd>
+
+
+</dl>
+
+</para>
+
+</doc>

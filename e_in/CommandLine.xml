@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Command line options</title>
+
+<para>
+<ptitle>Command line options</ptitle>
+　Kirikiri's command line options can be specified from the normal command line, or can be saved in the configuration file as <link href="Releaser" /> (krkrrel.exe) or <link href="Configure" /> (-userconf).<r/>
+The order in which options are read are the following:
+<ol>
+  <li>Options embedded in Kirikiri core</li>
+  <li>.cf file in the same directory as Kirikiri core (file name is the same as Kirikiri core)</li>
+  <li>The ".cfu" file in the data storage location output by "Engine Settings" (-userconf) (file name is the same as Kirikiri core)</li>
+  <li>Options specified on the command line</li>
+</ol>
+.cf and .cfu files are simply ignored if they do not exist. The specification read later has priority.<r/>
+<r/>
+　Command line options are basically followed by a '-' (hyphen) followed by the name of the option. Then follow it with an '=' and the option value.<r/>
+　For example, if the value of the option -cdvol is direct, specify -cdvol=direct.<r/>
+<r/>
+　Except for the "boot options", "debug-related options", and "system compatibility-related options", most of them are fine-tuning options for solving environment-dependent problems.<r/>
+　See also <link href="ComputerDependentProblems" /> for solutions to environment-dependent issues.<r/>
+<r/>
+<note>
+With Releaser or -userconf, you can change these options by modifying the Kirikiri executable file or an external configuration file, but the defaults are usually fine. <b>We do not recommend distributing executables or configuration files with these options changed to non-defaults, due to issues specific to the creator's environment</b> (Of course, there are some options like -datapath that need to be set according to the distribution and usage).
+</note>
+<r/>
+In the list below, those that have the notation "dynamically changeable" can be changed using the <a href="f_System_setArgument.html">System.setArgument</a> method. Other options cannot be changed dynamically.<r/>
+</para>
+
+
+
+<para>
+<ptitle>Start options</ptitle>
+　You have the following options to call and use only certain features of Kirikiri.<r/>
+<dl>
+<dt>-<kw>userconf</kw> (Start the configuration tool for end users)</dt>
+<dd>
+　Start the end-user setting tool built into the main unit.<r/>
+</dd>
+<dt>-<kw>about</kw> (Display copyright information dialog box)</dt>
+<dd>
+　Displays the "Version / Copyright / Environment Information" dialog box.
+</dd>
+<dt>-<kw>sel</kw> (Displaying the Select Folder / Archive Dialog Box)</dt>
+<dd>
+　Displays the Select Folder / Archive dialog box. Data such as data.xp3 is not automatically detected.<r/>
+　If you specify a folder as a command line parameter (without a leading hyphen), you can open the Select Folder / Archive dialog box with that folder initially selected.
+</dd>
+<dt>-<kw>printdatapath</kw> (Output data storage location)</dt>
+<dd>
+　Outputs the settings of the data storage location (-datapath option) and line feed to the standard output, and terminates. This option is for use by external applications that manage save data in cooperation with Kirikiri.<r/>
+　Special character strings such as $(exepath) in the data storage location are output after being replaced.<r/>
+　Since Kirikiri is a GUI application, nothing is displayed even if you start Kirikiri executable from the command prompt with -printdatapath option. Use pipes and redirects to capture the output.<r/>
+</dd>
+<dt>-<kw>startup</kw> (Specify startup script)</dt>
+<dd>
+　Specify the name of the script file to be executed first.<r/>
+　If not specified, startup.tjs is executed.<r/>
+</dd>
+</dl>
+</para>
+
+<para>
+<ptitle>General system options</ptitle>
+<dl>
+<dt>-<kw>datapath</kw> (Data storage location)</dt>
+<dd>
+　This is the setting of the location (folder) where Kirikiri saves various data.<r/>
+　Specifiable values are specified by character strings.<r/>
+　You can simply specify the folder name with the full path, but usually you use the special characters embedded below.<r/>
+<r/>
+<dl>
+ <dt>$(exepath)</dt> <dd>Replaced by System.exePath (the folder name where the Kirikiri core is located).</dd>
+ <dt>$(appdatapath)</dt> <dd>Replaced by System.appDataPath (user's home folder). This folder is usually a hidden folder.</dd>
+ <dt>$(personalpath)</dt> <dd>Replaced by System.personalPath (My Documents folder).</dd>
+ <dt>$(vistapath)</dt> <dd>$(appdatapath) when the OS is Vista or later, and $(exepath) when the OS is less than Vista.</dd>
+ <dt>$(savedgamespath)</dt> <dd>Replaced by System.savedGamesPath (the save data folder of the game). (1.1.0 or later)</dd>
+</dl>
+<r/>
+The default is "$(exepath)\savedata". This setting is suitable for a distribution format in which the program is compressed and archived with zip or the like without using an installer, etc., and the user can extract the file and execute the program immediately.<r/>
+However, with this default setting, if you place a program under Program Files, you will not be able to write files under Program Files. May result in an error.<r/>
+If you use a name like "$(appdatapath)\application name" or "$(personalpath)\application name", it will be written to the folder for each user, so this problem will not occur easily, but some users may get stuck because the visibility of the data storage location is poor.<r/>
+<r/>
+The data storage location specified by this option will be created when starting Kirikiri if it does not exist. If the creation fails, the process will continue without terminating, so handle the error in the user's script (by catching an exception such as unable to save data).<r/>
+<r/>
+The settings made in "Engine Settings" are created in the folder specified in this data storage location. In addition, various logs are created in this folder by default.<r/>
+</dd>
+
+<dt>-<kw>contfreq</kw> (Processing limit)</dt>
+<dd>
+　Specify whether to reduce the CPU usage rate by calling a process such as a transition at a specified cycle while applying a wait.<r/>
+　Possible values are <b>'0' (no limit)</b> or a positive integer. If this option is not specified, '0' is assumed. If you specify a positive integer, you can specify a period in Hz.<r/>
+　This option affects transitions and continuous handlers registered with System.addContinuousHandler.<r/>
+　If this is set to '0', the CPU will be used up and processing will be performed during transitions.<r/>
+　If you specify a numerical value, processing will be performed in that cycle, and the extra time will cause the CPU to rest. This reduces the impact on other applications, increases CPU temperature, and reduces computer power consumption. The lower the number, the better this effect. However, if you specify a low number, transitions may not be smooth.<r/>
+　If you wait for vertical synchronization with the waitvsync option, the continuous handler will be driven according to the timing of vertical synchronization, and the setting of the contfreq option will be ignored.<r/>
+　This option can be changed dynamically, but the change will take effect the next time the transition or Continuous Handler breaks.<r/>
+</dd>
+
+
+
+
+<dt>-<kw>memusage</kw> (memory usage)</dt>
+<dd>
+　This is the memory usage setting.<r/>
+　Possible values are <b>'normal'</b> or <b>'low'</b>. If this option is not specified, it is assumed that 'normal' has been specified.<r/>
+　Selecting "low" saves more memory than selecting "normal". However, if you select "low", the performance will decrease because various cache mechanisms inside Kirikiri are limited and the size of the hash table of TJS2 is limited. Also, if you select "low", "Graphic-Image Cache Limit" will be considered as "Forced" setting.
+</dd>
+<dt>-<kw>timerprec</kw> (Timer accuracy)</dt>
+<dd>
+　This is the setting for the high accuracy of the timer.<r/>
+　Possible values are <b>'normal'</b> or <b>'higher'</b> or <b>'high'</b> If no options are specified, 'normal' is assumed.<r/>
+　When 'higher' or 'high' is specified, the overall accuracy of the timer (including most of the things related to time and timing) will be higher, and the sloppy feeling of character display in KAG and the sloppy feeling of MIDI playback may be eliminated. Possible, but it can also degrade performance.
+</dd>
+
+<dt>-<kw>laxtimer</kw> (Timer event capacity limit)</dt>
+<dd>
+　Specify whether to limit the number of timer events (maximum allowable amount) that can be stored in the system at one time to avoid a situation where timer events become too large to be processed.<r/>
+　Possible values are <b>'no' (do not)</b> or <b>'yes' (do)</b>. If this option is not specified, it is assumed that 'no' was specified.<r/>
+　In a computer with a very slow processing, or a situation where a very heavy process is driven by a timer, it may not be possible to respond to the event generated by the timer, and it may be difficult for Kiriri to respond to operations. If 'yes' is specified for this option, the maximum allowable number of timer events stored in the system is always fixed at 1 (when the capacity property of the Timer class is 1). This can reduce the occurrence of timer events that cannot be handled by the system, but usually reduce the accuracy and accuracy of the timer.<r/>
+</dd>
+
+<dt>-<kw>lowpri</kw> (Low priority)</dt>
+<dd>
+　Set whether to lower the priority at the time of transition, etc.<r/>
+　Possible values are <b>'no' (do not)</b> or <b>'yes' (do)</b>. If this option is not specified, it is assumed that 'no' was specified.<r/>
+　If 'yes', when the main thread of Kirikiri continues to use the CPU, such as during a transition, the execution priority of the main thread will be reduced. This may improve symptoms such as skipping during transitions and difficulty in operating other applications during transitions.
+</dd>
+
+<dt>-<kw>exceptionexe</kw> (Exception start editor)</dt>
+<dd>
+　Specify the editor to be started when an exception occurs.<r/>
+</dd>
+
+<dt>-<kw>exceptionarg</kw> (Start on exception editor options)</dt>
+<dd>
+　Specify the options to be specified when starting the editor when an exception occurs.<r/>
+　Although it is possible to simply specify the argument, it is usually used by embedding the following special string.<r/>
+<r/>
+<dl>
+ <dt>%filepath%</dt> <dd>Replaced with the file path of the script where the exception occurred.</dd>
+ <dt>%line%</dt> <dd>Replaced by the line number where the exception occurred.</dd>
+</dl>
+<r/>
+</dd>
+
+
+
+
+</dl>
+
+
+
+</para>
+
+<para>
+<ptitle>Input related options</ptitle>
+<dl>
+
+<dt>-<kw>wheel</kw> (Mouse wheel rotation detection method)</dt>
+<dd>
+　Settings for how to detect mouse wheel rotation.<r/>
+　Possible values are <b>'no' (do not use)</b> or <b>'dinput' (DirectInput)</b> or <b>'message' (window message)</b>. If this option is not specified, 'dinput' is assumed.<r/>
+　If you select "Disable", the mouse wheel will be disabled. Select "DirectInput" to use DirectInput. Select "Window Message" to detect mouse wheel rotation without using DirectInput. Changing the settings may improve mouse wheel related issues.
+</dd>
+
+<dt>-<kw>joypad</kw> (Pad availability)</dt>
+<dd>
+Set whether to use a gamepad (joystick).<r/>
+　Possible values are <b>'no' (do not use)</b> or <b>'dinput' (use)</b>. If this option is not specified, 'dinput' is assumed.<r/>
+　If you select "Disable", the pad will be disabled. If the pad cannot be detected normally, or if the pad cannot be used normally, change the setting to "Disable".</dd>
+
+
+<dt>-<kw>paddelay</kw> (Pad key repeat delay)</dt>
+<dd>
+Specify the time until the key repeat of the gamepad (joystick) in milliseconds.<r/>
+　The settable value is a positive number or -1. Specifying -1 disables key repeat. If this option is not specified, 500 is assumed.<r/>
+　This option can be changed dynamically.
+</dd>
+
+
+<dt>-<kw>padinterval</kw> (Pad key repeat interval)</dt>
+<dd>
+Specifies the pad (joystick) key repeat interval in milliseconds. The smaller the value, the faster the repeat.<r/>
+　Possible values are positive numbers; if this option is not specified, 30 is assumed.<r/>
+　This option can be changed dynamically.
+</dd>
+
+
+<dt>-<kw>controlime</kw> (IME state control)</dt>
+<dd>
+　Set whether to control the status of the IME (conversion input software for Japanese, etc.) (control whether it is enabled or disabled).<r/>
+　Possible values are <b>'yes' (do it)</b> or <b>'no' (do not do it)</b>. If this option is not specified, it is assumed that 'yes' is specified.<r/>
+　If you select "No", you may be able to avoid problems such as "Cannot input languages such as Japanese that can be input through IME".<r/>
+</dd>
+
+</dl>
+
+</para>
+
+<para>
+<ptitle>Sound-related options</ptitle>
+<dl>
+<dt>-<kw>wsdecpri</kw> (PCM decoding thread priority)</dt>
+<dd>
+　The priority of the PCM decoding thread.<r/>
+　Possible values are <b>'0' (idle (lowest))</b>, <b>'1' (low)</b>, <b>'2' (normally below)</b> , <b>'3' (normal)</b>, <b>'4' (normal)</b>, or <b>'5' (high)</b>. If you do not specify, '1' is assumed.<r/>
+　A higher priority may reduce sound skipping during PCM (uncompressed wave, OggVorbis, etc.) playback, but may result in a less smooth transition or poor responsiveness to operations.<r/>
+　By the way, what is specified here is the priority of normal decoding. In an emergency (when the remaining data in the buffer is getting shorter), the necessary priority is automatically secured.
+</dd>
+
+<dt>-<kw>wssoft</kw> (DirectSound software mixing)</dt>
+<dd>
+　This is a setting to determine whether or not mixing is performed using software with DirectSound.<r/>
+　Possible values are <b>'yes' (perform software mixing)</b> or <b>'no' (do not perform software mixing)</b>. 'yes' is assumed.<r/>
+　In the standard setting, mixing is performed by software, which increases the load on the CPU, but increases the possibility of avoiding hardware-specific problems. If there is no problem even if you specify 'no' for this option (even when mixing with hard air), you may be able to reduce the CPU load. For USB audio and inexpensive sound cards, mixing may always be done by the CPU, so changing this option may have no effect.
+</dd>
+
+<dt>-<kw>wsrecreate</kw> (DirectSound Secondary buffer regeneration)</dt>
+<dd>
+　Set whether to always regenerate the secondary buffer in DirectSound.<r/>
+　Possible values are <b>'yes' (always regenerate)</b> or <b>'no' (regenerate as needed)</b>, unless this option is specified 'no' is assumed.<r/>
+　In Kirikiri, once created secondary buffer is reused if the conditions such as number of channels and sampling frequency are the same, but if 'yes' is specified, it will always be regenerated without reuse. Depending on the environment, instability such as skipping or skipping at the start of playback may be improved.
+</dd>
+
+<dt>-<kw>wsl1len</kw> (DirectSound secondary buffer length)</dt>
+<dd>
+　DirectSound Secondary buffer length setting.<r/>
+　Possible values are integers, specified in milliseconds. At least 250ms is required. If this option is not specified, 1000 is assumed.<r/>
+　The value specified here is the length of the buffer that is actually reserved as a secondary buffer for DirectSound.<r/>
+　In general, the longer the playback, the more stable the playback, but the more memory it consumes.
+</dd>
+
+<dt>-<kw>wsl2len</kw> (DirectSound Secondary auxiliary buffer length)</dt>
+<dd>
+　DirectSound Secondary buffer length setting for the secondary buffer.<r/>
+　Possible values are integers, specified in milliseconds. At least 250ms is required. If this option is not specified, 1000 is assumed.<r/>
+　Kirikiri creates an auxiliary buffer for each DirectSound secondary buffer, accumulates decoded data in this auxiliary buffer, and then transfers it to the secondary buffer. The buffer length specified here is the length of the auxiliary buffer.<r/>
+　Normally, decoding and accumulation in the auxiliary buffer are performed by a low-priority thread, but transfer from the auxiliary buffer to the secondary buffer is performed by a thread with a high priority.<r/>
+　In general, the longer the playback, the more stable the playback, but the more memory it consumes. Also, if control is made to change the decoding process, the delay before it is actually sounded will be longer.
+</dd>
+
+<dt>-<kw>wsmute</kw> (DirectSound Mute)</dt>
+<dd>
+　Setting to mute (decrease the volume) when the application is inactive or minimized in DirectSound.<r/>
+　Possible values are <b>'never' (do not mute)</b>, <b>'minimize' (when minimized)</b>, <b>'deactive' (when inactive)</b> If you do not specify this option with any of, 'never' is assumed.<r/>
+　Selecting 'never' will not mute. 'minimize' and 'deactive' will mute the application when it is minimized and when it becomes inactive, respectively.<r/>
+　Only the thing played by WaveSoundBuffer (KAG uses 'Wave' for BGM and sound effects) is muted, MIDI and CDDA playback are not muted.
+</dd>
+
+<dt>-<kw>wsmutevol</kw> (DirectSound Mute volume)</dt>
+<dd>
+　-wsmute (DirectSound mute) volume setting when muted.<r/>
+　The value that can be set is an integer, specified in units of %.<r/>
+　Specifying "0%" results in complete silence, while specifying "50%" results in half the volume (about -6dB).<r/>
+</dd>
+
+
+<dt>-<kw>wsforcecnv</kw> (DirectSound forced format conversion)</dt>
+<dd>
+　Set whether to forcibly convert PCM data to be played by DirectSound to the specified format.<r/>
+　Possible values are <b>'none' (no conversion)</b>, <b>'i16' (convert to 16 bit integer)</b>, <b>'i16m' (convert to 16 bit integer monaural)</b> If you do not specify this option for any of, it is assumed to be 'none'.<r/>
+　Changing the settings may improve playback problems. When 'i16m' is selected, the setting of the -wsexpandquad option (DirectSound forced 4ch playback) is ignored.
+</dd>
+
+<dt>-<kw>wsuse3d</kw> (DirectSound 3D control)</dt>
+<dd>
+　Set whether to perform 3D control with DirectSound.<r/>
+　Possible values are <b>'no' (no)</b> and <b>'yes' (yes)</b>. If this option is not specified, 'no' is specified.<r/>
+　Selecting 'yes' enables 3D control of the sound and enables the WaveSoundBuffer.posX, WaveSoundBuffer.posY, WaveSoundBuffer.posZ properties. (These properties are already implemented in the current version, but are not supported).<r/>
+　Also, in many environments, selecting 'yes' will cause DirectSound3D to extend stereo and monaural sounds to surround speakers for playback (for example, sounds that were only played on the front speakers will be played on all speakers in 5.1ch environment).<r/>
+　When 'yes' is selected, the setting of -wsexpandquad option (DirectSound forced 4ch playback) is ignored.
+</dd>
+
+
+
+<dt>-<kw>wsexpandquad</kw> (DirectSound forced 4ch playback)</dt>
+<dd>
+　Set whether to force playback on 4ch including the rear speaker when playing stereo or monaural sound with DirectSound.<r/>
+　Possible values are <b>'no' (no)</b> and <b>'yes' (yes)</b>. If this option is not specified, 'no' is specified.<r/>
+　Setting 'yes' allows the sound to be played on both front and rear speakers, even in environments where stereo or monaural sound is played only on the front speakers.
+</dd>
+
+<dt>-<kw>wsfreq</kw> (DirectSound primary buffer frequency)</dt>
+<dd>
+　Set the playback frequency of the primary buffer of DirectSound.<r/>
+　Possible values are positive natural numbers that represent the frequency in Hz; if this option is not specified, '44100' is assumed.<r/>
+　Especially in an environment that uses a WDM sound driver (Windows 2000, XP or later), the playback status may not change even if the setting is changed.
+</dd>
+
+<dt>-<kw>wsbits</kw> (DirectSound Primary Buffer Bits)</dt>
+<dd>
+　This is the setting for the playback bit depth of the DirectSound primary buffer.<r/>
+　Possible values are <b>'i8' (8-bit integer)</b>, <b>'i16' (16-bit integer)</b>, <b>'i24' (24-bit integer)</b>, For <b>'i32' (32-bit integer)</b> and <b>'f32' (32-bit floating point number)</b>, if this option is not specified, 'i16' is assumed.<r/>
+　Especially in an environment that uses a WDM sound driver (Windows 2000, XP or later), the playback status may not change even if the setting is changed.
+</dd>
+
+<dt>-<kw>wscontrolpri</kw> (DirectSound primary buffer playback control)</dt>
+<dd>
+　This is the setting to control whether to play / stop the primary buffer of DirectSound.<r/>
+　Possible values are <b>'yes' (do)</b> and <b>'no' (do not)</b>. If this option is not specified, 'yes' is specified.<r/>
+　There seems to be an environment where skipping and sound breakage can be improved by changing the setting in rare cases.
+</dd>
+
+<dt>-<kw>wspritry</kw> (DirectSound primary buffer setting trial level)</dt>
+<dd>
+　How many settings to try when specifying the format of the DirectSound primary buffer.<r/>
+　Possible values are <b>'0' - '2' (level 0 - level 2)</b> or <b>'all' (all)</b>. If not specified, 'all' is assumed.<r/>
+　If level 0 is specified, an attempt will be made to set a stereo 16-bit integer format.<r/>
+　If level 1 is specified, before trying level 0, it will try to set the number of channels according to the system speaker settings and format with 16bit integer.<r/>
+　Specifying level 2 will attempt to set the number of bits specified in "DirectSound Primary Buffer Bits", the number of channels according to the system speaker settings, and the format using the WAVEFORMATEX structure before attempting level 1.<r/>
+　If "All" is specified, before trying level 2, it will try to specify the format by WAVEFORMATEXTENSIBLE structure with the same settings as level 2.
+</dd>
+<!-- 
+<dt>-<kw>_inmm</kw> (_inmm.dll)</dt>
+<dd>
+　It is a setting whether to use _inmm.dll of irori.<r/>
+　Possible values are <b>'yes'(use)</b> or <b>'no' (do not use)</b>. If this option is not specified, 'no' is specified Is considered to have been<r/>
+　Mr. irori's _inmm.dll is useful, but Kiriri Kiri cannot be patched by the _inmm.dll patch program due to its structure. Therefore, it is supported by Kirikiri body itself.<r/>
+　If you specify 'yes', you can perform the same operation as applying a patch.
+</dd>
+-->
+
+</dl>
+</para>
+
+<para>
+<ptitle>Graphics-related options</ptitle>
+<dl>
+<dt>-<kw>gclim</kw> (Image cache limit)</dt>
+<dd>
+　Set the maximum value of the memory used for the image cache.<r/>
+　Possible values are <b>'auto'</b> or an integer value. When specifying an integer value, specify the memory used for the image cache in MB. If this option is not specified, 'auto' is assumed.<r/>
+　Kirikiri has a mechanism to cache images so that you can quickly access images once they are loaded. Specify the limit of the memory used for it.<r/>
+　If you specify 'auto', the value is determined automatically by the amount of physical memory installed on your computer.<r/>
+　If '0' is specified, caching is not performed.<r/>
+　If swaps occur frequently during execution of Kirikiri, you may be able to improve by specifying a smaller value or '0'.
+</dd>
+
+<dt>-<kw>fsbpp</kw> (Color mode at full screen)</dt>
+<dd>
+　This is the color mode setting for full screen.<r/>
+　Possible values are <b>'nochange' (do not change)</b>, <b>'16' (16-bit color)</b>, <b>'24' (24-bit color)</b>, <b>'32' (32-bit color)</b>. If you do not specify this option for any of, it is assumed that 'nochange' is specified.<r/>
+　If 'nochange' is specified, the color mode will be the same as the non-full screen color mode.<r/>
+　This option can be changed dynamically, but will take effect the next time you try to go full screen.<r/>
+</dd>
+
+<dt>-<kw>fsres</kw> (Screen resolution at full screen)</dt>
+<dd>
+　This is the screen resolution setting for full screen.<r/>
+　Possible values are <b>'auto' (automatic)</b>, <b>'proportional' (resolution with same aspect ratio)</b>, <b>'nearest' (closest resolution)</b> or <b>'nochange' (do not change resolution)</b>, if this option is not specified, 'auto' is assumed.<r/>
+　Selecting 'auto' will automatically select and use the most suitable screen resolution. In this case, if there is a resolution with the same aspect ratio that fits the resolution specified in the program, select it. If there is no such resolution, the engine side without changing the resolution Enlarge the display. With this setting, it is always assumed to be 'outer' (fit into the monitor), even if 'no' is specified for the -fszoom (engine full-screen zoom) option .<r/>
+　Selecting 'proportional' will select the closest resolution that is the same as or larger than the resolution specified in the program, with the same screen aspect ratio as in non-full screen.<r/>
+　Choosing 'nearest' will select the closest resolution that is equal to or greater than the resolution specified in the program, but there is no guarantee that the same aspect ratio resolution will be selected as in non-full screen. This setting may be suitable for CRT monitors and LCD monitors that support enlarged display while maintaining the screen aspect ratio.<r/>
+　If you select 'nochange', the resolution will not be changed while keeping the non-full screen resolution.<r/>
+　This option can be changed dynamically, but will take effect the next time you try to go full screen.<r/>
+</dd>
+
+<dt>-<kw>fszoom</kw> (Enlarged display by engine at full screen)</dt>
+<dd>
+　Specifies how the engine enlarges the screen during full screen.<r/>
+　Possible values are <b>'inner' (fit inside the monitor)</b>, <b>'outer' (zoom to fill the monitor)</b>, <b>'no' (no)</b> If you do not specify this option for any of, 'inner' is assumed.<r/>
+　Selecting 'inner' will cause the engine to expand if necessary. When necessary, the screen resolution is different from the one specified in the program (if the screen resolution is lower than the one specified in the program, it will be reduced). At this time, enlargement is performed while maintaining the aspect ratio of the resolution specified in the program, but if the aspect ratio of the monitor is different from this aspect ratio, there may be gaps in the top and bottom or left and right . This gap is always displayed in black.<r/>
+　If 'outer' is specified, engine expansion will be performed if necessary, as if 'inner' was specified. However, unlike 'inner', if the aspect ratio of the monitor is different from the aspect ratio specified in the program, the image will be enlarged to the full extent so that there is no gap between the top and bottom and left and right. For this reason, there is no gap, but the screen may run off the monitor. With this setting, for example, when displaying 16: 9 content on a 16:10 monitor, it is possible to enlarge the display to the fullest size without leaving any gaps. Of course, this will cause areas to protrude to the left and right, so if you are creating content that assumes such display, you need to take measures such as not displaying important UI and characters in the protruding parts.<r/>
+　If you select 'no', the engine will not expand if necessary. In this case, even if the screen resolution is different from the resolution specified in the program, the engine does not enlarge the image (as a result, the image may be displayed smaller in the center of the screen).<r/>
+　If the original resolution of the monitor and the resolution of the signal output from the graphic card are different, the LCD monitor may perform enlarged display on the monitor side. Note that doing so causes double enlargement, which may result in a dirty image. (The "auto" option of -fsres automatically selects combinations that prevent such double enlargement. To select).<r/>
+　This option can be changed dynamically, but will take effect the next time you try to go full screen.<r/>
+</dd>
+
+
+<!-- obsoleted
+<dt>-<kw>dither</kw> (Dithering)</dt>
+<dd>
+　Set whether to dither the image in the screen mode of 16bit color mode.<r/>
+　Possible values are <b>'no' (do not use)</b> or <b>'yes' (use)</b>. If this option is not specified, 'no' is specified Will be considered<r/>
+　Kirikiri has a function to reduce and display the color while dithering the image for the 16-bit color screen mode. This can reduce color shading in the image, but may degrade drawing performance.
+</dd>
+-->
+
+<dt>-<kw>gsplit</kw> (Division of image operation)</dt>
+<dd>
+　Sets whether to perform image calculation in finely divided units.<r/>
+　Possible values are <b>'yes' (do)</b>, <b>'int' (interlace split)</b>, <b>'bidi' (bidirectional split)</b>, <b>'no'</b> If you do not specify this option for any of, 'yes' is assumed.<r/>
+　In order to use the CPU's memory cache effectively, Kiri Kiri performs calculations while dividing the image into small areas. Depending on the environment, this may lead to screen flicker. In such environments, specifying 'no' may reduce flickering, but may degrade drawing performance. If double buffering is enabled, it does not make sense to not perform the splitting process, so it is recommended that you set it to perform the splitting process.<r/>
+　If 'int' is specified, the image will be processed every other unit, but stripes may be seen when updating the screen. When 'bidi' is selected, the order of image operations is repeated from top to bottom, bottom to top (when 'yes', always top to bottom).
+</dd>
+
+<dt>-<kw>smoothzoom</kw> (Smoothing in enlarged display)</dt>
+<dd>
+　Set whether to perform smoothing (interpolation at the time of enlargement) when performing enlargement display of the display contents with Window.setZoom, etc., or when Kirari Kiris enlarges (reduces) the screen with the -fsres option. (It has nothing to do with scaling in Layer.affineCopy etc.)<r/>
+　Possible values are <b>'no' (do not do)</b> or <b>'yes' (do)</b>. If this option is not specified, 'yes' is specified. Will be considered<r/>
+　Smoothing makes the image smoother but slightly blurry. Without smoothing, the image will be sharper but jagged.<r/>
+　In some environments, performance may degrade without smoothing. Also, there may be environments where smoothing does not work.<r/>
+　Some third-party drawing devices (devices set with the Window.drawDevice property) may not be affected by this option.<r/>
+　This option can be changed dynamically, but there is no guarantee that the value will take effect immediately.<r/>
+</dd>
+
+
+<dt>-<kw>aamethod</kw> (Anti-aliased character drawing method)</dt>
+<dd>
+　Set the anti-aliased character drawing method.<r/>
+　Possible values are <b>'auto' (automatic)</b>, <b>'res4' (resampling 4 × 4)</b>, <b>'res8' (resampling 8 × 8)</b>, <b>'api' (Windows API)</b>, if this option is not specified, 'auto' is assumed.<r/>
+　If 'auto', 'api' is selected automatically in the current version.<r/>
+　'res4' or 'res8' draws characters several times larger (4x4 or 8x8) and shrinks them to achieve anti-aliasing. res4 is faster than res8, but less accurate.<r/>
+　'api' uses the GetGlyphOutline API to draw anti-aliased characters, but it looks like an API with many inconveniences and may not draw properly depending on the environment.
+</dd>
+
+<dt>-<kw>jpegdec</kw> (JPEG image decoding accuracy)</dt>
+<dd>
+　This is the setting for the accuracy of decoding (decompression) of JPEG images.<r/>
+　Possible values are <b>'high'</b>, <b>'normal'</b>, or <b>'low'</b> , If this option is not specified, 'normal' is assumed.<r/>
+　Specifying 'high' results in slower decoding but higher quality. Specifying 'low' speeds up decoding but lowers image quality. However, there is little difference in appearance.
+</dd>
+
+<dt>-<kw>drawthread</kw> (Number of drawing threads)</dt>
+<dd>
+　This is the setting for the number of threads to be used during the drawing process.<r/>
+　Possible values are either <b>arbitrary numbers</b> or <b>'auto'</b>. If this option is not specified, it is assumed that '1' has been specified. Is done.<r/>
+　When 'auto' is specified, the same number of threads as the number of processors recognized by the OS are automatically allocated.<r/>
+　Setting multiple drawing threads may improve drawing performance in a multi-core environment, but may also degrade performance.<r/>
+　Good results may be obtained by applying it to processing with a large drawing area, high-affinity Affine-based processing, or layer-compositing processing with heavy computation.<r/>
+　Even if it is set to use multi-threading, if the system determines that the drawing processing load is light and the effect of multi-threading cannot be obtained, it may not be executed in multi-threading.<r/>
+</dd>
+
+<dt>-<kw>bitmapallocator</kw> (Bitmap memory allocation method Ver 1.1 or later)</dt>
+<dd>
+　Specifies how to allocate memory for the bitmap.<r/>
+　Possible values are <b>'globalalloc' (allocated by GlobalAlloc)</b>, <b>'separateheap' (use split heap)</b>, <b>'malloc' (use malloc)</b>, if this option is not specified, 'globalalloc' is assumed.<r/>
+　Using separateheap may reduce memory fragmentation and possibly avoid out-of-memory errors.
+</dd>
+
+<dt>-<kw>bitmapheapsize</kw> (Initial split heap size Ver 1.1 or later)</dt>
+<dd>
+　Specify the initial size when using the split heap in the bitmap memory allocation method.<r/>
+　Possible values are <b>'auto' (auto (recommended))</b>, <b>'0' (automatically expand)</b>, <b>'64' (64MB)</b>, <b>'128' (128MB)</b>, <b>'256' (256MB)</b>, <b>'512' (512MB)</b>, <b>'1024' (1024MB)</b> or <b>'2048' (2048MB)</b>, if this option is not specified, it is assumed that 'auto' is specified.<r/>
+　Normally, auto is fine, but adjusting the initial value may reduce memory fragmentation and avoid out-of-memory errors.
+</dd>
+
+</dl>
+</para>
+
+
+<para>
+<ptitle>Options related to CPU functions</ptitle>
+　The following options have all possible values: <b>'yes' (use if available)</b>, <b>'no' (do not use if available)</b> , <b>'force'</b>, if no options are specified, 'yes' is assumed.<r/>
+　If you set it to 'no' when CPU recognition trouble occurs, that function will not be used.<r/>
+　'force' will force the use of the CPU feature even if it is not detected, but will not work properly if the CPU does not have that feature.<r/>
+　Only the -cpummx -cpucmov -cpusse -cpuemmx options affect the Kirikiri body. The OggVorbis decoder (wuvorbis.dll) is affected by the -cpusse, -cpummx and -cpu3dn options. Some other (third-party) plug-ins may also be affected by CPU feature settings.<r/>
+<r/>
+<ul>
+<li>-<kw>cpummx</kw> (MMX)</li>
+<li>-<kw>cpu3dn</kw> (3DNow!)</li>
+<li>-<kw>cpusse</kw> (SSE)</li>
+<li>-<kw>cpucmov</kw> (CMOVcc)</li>
+<li>-<kw>cpue3dn</kw> (Enhanced 3DNow!)</li>
+<li>-<kw>cpuemmx</kw> (EMMX (MMX2))</li>
+<li>-<kw>cpusse2</kw> (SSE2)</li>
+<li>-<kw>cpusse3</kw> (SSE3)</li>
+<li>-<kw>cpussse3</kw> (SSSE3)</li>
+<li>-<kw>cpusse41</kw> (SSE4.1)</li>
+<li>-<kw>cpusse42</kw> (SSE4.2)</li>
+<li>-<kw>cpusse4a</kw> (SSE4a)</li>
+<li>-<kw>cpuavx</kw> (AVX)</li>
+<li>-<kw>cpuavx2</kw> (AVX2)</li>
+<li>-<kw>cpufma3</kw> (FMA3)</li>
+<li>-<kw>cpuaes</kw> (AES)</li>
+</ul>
+</para>
+
+
+
+<para>
+<ptitle>Debug related options</ptitle>
+<dl>
+
+<dt>-<kw>debug</kw> (Debug mode)</dt>
+<dd>
+　This is the setting for whether or not to run Kirikiri in debug mode <comlink href="Debug"/>.<r/>
+　Possible values are <b>'no' (disabled)</b> and <b>'yes' (enabled)</b>. If this option is not specified, 'no' is specified. Will be considered.<r/>
+　When enabled, Kirikiri works in debug mode, enabling some debugging support features, but runs slower than in normal mode.
+</dd>
+
+
+<dt>-<kw>forcelog</kw> (Log to file)</dt>
+<dd>
+　Specify whether to output the console log to a file.<r/>
+　Available values are <b>'no' (do not output)</b>, <b>'yes' (output by adding to existing file)</b>, <b>'clear' (clearing existing output then creating a new file). If you do not specify this option, it is assumed that 'no' is specified.
+
+</dd>
+
+<dt>-<kw>logerror</kw> (Log to file on error)</dt>
+<dd>
+　Specify whether to output the console log to a file when an error occurs.<r/>
+　Available values are <b>'no' (do not output)</b>, <b>'yes' (output by adding to existing file)</b>, <b>'clear' (clearing existing output then creating a new file). If you do not specify this option, it is assumed that 'no' is specified.
+
+</dd>
+</dl>
+</para>
+
+
+
+
+
+<para>
+<ptitle>System compatibility options</ptitle>
+
+<dl>
+<dt>-<kw>arcdelim</kw> (Archive delimiter)</dt>
+<dd>
+　Specify the archive delimiter (the character that separates the archive storage name and the storage name in the archive).<r/>
+　Possible values are <b>'&gt;' (use '&gt;')</b>, <b>'#' (use '#')</b>, or '&gt;' is specified if this option is not specified Will be considered<r/>
+　The archive delimiter has been changed from '#' to '>' in 2.19 beta 14 of Kirikiri 2.<r/>
+　Applications that worked before 2.19 beta 14 may not work due to this change, but you can work with this option by changing the delimiter to '#'.<r/>
+</dd>
+
+
+<dt>-<kw>evalcontext</kw> (Behavior of the postfix '!' operator)</dt>
+<dd>
+　Specifies the operation of the postfix '!' operator for TJS2.<r/>
+　Possible values are <b>'this' (evaluate expression on this)</b> and <b>'global' (evaluate expression on global)</b>. If not specified, 'this' is assumed.<r/>
+　The postfix '!' Operator in TJS2 executed expressions in the global context, but since 2.21 beta 9, it now executes in the this context.<r/>
+If your application assumes less than 2.21 beta 9, this setting may not work unless you set "Evaluate expression on global".
+</dd>
+
+
+<dt>-<kw>holdalpha</kw> (Default value of Layer.holdAlpha property)</dt>
+<dd>
+　Specifies the default value for the <at href="f_Layer_holdAlpha.html">Layer.holdAlpha</at> property.<r/>
+　Possible values are <b>'false' (false)</b> or <b>'true' (true)</b>. If this option is not specified, 'false' is specified. Will be considered.<r/>
+　Kirikiri 2 In 2.23 beta 4, the hda (whether to protect the alpha channel) option specified for various arithmetic functions was removed, and the Layer.holdAlpha property was created instead. At this point, the default value of Layer.holdAlpha was true. If Layer.holdAlpha is true, it will not affect past application behavior.<r/>
+　Kirikiri 2 In 2.23 beta 5, this default value was false. Kirikiri 2 If you want to run an application that assumes less than 2.23 beta 5, it may not work properly unless you specify "true" for this option.
+</dd>
+
+
+<dt>-<kw>unaryaster</kw> (Behavior of the prefix '*' operator)</dt>
+<dd>
+　Specify the operation of TJS2 prefix '*' operator.<r/>
+　Possible values are <b>'default' (beginning with 2.25)</b> and <b>'compat' (below 2.25)</b>. 'default' is assumed.<r/>
+　The prefix '*' operator in TJS2 was an operator that extracts the property object itself without going through the property handler. From 2.25 beta 1, the operator with this function is prefixed with '&amp;' The '*' operator is now an operator for running property handlers on property objects. Applications that expect less than 2.25 beta 1 may not work properly unless this setting is "compatible with less than 2.25".
+</dd>
+
+
+<dt>-<kw>wsvolfactor</kw> (DirectSound volume curve)</dt>
+<dd>
+　Possible values are <b>'3322' (operation after 2.31 2011/6/14)</b> and <b>'5000' (operation before 2.31 2011/6/14)</b> If this option is not specified, '3322' is assumed.<r/>
+　The volume curve of DirectSound is more intuitive than 2.31 2011/6/14.<r/>
+</dd>
+
+
+<dt>-<kw>readencoding</kw> (Script reading character code)</dt>
+<dd>
+　Possible values are <b>'Shift_JIS' (Kirikiri 2 compatible operation)</b> and <b>'UTF-8' (Kirikiri Z operation)</b> If you do not specify, 'UTF-8' is assumed.<r/>
+　The character code used to load the script.<r/>
+</dd>
+
+
+<dt>-<kw>ignoretouch</kw> (Disable touch event 1.3.0 or later)</dt>
+<dd>
+　Possible values are <b>'false' (false)</b> or <b>'true' (true)</b>. If this option is not specified, 'false' is specified. Will be considered.<r/>
+　Specifying 'true' disables touch events and fires mouse events instead.<r/>
+</dd>
+
+
+
+
+</dl>
+</para>
+
+
+
+</doc>

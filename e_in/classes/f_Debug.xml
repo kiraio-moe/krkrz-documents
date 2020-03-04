@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Debug</title>
+<desc>
+　The Debug class is a class that provides functions related to debugging Kirikiri. Objects cannot be created from this class.<r/>
+　The name of the console log for Kirikiri is krkr.console.log. The file created when a hardware exception occurs is hwexcept.log.<r/>
+　These log files default to the project directory. However, it is not output if the project directory is a directory that cannot be written, such as an archive.<r/>
+　The output destination of the log file can be changed with the logLocation property (in the case of KAG, it is set to the storage location of bookmark data).<r/>
+</desc>
+
+<member>
+	<name>message</name>
+	<type>method</type>
+	<shortdesc>Output message to console</shortdesc>
+	<arg>
+		<argitem>
+			<name>message</name>
+			<default></default>
+			<desc>
+				　Specify the message to be output.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Outputs a message to <kw>console</kw>.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>notice</name>
+	<type>method</type>
+	<shortdesc>Print important messages to console</shortdesc>
+	<arg>
+		<argitem>
+			<name>message</name>
+			<default></default>
+			<desc>
+				　Specify the message to be output.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Outputs a message to <kw>console</kw>.<r/>
+		Unlike <ref>Debug.message</ref>, the message output here is always written to the log file even if writing to the log file is started in the middle (The message output by Debug.message is written only up to). Used to output important information that will be useful when the log file is collected.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>startLogToFile</name>
+	<type>method</type>
+	<shortdesc>Start output of console log</shortdesc>
+	<arg>
+		<argitem>
+			<name>clear</name>
+			<default>false</default>
+			<desc>
+				　Specifying true clears the log file.<r/>
+				　Specify false to append to existing files.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Starts output of the console log to a file.<r/>
+	</desc>
+	<ref>Debug.logToFileOnError</ref>
+	<ref>Debug.clearLogFileOnError</ref>
+</member>
+
+<member>
+	<name>logAsError</name>
+	<type>method</type>
+	<shortdesc>Start outputting the log to a file as in the case of an error</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Regarding the error log file, Kirikiri performs the same operation as when an error occurred.
+		That is, if <ref>Debug.logToFileOnError</ref> is true, start logging the console to a file. At that time, if <ref>Debug.clearLogFileOnError</ref> is true, clear the file.<r/>
+		　In contrast, <ref>Debug.startLogToFile</ref> unconditionally starts writing the console log to a file.<r/>
+	</desc>
+	<ref>Debug.startLogToFile</ref>
+	<ref>Debug.logToFileOnError</ref>
+	<ref>Debug.clearLogFileOnError</ref>
+</member>
+
+<member>
+	<name>addLoggingHandler</name>
+	<type>method</type>
+	<shortdesc>Add a log handler</shortdesc>
+	<arg>
+		<argitem>
+			<name>handler</name>
+			<default></default>
+			<desc>
+				　Specify a log handler.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Register a handler to be called every time an error log is output.<r/>
+		　The handler is called with the log message as an argument.<r/>
+		　Even if a log is output in the registration method, a recursive call is not made and it is ignored.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>removeLoggingHandler</name>
+	<type>method</type>
+	<shortdesc>Delete a log handler</shortdesc>
+	<arg>
+		<argitem>
+			<name>handler</name>
+			<default></default>
+			<desc>
+				　Specify a log handler.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Delete the registered log handler.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>getLastLog</name>
+	<type>method</type>
+	<shortdesc>Get unoutputted logs</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Acquires logs that have not been output.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>logLocation</name>
+	<type>property</type>
+	<shortdesc>Log file output destination</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates the log file output destination directory. You can also write a value.<r/>
+		　By default, it is set to the data storage location (command line option -datapath).<r/>
+		　If you change this value, subsequent logs will be output as *.console.log under that directory.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>logToFileOnError</name>
+	<type>property</type>
+	<shortdesc>Whether to output the console log to a file when an error occurs</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　If true, causes the console log to start writing to a file when an error occurs.<r/>
+		　If false, log output to a file will not start even if an error occurs.<r/>
+	</desc>
+	<ref>Debug.startLogToFile</ref>
+	<ref>Debug.clearLogFileOnError</ref>
+</member>
+
+<member>
+	<name>clearLogFileOnError</name>
+	<type>property</type>
+	<shortdesc>Whether to clear the console log file when an error occurs</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　If true, will automatically clear the console log when an error occurs.<r/>
+		　If false, it will not be cleared and will be appended to the existing log file.<r/>
+	</desc>
+	<ref>Debug.startLogToFile</ref>
+	<ref>Debug.logToFileOnError</ref>
+</member>
+
+
+</doc>

@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Image format converter</title>
+
+<para>
+<ptitle>About Image Format Converter</ptitle>
+　The image format converter (krkrtpc.exe in the tools folder) is a tool for cross-conversion of Kirikiri's images.<r/>
+　It can be used to prepare various images.<r/>
+<r/>
+　You can select BMP, PNG, JPEG, PSD as the input file format and BMP, PNG, TLG5, TLG6, JPEG as the output file format.<r/>
+　It can also read and output transparent images in the main / mask separation format used by Kirikiri. The term "mask" used here is synonymous with alpha channel.<r/>
+<r/>
+　Basically, it only converts the image format, so I think the image output with this can be used for other software and tools.<r/>
+<r/>
+　It's not limited to this tool, but <b>don't forget to backup!</b><r/>
+</para>
+
+<para>
+<ptitle>Input image format</ptitle>
+　The following formats can be used as the input file format.<r/>
+<r/>
+<dl>
+<dt>BMP</dt>
+<dd>
+　Windows standard bitmap format. BMP in 32 bit (bpp) format is considered to be a BMP with an alpha channel.<r/>
+　Other forms of BMP are considered to be opaque images (images without transparency information) (unless used in the main / mask separation format described below).
+</dd>
+
+<dt>PNG</dt>
+<dd>
+　Portable Network Graphic format. PNGs with transparency (with alpha channel and transparency information) can also be read.
+</dd>
+
+<dt>PSD</dt>
+<dd>
+　This format is used by Adobe Photoshop 3 or later. However, PSDs that can be read by this tool have the following major limitations.<r/>
+<r/>
+<ul>
+<li>Cannot read color modes other than RGB</li>
+<li>Cannot read 16bit / channel</li>
+<li>Only uncompressed and RLE compression supported (For Photoshop3.0 format only RLE compression supported)</li>
+</ul>
+<r/>
+　This format cannot be read as the main / mask separation format.<r/>
+　Most data can be read, but some data cannot.<r/>
+　If you are using a color mode other than RGB (such as CMYK), convert it to RGB. If you are using 16bit / channel, convert to 8bit / channel.<r/>
+　If you include layers in blend modes other than "Normal", it is okay to perform "Merge Display" before entering this tool.<r/>
+<r/>
+　The function of reading PSD files changes greatly depending on whether "Export in ltAddAlpha format" is selected or not in the output format.<r/>
+<r/>
+　When "Output in ltAddAlpha format" is selected, "Normal", "Covering (linear)", "Burning (linear)", "Multiplication", "Screen", "Overlay", "Hard Light", "Soft Light", "Cover edcolor", "Burn Color" You can import PSD files that contain layers of "Comparison (Light)", "Compare (Dark)", "Absolute Value of Difference" and "Exclude". In addition, if the image consists only of "Normal", it can correspond even if multiple layers overlap (in other modes, multiple layers overlap cannot be supported).<r/>
+<r/>
+　If Output in ltAddAlpha format is selected, only normal and wrap(linear) layers can be used. In this case, the layers must be in the order of "any number of "normal" layers, and "any number of "linear layers", in order from the bottom (from the back). "Any number" is 0 sheets, that is, no layers, or one or more layers.<r/>
+<dl>
+<dt>Example that can be read when "Output in ltAddAlpha format" is selected</dt>
+<dd>
+    <ul>
+        <li>One "Dodge (Linear)" layer on one "Normal" layer</li>
+        <li>No "normal" layer, only one "dodging (linear)" layer</li>
+        <li>Only one "Normal" layer</li>
+        <li>2 "Dodge (linear)" layers on 3 "Normal" layers</li>
+    </ul>
+</dd>
+<dt>Example that cannot be read when "Output in ltAddAlpha format" is selected</dt>
+<dd>
+    <ul>
+        <li>One "Dodge (Linear)" layer on one "Normal" layer, and one more "Normal" layer on it<r/>(The dodging linear layer cannot be sandwiched between normal layers.)</li>
+        <li>One "normal" layer on one "dodging (linear)" layer, and one "dodging (linear)" layer on it<r/>(Normal layers cannot be sandwiched between dodging linear layers.)</li>
+        <li>Only one "Dodge" layer<r/>(Even if you are dodging, you can only handle dodging linear layers)</li>
+    </ul>
+</dd>
+</dl>
+"Normal" in Photoshop is equivalent to Kirikiri's alpha synthesis, and "Dodge (linear)" is equivalent to Kirikiri's additive synthesis. Since ltAdditiveAlpha (additive alpha compositing) can express both alpha compositing and additive compositing at the same time, it is possible to read Photoshop data with such a layer configuration.<r/>
+<r/>
+
+
+</dd>
+
+<dt>JPEG</dt>
+<dd>
+　Imports full color and grayscale common JPEG formats. It can also be used as input for the main / mask separation format described below.</dd>
+
+<dt>Main / mask separation format</dt>
+<dd>
+　In the main / mask separation format, the main (color information) image and the mask (transparency information) image are in separate files.<r/>
+　The mask image has the file name of the main image with _m at the end (for example, test_jpg for test.jpg).<r/>
+　Valid input image formats for the main / mask separation format are BMP, JPEG, and PNG, respectively. The format of the main and mask can be different.
+</dd>
+</dl>
+<note>
+　TLG5 and TLG6 formats cannot be used as input. ERI format is not supported at this time.
+</note>
+</para>
+
+<para>
+<ptitle>Output image format</ptitle>
+　The following formats can be used as output image formats.<r/>
+<r/>
+<dl>
+<dt>24bit/32bit BMP</dt>
+<dd>
+　24bit BMP is a BMP without an alpha channel.<r/>
+　32bit BMP is a BMP with an alpha channel. It has a main and a mask in one file.
+</dd>
+
+<dt>PNG</dt>
+<dd>
+　A full-color PNG or a PNG with an alpha channel.<r/>
+</dd>
+
+<dt>TLG5</dt>
+<dd>
+　Full color TLG5 or TLG5 with alpha channel.<r/>
+<note>
+　TLG5 format takes quite some time to compress. It may look like the program has stopped.
+</note>
+</dd>
+
+<dt>TLG6</dt>
+<dd>
+　Full color TLG6 or TLG6 with alpha channel.<r/>
+<note>
+　TLG6 format, like TLG5 format, takes considerably longer to compress. It may look like the program has stopped.
+</note>
+For TLG6 images, tag information is written in the same way as for TLG5 images.<r/>
+</dd>
+
+<dt>Main / mask separation format</dt>
+<dd>
+　This method records the main / mask in separate files for images with transparent parts. You can select BMP, JPEG and PNG respectively.<r/>
+　The mask image has the file name of the main image with _m at the end (for example, test_jpg for test.jpg).<r/>
+　The main and mask can be in different image formats, but the combination of BMP and BMP, or PNG and PNG is almost meaningless, so it is better to choose the above 32bit BMP or PNG with alpha channel.<r/>
+　Using JPEG for one or both saves file size, but reduces image quality.<r/>
+　TLG5 or TLG6 format cannot be specified for the main / mask separation format.
+</dd>
+</dl>
+</para>
+
+<para>
+<ptitle>Tag information</ptitle>
+The image format converter writes "tag information" to TLG images and PNG images. "Tag information" is information including how the image should be displayed. This tag information can be obtained as the return value of the <at href="f_Layer_loadImages.html">Layer.loadImages</at> method.<r/><r/>
+The following tag information is exported.<r/>
+<dl>
+<dt><kw>mode</kw> (TLG only)</dt>
+<dd>
+Image display mode. For "opaque image", mode=opaque, and if the output format is ltAddAlpha, write the information mode=addalpha.<r/>
+If the output format is not "ltAddAlpha" for "Images with transparency", mode=alpha will be set if a non-PSD file or a PSD file containing only "Normal" layers is loaded. If you import a layer other than "Normal" in a PSD file, the information corresponding to each blend mode is exported.<r/>
+In the case of KAG, this corresponds to the mode attribute of the image tag as it is, and becomes the initial value when the mode attribute is omitted in the image tag. In other words, in KAG, even if you do not specify the mode attribute, the mode attribute suitable for the image is automatically set.<r/>
+<r/>
+　Kirikiri has a dictionary array called imageTagLayerType in the global object of TJS, and shows how the mode of the tag information possessed by the TLG image and the layer type are associated, and is defined as follows.<r/>
+<bq>
+global.imageTagLayerType = %[<r/>
+    opaque      :%[type:ltOpaque            ],<r/>
+    rect        :%[type:ltOpaque            ],<r/>
+    alpha       :%[type:ltAlpha             ],<r/>
+    transparent :%[type:ltAlpha             ],<r/>
+    addalpha    :%[type:ltAddAlpha          ],<r/>
+    add         :%[type:ltAdditive          ],<r/>
+    sub         :%[type:ltSubtractive       ],<r/>
+    mul         :%[type:ltMultiplicative    ],<r/>
+    dodge       :%[type:ltDodge             ],<r/>
+    darken      :%[type:ltDarken            ],<r/>
+    lighten     :%[type:ltLighten           ],<r/>
+    screen      :%[type:ltScreen            ],<r/>
+    psnormal    :%[type:ltPsNormal          ],<r/>
+    psadd       :%[type:ltPsAdditive        ],<r/>
+    pssub       :%[type:ltPsSubtractive     ],<r/>
+    psmul       :%[type:ltPsMultiplicative  ],<r/>
+    psscreen    :%[type:ltPsScreen          ],<r/>
+    psoverlay   :%[type:ltPsOverlay         ],<r/>
+    pshlight    :%[type:ltPsHardLight       ],<r/>
+    psslight    :%[type:ltPsSoftLight       ],<r/>
+    psdodge     :%[type:ltPsColorDodge      ],<r/>
+    psdodge5    :%[type:ltPsColorDodge5     ],<r/>
+    psburn      :%[type:ltPsColorBurn       ],<r/>
+    pslighten   :%[type:ltPsLighten         ],<r/>
+    psdarken    :%[type:ltPsDarken          ],<r/>
+    psdiff      :%[type:ltPsDifference      ],<r/>
+    psdiff5     :%[type:ltPsDifference5     ],<r/>
+    psexcl      :%[type:ltPsExclusion       ],<r/>
+]<r/>
+</bq>
+　See <link href="GraphicSystem" /> for the type of each layer.
+</dd>
+
+<dt><kw>offs_x</kw> <kw>offs_y</kw> <kw>offs_unit</kw> (TLG, PNG)</dt>
+<dd>
+　These will only be output if the source is a PNG and the PNG contains information about the offset (oFFs chunk) from the upper left corner of the image.<r/>
+　offs_x is the distance from the left edge of the horizontal position, and offs_y is the distance from the top edge of the vertical position. offs_unit is either <kw>pixel</kw> or <kw>micrometer</kw> and indicates the unit of distance.<r/>
+</dd>
+
+<dt><kw>vpag_w</kw> <kw>vpag_h</kw> <kw>vpag_unit</kw> (TLG, PNG)</dt>
+<dd>
+　These will only be output if the source is a PNG and the PNG contains information about the Virtual PAGe, ie the size of the entire image (vpAg chunk).<r/>
+　There is an <at target="_top"  href="http://www.imagemagick.org/">ImageMagick</at> utility as software that outputs this information to PNG. When trimming is performed with this <kw>ImageMagick</kw>, this information is output as the image size before trimming.<r/>
+　vpag_w is the horizontal size of the whole image, vpag_h is the vertical size of the whole image, and offs_unit is either <kw>pixel</kw> or <kw>micrometer</kw>, indicating the unit of size.<r/>
+</dd>
+
+<dt><kw>reso_x</kw> <kw>reso_y</kw> <kw>reso_unit</kw> (TLG, PNG)</dt>
+<dd>
+　These will only be output if the source is a PNG and the PNG contains information about the image's resolution (pHYs chunk).<r/>
+　reso_x is the horizontal resolution and reso_y is the vertical resolution. reso_unit is <kw>meter</kw>, indicating the unit of resolution.<r/>
+</dd>
+
+</dl>
+
+</para>
+
+<para>
+<ptitle>How to use image format converter</ptitle>
+<r/>
+　Conversion can be done by dropping the file you want to convert on the image format converter window. You can also drop multiple files.<r/>
+<r/>
+　You can specify different formats for opaque images and images with transparency.<r/>
+<r/>
+　The term "opaque image" here refers to an image in which the entire image is completely opaque (for example, a background image used in KAG). An "image with transparency" is an image that has a transparent area (foreground image such as used in KAG).<r/>
+　Even if the image format has equivalent information, if all pixels of the image are completely opaque as a result, it is treated as an "opaque image".<r/>
+<r/>
+　After the conversion is completed, a log will be displayed to confirm whether the conversion of each file was successful or an error occurred.<r/>
+<r/>
+　The following is a description of the screen.<r/>
+<r/>
+<img src="TPC.png"/><r/><r/>
+　When executed, the above screen is displayed.<r/>
+<r/>
+<dl>
+<dt>Show options</dt>
+<dd>
+　When checked, the following settings are displayed. When unchecked, the window will only be at the top, and will be narrow and wide. You can make the window compact if you do not need to set options.
+</dd>
+
+<dt>"Opaque image-24bit BMP"</dt>
+<dd>
+　Select 24bit BMP as the output format for opaque images.
+</dd>
+
+<dt>"Opaque image-PNG"</dt>
+<dd>
+　Select PNG as the output format for opaque images.
+</dd>
+
+<dt>"Opaque image-TLG5"</dt>
+<dd>
+　Select TLG5 as the output format for opaque images.
+</dd>
+
+<dt>"Opaque image-TLG6"</dt>
+<dd>
+　Select TLG6 as the output format for opaque images.
+</dd>
+
+<dt>"Opaque image-JPEG"</dt>
+<dd>
+　Select JPEG as the output format for opaque images.
+</dd>
+
+<dt>"Opaque images-JPEG options ..."</dt>
+<dd>
+　Select the JPEG compression quality when JPEG is selected as the output format for opaque images.
+</dd>
+
+
+<dt>"Image with transparency-32bit BMP (Main + Mask)"</dt>
+<dd>
+　Select 32bit BMP as the output format for images with transparency information.
+</dd>
+
+<dt>"Image with transparency-PNG with alpha channel (main + mask)"</dt>
+<dd>
+　Select PNG with alpha channel as output format for images with transparency information.
+</dd>
+
+<dt>"Image with transparency-TLG5 with alpha channel (main + mask)"</dt>
+<dd>
+　Select TLG5 with alpha channel as the output format for images with transparency information.
+</dd>
+
+<dt>"Image with transparency-TLG6 with alpha channel (main + mask)"</dt>
+<dd>
+　Select TLG6 with alpha channel as the output format for images with transparency information.
+</dd>
+
+<dt>"Images with transparency-Main / Mask separation format"</dt>
+<dd>
+　Specify the main / mask separation format as the output format of the image with transparency information. Select below what to use for the main / mask. In the case of JPEG, you can select the JPEG compression quality by clicking the "JPEG Option" button.
+</dd>
+
+<dt>"Image with transparency-considers input image to be in ltAddAlpha format"</dt>
+<dd>
+　If this option is checked, the input image will be considered to be in ltAddAlpha format, that is, an additive alpha compositing format suitable for display by specifying ltAddAlpha in the Kirikiri's <at href="f_Layer_type.html">Layer.type</at> property. The input image formats affected by this option are BMP, PNG, Main / Mask Separation format, PSD format is not affected.<r/>
+　If this option is not checked, the input image is assumed to be in ltAlpha format. Most graphics software output formats and PNG specifications are in ltAlpha format, so you should not normally check this option.<r/>
+　If this option is unchecked and "Export in ltAddAlpha format" is checked, the image format converter will convert from ltAlpha format to ltAddAlpha format.<r/>
+　When this option is checked, the option of "Output in ltAddAlpha format" is automatically checked. Also, the option of "Color information of completely transparent area" is disabled (neither alpha information nor color information is processed by the image format converter).<r/>
+</dd>
+
+
+<dt>"Images with transparency-output in ltAddAlpha format"</dt>
+<dd>
+　If this option is checked, the output image will be output in ltAddAlpha format.<r/>
+　If this option is unchecked, the output image will be in ltAlpha format, or in the case of input from a PSD file, will be in a format that corresponds to the blend mode of the layers contained in that file.<r/>
+　Various graphic software and PNG specifications only accept images in ltAlpha format, so if you do not use the output image for Kirikiri, please do not check it normally.<r/>
+　If this option is checked, the option "Color information for fully transparent areas" will be disabled (no alpha or color information will be processed by the image format converter).<r/>
+</dd>
+
+
+<dt>"Images with transparency-color information for fully transparent areas"</dt>
+<dd>
+　Specifies processing of completely transparent parts of the image.<r/>
+　Normally, ltAlpha format images have color information even in completely transparent areas. Since that part is completely transparent, it is simply ignored when displaying, but it is not ignored when processing images (including compression by JPEG, etc.).<r/>
+　Specifies how to handle this completely transparent part.<r/>
+<r/>
+<dl>
+<dt>Removal</dt>
+<dd>
+　If you specify the removal, the color information of the completely transparent part is removed (exactly, it is filled with black).<r/>
+　Normally, this is OK.
+</dd>
+
+<dt>As it is</dt>
+<dd>
+　Do not process. The original image remains as it is.<r/>
+　If there is dust in the completely transparent area, the dust will be compressed, so the compression ratio will be worse.
+</dd>
+
+<dt>Synthesis</dt>
+<dd>
+　The color of the completely transparent part is inferred from the color of the opaque part around it, and then synthesized.<r/>
+　You can select the synthesis intensity from 1, 2, 3, 5, 8 pixels. Here, the color of the completely transparent part is synthesized from the pixel color of the opaque part within the specified distance in pixel units. Larger values take longer to process. Colors that are completely transparent outside the specified distance will be removed.<r/>
+　For example, when compressing a main image with JPEG, mosquito noise occurs in places where there is a sudden change in color due to the characteristics of JPEG. In the case of foreground images, if "composite" processing is not performed, and if there is a sudden color change at the boundary between completely opaque parts, it is likely to occur in that part. By performing the "composite" process, the color of the completely transparent part is composited from the color of the opaque part, so the difference in color change can be suppressed and the occurrence of mosquito noise can be suppressed. Also, in general JPEG, color information is mixed with neighboring pixels, but this is also performed by "compositing" processing, so that the color of unintended completely transparent parts (if not combined) and the color of opaque parts Can be kept from mixing.<r/>
+　Normally select "Remove". No color information is needed for completely transparent areas. If you remove the image, you can reduce the file size of the compressed image.
+</dd>
+</dl>
+　This option is disabled if "Output in ltAddAlpha format" is checked. "Completely transparent" in the ltAddAlpha format is because the opacity is 0 and the color can only be black.<r/>
+</dd>
+
+<dt>"Output folder-same folder as input file"</dt>
+<dd>
+　Output the file to the same folder as the input file.
+</dd>
+
+<dt>"Output folder-specified folder"</dt>
+<dd>
+　Outputs the output file to the folder specified in the input box below.<r/>
+　Click the "Browse ..." button to display a dialog box for selecting an output folder.<r/>
+　If you specify a relative folder in the input field, you can specify a relative position from the folder that contains the input file.
+</dd>
+
+<dt>"Output folder-Overwrite if there is a file with the same name"</dt>
+<dd>
+　If this check box is checked, if there is a file with the same name, it will be overwritten.
+</dd>
+
+<dt>"Do not display log if no error occurred"</dt>
+<dd>
+　If this check box is checked, if the conversion is completed and no error occurs during the conversion, the window for checking the log will not be displayed.
+</dd>
+
+<dt>"close"</dt>
+<dd>
+　Exit this tool.
+</dd>
+</dl>
+</para>
+
+
+</doc>
+
+

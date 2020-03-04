@@ -1,0 +1,1903 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Window</title>
+<desc>
+　Window class is a class for managing <kw>windows</kw>.<r/>
+</desc>
+
+<member>
+	<name>Window</name>
+	<type>constructor</type>
+	<shortdesc>Constructing a Window object</shortdesc>
+	<arg>
+		<argitem>
+			<name>parent</name>
+			<default></default>
+			<desc>
+				　Specify the parent window.<r/>
+				　If you specify a parent window, it will be created as its child window.<r/>
+				　Omit if not specified.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Constructs a Window class object.<r/>
+		　The window is created hidden and its position and size are undefined (appropriate size for somewhere).<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onMouseEnter</name>
+	<type>event</type>
+	<shortdesc>Mouse came in</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when the mouse enters the window's client area.<r/>
+	</desc>
+	<ref>Window.onMouseLeave</ref>
+</member>
+
+<member>
+	<name>onMouseLeave</name>
+	<type>event</type>
+	<shortdesc>Mouse came out</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when the mouse leaves the window's client area.<r/>
+	</desc>
+	<ref>Window.onMouseEnter</ref>
+</member>
+
+<member>
+	<name>onClick</name>
+	<type>event</type>
+	<shortdesc>Window clicked</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　The value of the x coordinate (in client coordinates) of where the window was clicked.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　The y coordinate (in client coordinates) of the location where the window was clicked.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when the window is clicked.<r/>
+	</desc>
+	<ref>Window.onMouseDown</ref>
+	<ref>Window.onDoubleClick</ref>
+</member>
+
+<member>
+	<name>onDoubleClick</name>
+	<type>event</type>
+	<shortdesc>Window was double-clicked</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　The value of the x coordinate (in client coordinates) of the location where the window was double-clicked.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　The value of the y coordinate (in client coordinates) of the location where the window was double-clicked.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when a window is double-clicked.<r/>
+	</desc>
+	<ref>Window.onClick</ref>
+</member>
+
+<member>
+	<name>onMouseDown</name>
+	<type>event</type>
+	<shortdesc>Mouse button pressed</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　The value of the x coordinate (in client coordinates) of the position where the mouse button was pressed.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　The y coordinate (in client coordinates) of the position where the mouse button was pressed.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>button</name>
+			<default></default>
+			<desc>
+				　The mouse button that was pressed. One of the following values:<r/>
+				<tt><kw>mbLeft</kw>    : </tt>Left mouse button pressed<r/>
+				<tt><kw>mbMiddle</kw>  : </tt>Middle mouse button pressed<r/>
+				<tt><kw>mbRight</kw>   : </tt>Right mouse button pressed<r/>
+				<tt><kw>mbX1</kw>      : </tt>The first button of the mouse's side key is pressed<r/>
+				<tt><kw>mbX2</kw>      : </tt>The second button of the mouse's side key is pressed<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shift</name>
+			<default></default>
+			<desc>
+				　The state of the shift key that was pressed at the same time when the mouse button was pressed.
+				It is a combination of the following values by bit OR.<r/>
+				<tt><kw>ssAlt</kw>     : </tt>ALT key was pressed<r/>
+				<tt><kw>ssShift</kw>   : </tt>SHIFT key was pressed<r/>
+				<tt><kw>ssCtrl</kw>    : </tt>CTRL key was pressed<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when the mouse button is pressed.<r/>
+	</desc>
+	<ref>Window.onClick</ref>
+</member>
+
+<member>
+	<name>onMouseUp</name>
+	<type>event</type>
+	<shortdesc>Mouse button released</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　The value of the x coordinate (in client coordinates) of the position where the mouse button was released.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　The value of the y coordinate (in client coordinates) of the position where the mouse button was released.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>button</name>
+			<default></default>
+			<desc>
+				　The mouse button that was released. One of the following values:<r/>
+				<tt><kw>mbLeft</kw>    : </tt>Left mouse button released<r/>
+				<tt><kw>mbMiddle</kw>  : </tt>Middle mouse button released<r/>
+				<tt><kw>mbRight</kw>   : </tt>Right mouse button released<r/>
+				<tt><kw>mbX1</kw>      : </tt>Mouse side key first button released<r/>
+				<tt><kw>mbX2</kw>      : </tt>Mouse side key second button released<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shift</name>
+			<default></default>
+			<desc>
+				　The state of the shift key that was pressed at the same time when the mouse button was released.
+				It is a combination of the following values by bit OR.<r/>
+				<tt><kw>ssAlt</kw>     : </tt>ALT key was pressed<r/>
+				<tt><kw>ssShift</kw>   : </tt>SHIFT key was pressed<r/>
+				<tt><kw>ssCtrl</kw>    : </tt>CTRL key was pressed<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when the mouse button is released.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onMouseMove</name>
+	<type>event</type>
+	<shortdesc>Mouse moved</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　The value of the x coordinate (in client coordinates) of the location where the mouse moved.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　The value of the y coordinate (in client coordinates) of the position where the mouse moved.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shift</name>
+			<default></default>
+			<desc>
+				　The state of the shift keys and mouse buttons that were pressed at the same time when the mouse was moving.
+				It is a combination of the following values by bit OR.<r/>
+				<tt><kw>ssAlt</kw>     : </tt>ALT key was pressed<r/>
+				<tt><kw>ssShift</kw>   : </tt>SHIFT key was pressed<r/>
+				<tt><kw>ssCtrl</kw>    : </tt>CTRL key was pressed<r/>
+				<tt><kw>ssLeft</kw>    : </tt>Left mouse button was pressed<r/>
+				<tt><kw>ssMiddle</kw>  : </tt>The middle mouse button was pressed<r/>
+				<tt><kw>ssRight</kw>   : </tt>The right mouse button was pressed<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when the mouse moves.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onMouseWheel</name>
+	<type>event</type>
+	<shortdesc>Mouse wheel rotated</shortdesc>
+	<arg>
+		<argitem>
+			<name>shift</name>
+			<default></default>
+			<desc>
+				　The state of the shift keys and mouse buttons that were pressed at the same time when the mouse was moving.
+				It is a combination of the following values by bit OR.<r/>
+				<tt><kw>ssAlt</kw>     : </tt>ALT key was pressed<r/>
+				<tt><kw>ssShift</kw>   : </tt>SHIFT key was pressed<r/>
+				<tt><kw>ssCtrl</kw>    : </tt>CTRL key was pressed<r/>
+				<tt><kw>ssLeft</kw>    : </tt>Left mouse button was pressed<r/>
+				<tt><kw>ssMiddle</kw>  : </tt>The middle mouse button was pressed<r/>
+				<tt><kw>ssRight</kw>   : </tt>The right mouse button was pressed<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>delta</name>
+			<default></default>
+			<desc>
+				　The rotation angle of the wheel. Positive when turned up (opposite to the user), negative when turned down (toward the user). Usually the minimum amount is 120.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　The value of the x coordinate (in client coordinates) of the position where the wheel has rotated.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　The value of the y coordinate (in client coordinates) of the position where the wheel has rotated.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when the mouse wheel rolls.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onTouchDown</name>
+	<type>event</type>
+	<shortdesc>Screen touched</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　The value of the x coordinate (in client coordinates) of the touched location.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　The value of the y coordinate (in client coordinates) of the touched location.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cx</name>
+			<default></default>
+			<desc>
+				　The number of horizontal pixels the finger is touching.<r/>
+				　Always 1 if the device is not compatible.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cy</name>
+			<default></default>
+			<desc>
+				　The number of vertical pixels the finger is touching.<r/>
+				　Always 1 if the device is not compatible.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>id</name>
+			<default></default>
+			<desc>
+				　Touch ID.<r/>
+				　At the time of multi-touch, a unique value is set for each position, and the position can be identified by this ID.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when the touch panel is touched.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onTouchUp</name>
+	<type>event</type>
+	<shortdesc>Finger released from screen</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　The value of the x coordinate (in client coordinates) of the location that was released.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　The value of the y coordinate (in client coordinates) of the location that was released.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cx</name>
+			<default></default>
+			<desc>
+				　The number of horizontal pixels the finger is touching.<r/>
+				　Always 1 if the device is not compatible.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cy</name>
+			<default></default>
+			<desc>
+				　The number of vertical pixels the finger is touching.<r/>
+				　Always 1 if the device is not compatible.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>id</name>
+			<default></default>
+			<desc>
+				　Touch ID.<r/>
+				　At the time of multi-touch, a unique value is set for each position, and the position can be identified by this ID.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when a finger is released from the touch panel.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onTouchMove</name>
+	<type>event</type>
+	<shortdesc>Finger moved</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　The value of the x coordinate (in client coordinates) of the touch location.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　The value of the y coordinate (in client coordinates) of the touch location.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cx</name>
+			<default></default>
+			<desc>
+				　The number of horizontal pixels the finger is touching.<r/>
+				　Always 1 if the device is not compatible.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cy</name>
+			<default></default>
+			<desc>
+				　The number of vertical pixels the finger is touching.<r/>
+				　Always 1 if the device is not compatible.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>id</name>
+			<default></default>
+			<desc>
+				　Touch ID.<r/>
+				　At the time of multi-touch, a unique value is set for each position, and the position can be identified by this ID.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when a finger on the touch panel moves.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onTouchScaling</name>
+	<type>event</type>
+	<shortdesc>Enlarged operation</shortdesc>
+	<arg>
+		<argitem>
+			<name>startdistance</name>
+			<default></default>
+			<desc>
+				　Pixel distance when multi-touch started.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>currentdistance</name>
+			<default></default>
+			<desc>
+				　The pixel distance of the touch when the event occurred.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cx</name>
+			<default></default>
+			<desc>
+				　The value of the x coordinate (in client coordinates) of the center location.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cy</name>
+			<default></default>
+			<desc>
+				　The value of the y-coordinate (in client coordinates) of the center location.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>flag</name>
+			<default></default>
+			<desc>
+				　Multi-touch status flag.<r/>
+				<tt><kw>0x01</kw>     : </tt>Set to the first event when multi-touch is started.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when performing a multi-touch enlargement operation on the touch panel.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onTouchRotate</name>
+	<type>event</type>
+	<shortdesc>Rotated</shortdesc>
+	<arg>
+		<argitem>
+			<name>startangle</name>
+			<default></default>
+			<desc>
+				　The radian angle when multi-touch was started.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>currentangle</name>
+			<default></default>
+			<desc>
+				　The radian angle of the touch when the event occurred.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>distance</name>
+			<default></default>
+			<desc>
+				　The pixel distance of the touch when the event occurred.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cx</name>
+			<default></default>
+			<desc>
+				　The value of the x coordinate (in client coordinates) of the center location.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cy</name>
+			<default></default>
+			<desc>
+				　The value of the y-coordinate (in client coordinates) of the center location.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>flag</name>
+			<default></default>
+			<desc>
+				　Multi-touch status flag.<r/>
+				<tt><kw>0x01</kw>     : </tt>Set to the first event when multi-touch is started.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when rotating by multi-touch on the touch panel.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onMultiTouch</name>
+	<type>event</type>
+	<shortdesc>Multi-touch status changed</shortdesc>
+	<arg></arg>
+	<result></result>
+	<desc>
+		　Occurs when a multi-touch state has started, moved, or moved away.<r/>
+		　Coordinate information can be obtained with the <ref>Window.touchPointCount</ref> property and the <ref>Window.getTouchPoint</ref> method.<r/>
+	</desc>
+	<ref>Window.getTouchPoint</ref>
+	<ref>Window.touchPointCount</ref>
+</member>
+
+<member>
+	<name>onKeyDown</name>
+	<type>event</type>
+	<shortdesc>Key pressed</shortdesc>
+	<arg>
+		<argitem>
+			<name>key</name>
+			<default></default>
+			<desc>
+				　The <kw>virtual key code</kw> value of the pressed key.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shift</name>
+			<default></default>
+			<desc>
+				　The state of the shift keys and mouse buttons that were pressed at the same time as the key was pressed.
+				It is a combination of the following values by bit OR.<r/>
+				<tt><kw>ssAlt</kw>     : </tt>ALT key was pressed<r/>
+				<tt><kw>ssShift</kw>   : </tt>SHIFT key was pressed<r/>
+				<tt><kw>ssCtrl</kw>    : </tt>CTRL key was pressed<r/>
+				<tt><kw>ssLeft</kw>    : </tt>Left mouse button was pressed<r/>
+				<tt><kw>ssMiddle</kw>  : </tt>The middle mouse button was pressed<r/>
+				<tt><kw>ssRight</kw>   : </tt>The right mouse button was pressed<r/>
+				　When the keyboard is pressed for a long time and a key repeat occurs, the following values are also combined.<r/>
+				<tt><kw>ssRepeat</kw>  : </tt>Key repeat occurred<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when a key is pressed.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onKeyUp</name>
+	<type>event</type>
+	<shortdesc>Key released</shortdesc>
+	<arg>
+		<argitem>
+			<name>key</name>
+			<default></default>
+			<desc>
+				　The <kw>virtual key code</kw> value of the released key.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shift</name>
+			<default></default>
+			<desc>
+				　The state of the shift keys and mouse buttons that were pressed at the same time when the key was released.
+				It is a combination of the following values by bit OR.<r/>
+				<tt><kw>ssAlt</kw>     : </tt>ALT key was pressed<r/>
+				<tt><kw>ssShift</kw>   : </tt>SHIFT key was pressed<r/>
+				<tt><kw>ssCtrl</kw>    : </tt>CTRL key was pressed<r/>
+				<tt><kw>ssLeft</kw>    : </tt>The left mouse button was pressed<r/>
+				<tt><kw>ssMiddle</kw>  : </tt>The middle mouse button was pressed<r/>
+				<tt><kw>ssRight</kw>   : </tt>The right mouse button was pressed<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when a key is released.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onKeyPress</name>
+	<type>event</type>
+	<shortdesc>Character entered</shortdesc>
+	<arg>
+		<argitem>
+			<name>key</name>
+			<default></default>
+			<desc>
+				　The character entered.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when a character is entered. Unlike <ref>Window.onKeyDown</ref>, while onKeyDown handles virtual keycodes, this event deals with the characters themselves. This event does not occur if the pressed key is a key that is not related to characters (such as a function key).<r/>
+		If it is pressed at the same time as the Ctrl key, the following control code will be sent.<r/>
+		<tt>0x00 : </tt>Ctrl+@<r/>
+		<tt>0x01 : </tt>Ctrl+A<r/>
+		<tt>0x02 : </tt>Ctrl+B<r/>
+		<tt>0x03 : </tt>Ctrl+C<r/>
+		<tt>0x04 : </tt>Ctrl+D<r/>
+		<tt>0x05 : </tt>Ctrl+E<r/>
+		<tt>0x06 : </tt>Ctrl+F<r/>
+		<tt>0x07 : </tt>Ctrl+G<r/>
+		<tt>0x08 : </tt>Ctrl+H<r/>
+		<tt>0x09 : </tt>Ctrl+I<r/>
+		<tt>0x0A : </tt>Ctrl+J<r/>
+		<tt>0x0B : </tt>Ctrl+K<r/>
+		<tt>0x0C : </tt>Ctrl+L<r/>
+		<tt>0x0D : </tt>Ctrl+M<r/>
+		<tt>0x0E : </tt>Ctrl+N<r/>
+		<tt>0x0F : </tt>Ctrl+O<r/>
+		<tt>0x10 : </tt>Ctrl+P<r/>
+		<tt>0x11 : </tt>Ctrl+Q<r/>
+		<tt>0x12 : </tt>Ctrl+R<r/>
+		<tt>0x13 : </tt>Ctrl+S<r/>
+		<tt>0x14 : </tt>Ctrl+T<r/>
+		<tt>0x15 : </tt>Ctrl+U<r/>
+		<tt>0x16 : </tt>Ctrl+V<r/>
+		<tt>0x17 : </tt>Ctrl+W<r/>
+		<tt>0x18 : </tt>Ctrl+X<r/>
+		<tt>0x19 : </tt>Ctrl+Y<r/>
+		<tt>0x1A : </tt>Ctrl+Z<r/>
+		<tt>0x1B : </tt>Ctrl+[<r/>
+		<tt>0x1C : </tt>Ctrl+\<r/>
+		<tt>0x1D : </tt>Ctrl+]<r/>
+		<tt>0x1E : </tt>Ctrl+^<r/>
+		<tt>0x1F : </tt>Ctrl+_<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onResize</name>
+	<type>event</type>
+	<shortdesc>Window size has changed</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when the window size changes.<r/>
+		　Obtain the actual size using the <ref>Window.width</ref> or <ref>Window.height</ref> properties.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onFileDrop</name>
+	<type>event</type>
+	<shortdesc>File dropped</shortdesc>
+	<arg>
+		<argitem>
+			<name>files</name>
+			<default></default>
+			<desc>
+				　It is an array object that stores the dropped file name.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when a file is dropped on a window, such as from Explorer.<r/>
+		　Even if a single file is dropped, an array object is passed as an argument (the first element is the file).<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onCloseQuery</name>
+	<type>event</type>
+	<shortdesc>Confirm closing window</shortdesc>
+	<arg>
+		<argitem>
+			<name>canclose</name>
+			<default></default>
+			<desc>
+				　Passed if the window can be closed. In the process of calling the event handler of the upper class from the lower class, the "whether the window can be closed" determined by the lower class is passed.<r/>
+				
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Event to check if the window can be closed. If you cannot close the window, pass false as an argument to the same method of the higher class.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onPopupHide</name>
+	<type>event</type>
+	<shortdesc>Close popup window</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Event fired when the popup window should close. This event occurs when the <ref>Window.stayOnTop</ref> property is true and the <ref>Window.focusable</ref> property is false when "other window is clicked" or "other application is activated."<r/>
+		　Normally, close or hide the window here.<r/>
+	</desc>
+	<ref>Window.focusable</ref>
+	<ref>Window.stayOnTop</ref>
+</member>
+
+<member>
+	<name>onActivate</name>
+	<type>event</type>
+	<shortdesc>When the window is activated</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Represents the event function that is called when the window was activated.<r/>
+		　Note that this event can also occur if the window is already active (it is not guaranteed to occur completely in the order of onActivate → onDeactivate → onActivate → ...).<r/>
+	</desc>
+	<ref>Window.onDeactivate</ref>
+	<ref>System.onActivate</ref>
+	<ref>System.onDeactivate</ref>
+
+</member>
+
+<member>
+	<name>onDeactivate</name>
+	<type>event</type>
+	<shortdesc>When a window becomes inactive</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Represents the event function called when the window becomes inactive.<r/>
+		　Note that this event can also occur if the window is already inactive (it is not guaranteed to occur completely in the order of onActivate → onDeactivate → onActivate →...).<r/>
+	</desc>
+	<ref>Window.onActivate</ref>
+	<ref>System.onActivate</ref>
+	<ref>System.onDeactivate</ref>
+
+</member>
+
+<member>
+	<name>onHintChanged</name>
+	<type>event</type>
+	<shortdesc>When the state of the hint changes</shortdesc>
+	<arg>
+		<argitem>
+			<name>text</name>
+			<default></default>
+			<desc>
+				　The string to display in the hint is passed.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　Hint display X axis coordinate value is passed.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　Hint display Y axis coordinate value is passed.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>isshow</name>
+			<default></default>
+			<desc>
+				　Passes in whether to show or hide the hint.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Represents the event function called when the state of the hint changes.<r/>
+		　Display hints according to display / hide.<r/>
+		　If you want hints to be displayed on a layer, set <ref>Layer.hitThreshold</ref> to 256 so that mouse messages on that layer are ignored.<r/>
+		　Also, <ref>Layer.ignoreHintSensing</ref> specifies true.<r/>
+	</desc>
+	<ref>Window.hintDelay</ref>
+	<ref>Layer.ignoreHintSensing</ref>
+	<ref>Layer.hitThreshold</ref>
+</member>
+
+<member>
+	<name>onDisplayRotate</name>
+	<type>event</type>
+	<shortdesc>When the screen is rotated (1.1.0 or later)</shortdesc>
+	<arg>
+		<argitem>
+			<name>orientation</name>
+			<default></default>
+			<desc>
+				　The screen orientation.<r/>
+				　One of the following values:<r/>
+				　oriUnknown (acquisition failure / unknown), oriPortrait (portrait), oriLandscape (landscape)<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>angle</name>
+			<default></default>
+			<desc>
+				　Angle.<r/>
+				　The angle (angle) is 0, 90, 180, 270, or -1. If it cannot be obtained, it becomes -1.<r/>
+				　The angle is the rotation angle from the device default, so it will be 0 vertically in portrait devices.<r/>
+				　On a normal device, there are many 0s in landscape.<r/>
+				　The vertical orientation is 0 for recent 8-inch tablets, etc., and the vertical orientation is the standard orientation.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>bpp</name>
+			<default></default>
+			<desc>
+				　 bits per pixel.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>width</name>
+			<default></default>
+			<desc>
+				　Screen width.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>height</name>
+			<default></default>
+			<desc>
+				　The height of the screen.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Represents the event function called when the screen is rotated.<r/>
+	</desc>
+	<ref>Window.displayOrientation</ref>
+	<ref>Window.displayRotate</ref>
+</member>
+
+
+<member>
+	<name>close</name>
+	<type>method</type>
+	<shortdesc>close the window</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Closes the window displayed by the <ref>Window.showModal</ref> method. Before closing the window, the <ref>Window.onCloseQuery</ref> event is fired, and you can check whether the window can be closed.<r/>
+	</desc>
+	<ref>Window.showModal</ref>
+	<ref>Window.onCloseQuery</ref>
+</member>
+
+<member>
+	<name>bringToFront</name>
+	<type>method</type>
+	<shortdesc>Bring window to front</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Brings the window to the front. If the application is inactive, activate the application itself.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>update</name>
+	<type>method</type>
+	<shortdesc>Force window contents to be drawn</shortdesc>
+	<arg>
+		<argitem>
+			<name>type</name>
+			<default>tutNormal</default>
+			<desc>
+				　Specifies the type of window drawing.<r/>
+				　When <tt><kw>tutNormal</kw></tt> is specified, normal drawing (difference drawing) is specified, and when <tt><kw>tutEntire</kw></tt> is specified, the entire window content is drawn.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Arguments are ignored in the current version.<r/>
+		　tutNormal and tutEntire are not implemented.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>showModal</name>
+	<type>method</type>
+	<shortdesc>Display windows modally</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Displays the window <kw>modally</kw> (<kw>with mode</kw>).
+		This method makes the window visible and temporarily disables other windows. Therefore, the user can access only this window (this is called the moded state). When the window is closed, the mode state is released.<r/>
+		　The window must be hidden when calling this method.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>setMaskRegion</name>
+	<type>method</type>
+	<shortdesc>Set window region according to mask</shortdesc>
+	<arg>
+		<argitem>
+			<name>threshold</name>
+			<default>1</default>
+			<desc>
+				　Specify the mask threshold (threshold value).<r/>
+				　The window is cut out to show the portion of the primary layer mask (layer opacity information) that is larger than this value.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Sets the window region according to the primary layer mask (layer opacity information).<r/>
+		　Windows can be made irregular.<r/>
+		　In order to keep the size and position of the displayed primary layer from the window, you need to do the following.<r/>
+		<ul>
+		<li><ref>Window.borderStyle</ref> is set to bsNone.</li>
+		<li><ref>Layer.imageLeft</ref> and <ref>Layer.imageTop</ref> are set to 0.</li>
+		</ul>
+	</desc>
+	<ref>Window.removeMaskRegion</ref>
+</member>
+
+<member>
+	<name>removeMaskRegion</name>
+	<type>method</type>
+	<shortdesc>Release window region</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Cancels the window region set with <ref>Window.setMaskRegion</ref> and returns the window to a rectangle.<r/>
+	</desc>
+	<ref>Window.setMaskRegion</ref>
+</member>
+
+<member>
+	<name>add</name>
+	<type>method</type>
+	<shortdesc>Adding managed objects</shortdesc>
+	<arg>
+		<argitem>
+			<name>object</name>
+			<default></default>
+			<desc>
+				　Specifies the object to be managed.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Add a management object. The object specified here will be automatically invalidated when the window is invalidated.<r/>
+	</desc>
+	<ref>Window.remove</ref>
+</member>
+
+<member>
+	<name>remove</name>
+	<type>method</type>
+	<shortdesc>Deleting managed objects</shortdesc>
+	<arg>
+		<argitem>
+			<name>object</name>
+			<default></default>
+			<desc>
+				　Specifies the object to delete from the list of managed objects.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Removes the specified object from the list of managed objects.<r/>
+	</desc>
+	<ref>Window.add</ref>
+</member>
+
+<member>
+	<name>setSize</name>
+	<type>method</type>
+	<shortdesc>Setting the window size</shortdesc>
+	<arg>
+		<argitem>
+			<name>width</name>
+			<default></default>
+			<desc>
+				　Specify the width of the window.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>height</name>
+			<default></default>
+			<desc>
+				　Specifies the height of the window.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Specify the size of the window.<r/>
+		　It is more efficient to use this method to specify the size of the window than to set the <ref>Window.width</ref> and <ref>Window.height</ref> properties individually.<r/>
+	</desc>
+	<ref>Window.width</ref>
+	<ref>Window.height</ref>
+	<ref>Window.setPos</ref>
+	<ref>Window.setInnerSize</ref>
+	<ref>Window.setMinSize</ref>
+	<ref>Window.setMaxSize</ref>
+</member>
+
+<member>
+	<name>setMinSize</name>
+	<type>method</type>
+	<shortdesc>Setting the minimum window size</shortdesc>
+	<arg>
+		<argitem>
+			<name>width</name>
+			<default></default>
+			<desc>
+				　Specifies the minimum width of the window. If you specify 0, there is no limit.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>height</name>
+			<default></default>
+			<desc>
+				　Specifies the minimum height of the window. If you specify 0, there is no limit.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Specify the minimum size of the window. The window cannot be smaller than the size specified in this method.
+	</desc>
+	<ref>Window.setMaxSize</ref>
+	<ref>Window.setSize</ref>
+	<ref>Window.minWidth</ref>
+	<ref>Window.minHeight</ref>
+</member>
+
+<member>
+	<name>setMaxSize</name>
+	<type>method</type>
+	<shortdesc>Setting the maximum window size</shortdesc>
+	<arg>
+		<argitem>
+			<name>width</name>
+			<default></default>
+			<desc>
+				　Specifies the maximum width of the window. If you specify 0, there is no limit.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>height</name>
+			<default></default>
+			<desc>
+				　Specifies the maximum height of the window. If you specify 0, there is no limit.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Specify the maximum size of the window. The window cannot be larger than the size specified in this method.
+	</desc>
+	<ref>Window.setMixSize</ref>
+	<ref>Window.setSize</ref>
+	<ref>Window.maxWidth</ref>
+	<ref>Window.maxHeight</ref>
+</member>
+
+<member>
+	<name>setPos</name>
+	<type>method</type>
+	<shortdesc>Setting the window position</shortdesc>
+	<arg>
+		<argitem>
+			<name>left</name>
+			<default></default>
+			<desc>
+				　Specifies the left edge of the window.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>top</name>
+			<default></default>
+			<desc>
+				　Specifies the top position of the window.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Specify the position of the window.<r/>
+		　It is more efficient to use this method to specify the window position at once than to set the <ref>Window.left</ref> and <ref>Window.top</ref> properties individually.<r/>
+	</desc>
+	<ref>Window.left</ref>
+	<ref>Window.top</ref>
+	<ref>Window.setSize</ref>
+</member>
+
+<member>
+	<name>setInnerSize</name>
+	<type>method</type>
+	<shortdesc>Setting client size</shortdesc>
+	<arg>
+		<argitem>
+			<name>width</name>
+			<default></default>
+			<desc>
+				　Specify the width of the client.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>height</name>
+			<default></default>
+			<desc>
+				　Specify the height of the client.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Specify the client size of the window.<r/>
+		　The client is the area in the window where the layer can be displayed.<r/>
+		　Setting this size changes the size of the window accordingly.<r/>
+		　It is more efficient to use this method to specify the size of the client than to set the <ref>Window.innerWidth</ref> and <ref>Window.innerHeight</ref> properties individually.<r/>
+	</desc>
+	<ref>Window.innerWidth</ref>
+	<ref>Window.innerHeight</ref>
+</member>
+
+<member>
+	<name>setZoom</name>
+	<type>method</type>
+	<shortdesc>Setting the layer magnification</shortdesc>
+	<arg>
+		<argitem>
+			<name>numer</name>
+			<default></default>
+			<desc>
+				　Specify the numerator of the magnification as an integer.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>denom</name>
+			<default></default>
+			<desc>
+				　Specify the denominator of the scaling factor as an integer.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Specify the magnification of the layer. The image is displayed enlarged or reduced by the size specified by the numerator / denominator.<r/>
+		　If the numerator and denominator have common divisors, they are automatically reduced, so the values read by the <ref>Window.zoomNumer</ref> and <ref>Window.zoomDenom</ref> properties may differ from the values specified by this method.<r/>
+		　In the current version of Kirikiri, whether or not interpolation is applied when scaling is affected by the hardware and driver of the graphics card. For hardware or drivers that do not perform interpolation, the image quality will be poor.<r/>
+		　Depending on the options, Kirikiri will check the hardware available for scaling each time the magnification is changed, so this method is suitable for applications where the magnification is continuously changed and production is performed. Is not ...<r/>
+	</desc>
+	<ref>Window.zoomNumer</ref>
+	<ref>Window.zoomDenom</ref>
+</member>
+
+<member>
+	<name>postInputEvent</name>
+	<type>method</type>
+	<shortdesc>Generate input events</shortdesc>
+	<arg>
+		<argitem>
+			<name>eventname</name>
+			<default></default>
+			<desc>
+				　Specify the event name. Specify with the following character string.<r/>
+				<ul>
+				<li>"<kw>onKeyDown</kw>" generates a <ref>Window.onKeyDown</ref> event</li>
+				<li>"<kw>onKeyPress</kw>" generates a <ref>Window.onKeyPress</ref> event.</li>
+				<li>"<kw>onKeyUp</kw>" generates a <ref>Window.onKeyUp</ref> event. Since onKeyDown and onKeyUp are paired, it is recommended that when you generate onKeyDown, you also generate the corresponding onKeyUp.</li>
+				</ul>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>params</name>
+			<default>null</default>
+			<desc>
+				　Specify the dictionary array that stores the parameters of the event.<r/>
+				<ul>
+				<li>For "onKeyDown" and "onKeyUp" events, the virtual key code is stored in "key" and the shift status is stored in "shift". If "shift" is omitted, it is assumed to be 0.</li>
+				<li>In the "onKeyPress" event, specify a character for "key".</li>
+				</ul>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Generate an input event. In the current version, three events related to key input can be generated.<r/>
+		　This method generates the event as an asynchronous event. In other words, this method returns without waiting for the corresponding event handler to finish. The event handler is actually called and the processing is performed once control returns to Kirikiri.<r/>
+		　Input events occur not only in the Window class but also as applicable events in the Layer class, just like normal input events.<r/>
+		<example>
+postInputEvent('onKeyDown', %[key: VK_UP, shift: ssShift]);<r/>
+postInputEvent('onKeyUp',   %[key: VK_UP, shift: ssShift]);<r/>
+	// Press the left cursor key<r/></example>
+	</desc>
+
+</member>
+
+
+<member>
+	<name>hideMouseCursor</name>
+	<type>method</type>
+	<shortdesc>Hide mouse cursor temporarily</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Hides the mouse cursor temporarily. Move the mouse a little and the mouse cursor will reappear.<r/>
+		　This method has the same effect as setting <ref>Window.mouseCursorState</ref> to <tt><kw>mcsTempHidden</kw></tt>.<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>registerMessageReceiver</name>
+	<type>method</type>
+	<shortdesc>Registration / deletion of message reception function</shortdesc>
+	<arg>
+		<argitem>
+			<name>mode</name>
+			<default></default>
+			<desc>
+				　Specify whether to register or delete.<r/>
+				　Specify <kw>wrmRegister</kw> to register. Specifying <kw>wrmUnregister</kw> will delete the registration.<r/>
+				　Constants starting with wrm are defined in tp_stub.h.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>func</name>
+			<default></default>
+			<desc>
+				　Specify the message receiving function.<r/>
+				　The message receiving function must be of the form bool __stdcall func(void *userdata, tTVPWindowMessage *Message), and when passing to this method, the function pointer must be cast to an integer type and passed.<r/>
+				　The structure tTVPWindowMessage is defined in tp_stub.h.<r/>
+				　If this function returns true, Kirikiri will not be aware of the window message.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>userdata</name>
+			<default></default>
+			<desc>
+				　Specify a data pointer to be passed to the userdata argument of the receiving function specified by the func argument.<r/>
+				　When passing to this method, it is necessary to cast the pointer to an integer type and pass it.<r/>
+				　This argument is ignored if the mode argument is not wrmRegister.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　This method is intended to be used from plugins written in C++ etc. It cannot be used normally from TJS2.<r/>
+		　In this method, you can register a message receiving function to trap messages passing through this window. The message receiving function can also trap two important messages, TVP_WM_DETACH and TVP_WM_ATTACH, in addition to a normal window message, and can be used to remove child windows when windows are rebuilt or destroyed. .<r/>
+		　There is a simple usage explanation in src/plugins/win32/wmrdump in the Kirikiri source distribution package.<r/>
+	</desc>
+	<ref>Window.HWND</ref>
+</member>
+
+<member>
+	<name>getTouchPoint</name>
+	<type>method</type>
+	<shortdesc>Get touch coordinates</shortdesc>
+	<arg>
+		<argitem>
+			<name>index</name>
+			<default></default>
+			<desc>
+				　Specify the index of the touch coordinate array.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Gets the coordinate information of the specified index from the current touch coordinate array.<r/>
+		　The number of coordinates can be obtained with the <ref>Window.touchPointCount</ref> property.<r/>
+		　Coordinate information is returned in a dictionary containing the following elements:<r/>
+		<tt><kw>startX</kw>     : </tt>X coordinate value (client coordinate system) of the start coordinate of this touch<r/>
+		<tt><kw>startY</kw>   : </tt>Y coordinate of the start coordinate of this touch (client coordinate system)<r/>
+		<tt><kw>x</kw>    : </tt>The x coordinate value (client coordinate system) of the current coordinate of this touch<r/>
+		<tt><kw>y</kw>    : </tt>The y coordinate value (client coordinate system) of the current coordinate of this touch<r/>
+		<tt><kw>ID</kw>    : </tt>ID for identifying this touch<r/>
+	</desc>
+	<ref>Window.touchPointCount</ref>
+</member>
+
+<member>
+	<name>getMouseVelocity</name>
+	<type>method</type>
+	<shortdesc>Acquisition of mouse coordinate movement speed (1.1.0 or later)</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　Returns the mouse coordinate movement speed in the X-axis direction.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　Returns the mouse coordinate movement speed in the Y-axis direction.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>speed</name>
+			<default></default>
+			<desc>
+				　Returns the mouse coordinate movement speed.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Returns whether the acquisition was successful or failed</result>
+	<desc>
+		　Gets the current mouse movement speed in pixel / sec.<r/>
+		　The measurement is started from the moment when it enters the window.<r/>
+		　You can reset the measurement using <ref>Window.resetMouseVelocity</ref> so that you can get the measurement at any timing.<r/>
+	</desc>
+	<ref>Window.getTouchVelocity</ref>
+	<ref>Window.resetMouseVelocity</ref>
+</member>
+
+<member>
+	<name>getTouchVelocity</name>
+	<type>method</type>
+	<shortdesc>Acquisition of touch coordinate movement speed (1.1.0 or later)</shortdesc>
+	<arg>
+		<argitem>
+			<name>id</name>
+			<default></default>
+			<desc>
+				　Specify the touch ID.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　Returns the mouse coordinate movement speed in the X-axis direction.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　Returns the mouse coordinate movement speed in the Y-axis direction.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>speed</name>
+			<default></default>
+			<desc>
+				　Returns the mouse coordinate movement speed.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Returns whether the acquisition was successful or failed</result>
+	<desc>
+		　Gets the current touch movement speed in pixel / sec.<r/>
+		　It is measured from the time it is pressed until it is released.<r/>
+		　Speed is measured for each ID to support multi-touch.<r/>
+		　Note that the measured speed information disappears when the method call of the <ref>Window.onTouchUp</ref> event ends.<r/>
+	</desc>
+	<ref>Window.getMouseVelocity</ref>
+</member>
+
+<member>
+	<name>resetMouseVelocity</name>
+	<type>method</type>
+	<shortdesc>Reset of mouse coordinate movement speed measurement (1.1.0 or later)</shortdesc>
+	<arg></arg>
+	<result></result>
+	<desc>
+		　Resets the mouse coordinate movement speed measurement.<r/>
+		　By resetting, speed measurement can be started from any timing.<r/>
+	</desc>
+	<ref>Window.getMouseVelocity</ref>
+</member>
+
+
+
+<member>
+	<name>visible</name>
+	<type>property</type>
+	<shortdesc>Whether the window is visible</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether the window is visible. You can also set a value.<r/>
+		　If true, the window is visible; if false, the window is hidden.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>caption</name>
+	<type>property</type>
+	<shortdesc>Window caption</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the window <kw>caption</kw> (title in the title bar).
+		You can also set a value.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>width</name>
+	<type>property</type>
+	<shortdesc>Window width</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the width of the window. You can also set a value.<r/>
+	</desc>
+	<ref>Window.height</ref>
+	<ref>Window.setSize</ref>
+</member>
+
+<member>
+	<name>height</name>
+	<type>property</type>
+	<shortdesc>Window width</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the height of the window. You can also set a value.<r/>
+	</desc>
+	<ref>Window.width</ref>
+	<ref>Window.setSize</ref>
+</member>
+
+<member>
+	<name>minWidth</name>
+	<type>property</type>
+	<shortdesc>Minimum width of window</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the minimum width of the window. You can also set a value. If you specify 0, there is no limit.<r/>
+	</desc>
+	<ref>Window.width</ref>
+	<ref>Window.minHeight</ref>
+	<ref>Window.maxWidth</ref>
+	<ref>Window.maxHeight</ref>
+	<ref>Window.setMinSize</ref>
+	<ref>Window.setMaxSize</ref>
+	<ref>Window.setSize</ref>
+</member>
+
+<member>
+	<name>minHeight</name>
+	<type>property</type>
+	<shortdesc>The minimum height of the window</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the minimum height of the window. You can also set a value. If you specify 0, there is no limit.<r/>
+	</desc>
+	<ref>Window.height</ref>
+	<ref>Window.minWidth</ref>
+	<ref>Window.maxWidth</ref>
+	<ref>Window.maxHeight</ref>
+	<ref>Window.setMinSize</ref>
+	<ref>Window.setMaxSize</ref>
+	<ref>Window.setSize</ref>
+</member>
+
+<member>
+	<name>maxWidth</name>
+	<type>property</type>
+	<shortdesc>Maximum width of window</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the maximum width of the window. You can also set a value. If you specify 0, there is no limit.<r/>
+	</desc>
+	<ref>Window.width</ref>
+	<ref>Window.maxHeight</ref>
+	<ref>Window.minWidth</ref>
+	<ref>Window.minHeight</ref>
+	<ref>Window.setMinSize</ref>
+	<ref>Window.setMaxSize</ref>
+	<ref>Window.setSize</ref>
+</member>
+
+<member>
+	<name>maxHeight</name>
+	<type>property</type>
+	<shortdesc>Maximum height of window</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the maximum height of the window. You can also set a value. If you specify 0, there is no limit.<r/>
+	</desc>
+	<ref>Window.height</ref>
+	<ref>Window.maxWidth</ref>
+	<ref>Window.minWidth</ref>
+	<ref>Window.minHeight</ref>
+	<ref>Window.setMinSize</ref>
+	<ref>Window.setMaxSize</ref>
+	<ref>Window.setSize</ref>
+</member>
+
+<member>
+	<name>left</name>
+	<type>property</type>
+	<shortdesc>Window left edge position</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the left edge position of the window. You can also set a value.<r/>
+		　The leftmost position is the x coordinate from the screen origin (upper left corner).<r/>
+	</desc>
+	<ref>Window.top</ref>
+	<ref>Window.setPos</ref>
+</member>
+
+<member>
+	<name>top</name>
+	<type>property</type>
+	<shortdesc>Window top position</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the top position of the window. You can also set a value.<r/>
+		　The top position is the y coordinate from the screen origin (upper left corner).<r/>
+	</desc>
+	<ref>Window.left</ref>
+	<ref>Window.setPos</ref>
+</member>
+
+<member>
+	<name>focusable</name>
+	<type>property</type>
+	<shortdesc>Can get focus</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether focus can be obtained. You can also set a value.<r/>
+		　If set to false, you will not be able to get focus, ie the window will not be active. As a side effect, you can not move the window by grabbing the title bar, resize the window, or close the window by pressing the "x" button.<r/>
+		　If you want to get keyboard input, you can use the <ref>Window.trapKey</ref> property.<r/>
+		　Typically, this is used to implement a window that is displayed in the foreground, but does not gain focus itself, such as a popup menu.<r/>
+		　In the current version, the setting of this property may be lost when the window goes full screen or returns from full screen.<r/>
+	</desc>
+	<ref>Window.trapKey</ref>
+	<ref>Window.onPopupHide</ref>
+</member>
+
+<member>
+	<name>trapKey</name>
+	<type>property</type>
+	<shortdesc>Whether to trap keystrokes</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether to trap keystrokes. You can also set a value.<r/>
+		　If set to true, keystroke events occurring in other windows can be intercepted and fired in this window.<r/>
+		　If multiple windows have this property set to true, the keystroke event will fire for the most recently created window.<r/>
+	</desc>
+	<ref>Window.focusable</ref>
+</member>
+
+<member>
+	<name>innerWidth</name>
+	<type>property</type>
+	<shortdesc>Width of client area</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the width of the client area.
+		You can also set a value.<r/>
+	</desc>
+	<ref>Window.innerHeight</ref>
+	<ref>Window.setInnerSize</ref>
+</member>
+
+<member>
+	<name>innerHeight</name>
+	<type>property</type>
+	<shortdesc>Height of client area</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the height of the client area.
+		You can also set a value.<r/>
+	</desc>
+	<ref>Window.innerWidth</ref>
+	<ref>Window.setInnerSize</ref>
+</member>
+
+<member>
+	<name>zoomNumer</name>
+	<type>property</type>
+	<shortdesc>Layer magnification (numerator)</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the numerator of the layer magnification.
+		For the time being, you can set the value, but use the <ref>Window.setZoom</ref> method to set the value.<r/>
+		　The denominator is represented by the <ref>Window.zoomDenom</ref> property.<r/>
+		　See the <ref>Window.setZoom</ref> methods for details.<r/>
+	</desc>
+	<ref>Window.setZoom</ref>
+	<ref>Window.zoomDenom</ref>
+</member>
+
+<member>
+	<name>zoomDenom</name>
+	<type>property</type>
+	<shortdesc>Layer magnification (denominator)</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the denominator of the layer magnification.
+		You can set the value, but use the <ref>Window.setZoom</ref> method to set the value.<r/>
+		　The numerator is represented by the <ref>Window.zoomNumer</ref> property.<r/>
+		　See the <ref>Window.setZoom</ref> methods for details.<r/>
+	</desc>
+	<ref>Window.setZoom</ref>
+	<ref>Window.zoomNumer</ref>
+</member>
+
+<member>
+	<name>drawDevice</name>
+	<type>property</type>
+	<shortdesc>Drawing device</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents a drawing device object.<r/>
+		　You can also set a value. Setting the value will automatically invalidate (invalidate) the drawing device previously specified for this window.<r/>
+		　By default, an instance of the class Window.BasicDrawDevice is specified.<r/>
+		　For details of Window.BasicDrawDevice, please refer to the description in core/visual/win32/BasicDrawDevice.cpp of the Kirikiri source.<r/>
+		　If you want to specify your own drawing device (the one provided by the plugin), follow the plugin's documentation.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>borderStyle</name>
+	<type>property</type>
+	<shortdesc>Window appearance</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the appearance of the window. You can also set a value.<r/>
+		　You can set the following values:<r/>
+<tt><kw>bsDialog</kw>      :</tt> Has a non-resizable, dialog-like appearance.<r/>
+<tt><kw>bsSingle</kw>      :</tt> This window cannot be resized.<r/>
+<tt><kw>bsNone</kw>        :</tt> A window without a border.<r/>
+<tt><kw>bsSizeable</kw>    :</tt> A resizable general window. Default.<r/>
+<tt><kw>bsToolWindow</kw>  :</tt> A non-resizable tool window (a window with a small caption).<r/>
+<tt><kw>bsSizeToolWin</kw> :</tt> Similar to bsToolWindow, but resizable.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>stayOnTop</name>
+	<type>property</type>
+	<shortdesc>Whether to always display at the top</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether the window is always displayed at the top (foreground). You can also set a value.<r/>
+		　If true, the window will always be displayed at the top level.<r/>
+		　In the current version, the setting of this property may be lost when the window goes full screen or returns from full screen.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>imeMode</name>
+	<type>property</type>
+	<shortdesc>Default IME mode</shortdesc>
+	<access>r</access>
+	<desc>
+		　Represents the default IME mode.<r/>
+		　The mode specified here is a mode in which no layer has focus.<r/>
+		　Unspecified is <kw>imDisable</kw>, which means that the IME is disabled when no layer has focus.<r/>
+		　See <ref>Layer.imeMode</ref> for possible values.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>mouseCursorState</name>
+	<type>property</type>
+	<shortdesc>Mouse cursor display state</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates the display state of the mouse cursor. You can also set a value.<r/>
+		　When <tt><kw>mcsVisible</kw></tt> is specified, the mouse cursor is displayed. This is the default state.<r/>
+		　If you specify <tt><kw>mcsTempHidden</kw></tt>, the mouse cursor will be hidden, but if you move the mouse a little, it will change to <tt>mcsVisible</tt> and it will be displayed. This state occurs when the <ref>Window.hideMouseCursor</ref> method is called.<r/>
+		　When <tt><kw>mcsHidden</kw></tt> is specified, the mouse cursor is hidden. Moving the mouse does not change the display state.<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>useMouseKey</name>
+	<type>property</type>
+	<shortdesc>Whether to use mouse keys</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether to use mouse keys. You can also set a value.<r/>
+		　If true, you can use mouse keys.<r/>
+		　When the mouse keys are enabled, you can use the cursor keys to move the mouse cursor, but no key input events will occur.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>fullScreen</name>
+	<type>property</type>
+	<shortdesc>Whether full screen</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether it is <kw>full screen</kw>. You can also set a value.<r/>
+		　If true, the client area of the current window will be full screen. The screen resolution at full screen is the size of the client area.<r/>
+		　If false is specified, the window will be displayed.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>mainWindow</name>
+	<type>property</type>
+	<shortdesc>Main window</shortdesc>
+	<access>r</access>
+	<desc>
+		　Represents the main window (the first window created).<r/>
+	</desc>
+</member>
+
+<member>
+	<name>focusedLayer</name>
+	<type>property</type>
+	<shortdesc>Layer object that has focus</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the layer object that currently has <kw>focus</kw>.
+		You can also set a value.<r/>
+		　If null no layers have focus. When you set a layer object, the focus moves to that layer.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>primaryLayer</name>
+	<type>property</type>
+	<shortdesc>Primary layer object</shortdesc>
+	<access>r</access>
+	<desc>
+		　Represents a <kw>primary layer</kw> object.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>HWND</name>
+	<type>property</type>
+	<shortdesc>Window handle</shortdesc>
+	<access>r</access>
+	<desc>
+		　Represents a window handle.<r/>
+		　You can get an integer here, but if you use this number in a plug-in, cast it to HWND type.<r/>
+	</desc>
+	<ref>Window.registerMessageReceiver</ref>
+</member>
+
+<member>
+	<name>touchScaleThreshold</name>
+	<type>property</type>
+	<shortdesc>Multi-touch magnification threshold</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　This is the threshold for starting multi-touch enlargement.<r/>
+		　An expansion event occurs when the distance between two touch positions changes by more than this value.<r/>
+		　Magnification events are enabled until the finger is released once the threshold is exceeded.<r/>
+	</desc>
+	<ref>Window.onTouchScaling</ref>
+</member>
+
+<member>
+	<name>touchRotateThreshold</name>
+	<type>property</type>
+	<shortdesc>Multi-touch rotation threshold</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Threshold for starting rotation with multi-touch.<r/>
+		　A rotation event occurs when the movement distance of each touch position changes by more than this value.<r/>
+		　The rotation event is valid until the finger is released once the threshold is exceeded.<r/>
+	</desc>
+	<ref>Window.onTouchRotate</ref>
+</member>
+
+<member>
+	<name>touchPointCount</name>
+	<type>property</type>
+	<shortdesc>Number of touches</shortdesc>
+	<access>r</access>
+	<desc>
+		　The number touched on the touch panel.<r/>
+	</desc>
+	<ref>Window.getTouchPoint</ref>
+</member>
+
+<member>
+	<name>enableTouch</name>
+	<type>property</type>
+	<shortdesc>Touch event enable / disable</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether <kw>touch events</kw> are enabled. You can also set a value.<r/>
+		　If true is specified, events such as <ref>Window.onTouchDown</ref> will be enabled, and <ref>Window.onMouseDown</ref> will not occur in touch operation.<r/>
+		　In environments with touch devices and multi-touch enabled, the default is true.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>waitVSync</name>
+	<type>property</type>
+	<shortdesc>Wait for vertical synchronization</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Set whether to draw after waiting for vertical synchronization of the display by transition (screen switching).<r/>
+		　Changing the setting may reduce screen flicker, but may also decrease drawing performance.<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>hintDelay</name>
+	<type>property</type>
+	<shortdesc>Hint display wait time</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Shows the display wait time of the hint in milliseconds. You can also set a value.<r/>
+		　The default is 500 milliseconds.<r/>
+		　When 0 is set, <ref>Window.onHintChanged</ref> is called immediately (always in display state).<r/>
+		　If you set -1, no hint will be displayed.<r/>
+	</desc>
+	<ref>Window.onHintChanged</ref>
+</member>
+
+
+<member>
+	<name>displayOrientation</name>
+	<type>property</type>
+	<shortdesc>Display orientation (1.1.0 or later)</shortdesc>
+	<access>r</access>
+	<desc>
+		　Indicates the orientation of the display.<r/>
+		　One of oriUnknown (Failed / Unknown), oriPortrait (portrait), oriLandscape (landscape).<r/>
+	</desc>
+	<ref>Window.onDisplayRotate</ref>
+	<ref>Window.displayRotate</ref>
+</member>
+
+
+<member>
+	<name>displayRotate</name>
+	<type>property</type>
+	<shortdesc>Display rotation angle (1.1.0 or later)</shortdesc>
+	<access>r</access>
+	<desc>
+		　Indicates the rotation angle of the display.<r/>
+		　Any of 0, 90, 180, 270, and -1. If it cannot be obtained, it is -1.<r/>
+	</desc>
+	<ref>Window.onDisplayRotate</ref>
+	<ref>Window.displayOrientation</ref>
+</member>
+
+</doc>

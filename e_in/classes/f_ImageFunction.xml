@@ -1,0 +1,1072 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>ImageFunction</title>
+<desc>
+　The ImageFunction class is a class that operates on images.<r/>
+　Objects cannot be created from this class.
+</desc>
+
+<member>
+	<name>operateAffine</name>
+	<type>method</type>
+	<shortdesc>Affine transform arithmetic synthesis</shortdesc>
+	<arg>
+		<argitem>
+			<name>dst</name>
+			<default></default>
+			<desc>
+				　Specify the Bitmap object to overlay.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>src</name>
+			<default></default>
+			<desc>
+				　Specify the source Bitmap object.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>A</name>
+			<default></default>
+			<desc>
+				　A parameter. The interpretation depends on the affine argument.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>B</name>
+			<default></default>
+			<desc>
+				　B parameter. The interpretation depends on the affine argument.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>C</name>
+			<default></default>
+			<desc>
+				　C parameter. The interpretation depends on the affine argument.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>D</name>
+			<default></default>
+			<desc>
+				　D parameter. The interpretation depends on the affine argument.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>E</name>
+			<default></default>
+			<desc>
+				　The E parameter. The interpretation depends on the affine argument.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>F</name>
+			<default></default>
+			<desc>
+				　The F parameter. The interpretation depends on the affine argument.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>srcrect</name>
+			<default>null</default>
+			<desc>
+				　Specify the rectangle to be overlapped in pixels (at the image position of the source Bitmap) with a Rect object.<r/>
+				　If not specified, the entire target is used.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cliprect</name>
+			<default>null</default>
+			<desc>
+				　Specify the clipping rectangle as a Rect object (at the image position of the overlay Bitmap).<r/>
+				　If not specified, no clipping is performed.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>affine</name>
+			<default></default>
+			<desc>
+				　Specify how to handle the following six arguments (A to F parameters).<r/>
+				　If you specify true, each of the six parameters is interpreted as follows:<r/>
+				<tt>A   : a of the 2D affine transformation matrix</tt><r/>
+				<tt>B   : b of the 2D affine transformation matrix</tt><r/>
+				<tt>C   : c of 2D affine transformation matrix</tt><r/>
+				<tt>D   : d of 2D affine transformation matrix</tt><r/>
+				<tt>E   : tx of 2D affine transformation matrix</tt><r/>
+				<tt>F   : ty of the 2D affine transformation matrix</tt><r/>
+				<r/>
+				　By the affine transformation, the image position (x, y) of the superimposition source (where the upper left corner of the superimposition rectangle is (0, 0)) is calculated by the following equation using the image position (x', y').<r/>
+				x' =  a*x + c*y + tx<r/>
+				y' =  b*x + d*y + ty<r/>
+				<r/>
+				　If you specify false, each of the six parameters is interpreted as follows:<r/>
+				<tt>A   : X coordinate position (x0) of the upper left corner of the source rectangle in the image position at the destination</tt><r/>
+				<tt>B   : Y coordinate position (y0) of the upper left corner of the source rectangle in the image position at the destination</tt><r/>
+				<tt>C   : X coordinate position (x1) of the upper right corner point of the source rectangle in the image position at the destination</tt><r/>
+				<tt>D   : The Y coordinate position (y1) of the upper right corner point of the copy source rectangle in the image position at the copy destination</tt><r/>
+				<tt>E   : X coordinate position of the lower left corner of the source rectangle at the image position at the destination (x2)</tt><r/>
+				<tt>F   : Y coordinate position of the lower left corner point of the copy source rectangle in the image position at the copy destination (y2)</tt><r/>
+				<r/>
+				　If false is specified, the overlay destination position (x3, y3) corresponding to the lower right corner of the overlay source is automatically calculated by the following formula.<r/>
+				x3 = x1 - x0 + x2<r/>
+				y3 = y1 - y0 + y2<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>mode</name>
+			<default>omAlpha</default>
+			<desc>
+				　Specify the operation mode.<r/>
+				If <tt><kw>omPsNormal</kw></tt> is specified, Photoshop compatible alpha composition is performed (not implemented in the current version).<r/>
+				When <tt><kw>omPsAdditive</kw></tt> is specified, dodging (linear) synthesis compatible with Photoshop is performed (not implemented in the current version).<r/>
+				If <tt><kw>omPsSubtractive</kw></tt> is specified, burning (linear) composition compatible with Photoshop is performed (not implemented in the current version).<r/>
+				If <tt><kw>omPsMultiplicative</kw></tt> is specified, Photoshop compatible multiplication and synthesis will be performed (not implemented in the current version).<r/>
+				If <tt><kw>omPsScreen</kw></tt> is specified, Photoshop compatible screen composition is performed (not implemented in the current version).<r/>
+				If <tt><kw>omPsOverlay</kw></tt> is specified, Photoshop compatible overlay composition is performed (not implemented in the current version).<r/>
+				If <tt><kw>omPsHardLight</kw></tt> is specified, Photoshop compatible hard light composition is performed (not implemented in the current version).<r/>
+				If <tt><kw>omPsSoftLight</kw></tt> is specified, Photoshop compatible soft light composition is performed (not implemented in the current version).<r/>
+				If <tt><kw>omPsColorDodge</kw></tt> is specified, dodge color composition compatible with Photoshop is performed (not implemented in the current version).<r/>
+				If <tt><kw>omPsColorDodge5</kw></tt> is specified, dodging color composition compatible with Photoshop version 5.x or lower is performed (not implemented in the current version).<r/>
+				If <tt><kw>omPsColorBurn</kw></tt> is specified, burn-in color composition compatible with Photoshop is performed (not implemented in the current version).<r/>
+				If <tt><kw>omPsLighten</kw></tt> is specified, comparison (bright) composition compatible with Photoshop is performed (not implemented in the current version).<r/>
+				If <tt><kw>omPsDarken</kw></tt> is specified, comparison (dark) composition compatible with Photoshop is performed (not implemented in the current version).<r/>
+				If <tt><kw>omPsDifference</kw></tt> is specified, the absolute value of the difference compatible with Photoshop is synthesized (not implemented in the current version).<r/>
+				If <tt><kw>omPsDifference5</kw></tt> is specified, the absolute value of the difference in compatibility with Photoshop version 5.x or lower is synthesized (not implemented in the current version).<r/>
+				If <tt><kw>omPsExclusion</kw></tt> is specified, Photoshop compatible exclusion synthesis is performed (not implemented in the current version).<r/>
+				If <tt><kw>omAdditive</kw></tt> is specified, addition synthesis is performed (not implemented in the current version).<r/>
+				If <tt><kw>omSubtractive</kw></tt> is specified, subtraction synthesis is performed (not implemented in the current version).<r/>
+				If <tt><kw>omMultiplicative</kw></tt> is specified, multiplication and synthesis will be performed (not implemented in the current version).<r/>
+				When <tt><kw>omDodge</kw></tt> is specified, dodging synthesis is performed (not implemented in the current version).<r/>
+				If <tt><kw>omDarken</kw></tt> is specified, comparison (dark) synthesis is performed (not implemented in the current version).<r/>
+				If <tt><kw>omLighten</kw></tt> is specified, comparison (bright) synthesis is performed (not implemented in the current version).<r/>
+				If <tt><kw>omScreen</kw></tt> is specified, screen multiplication is performed (not implemented in the current version).<r/>
+				If <tt><kw>omAlpha</kw></tt> is specified, alpha synthesis will be performed.<r/>
+				If <tt><kw>omAddAlpha</kw></tt> is specified, additive alpha synthesis will be performed. In this case, when face is dfOpaque and hda is false, linear interpolation can be performed by specifying stFastLinear in the type argument.<r/>
+				If <tt><kw>omOpaque</kw></tt> is specified, the alpha information of src is ignored and src is always assumed to be completely opaque. In this case, when face is dfOpaque and hda is false, linear interpolation can be performed by specifying stFastLinear in the type argument.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>face</name>
+			<default>dfAlpha</default>
+			<desc>
+				　Specify the drawing method.<r/>
+				If <tt><kw>dfAlpha</kw></tt> is specified, the image is assumed to be an image with an alpha channel and is drawn.<r/>
+				If <tt><kw>dfAddAlpha</kw></tt> is specified, the image will be considered as an image with an additional alpha channel and drawn.<r/>
+				If <tt><kw>dfOpaque</kw></tt> is specified, all images are assumed to be completely opaque and are drawn.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>opa</name>
+			<default>255</default>
+			<desc>
+				　Specifies the opacity of the overlay (0-255).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>type</name>
+			<default>stNearest</default>
+			<desc>
+				　Specifies the type of affine transformation.<r/>
+				<tt><kw>stNearest</kw>    </tt> : Nearest neighbor method is used<r/>
+				<tt><kw>stFastLinear</kw> </tt> : Low-precision linear interpolation is used (partially implemented)<r/>
+				<tt><kw>stLinear</kw>     </tt> : Linear interpolation is used (not implemented)<r/>
+				<tt><kw>stCubic</kw>      </tt> : 3D interpolation is used (not implemented)<r/>
+				　The speed is higher in the order of stNearest > stFastLinear > stLinear > stCubic, but the higher the speed, the lower the quality in the faster mode.<r/>
+				　For stFastLinear, stLinear, and stCubic, stRefNoClip can be added with bitwise OR, which allows you to browse outside the area of the bitmap to be copied and synthesize colors. If not specified, the source bitmap does not reference the range of the source bitmap if there is room around it (the color in the range is considered the color of the pixel in the nearest range).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>hda</name>
+			<default>false</default>
+			<desc>
+				　Specifies whether to protect the alpha channel.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Performs arithmetic synthesis on the specified overlay source Bitmap rectangle while performing affine transformation on the overlay destination.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>operateRect</name>
+	<type>method</type>
+	<shortdesc>Rectangle operation composition</shortdesc>
+	<arg>
+		<argitem>
+			<name>dst</name>
+			<default></default>
+			<desc>
+				　Specify the Bitmap object to overlay.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>dleft</name>
+			<default></default>
+			<desc>
+				　Specify the left end position of the destination rectangle in pixels (at the destination Bitmap image position).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>dtop</name>
+			<default></default>
+			<desc>
+				　Specify the top position of the destination rectangle in pixels (at the destination Bitmap image position).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>src</name>
+			<default></default>
+			<desc>
+				　Specify the source Bitmap object.<r/>
+				　When not specified, the entire target is used.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>srcrect</name>
+			<default>null</default>
+			<desc>
+				　Specify the rectangle to operate on in a Rect object in pixel units (at the image position of the source Bitmap).<r/>
+				　When not specified, the entire target is used.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cliprect</name>
+			<default>null</default>
+			<desc>
+				　Specify the clipping rectangle as a Rect object (at the image position of the overlay Bitmap).<r/>
+				　If not specified, no clipping is performed.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>mode</name>
+			<default>omAuto</default>
+			<desc>
+				　Specify the operation mode.<r/>
+				If <tt><kw>omPsNormal</kw></tt> is specified, Photoshop compatible alpha compositing will be performed.<r/>
+				If <tt><kw>omPsAdditive</kw></tt> is specified, dodge (linear) composition compatible with Photoshop is performed.<r/>
+				If <tt><kw>omPsSubtractive</kw></tt> is specified, burning (linear) synthesis compatible with Photoshop will be performed.<r/>
+				If <tt><kw>omPsMultiplicative</kw></tt> is specified, Photoshop compatible multiplication and synthesis will be performed.<r/>
+				If <tt><kw>omPsScreen</kw></tt> is specified, Photoshop compatible screen composition is performed.<r/>
+				If <tt><kw>omPsOverlay</kw></tt> is specified, overlay composition compatible with Photoshop is performed.<r/>
+				If <tt><kw>omPsHardLight</kw></tt> is specified, Photoshop compatible hard light composition is performed.<r/>
+				If <tt><kw>omPsSoftLight</kw></tt> is specified, Photoshop compatible soft light synthesis will be performed.<r/>
+				If <tt><kw>omPsColorDodge</kw></tt> is specified, dodge color composition compatible with Photoshop is performed.<r/>
+				If <tt><kw>omPsColorDodge5</kw></tt> is specified, dodging color composition compatible with Photoshop version 5.x or lower is performed.<r/>
+				If <tt><kw>omPsColorBurn</kw></tt> is specified, Photoshop compatible burn-in color composition is performed.<r/>
+				If <tt><kw>omPsLighten</kw></tt> is specified, Photoshop compatible comparison (bright) synthesis will be performed.<r/>
+				If <tt><kw>omPsDarken</kw></tt> is specified, Photoshop compatible comparison (dark) composition is performed.<r/>
+				When <tt><kw>omPsDifference</kw></tt> is specified, the absolute value of the difference compatible with Photoshop is synthesized.<r/>
+				If <tt><kw>omPsDifference5</kw></tt> is specified, the absolute value of the difference in compatibility with Photoshop version 5.x or lower is synthesized.<r/>
+				If <tt><kw>omPsExclusion</kw></tt> is specified, exclusion synthesis compatible with Photoshop is performed.<r/>
+				When <tt><kw>omAdditive</kw></tt> is specified, addition synthesis is performed.<r/>
+				If <tt><kw>omSubtractive</kw></tt> is specified, subtraction synthesis is performed.<r/>
+				When <tt><kw>omMultiplicative</kw></tt> is specified, multiplication and synthesis are performed.<r/>
+				If <tt><kw>omDodge</kw></tt> is specified, dodging synthesis is performed.<r/>
+				If <tt><kw>omDarken</kw></tt> is specified, comparison (dark) synthesis is performed.<r/>
+				If <tt><kw>omLighten</kw></tt> is specified, comparison (bright) synthesis is performed.<r/>
+				If <tt><kw>omScreen</kw></tt> is specified, screen multiplication will be performed.<r/>
+				If <tt><kw>omAlpha</kw></tt> is specified, alpha synthesis will be performed.<r/>
+				If <tt><kw>omAddAlpha</kw></tt> is specified, additive alpha synthesis will be performed.<r/>
+				If <tt><kw>omOpaque</kw></tt> is specified, the alpha information of src is ignored and src is always assumed to be completely opaque.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>face</name>
+			<default>dfAlpha</default>
+			<desc>
+				　Specify the drawing method.<r/>
+				If <tt><kw>dfAlpha</kw></tt> is specified, the image is assumed to be an image with an alpha channel and is drawn.<r/>
+				If <tt><kw>dfAddAlpha</kw></tt> is specified, the image will be considered as an image with an additional alpha channel and drawn.<r/>
+				If <tt><kw>dfOpaque</kw></tt> is specified, all images are assumed to be completely opaque and are drawn.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>opa</name>
+			<default>255</default>
+			<desc>
+				　Specifies the strength of the operation (0-255).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>hda</name>
+			<default>false</default>
+			<desc>
+				　Specifies whether to protect the alpha channel.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Computes the rectangular part of the specified operation source Bitmap at the specified position of the operation destination Bitmap in the specified mode.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>operateStretch</name>
+	<type>method</type>
+	<shortdesc>Scaling operation synthesis</shortdesc>
+	<arg>
+		<argitem>
+			<name>dst</name>
+			<default></default>
+			<desc>
+				　Specify the Bitmap object to overlay.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>src</name>
+			<default></default>
+			<desc>
+				　Specify the source Bitmap object.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>dstrect</name>
+			<default>null</default>
+			<desc>
+				　The destination rectangle is specified by a Rect object in pixels (at the image position of the destination Bitmap).<r/>
+				　If not specified, the entire target is used.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>srcrect</name>
+			<default>null</default>
+			<desc>
+				　The rectangle to overlap is specified by a Rect object in pixels (at the image position of the overlapping Bitmap).<r/>
+				　If not specified, the entire target is used.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cliprect</name>
+			<default>null</default>
+			<desc>
+				　Specify the clipping rectangle as a Rect object (at the image position of the overlay Bitmap).<r/>
+				　If not specified, no clipping is performed.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>mode</name>
+			<default>omAuto</default>
+			<desc>
+				　Specify the operation mode.<r/>
+				If <tt><kw>omPsNormal</kw></tt> is specified, Photoshop-compatible alpha synthesis is performed (implemented outside stNearest and stFastLinear after 1.3).<r/>
+				If <tt><kw>omPsAdditive</kw></tt> is specified, Photoshop-compatible covering (linear) synthesis is performed (implemented outside stNearest and stNearLinear after 1.3).<r/>
+				If <tt><kw>omPsSubtractive</kw></tt> is specified, Photoshop-compatible burn (linear) synthesis is performed (implemented outside stNearest and stNearLinear after 1.3).<r/>
+				If <tt><kw>omPsMultiplicative</kw></tt> is specified, Photoshop-compatible multiplication synthesis is performed (implemented outside stNearest and stFastLinear after 1.3).<r/>
+				If <tt><kw>omPsScreen</kw></tt> is specified, screen composition compatible with Photoshop will be performed (implemented in 1.3 or later except stNearest and stFastLinear).<r/>
+				If <tt><kw>omPsOverlay</kw></tt> is specified, Photoshop compatible overlay composition is performed (implemented in 1.3 or later except stNearest and stFastLinear).<r/>
+				If <tt><kw>omPsHardLight</kw></tt> is specified, Photoshop compatible hard light composition is performed (implemented in 1.3 or later except stNearest and stFastLinear).<r/>
+				If <tt><kw>omPsSoftLight</kw></tt> is specified, Photoshop compatible soft light synthesis will be performed. (Since 1.3, it is implemented by other than stNearest and stFastLinear.)<r/>
+				If <tt><kw>omPsColorDodge</kw></tt> is specified, dodge color composition compatible with Photoshop is performed (implemented in stNearest and stFastLinear other than 1.3 in 1.3 or later).<r/>
+				If <tt><kw>omPsColorDodge5</kw></tt> is specified, dodge color composition compatible with Photoshop version 5.x or less is performed (implemented in 1.3 or later except stNearest and stFastLinear).<r/>
+				If <tt><kw>omPsColorBurn</kw></tt> is specified, burn-in color composition compatible with Photoshop will be performed (implemented in other than stNearest and stFastLinear in 1.3 or later).<r/>
+				When <tt><kw>omPsLighten</kw></tt> is specified, Photoshop compatible comparison (bright) synthesis is performed (Since 1.3, it is implemented by other than stNearest and stFastLinear).<r/>
+				When <tt><kw>omPsDarken</kw></tt> is specified, comparison (dark) composition compatible with Photoshop is performed (implemented in other than stNearest and stFastLinear in 1.3 or later).<r/>
+				If <tt><kw>omPsDifference</kw></tt> is specified, the absolute value of the difference compatible with Photoshop will be synthesized (Since 1.3, it is implemented by other than stNearest and stFastLinear).<r/>
+				If <tt><kw>omPsDifference5</kw></tt> is specified, the absolute value of the difference in compatibility with Photoshop version 5.x or lower will be synthesized.<r/>
+				If <tt><kw>omPsExclusion</kw></tt> is specified, exclusion synthesis compatible with Photoshop will be performed. (Since 1.3, it is implemented by other than stNearest and stFastLinear.)<r/>
+				If <tt><kw>omAdditive</kw></tt> is specified, addition synthesis is performed (implemented in other than stNearest and stFastLinear in 1.3 or later).<r/>
+				If <tt><kw>omSubtractive</kw></tt> is specified, subtraction synthesis will be performed (implemented in other than stNearest and stFastLinear in 1.3 and later).<r/>
+				When <tt><kw>omMultiplicative</kw></tt> is specified, multiplication and synthesis are performed (implemented in other than stNearest and stFastLinear in 1.3 or later).<r/>
+				If <tt><kw>omDodge</kw></tt> is specified, dodging synthesis will be performed (implemented in other than stNearest and stFastLinear in 1.3 or later).<r/>
+				If <tt><kw>omDarken</kw></tt> is specified, comparison (dark) synthesis is performed (implemented in other than stNearest and stFastLinear in 1.3 or later).<r/>
+				If <tt><kw>omLighten</kw></tt> is specified, comparison (bright) synthesis is performed (implemented in other than stNearest and stFastLinear since 1.3).<r/>
+				If <tt><kw>omScreen</kw></tt> is specified, screen multiplication is performed (implemented in other than stNearest and stFastLinear in 1.3 or later).<r/>
+				If <tt><kw>omAlpha</kw></tt> is specified, alpha synthesis will be performed.<r/>
+				If <tt><kw>omAddAlpha</kw></tt> is specified, additive alpha synthesis will be performed. In this case, when face is dfOpaque and hda is false, linear interpolation can be performed by specifying stFastLinear in the type argument.<r/>
+				If <tt><kw>omOpaque</kw></tt> is specified, the alpha information of src is ignored and src is always assumed to be completely opaque. In this case, when face is dfOpaque and hda is false, linear interpolation can be performed by specifying stFastLinear in the type argument.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>face</name>
+			<default>dfAlpha</default>
+			<desc>
+				　Specify the drawing method.<r/>
+				If <tt><kw>dfAlpha</kw></tt> is specified, the image is assumed to be an image with an alpha channel and is drawn.<r/>
+				If <tt><kw>dfAddAlpha</kw></tt> is specified, the image will be considered as an image with an additional alpha channel and drawn.<r/>
+				If <tt><kw>dfOpaque</kw></tt> is specified, all images are assumed to be completely opaque and are drawn.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>opa</name>
+			<default>255</default>
+			<desc>
+				　Specifies the strength of the operation (0-255).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>type</name>
+			<default>stNearest</default>
+			<desc>
+				　Specifies the type of scaling.<r/>
+				<tt><kw>stNearest</kw>          </tt> : Nearest neighbor method is used<r/>
+				<tt><kw>stFastLinear</kw>       </tt> : Low-precision linear interpolation is used (partially implemented)<r/>
+				<tt><kw>stSemiFastLinear</kw>   </tt> : Fixed decimal linear interpolation is used (since 1.3)<r/>
+				<tt><kw>stLinear</kw>           </tt> : Linear interpolation is used (implementation change since 1.3)<r/>
+				<tt><kw>stFastCubic</kw>        </tt> : Fixed decimal 3D interpolation is used (since 1.3)<r/>
+				<tt><kw>stCubic</kw>            </tt> : Three-dimensional interpolation is used (implementation change since 1.3)<r/>
+				<tt><kw>stFastLanczos2</kw>     </tt> : Fixed decimal area Lanczos interpolation range 4x4 is used (since 1.3)<r/>
+				<tt><kw>stLanczos2</kw>         </tt> : Lanczos interpolation range 4x4 is used (since 1.3)<r/>
+				<tt><kw>stFastLanczos3</kw>     </tt> : Fixed decimal area Lanczos interpolation range 6x6 is used (since 1.3)<r/>
+				<tt><kw>stLanczos3</kw>         </tt> : Lanczos interpolation range 6x6 is used (since 1.3)<r/>
+				<tt><kw>stFastSpline16</kw>     </tt> : Fixed decimal spline interpolation 4x4 is used (since 1.3)<r/>
+				<tt><kw>stSpline16</kw>         </tt> : 4x4 spline interpolation is used (since 1.3)<r/>
+				<tt><kw>stFastSpline36</kw>     </tt> : Fixed decimal spline interpolation 6x6 is used (since 1.3)<r/>
+				<tt><kw>stSpline36</kw>         </tt> : 6x6 spline interpolation is used (since 1.3)<r/>
+				<tt><kw>stFastAreaAvg</kw>      </tt> : Fixed decimal area average reduction is used. Cannot be expanded (since 1.3)<r/>
+				<tt><kw>stAreaAvg</kw>          </tt> : Area average reduction is used. Cannot be expanded (since 1.3)<r/>
+				<tt><kw>stFastGaussian</kw>     </tt> : Fixed decimal Gaussian interpolation 4x4 is used (since 1.3)<r/>
+				<tt><kw>stGaussian</kw>         </tt> : Gaussian interpolation 4x4 is used (since 1.3)<r/>
+				<tt><kw>stFastBlackmanSinc</kw> </tt> : Fixed-point Blackman-Sinc interpolation 8x8 is used (since 1.3)<r/>
+				<tt><kw>stBlackmanSinc</kw>     </tt> : Blackman-Sinc interpolation 8x8 is used (1.3 or later)<r/>
+				　The speed is higher in the order of stNearest> stFastLinear> stLinear> stCubic, but the higher the speed, the lower the quality.<r/>
+				The interpolation method after stCubic is sufficiently high quality and can be said to be the difference of preference.<r/>
+				However, Gaussian interpolation results in blurry image quality.<r/>
+				The difference between stFastLinear and other linear interpolations (stSemiFastLinear and stLinear) is significant when reducing.<r/>
+				stFastLinear always refers to the surrounding four pixels, whereas stSemiFastLinear and stLinear refer to and interpolate a range in which the affected area at equal magnification is 4 pixels when reducing, that is, a wider range of pixels. Higher image quality (algorithm is the original linear interpolation algorithmically).<r/>
+				　For stFastLinear, stRefNoClip can be additionally specified by bitwise OR, and in this case, it is permitted to refer to outside the area of the bitmap to be copied and synthesize the color. If this is not specified, there will be no reference outside the range of the source bitmap, even if there is room around the source bitmap. Is considered a color).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>hda</name>
+			<default>false</default>
+			<desc>
+				　Specifies whether to protect the alpha channel.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>option</name>
+			<default>-1.0</default>
+			<desc>
+				　Added since 1.3.<r/>
+				　Sharpness for 3D interpolation. Other interpolation methods currently have no meaning.<r/>
+				　Increasing the sharpness value in the positive direction blurs the image, and increasing the value in the negative direction increases the sharpness.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Computes and combines the specified rectangle of the source Bitmap with the rectangle of the destination Bitmap.<r/>
+		　If the size of the source rectangle and the destination rectangle are different, the size is enlarged or reduced.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>flipLR</name>
+	<type>method</type>
+	<shortdesc>Flip horizontal</shortdesc>
+	<arg>
+		<argitem>
+			<name>bmp</name>
+			<default></default>
+			<desc>
+				　Specifies the Bitmap object to flip.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>rect</name>
+			<default>null</default>
+			<desc>
+				　Specify the area to be inverted with a Rect object (at the bitmap image position).<r/>
+				　If not specified, the entire target is used.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Flip the image left and right.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>flipUD</name>
+	<type>method</type>
+	<shortdesc>flip upside down</shortdesc>
+	<arg>
+		<argitem>
+			<name>bmp</name>
+			<default></default>
+			<desc>
+				　Specifies the Bitmap object to flip.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>rect</name>
+			<default>null</default>
+			<desc>
+				　Specify the area to be inverted with a Rect object (at the bitmap image position).<r/>
+				　If not specified, the entire target is used.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Flip the image upside down.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>adjustGamma</name>
+	<type>method</type>
+	<shortdesc>Gamma correction</shortdesc>
+	<arg>
+		<argitem>
+			<name>bmp</name>
+			<default></default>
+			<desc>
+				　Specify the Bitmap object for gamma correction.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>rgamma</name>
+			<default>1.0</default>
+			<desc>
+				　Specify the gamma value of the red component (0.0 to 1.0 to 9.0).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>rfloor</name>
+			<default>0</default>
+			<desc>
+				　Specify the minimum output value of the red component (0 to 255).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>rceil</name>
+			<default>255</default>
+			<desc>
+				　Specify the maximum output value of the red component (0 to 255).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>ggamma</name>
+			<default>1.0</default>
+			<desc>
+				　Specify the gamma value of the green component (0.0 to 1.0 to 9.0).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>gfloor</name>
+			<default>0</default>
+			<desc>
+				　Specify the minimum output value of the green component (0 to 255).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>gceil</name>
+			<default>255</default>
+			<desc>
+				　Specify the maximum output value of the green component (0 to 255).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>bgamma</name>
+			<default>1.0</default>
+			<desc>
+				　Specify the gamma value of the blue component (0.0 to 1.0 to 9.0).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>bfloor</name>
+			<default>0</default>
+			<desc>
+				　Specify the minimum output value of the blue component (0 to 255).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>bceil</name>
+			<default>255</default>
+			<desc>
+				　Specify the maximum output value of the blue component (0 to 255).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cliprect</name>
+			<default>null</default>
+			<desc>
+				　Specify the clipping area with a Rect object (at the bitmap image position).<r/>
+				　If not specified, the entire target is used.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>isaddalpha</name>
+			<default>false</default>
+			<desc>
+				　Specifies whether to use the additive composite alpha format.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Performs gamma correction on the image.<r/>
+		　Specifying 1.0 as the gamma value makes the gamma curve a straight line.<r/>
+		　The output minimum and output maximum specify the minimum and maximum brightness of each component.<r/>
+		　You can invert the image by setting the highest value lower than the lowest value.<r/>
+		　If isaddalpha is true, this method uses a special gamma correction routine for additive alpha compositing.<r/>
+		　This routine performs gamma correction for components equivalent to alpha synthesis in additive alpha synthesis, but does not perform gamma correction for components equivalent to additive synthesis.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>doBoxBlur</name>
+	<type>method</type>
+	<shortdesc>Apply a rectangular blur</shortdesc>
+	<arg>
+		<argitem>
+			<name>bmp</name>
+			<default></default>
+			<desc>
+				　Specifies a Bitmap object to be rectangle-blurred.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>xblur</name>
+			<default>1</default>
+			<desc>
+				Specifies the extent of the horizontal blur.
+			</desc>
+		</argitem>
+		<argitem>
+			<name>yblur</name>
+			<default>1</default>
+			<desc>
+				Specifies the vertical blur range.
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cliprect</name>
+			<default>null</default>
+			<desc>
+				　Specify the clipping area with a Rect object (at the bitmap image position).<r/>
+				　If not specified, the entire target is used.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>isalpha</name>
+			<default>true</default>
+			<desc>
+				　Specifies whether to have an alpha channel.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Apply a blur. The algorithm is "box blur".<r/>
+		　Rectangle blur is the average of the brightness of the pixels in the "range" represented by two parameters, xblur and yblur. For example, if xblur = 10 yblur = 2, the average brightness of the pixels in the rectangular range -10 to 10 in the horizontal direction and -2 to 2 in the vertical direction around the target pixel is calculated, It is the brightness of that pixel.<r/>
+		　The area of the range can be calculated by (xblur × 2 + 1) × (yblur × 2 + 1). In the current version, if the area is less than 256, the algorithm will be faster than if the area is more than 256.<r/>
+		　If isalpha is true, it uses a special algorithm for alpha compositing, so it will be a little slower.<r/>
+		　If false, the algorithm is faster.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>doGrayScale</name>
+	<type>method</type>
+	<shortdesc>Grayscale conversion</shortdesc>
+	<arg>
+		<argitem>
+			<name>bmp</name>
+			<default></default>
+			<desc>
+				　Specify the Bitmap object to be converted to grayscale.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cliprect</name>
+			<default>null</default>
+			<desc>
+				　Specify the clipping area with a Rect object (at the bitmap image position).<r/>
+				　If not specified, the entire target is used.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Convert the image to grayscale.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>colorRect</name>
+	<type>method</type>
+	<shortdesc>Rectangular translucent fill</shortdesc>
+	<arg>
+		<argitem>
+			<name>bmp</name>
+			<default></default>
+			<desc>
+				　Specifies the Bitmap object to fill.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>value</name>
+			<default></default>
+			<desc>
+				　Specify the fill color and value.<r/>
+				　This value depends on the value of the face argument.<r/>
+				<tt><kw>dfAlpha</kw>    </tt> : Specify color in 0xRRGGBB format<r/>
+				<tt><kw>dfAddAlpha</kw> </tt> : Specify color in 0xRRGGBB format<r/>
+				<tt><kw>dfOpaque</kw>   </tt> : Specify color in 0xRRGGBB format<r/>
+				<tt><kw>dfMask</kw>     </tt> : Specify the value of mask (opacity) (0 to 255)<r/>
+				　If dfOpaque is specified, the mask information will be ignored. If dfMask is specified, the color information will remain as it is.<r/>
+				　This argument is ignored for dfAlpha and if opa is negative.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>opa</name>
+			<default>255</default>
+			<desc>
+				　Specifies the opacity to fill (-255 to 0 to 255).<r/>
+				　This argument is ignored if the value of face is dfMask or dfProvince (always completely opaque).<r/>
+				　Specifying a negative number is valid only when face is dfAlpha, in which case the value argument is ignored and opacity is removed from the image (specifying -255 makes the rectangle completely transparent).
+			</desc>
+		</argitem>
+		<argitem>
+			<name>rect</name>
+			<default>null</default>
+			<desc>
+				　The rectangle to fill, in pixels (at the image location), specified as a Rect object.<r/>
+				　If not specified, the entire target is used.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>face</name>
+			<default>dfAlpha</default>
+			<desc>
+				　Specify the drawing method.<r/>
+				If <tt><kw>dfAlpha</kw></tt> is specified, the image is assumed to be an image with an alpha channel and is drawn.<r/>
+				If <tt><kw>dfAddAlpha</kw></tt> is specified, the image will be considered as an image with an additional alpha channel and drawn.<r/>
+				If <tt><kw>dfOpaque</kw></tt> is specified, all images are assumed to be completely opaque and are drawn.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cliprect</name>
+			<default>null</default>
+			<desc>
+				　Specify the clipping area with a Rect object (at the bitmap image position).<r/>
+				　If not specified, the entire target is used.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Fills the specified Bitmap image rectangle with the specified method.<r/>
+		　Unlike <ref>ImageFunction.fillRect</ref>, you can specify translucency and fill in translucent.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>drawText</name>
+	<type>method</type>
+	<shortdesc>Character drawing</shortdesc>
+	<arg>
+		<argitem>
+			<name>bmp</name>
+			<default></default>
+			<desc>
+				　Specify the Bitmap object to draw characters.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>font</name>
+			<default></default>
+			<desc>
+				　Specify the font to be drawn with the Font object.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　Specifies the x coordinate (at image position) of the origin at which to start drawing characters in pixels.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　Specifies the y coordinate (at the image position) of the origin at which to start drawing characters in pixels.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>text</name>
+			<default></default>
+			<desc>
+				　Specify the character to be drawn.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>color</name>
+			<default></default>
+			<desc>
+				　Specify the color of the text to be drawn in 0xRRGGBB format.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>opa</name>
+			<default>255</default>
+			<desc>
+				　Specify the opacity (-255 to 0 to 255) of the character to be drawn.<r/>
+				　Specifying a negative number is valid only when face is dfAlpha, in which case the opacity is removed from the character shape (the smaller the value, the greater the effect).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>aa</name>
+			<default>true</default>
+			<desc>
+				　Specify whether to perform anti-aliasing.<r/>
+				　Specifying true performs anti-aliasing. If you specify false, it will not be performed.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>face</name>
+			<default>dfAlpha</default>
+			<desc>
+				　Specify the drawing method.<r/>
+				If <tt><kw>dfAlpha</kw></tt> is specified, the image is assumed to be an image with an alpha channel and is drawn.<r/>
+				If <tt><kw>dfAddAlpha</kw></tt> is specified, the image will be considered as an image with an additional alpha channel and drawn.<r/>
+				If <tt><kw>dfOpaque</kw></tt> is specified, all images are assumed to be completely opaque and are drawn.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shadowlevel</name>
+			<default>0</default>
+			<desc>
+				　Specifies the opacity of the shadow. The appropriate value depends on the value of the shadowwidth argument.<r/>
+				If 0 is specified, no shadow is drawn.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shadowcolor</name>
+			<default>0x000000</default>
+			<desc>
+				　Specifies the color of the shadow in 0xRRGGBB format.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shadowwidth</name>
+			<default>0</default>
+			<desc>
+				　Specifies the width (blur) of the shadow. 0 is the sharpest (no blurring), and higher values can blur shadows.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shadowofsx</name>
+			<default>0</default>
+			<desc>
+				　Specifies the x-coordinate value of the shadow location in pixels. If 0 is specified, the shadow is drawn directly below.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shadowofsy</name>
+			<default>0</default>
+			<desc>
+				　Specifies the y-coordinate value of the shadow location in pixels. If 0 is specified, the shadow is drawn directly below.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>hda</name>
+			<default>false</default>
+			<desc>
+				　Specifies whether to protect the alpha channel.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cliprect</name>
+			<default>null</default>
+			<desc>
+				　Specify the clipping area with a Rect object (at the bitmap image position).<r/>
+				　If not specified, the entire target is used.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Drawing area (Rect object)</result>
+	<desc>
+		　Draw characters on the Bitmap.<r/>
+		　If dfOpaque is specified for face, whether the drawing destination mask is destroyed or protected depends on hda.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>drawGlyph</name>
+	<type>method</type>
+	<shortdesc>Character drawing</shortdesc>
+	<arg>
+		<argitem>
+			<name>bmp</name>
+			<default></default>
+			<desc>
+				　Specify the Bitmap object to draw characters.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　Specifies the x coordinate (at image position) of the origin at which to start drawing characters in pixels.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　Specifies the y coordinate (at the image position) of the origin at which to start drawing characters in pixels.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>glyph</name>
+			<default></default>
+			<desc>
+				　Specifies the glyph to draw.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>color</name>
+			<default></default>
+			<desc>
+				　Specify the color of the text to be drawn in 0xRRGGBB format.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>opa</name>
+			<default>255</default>
+			<desc>
+				　Specify the opacity (-255 to 0 to 255) of the character to be drawn.<r/>
+				　Specifying a negative number is valid only when face is dfAlpha, in which case the opacity is removed from the character shape (the smaller the value, the greater the effect).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>aa</name>
+			<default>true</default>
+			<desc>
+				　Specify whether to perform anti-aliasing.<r/>
+				　Specifying true performs anti-aliasing. If you specify false, it will not be performed.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>face</name>
+			<default>dfAlpha</default>
+			<desc>
+				　Specify the drawing method.<r/>
+				If <tt><kw>dfAlpha</kw></tt> is specified, the image is assumed to be an image with an alpha channel and is drawn.<r/>
+				If <tt><kw>dfAddAlpha</kw></tt> is specified, the image will be considered as an image with an additional alpha channel and drawn.<r/>
+				If <tt><kw>dfOpaque</kw></tt> is specified, all images are assumed to be completely opaque and are drawn.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shadowlevel</name>
+			<default>0</default>
+			<desc>
+				　Specifies the opacity of the shadow. The appropriate value depends on the value of the shadowwidth argument.<r/>
+				If 0 is specified, no shadow is drawn.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shadowcolor</name>
+			<default>0x000000</default>
+			<desc>
+				　Specifies the color of the shadow in 0xRRGGBB format.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shadowwidth</name>
+			<default>0</default>
+			<desc>
+				　Specifies the width (blur) of the shadow. 0 is the sharpest (no blurring), and higher values can blur shadows.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shadowofsx</name>
+			<default>0</default>
+			<desc>
+				　Specifies the x-coordinate value of the shadow location in pixels. If 0 is specified, the shadow is drawn directly below.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>shadowofsy</name>
+			<default>0</default>
+			<desc>
+				　Specifies the y-coordinate value of the shadow location in pixels. If 0 is specified, the shadow is drawn directly below.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>hda</name>
+			<default>false</default>
+			<desc>
+				　Specifies whether to protect the alpha channel.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cliprect</name>
+			<default>null</default>
+			<desc>
+				　Specify the clipping area with a Rect object (at the bitmap image position).<r/>
+				　If not specified, the entire target is used.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Drawing area (Rect object)</result>
+	<desc>
+		　Draws a glyph on a Bitmap.<r/>
+		　If dfOpaque is specified for face, whether the drawing destination mask is destroyed or protected depends on hda.<r/>
+		　A glyph specifies an array of the form glyph: Array[9] = [width, height, originx, originy, incx, incy, inc, bitmap (Octet), colors].<r/>
+		　If the color of the glyph is omitted, it will be determined to be 256 shades.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>fillRect</name>
+	<type>method</type>
+	<shortdesc>Rectangle fill</shortdesc>
+	<arg>
+		<argitem>
+			<name>bmp</name>
+			<default></default>
+			<desc>
+				　Specifies the Bitmap object to fill.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>value</name>
+			<default></default>
+			<desc>
+				　Specify the fill color and value.<r/>
+				　The meaning of this value depends on the value of isalpha.<r/>
+				<tt><kw>true</kw>  </tt> : Specify opacity and color in 0xAARRGGBB format. Both the main and the mask are filled.<r/>
+				<tt><kw>false</kw> </tt> : Please specify the color in 0xRRGGBB format.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>rect</name>
+			<default>null</default>
+			<desc>
+				　The rectangle to fill, in pixels (at the image location), specified as a Rect object.<r/>
+				　If not specified, the entire target is used.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>isalpha</name>
+			<default>true</default>
+			<desc>
+				　Specifies whether to have an alpha channel.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>cliprect</name>
+			<default>null</default>
+			<desc>
+				　Specify the clipping area with a Rect object (at the bitmap image position).<r/>
+				　If not specified, the entire target is used.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Fills the specified Bitmap image rectangle with the specified method.<r/>
+	</desc>
+</member>
+
+</doc>

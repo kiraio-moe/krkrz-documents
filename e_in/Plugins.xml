@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>About plugins</title>
+
+<para>
+<ptitle>What is a plug-in</ptitle>
+　Used to connect to Kirikiri and extend Kirikiri's functionality.<r/>
+　At this stage, there are three types of plugins that can be used in Kirikiri,<r/>
+<ul>
+<li>Susie Plug-in (image reading and archive access)</li>
+<li>Plugin to extend the format that can be played by WaveSoundBuffer</li>
+<li>Other Kirikiri-specific plug-ins</li>
+</ul>
+　It has become.<r/>
+<r/>
+　If you use a plugin, you need to connect to Kirikiri core using <at href="f_Plugins_link.html">Plugins.link</at> method.<r/>
+</para>
+
+
+<para>
+<ptitle>Search for plugins</ptitle>
+　The <at href="f_Plugins_link.html">Plugins.link</at> method looks for the specified plug-in in the following order:<r/>
+<ol>
+<li>The same folder as the Kirikiri core</li>
+<li>In the plugin (plugin64 for 64bit version) folder in the same folder as the Kirikiri body and below</li>
+<li>Automatic search path</li>
+</ol>
+<r/>
+　If the automatic search path is in a location that is not accessible as a local file, such as in an archive, Kirikiri tries to extract the plug-in to the same folder as the <b>Kirikiri core</b>. Since this may cause problems, it is <b>strongly recommended</b> that plugins be placed in "the same folder as Kirikiri body" or "in the plugin folder in the same folder as Kirikiri body".
+<r/>
+　It is important to place them in the plugin / plugin64 folder in order to distinguish plug-ins in the 32-bit / 64-bit versions.<r/>
+　In addition, Kirikiri's configuration tool (Releaser and -userconf option) looks for plug-ins to collect embedded option information for each plug-in, but in the following order.<r/>
+<ol>
+<li>The same folder as the Kirikiri body</li>
+<li>In the plugin folder in the same folder as the Kirikiri body and below</li>
+</ol>
+<r/>
+　Since the Kirikiri setting tool does not search up to the automatic search path, plug-ins including setting items must be placed in the "same folder as Kirikiri body" or "in the plugin folder in the same folder as Kirikiri body and below" not.<r/>
+</para>
+
+<para>
+<ptitle>Automatic loading of plugins</ptitle>
+　Kirikiri has a function to automatically search for plugins and load them at startup. If you want the plugin to load automatically, you need to change the extension of the plugin from dll to tpm.<r/>
+　At startup (just before running startup.tjs), Kiri Kiri looks for a file with the extension tpm from the following folder and automatically loads it as a plugin.<r />
+<ul>
+<li>The same folder as the Kirikiri body</li>
+<li>In the plugin (plugin64 for 64bit version) folder in the same folder as the Kirikiri body and below</li>
+</ul>
+<r/>
+　Kirikiri sorts the plug-ins you look ed in ascending order by name and loads them in that order. For example, aaa.tpm is loaded before aab.tpm. This does not affect the folder where the plug-in is, only the name of the plug-in is affected (even if z.tpm is in the same folder as Kirikiri, a.tpm is loaded first if there is a.tpm in the plugin folder). If you want to specify the order in which plug-ins are loaded, you must change the file name of the plug-in.<r/>
+</para>
+
+<para>
+<ptitle>About creating plugins</ptitle>
+　There is a plug-in source included with Kirikiri in the Kirikiri source, so please refer to it.<r/>
+　At this stage, the specifications of "other Kirikiri-specific plug-ins" are <b>unfixed</b>. Even if the specifications are changed in the future, we hope that the compatibility at the source level will be maintained, so even if the compatibility at the binary level is lost, it will be possible to use it by rebuilding it according to Kirikiri itself think.<r/>
+</para>
+
+<para>
+<ptitle>About Susie Plug-in</ptitle>
+　You can use the plugin for the image viewer "Susie32" by Takechin.<r/>
+　You can use the 00IN format (plug-in for images) and the 00AM format (plug-in for archives), but there are the following restrictions or unique specifications of Kirikiri.<r/>
+<r/>
+<ul>
+<li>Kirikiri can't support images with extensions that have a different extension (the GetPluginInfo function returns) because the extension determines the format of the image (even if the extensions are different because the archive checks all supported formats)</li>
+<li>32bpp bitmaps are considered as bitmaps with alpha channel</li>
+<li>Some bitmap formats are not accepted (such as RLE-compressed ones or those with BITFIELDS specified)</li>
+<li>Image reading and archive access via Susie plugin is significantly slower than the image formats and xp3 archives that Kirikiri natively handles</li>
+<li>Archived files are expanded in memory, so it is not suitable for handling large files</li>
+<li>Not compatible with archive in archive</li>
+<li>Not compatible with Mac binary</li>
+</ul>
+<r/>
+　In addition, some plug-ins that do not fully support the Susie plug-in standard are incompatible with Kirikiri.<r/>
+</para>
+
+<para>
+<ptitle>About the plug-in included with Kirikiri</ptitle>
+　It is a description of the plug-in that is attached to Kirikiri as standard.<r/>
+<r/>
+<dl>
+<dt><kw>wuvorbis.dll</kw></dt>
+<dd>
+　A plugin to make <kw>Ogg Vorbis</kw> playable in Kirikiri.
+</dd>
+
+<dt><kw>wumsadp.dll</kw></dt>
+<dd>
+　It is a plug-in to make <kw>Microsoft ADPCM</kw> format .wav files playable in Kirikiri.
+</dd>
+
+<dt><kw>wutcwf.dll</kw></dt>
+<dd>
+　It is a plug-in to make <kw>TCWF</kw> format files playable in Kirikiri.
+</dd>
+
+<dt><kw>extrans.dll</kw></dt>
+<dd>
+　It is a plug-in to extend the kind of transition of Kirikiri body, and some transitions can be used when connected to Kirikiri body.<r/>
+　See <link href="Transition"/> for how to use this plugin.
+</dd>
+
+<dt><kw>dirlist.dll</kw></dt>
+<dd>
+　A plugin to get a list of files in a specified directory.<r/>
+　When this plug-in is connected, a function called <kw>getDirList</kw> can be used.<r/>
+<tt>getDirList(directory)</tt><r/>
+　Returns a list of all the files in that directory as an array. This list also includes directories, which have an '/' at the end of the element string.<r/>
+　Also, this list usually contains two elements, './' and '../'.<r/>
+　This function only gets a list of the files under the specified directory, and does not recursively get the files in directories below it.
+</dd>
+
+<dt><kw>fftgraph.dll</kw></dt>
+<dd>
+　This is a plug-in for displaying a simple spectrum analyzer (spreader) in synchronization with WaveSoundBuffer.<r/>
+　When this plug-in is connected, a function called <kw>drawFFTGraph</kw> can be used.<r/>
+　Please refer to the fftgraph source included in the Kirikiri source and the KAG plugin for usage.
+</dd>
+
+<dt><kw>win32ole.dll</kw></dt>
+<dd>
+　ActiveX Control A plug-in for pasting into Kirikiri's window and operating OLE-automable objects from Kirikiri.<r/>
+　For example, you can paste a web browser (Internet Explorer) or media player into Kirikiri's window or operate Excel from Kirikiri.<r/>
+　Please refer to the <a href="https://sv.kikyou.info/trac/kirikiri/browser/kirikiri2/trunk/kirikiri2/src/plugins/win32/win32ole/manual.tjs">kirikiri2/trunk/kirikiri2/src/plugins/win32/win32ole/manual.tjs</a> and <a href="https://sv.kikyou.info/trac/kirikiri/browser/kirikiri2/trunk/kirikiri2/tests/win32ole">kirikiri2/trunk/kirikiri2/tests/win32ole</a> directories of the Kirikiri source for usage.<r/>
+</dd>
+
+<dt><kw>wsh.dll</kw> (experimental)</dt>
+<dd>
+　This plugin enables JScript, VBScript, and PerlScript to be used in Kirikiri (RubyScript operation is being adjusted).<r/>
+　When this plug-in is connected, <at href="f_Scripts_exec.html">Scripts.exec</at> and <at href="f_Scripts_execStorage.html">Scripts.execStorage</at> are expanded.<r/>
+　Scripts.exec now accepts an extension, or ProgId, or CLSID as the second argument. Scripts.execStorage also accepts an extension, ProgId, or CLSID as the second argument, similar to Scripts.exec, but if the second argument is omitted, the language is determined from the extension of the first argument .<r/>
+　The extension is js, vbs, pl, or rb, and ProgId is JScript, VBScript, PerlScript, RubyScript respectively. When specifying CLSID, specify the class ID of the script engine. If any other extension is passed, it will be executed as a TJS script.<r/>
+　Please refer to the <a href="https://sv.kikyou.info/trac/kirikiri/browser/kirikiri2/trunk/kirikiri2/tests/wsh">kirikiri2/trunk/kirikiri2/tests/wsh</a> directory of Kirikiri source for usage.<r/>
+</dd>
+
+
+<dt><kw>agg.dll</kw> (experimental)</dt>
+<dd>
+　It is a plug-in that draws figures using <a href="http://www.antigrain.com/">AGG (Anti-Grain Geometry)</a> in Kirikiri.<r/>
+　You can use a simple SVG reading / drawing function.<r/>
+　To render an SVG, for example,
+<example>
+var svg  = new AGGPrimitive(layer, "SVG", "tiger.svg");<r/>
+var svg1 = new AGGPrimitive(layer, "SVG", "tiger.svg");<r/>
+</example>
+(Many SVGs cannot be read due to limitations of the original AGG SVG reading support).<r/>
+　For more information, please refer to the <a href="https://sv.kikyou.info/trac/kirikiri/browser/kirikiri2/trunk/kirikiri2/src/plugins/win32/layerExAgg/">kirikiri2/trunk/kirikiri2/src/plugins/win32/layerExAgg</a> directory of the Kirikiri source.<r/>
+</dd>
+
+
+
+<dt><kw>csvParser.dll</kw> (experimental)</dt>
+<dd>
+　It is a plug-in for reading CSV (Comma Separated Values) files in Kirikiri.<r/>
+　For more information, please refer to the <a href="https://sv.kikyou.info/trac/kirikiri/browser/kirikiri2/trunk/kirikiri2/src/plugins/win32/csvParser/">kirikiri2/trunk/kirikiri2/src/plugins/win32/csvParser</a> directory of the Kirikiri source.<r/>
+</dd>
+
+
+
+<dt><kw>expat.dll</kw> (experimental)</dt>
+<dd>
+　A plugin for reading XML files via <a href="http://expat.sourceforge.net/">Expat</a> in Kirikiri.<r/>
+　For more information, please refer to the <a href="https://sv.kikyou.info/trac/kirikiri/browser/kirikiri2/trunk/kirikiri2/src/plugins/win32/expat/">kirikiri2/trunk/kirikiri2/src/plugins/win32/expat</a> directory of the Kirikiri source.<r/>
+</dd>
+
+
+
+<dt><kw>json.dll</kw> (experimental)</dt>
+<dd>
+　It is a plugin to read <a href="http://www.json.org/">JSON</a> in Kirikiri.<r/>
+　For more information, please refer to the <a href="https://sv.kikyou.info/trac/kirikiri/browser/kirikiri2/trunk/kirikiri2/src/plugins/win32/json/">kirikiri2/trunk/kirikiri2/src/plugins/win32/json</a> directory of the Kirikiri source.<r/>
+</dd>
+
+
+<dt><kw>layerExImage.dll</kw> (experimental)</dt>
+<dd>
+　Plug-in for adjusting brightness and contrast, adjusting hue and saturation, and adding noise to layers.<r/>
+　For more information, please refer to the <a href="https://sv.kikyou.info/trac/kirikiri/browser/kirikiri2/trunk/kirikiri2/src/plugins/win32/layerExImage/">kirikiri2/trunk/kirikiri2/src/plugins/win32/layerExImage</a> directory of the Kirikiri source.<r/>
+</dd>
+
+
+<dt><kw>perspective.dll</kw> (experimental)</dt>
+<dd>
+　It is a plug-in that performs perspective transformation of the layer.<r/>
+　For more information, please refer to the <a href="https://sv.kikyou.info/trac/kirikiri/browser/kirikiri2/trunk/kirikiri2/src/plugins/win32/layerExPerspective/">kirikiri2/trunk/kirikiri2/src/plugins/win32/layerPerspective</a> directory of the Kirikiri source.<r/>
+</dd>
+
+
+
+<dt><kw>saveStruct.dll</kw></dt>
+<dd>
+Array / Dictionary saveStruct processing can be output in the current code page or UTF-8 instead of Unicode (UTF-16).<r/>
+　For more information, please refer to the <a href="https://sv.kikyou.info/trac/kirikiri/browser/kirikiri2/trunk/kirikiri2/src/plugins/win32/saveStruct/">kirikiri2/trunk/kirikiri2/src/plugins/win32/saveStruct</a> directory of the Kirikiri source.<r/>
+</dd>
+
+
+
+<dt><kw>fstat.dll</kw></dt>
+<dd>
+Add methods to the Storages class to obtain information such as file size and update date, and to retrieve files from the storage system.
+　For more information, please refer to the <a href="https://sv.kikyou.info/trac/kirikiri/browser/kirikiri2/trunk/kirikiri2/src/plugins/win32/fstat/">kirikiri2/trunk/kirikiri2/src/plugins/win32/fstat</a> directory of the Kirikiri source.<r/>
+</dd>
+
+
+<dt><kw>clipboardEx.dll</kw>(experimental)</dt>
+<dd>
+Add functions to the Clipboard class to exchange images and TJS expressions via the clipboard, and to register a handler that automatically detects clipboard updates.
+　For more information, please refer to the <a href="https://sv.kikyou.info/trac/kirikiri/browser/kirikiri2/trunk/kirikiri2/src/plugins/win32/clipboardEx/">kirikiri2/trunk/kirikiri2/src/plugins/win32/clipboardEx</a> directory of the Kirikiri source.<r/>
+</dd>
+
+
+
+
+
+</dl>
+<r/>
+
+</para>
+
+</doc>
+
+

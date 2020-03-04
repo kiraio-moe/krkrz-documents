@@ -1,0 +1,831 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>System</title>
+<desc>
+　The System class is a class for getting and setting information about the Kirikiri body and the environment in which Kirikiri is running. Objects cannot be created from this class.<r/>
+</desc>
+
+<member>
+	<name>terminate</name>
+	<type>method</type>
+	<shortdesc>Asynchronous termination of Kirikiri</shortdesc>
+	<arg>
+		<argitem>
+			<name>code</name>
+			<default>0</default>
+			<desc>
+				　Specify the exit code of the process
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　<kw>Quit</kw> Kirikiri.<r/>
+		　Calling this method does not immediately terminate Kirikiri.<r/>
+		　It ends when control returns from all event handlers to Kirikiri.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>exit</name>
+	<type>method</type>
+	<shortdesc>Synchronous termination of Kirikiri</shortdesc>
+	<arg>
+		<argitem>
+			<name>code</name>
+			<default>0</default>
+			<desc>
+				　Specify the exit code of the process
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　<kw>Quit</kw> Kirikiri.<r/>
+		　This method differs from <ref>System.terminate</ref> and ends when called. Therefore, this method never returns.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>addContinuousHandler</name>
+	<type>method</type>
+	<shortdesc>Adding a continuous handler</shortdesc>
+	<arg>
+		<argitem>
+			<name>callback</name>
+			<default></default>
+			<desc>
+				　Specify the function to be the handler.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Register a <kw>Continuous handler</kw>.<r/>
+		　Continuous handlers are event handlers that are called "as often as possible".<r/>
+		　If there is nothing else to do, Kirikiri continues to call the Continuous handler.
+		If another event occurs, that priority has priority.<r/>
+		　However, if the call frequency is specified by the command line option -contfreq, it will be followed.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>removeContinuousHandler</name>
+	<type>method</type>
+	<shortdesc>Remove Continuous Handler</shortdesc>
+	<arg>
+		<argitem>
+			<name>callback</name>
+			<default></default>
+			<desc>
+				　Specify the hand function.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Remove <kw>Continuous handler</kw>.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>inform</name>
+	<type>method</type>
+	<shortdesc>View messages</shortdesc>
+	<arg>
+		<argitem>
+			<name>text</name>
+			<default></default>
+			<desc>
+				　Specify the message to be displayed.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>caption</name>
+			<default>""</default>
+			<desc>
+				　Specify a string to be the window caption.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Displays a window to show the message to the user.<r/>
+		　Windows are displayed modally (that is, no other windows can be operated while displayed).<r/>
+	</desc>
+</member>
+
+<member>
+	<name>getTickCount</name>
+	<type>method</type>
+	<shortdesc>Get tick count</shortdesc>
+	<arg>
+	</arg>
+	<result>Returns the tick count (64-bit integer).</result>
+	<desc>
+		　<kw>Tick count</kw> is a value that counts up every 1/1000 second. You can use this method to get the tick count at two points and take the difference to get the time difference between the two points.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>getKeyState</name>
+	<type>method</type>
+	<shortdesc>Get key state</shortdesc>
+	<arg>
+		<argitem>
+			<name>code</name>
+			<default></default>
+			<desc>
+				　Specify the <kw>virtual key code</kw> <comlink href="vkeys"/> to get the status of.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>True if the key is pressed, false if not.</result>
+	<desc>
+		　Gets whether the key corresponding to the key code specified by code is pressed at the time of calling this method.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>shellExecute</name>
+	<type>method</type>
+	<shortdesc>Execute file / program</shortdesc>
+	<arg>
+		<argitem>
+			<name>target</name>
+			<default></default>
+			<desc>
+				　Specify the file or software to be executed.<r/>
+				　If a file is specified, the program associated with it will be launched.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>param</name>
+			<default>""</default>
+			<desc>
+				　Specify parameters to be passed to the software to be executed.<r/>
+				　If a file is specified in the target argument, omit this argument or specify an empty string.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Returns true if successful, false if unsuccessful.</result>
+	<desc>
+		　<kw>Executes</kw> the file or software specified by target.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>readRegValue</name>
+	<type>method</type>
+	<shortdesc>Reading the registry</shortdesc>
+	<arg>
+		<argitem>
+			<name>key</name>
+			<default></default>
+			<desc>
+				　Specify the registry key to read.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Returns the value of the registry if successful, void if unsuccessful.</result>
+	<desc>
+		　Reads the Windows registry specified by key.<r/>
+		　Registry keys can begin with the following root key names:<r/>
+		<tt>HKEY_CLASSES_ROOT<r/>HKEY_CURRENT_CONFIG<r/>HKEY_CURRENT_USER<r/>
+		HKEY_LOCAL_MACHINE<r/>HKEY_USERS<r/>HKEY_PERFORMANCE_DATA<r/>
+		HKEY_DYN_DATA<r/></tt>
+		　For example, the following string can be specified as key.<r/>
+		<tt>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\hoeg\installdir</tt><r/>
+		<r/>
+		　Only numbers and single strings can be read. A numeric value returns an integer type, and a character string returns a string type result.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>getArgument</name>
+	<type>method</type>
+	<shortdesc>Get command line options</shortdesc>
+	<arg>
+		<argitem>
+			<name>name</name>
+			<default></default>
+			<desc>
+				　Specify the command line option name to get. Add a '-' (hyphen) at the beginning (eg <tt>'-nosplash'</tt>).<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>If a command line option is specified, its value is returned, otherwise void is returned.</result>
+	<desc>
+		　<kw>Command line options</kw> must be passed to Kirikiri in the following format:<r/>
+		<tt>-name=value</tt><r/>
+		or<r/>
+		<tt>-name</tt><r/>
+		　<tt>value</tt> is returned as the value in the former case, and <tt>'yes'</tt> is returned as the value in the latter case.<r/>
+	</desc>
+	<ref>System.setArgument</ref>
+</member>
+
+
+<member>
+	<name>setArgument</name>
+	<type>method</type>
+	<shortdesc>Setting command line options</shortdesc>
+	<arg>
+		<argitem>
+			<name>name</name>
+			<default></default>
+			<desc>
+				　Specify the command line option name to be set. Add a '-' (hyphen) at the beginning (eg, <tt>'-contfreq'</tt>).<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>value</name>
+			<default></default>
+			<desc>
+				　Specify the value to be set. (Example: <tt>'60'</tt>).<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<desc>
+		　Set <kw>command line options</kw> dynamically. Not all command line options are configurable.<r/>
+		　See <link href="CommandLine" /> for the command line options that can be set. Do not change options that are not marked as dynamically changeable here.<r/>
+		　This method does not check whether the option can be changed dynamically, the existence of the option, the validity of the value, etc. Be careful when setting values.<r/>
+	</desc>
+	<ref>System.getArgument</ref>
+</member>
+
+
+<member>
+	<name>toActualColor</name>
+	<type>method</type>
+	<shortdesc>Get the actual color of a color constant</shortdesc>
+	<arg>
+		<argitem>
+			<name>color</name>
+			<default></default>
+			<desc>
+				　Specify a color constant (see <link href="ColorCodes" />).<r/>
+				　If a normal 0xRRGGBB format color is specified, the value will be returned as is.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Returns the actual color represented by the specified color constant in 0xRRGGBB format.</result>
+	<desc>
+		　Converts color constants to actual colors and returns in 0xRRGGBB format.<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>createAppLock</name>
+	<type>method</type>
+	<shortdesc>Check for double startup</shortdesc>
+	<arg>
+		<argitem>
+			<name>key</name>
+			<default></default>
+			<desc>
+				　Specify the key string for checking. If another running Kirikiri has specified the same key string in this method, false is returned.<r/>
+				　Consider that the key string can basically use only the same characters as the TJS variable naming rules.<r/>
+				　The key string must be unique enough.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Returns false if Kirikiri is already running with the same key string, true otherwise.</result>
+	<desc>
+		　Returns false if another key string is running, and true otherwise.<r/>
+		　Used to prevent double start.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>createUUID</name>
+	<type>method</type>
+	<shortdesc>Generate UUID string</shortdesc>
+	<arg>
+	</arg>
+	<result>The generated UUID string is returned in the format "e8b2a2b5-5ceb-4f75-a08b-1f1bdfdca4f1" (each alphanumeric character except the hyphen is a hexadecimal digit).</result>
+	<desc>
+		　Creates and returns a UUID string. This method generates a 128bit UUID (universal unique identifier) generated from a random bit string.<r/>
+		　The UUID generation algorithm implemented in Kirikiri picks up environmental noise to some extent and generates a random bit string. However, we do not recommend using it for applications that require high security. However, it is considered "very non-overlapping" with other UUIDs.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>assignMessage</name>
+	<type>method</type>
+	<shortdesc>Change message assignment</shortdesc>
+	<arg>
+		<argitem>
+			<name>id</name>
+			<default></default>
+			<desc>
+				　Specify the message ID to be assigned.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>msg</name>
+			<default></default>
+			<desc>
+				　Specify the message to be assigned to the ID specified by id.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Returns true if the ID exists and the message was successfully allocated, false otherwise.</result>
+	<desc>
+		　Change the message assignment.<r/>
+		　You can use this method to change the message that Kiriri has built in to another message.<r/>
+		　Usually, it is described in the message map file (see <link href="Startup" />).<r/>
+		　To get a list of IDs that can be set and messages currently assigned to them, execute "Create a message map file" from <link href="Controller" />.
+	</desc>
+</member>
+
+<member>
+	<name>doCompact</name>
+	<type>method</type>
+	<shortdesc>Compact memory</shortdesc>
+	<arg>
+		<argitem>
+			<name>level</name>
+			<default>clAll</default>
+			<desc>
+				　Specify the level.<r/>
+				　Specifying <kw>clIdle</kw> does the same thing as compacting when the system is idle (the system is relatively idle). In the current version, garbage collection of TJS2 is performed.<r/>
+				　If <kw>clDeactivate</kw> is specified, the same processing as compacting performed when Kirikiri becomes inactive (when another application is activated) is performed. In the current version, the temporary image buffer for layer operations, the layer cache, the segment (storage fragment) cache of the XP3 archive, and the cache of the automatic search path are cleared.<r/>
+				　Specifying <kw>clMinimize</kw> performs the same processing as compaction performed when Kirikiri is minimized. In the current version, the drawing character cache and image cache are cleared.<r/>
+				　Specifying <kw>clAll</kw> performs all of the above compactions.<r/>
+				　The level of compaction increases in the order of clIdle &lt; clDeactivate &lt; clMinimize &lt; clAll. If you specify a higher level, it also compacts at the lower level. For example, if you execute clDeactivate, the process with clIdle is also executed.<r/>
+				　If the argument is omitted, clAll is assumed.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Reduces memory size. Compacting is the process of releasing unused memory and cache memory to reduce memory usage.<r/>
+		　Kirikiri does this automatically, so you usually don't need to worry too much, but you can use this method if you want to force it to be done by the program.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>touchImages</name>
+	<type>method</type>
+	<shortdesc>Loading images into the cache</shortdesc>
+	<arg>
+		<argitem>
+			<name>storages</name>
+			<default></default>
+			<desc>
+				　Pass the image storage name you want to put in the cache as an array (an object of the Array class).<r/>
+				　The one written earlier has priority.<r/>
+				　Kirikiri manages the cache using the character string specified in the first argument of <ref>Layer.loadImages</ref> as it is as a key. To make the cache meaningful, specify here The image storage name must be the same as the one specified in the first argument of Layer.loadImages.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>limitbytes</name>
+			<default>0</default>
+			<desc>
+				　Specifies the limit of the cache capacity to be used in calling this method in bytes.<r/>
+				　Specify 0 to use all of the cache.<r/>
+				　Specifying a positive number will attempt to use the cache up to that number of bytes.<r/>
+				　If you specify a negative number, the current cache limit (<ref>System.graphicCacheLimit</ref>) will be added to the number (but subtracted because it adds a "negative number"). Used as If the result is a zero or negative limit, the method exits silently. For example, specifying -2 * 1024 * 1024 is equivalent to specifying the current cache limit minus 2MB. This is useful if you want more space in the cache.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>timeout</name>
+			<default>0</default>
+			<desc>
+				　Specify the timeout (time limit) in ms. If you specify 0, there is no limit.<r/>
+				　After the time specified by this argument has elapsed, this method stops loading any further images and returns. However, if a timeout occurs while loading an image, it will not return until the image has finished loading.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　This method attempts to cache the specified image. However, although this method will try to put the image in the cache, there is no guarantee that the image will actually be in the cache. If image cache limit is exceeded or timeout occurs, image loading will be interrupted. As for the image, the first thing written in the storages parameter is more likely to be in the cache (higher priority). If the specified image is already in the cache, it will just move up in the cache.<r/>
+		　This method ignores any errors while loading the image.<r/>
+		　In the current version, images that can be cached by this method are images that can usually be loaded with <ref>Layer.loadImages</ref> and do not specify a color key (images with alpha channel are OK). The rule image of the universal transition and the area image are read, but they are not valid data as a cache (the read data will be wasted), so do not specify it.<r/>
+		　See <ref>System.graphicCacheLimit</ref> for the number of bytes the image uses in the cache.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>showVersion</name>
+	<type>method</type>
+	<shortdesc>Display about dialog (1.1.0 or later)</shortdesc>
+	<arg></arg>
+	<result></result>
+	<desc>
+		　Displays the about dialog.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>dumpHeap</name>
+	<type>method</type>
+	<shortdesc>Heap information dump (1.1.0 or later)</shortdesc>
+	<arg></arg>
+	<result></result>
+	<desc>
+		　Outputs heap information to the console.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>versionString</name>
+	<type>property</type>
+	<shortdesc>Version string</shortdesc>
+	<access>r</access>
+	<desc>
+		　You can get the version string of Kirikiri body.<r/>
+		　The version string has the following format:<r/>
+		<tt>1.0.0.1</tt><r/>
+	</desc>
+</member>
+
+<member>
+	<name>versionInformation</name>
+	<type>property</type>
+	<shortdesc>Version information string</shortdesc>
+	<access>r</access>
+	<desc>
+		　You can get the version information string of Kirikiri body.<r/>
+		　The version information string is longer than <ref>System.versionString</ref> and looks like this:<r/>
+		<tt>吉里吉里[きりきり] Z 実行コア/1.0.0.0 (Compiled on Dec 16 2013 23:15:27) TJS2/2.4.28 Copyright (C) 1997-2013 W.Dee and contributors All rights reserved.</tt><r/>
+	</desc>
+</member>
+
+<member>
+	<name>eventDisabled</name>
+	<type>property</type>
+	<shortdesc>Whether event delivery has been suspended</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　This value is true if the <kw>event delivery</kw> of Kirikiri is stopped. You can also set a value.<r/>
+		　If the event delivery is stopped, the event on Kirikiri will not occur or will be postponed (behavior depends on the type of event).<r/>
+	</desc>
+</member>
+
+<member>
+	<name>graphicCacheLimit</name>
+	<type>property</type>
+	<shortdesc>Image cache limit</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　The <kw>image cache limit</kw> of Kirikiri in bytes. You can also set a value.<r/>
+		　If you specify <tt><kw>gcsAuto</kw></tt>, the value is automatically set according to the amount of memory installed in the machine.<r/>
+		　Rule images and area images consume the number of bytes expressed as width x height. Other images consume the number of bytes expressed as width x height x 4.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>platformName</name>
+	<type>property</type>
+	<shortdesc>Platform name</shortdesc>
+	<access>r</access>
+	<desc>
+		　The name of the platform on which Kirikiri is running. For Windows, it is 'Win32' when the OS is 32bit, and 'Win64' when it is 64bit.<r/>
+		　For 1.3.0 or earlier, it is always 'Win32'.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>osName</name>
+	<type>property</type>
+	<shortdesc>OS name</shortdesc>
+	<access>r</access>
+	<desc>
+		　Indicates the name of the OS on which Kirikiri is running.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>exePath</name>
+	<type>property</type>
+	<shortdesc>Path of the folder containing the Kirikiri body</shortdesc>
+	<access>r</access>
+	<desc>
+		　The path where the Kirikiri body is installed. Path names are represented by unified storage names.<r/>
+	</desc>
+	<ref>System.appDataPath</ref>
+	<ref>System.personalPath</ref>
+</member>
+
+<member>
+	<name>personalPath</name>
+	<type>property</type>
+	<shortdesc>My Documents Path</shortdesc>
+	<access>r</access>
+	<desc>
+		　Represents the user's My Documents path. On Windows, the folder represented by the HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders Personal in the registry is returned. This usually points to the "My Documents" folder.<r/>
+		If this folder does not exist, return the same folder as <ref>System.exePath</ref>.<r/>
+	</desc>
+	<ref>System.appDataPath</ref>
+	<ref>System.exePath</ref>
+</member>
+
+<member>
+	<name>appDataPath</name>
+	<type>property</type>
+	<shortdesc>User home directory path</shortdesc>
+	<access>r</access>
+	<desc>
+		　Represents the path of the user's home directory. On Windows, the folder represented by the HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders AppData in the registry is returned. If this folder does not exist, return the same folder as <ref>System.exePath</ref>.<r/>
+		<r/>
+		This is usually as follows:
+		<r/>
+			<dl>
+			<dt>For XP</dt>
+			<dd><tt>C:\Documents and Settings\&lt;User name&gt;\Application Data\</tt> ( C: part depends on environment )</dd>
+			<dt>For Vista, 7, 8</dt>
+			<dd><tt>C:\Users\&lt;User name&gt;\AppData\Roaming</tt> ( C: part depends on environment )</dd>
+			<dt>If the registry key (see above) could not be read for any reason</dt>
+			<dd>The folder where the executable file of Kirikiri is located (<ref>System.exePath</ref>)</dd>
+			</dl>
+	</desc>
+	<ref>System.exePath</ref>
+	<ref>System.personalPath</ref>
+</member>
+
+<member>
+	<name>dataPath</name>
+	<type>property</type>
+	<shortdesc>Data storage path</shortdesc>
+	<access>r</access>
+	<desc>
+		　Represents the directory specified by the command line option -datapath.<r/>
+		　By default, all logs are output here.<r/>
+		　If the user script saves the data, it is recommended to save it here.<r/>
+	</desc>
+
+</member>
+
+<member>
+	<name>exeName</name>
+	<type>property</type>
+	<shortdesc>Path to Kirikiri body</shortdesc>
+	<access>r</access>
+	<desc>
+		　Indicates the path name to the Kirikiri body. Path names are represented by unified storage names.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>title</name>
+	<type>property</type>
+	<shortdesc>title</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Displays the title of the main window as a character string. You can also set a value.<r/>
+	</desc>
+	<ref>Window.caption</ref>
+</member>
+
+<member>
+	<name>screenWidth</name>
+	<type>property</type>
+	<shortdesc>Screen width</shortdesc>
+	<access>r</access>
+	<desc>
+		　Indicates the horizontal size of the screen size (screen resolution) in pixels.<r/>
+		　The values are for the display with the main window.<r/>
+		　If there is no main window, the primary display is targeted.<r/>
+	</desc>
+	<ref>System.screenHeight</ref>
+	<ref>System.desktopLeft</ref>
+	<ref>System.desktopTop</ref>
+	<ref>System.desktopWidth</ref>
+	<ref>System.desktopHeight</ref>
+</member>
+
+<member>
+	<name>screenHeight</name>
+	<type>property</type>
+	<shortdesc>Screen height</shortdesc>
+	<access>r</access>
+	<desc>
+		　Displays the vertical size of the screen size (screen resolution) in pixels.<r/>
+		　The values are for the display with the main window.<r/>
+		　If there is no main window, the primary display is targeted.<r/>
+	</desc>
+	<ref>System.screenWidth</ref>
+	<ref>System.desktopLeft</ref>
+	<ref>System.desktopTop</ref>
+	<ref>System.desktopWidth</ref>
+	<ref>System.desktopHeight</ref>
+</member>
+
+<member>
+	<name>desktopLeft</name>
+	<type>property</type>
+	<shortdesc>Desktop left edge position</shortdesc>
+	<access>r</access>
+	<desc>
+		　Indicates the left edge of the desktop (the area where the window can be displayed) in pixels.<r/>
+		　The values are for the display with the main window.<r/>
+		　If there is no main window, the primary display is targeted.<r/>
+	</desc>
+	<ref>System.screenWidth</ref>
+	<ref>System.screenHeight</ref>
+	<ref>System.desktopTop</ref>
+	<ref>System.desktopWidth</ref>
+	<ref>System.desktopHeight</ref>
+</member>
+
+<member>
+	<name>desktopTop</name>
+	<type>property</type>
+	<shortdesc>Desktop top position</shortdesc>
+	<access>r</access>
+	<desc>
+		　Indicates the top edge of the desktop (the area where the window can be displayed) in pixels.<r/>
+		　The values are for the display with the main window.<r/>
+		　If there is no main window, the primary display is targeted.<r/>
+	</desc>
+	<ref>System.screenWidth</ref>
+	<ref>System.screenHeight</ref>
+	<ref>System.desktopLeft</ref>
+	<ref>System.desktopWidth</ref>
+	<ref>System.desktopHeight</ref>
+</member>
+
+<member>
+	<name>desktopWidth</name>
+	<type>property</type>
+	<shortdesc>Desktop width</shortdesc>
+	<access>r</access>
+	<desc>
+		　Indicates the width of the desktop (the area where the window can be displayed) in pixels.<r/>
+		　The values are for the display with the main window.<r/>
+		　If there is no main window, the primary display is targeted.<r/>
+	</desc>
+	<ref>System.screenWidth</ref>
+	<ref>System.screenHeight</ref>
+	<ref>System.desktopLeft</ref>
+	<ref>System.desktopTop</ref>
+	<ref>System.desktopHeight</ref>
+</member>
+
+<member>
+	<name>desktopHeight</name>
+	<type>property</type>
+	<shortdesc>Desktop height</shortdesc>
+	<access>r</access>
+	<desc>
+		　Represents the height of the desktop (the area where the window can be displayed) in pixels.<r/>
+		　The values are for the display with the main window.<r/>
+		　If there is no main window, the primary display is targeted.<r/>
+	</desc>
+	<ref>System.screenWidth</ref>
+	<ref>System.screenHeight</ref>
+	<ref>System.desktopLeft</ref>
+	<ref>System.desktopTop</ref>
+	<ref>System.desktopWidth</ref>
+</member>
+
+<member>
+	<name>exitOnWindowClose</name>
+	<type>property</type>
+	<shortdesc>Whether to exit when the main window closes</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether or not to close when the main window (the first instance of the Window class) closes. You can also set a value. Default is true.<r/>
+		　Note that if the main window is closed and no other debug-related windows are displayed, Kirikiri will remain on the system without quitting and may lose control. May be lost).
+	</desc>
+</member>
+
+<member>
+	<name>exceptionHandler</name>
+	<type>property</type>
+	<shortdesc>Handler function for uncaught exception</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents a function that handles uncaught exceptions (exceptions passed to Kirikiri body without being caught anywhere).<r/>
+		　Specifying null results in the default behavior.<r/>
+		　The default behavior is the following:
+		<ol>
+			<li>Stop delivery of asynchronous events (set <ref>System.eventDisabled</ref> to true)</li>
+			<li>Start outputting log to file (call <ref>Debug.logAsError</ref>)</li>
+			<li>Displays a dialog box that informs you of the error, and indicates the location in the script editor</li>
+		</ol>
+		　<r/>
+		　The handler function takes one argument, which is the exception object.<r/>
+		　If no handler function is specified, if the handler function is null, or if the handler function returns false, the default action will be taken.<r/>
+		　If the handler function returns true, the above default action will not be taken.<r/>
+		　Consider the possibility of asynchronous events occurring while executing the handler function. If the Kirikiri body can handle the asynchronous event, an unexpected exception may occur again while executing the exception handler. In order to avoid this, usually, when performing processing that waits for something in the handler function (when Kiriri has a chance to process the asynchronous event), stop the occurrence of the asynchronous event.<r/>
+		<example>
+System.exceptionHandler = function (e)<r/>
+{<r/>
+	// This function is called when an uncaught exception is caught by the system.<r/>
+	// e is the exception object.<r/>
+	if(e instanceof "ConductorException")<r/>
+	{<r/>
+		// For exceptions thrown by conductors<r/>
+		Debug.logAsError(); // Start writing log to file, etc.<r/>
+		var event_disabled = System.eventDisabled;<r/>
+		System.eventDisabled = true;<r/>
+			// Stop the event once because it is troublesome if an event occurs while displaying the reason of the error<r/>
+		System.inform(e.message);<r/>
+		System.eventDisabled = event_disabled;<r/>
+			// Whether or not to fire the event<r/>
+		return true; // If true is returned, exception processing will not be performed on the body side<r/>
+	}<r/>
+	else<r/>
+	{<r/>
+		return false; // Normal exception handling when returning false<r/>
+	}<r/>
+};<r/>
+		</example>
+	</desc>
+	<ref>System.eventDisabled</ref>
+	<ref>Debug.logAsError</ref>
+
+</member>
+
+<member>
+	<name>onActivate</name>
+	<type>property</type>
+	<shortdesc>When the application is activated</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the event function that is called when the application is activated.<r/>
+		　If null is specified, the function will not be called.<r/>
+		　Unlike normal event handlers, if you want to receive this event, set the function you want to call to this property.<r/>
+		　<ref>Window.onActivate</ref> occurs when each window in the same application is activated, but this event occurs when the main window is activated.<r/>
+		　Note that this event can also occur if the main window is already active (it is not guaranteed to occur completely in the order of onActivate → onDeactivate → onActivate →...).<r/>
+	</desc>
+	<ref>System.onDeactivate</ref>
+	<ref>Window.onActivate</ref>
+	<ref>Window.onDeactivate</ref>
+
+</member>
+
+<member>
+	<name>onDeactivate</name>
+	<type>property</type>
+	<shortdesc>When the application becomes inactive</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the event function that is called when the application becomes inactive.<r/>
+		　If null is specified, the function will not be called.<r/>
+		　Unlike normal event handlers, if you want to receive this event, set the function you want to call to this property.<r/>
+		　<ref>Window.onDeactivate</ref> occurs when each window in the same application is deactivated, but this event occurs when the main window is deactivated.<r/>
+		　Note that this event can also occur if the main window is already inactive (it is not guaranteed to occur completely in the order of onActivate → onDeactivate → onActivate → ...).<r/>
+	</desc>
+	<ref>System.onActivate</ref>
+	<ref>Window.onActivate</ref>
+	<ref>Window.onDeactivate</ref>
+
+</member>
+
+<member>
+        <name>drawThreadNum</name>
+        <type>property</type>
+        <shortdesc>Number of threads used for drawing</shortdesc>
+        <access>r/w</access>
+        <desc>
+                　This indicates the <kw>number of threads</kw> used by the Kirikiri layer system when drawing. You can also set a value.<r/>
+                　If you specify <tt><kw>dtnAuto</kw></tt>, the same number of threads as the number of processors recognized by the OS are automatically allocated.<r/>
+                　Setting multiple drawing threads may improve drawing performance in a multi-core environment, but may also degrade performance.<r/>
+                　Good results may be obtained by applying it to processing with a large drawing area, high-affinity Affine-based processing, or layer-compositing processing with heavy computation.<r/>
+                　Even if it is set to use multi-threading, if the system determines that the drawing processing load is light and the effect of multi-threading cannot be obtained, it may not be executed in multi-threading.<r/>
+        </desc>
+</member>
+
+<member>
+    <name>savedGamesPath</name>
+    <type>property</type>
+    <shortdesc>Saved game path (1.1.0 or later)</shortdesc>
+    <access>r</access>
+    <desc>
+		　Represents a saved game path.<r/>
+		<r/>
+		This is usually as follows:<r/>
+		C:\Users\&lt;User name&gt;\Saved Games<r/>
+    </desc>
+</member>
+
+<member>
+	<name>exeBits</name>
+	<type>property</type>
+	<shortdesc>Whether the Kirikiri body is a 32-bit version or a 64-bit version (1.3.0 or later)</shortdesc>
+	<access>r</access>
+	<desc>
+		　Indicates whether the execution binary is a 32-bit version or a 64-bit version by using the integer 32 or 64.<r/>
+	</desc>
+	<ref>System.osBits</ref>
+	<ref>System.platformName</ref>
+</member>
+
+<member>
+	<name>osBits</name>
+	<type>property</type>
+	<shortdesc>Whether the OS is 32-bit or 64-bit (1.3.0 or later)</shortdesc>
+	<access>r</access>
+	<desc>
+		　Indicates whether the OS is 32bit or 64bit by 32 or 64 integer.<r/>
+	</desc>
+	<ref>System.exeBits</ref>
+	<ref>System.platformName</ref>
+</member>
+
+</doc>

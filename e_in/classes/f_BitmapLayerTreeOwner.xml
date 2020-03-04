@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>BitmapLayerTreeOwner</title>
+<desc>
+　The BitmapLayerTreeOwner class is a class that holds a layer tree and allows you to obtain the drawing results with the Bitmap class. (1.1.0 or later)<r/>
+By passing instead of window as the first argument of the constructor of the Layer class, you can get the drawing result of those Layers as an image as a Bitmap class.<r/>
+</desc>
+
+<member>
+	<name>BitmapLayerTreeOwner</name>
+	<type>constructor</type>
+	<shortdesc>Construct BitmapLayerTreeOwner object</shortdesc>
+	<arg></arg>
+	<result></result>
+	<desc>
+		　Constructs a BitmapLayerTreeOwner class object.<r/>
+	</desc>
+</member>
+
+</doc>

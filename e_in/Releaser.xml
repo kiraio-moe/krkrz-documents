@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Releaser</title>
+
+<para>
+<ptitle>About Releaser</ptitle>
+　Releaser is a tool for organizing folders into archive files.<r/>
+　You can also specify a Kirikiri project folder and create a single executable with that project folder inside.<r/>
+</para>
+
+<para>
+<ptitle>How to use Releaser</ptitle>
+<img src="ReleaserSelect.png"/><r/><r/>
+　When you run Releaser (krkrrel.exe in the tools folder), you will first be asked to specify a folder. Specify a folder.<r/>
+　Targets files in the folder specified here.<r/>
+<r/>
+<note>
+　Releaser has a feature that when files with exactly the same contents are found in the process of creating the final archive, they are combined into one even if the file name is different, and only one file's capacity is used .
+</note>
+<note>
+　Releaser automatically ignores the CVS meta-information directory (the directory named "CVS", which contains a file named "Repository"). It also ignores files and directories whose names begin with a . (dot), such as hidden UNIX-like files and the Subversion meta-information directory.
+</note>
+<note>
+　When Releaser creates an archive, it creates a file called <kw>default.rpf</kw> in the directory where the archive was created. It describes the options for creating an archive, so you can easily create the next time you create an archive with the same settings.
+</note>
+</para>
+
+<para>
+<ptitle>Releaser setting screen</ptitle>
+　After selecting the folder, the setting screen appears.<r/>
+<dl>
+<dt>"Return to folder selection" button</dt>
+<dd>
+　You can redo the folder selection.
+</dd>
+
+<dt>"Profile: Save" button</dt>
+<dd>
+　Save the current settings to a file.
+</dd>
+
+<dt>"Profile: Import" button</dt>
+<dd>
+　Read settings from a file.
+</dd>
+
+<dt>"Create" button</dt>
+<dd>
+　Outputs an archive file or EXE executable file based on the current settings.
+</dd>
+
+<dt>"Cancel" (or exit) button</dt>
+<dd>
+　Exit Releaser.
+</dd>
+
+<dt>"Output" tab</dt>
+<dd>
+<img src="ReleaserOutput.png"/><r/><r/>
+<dl>
+<dt>"Output format"</dt>
+<dd>
+　If you select ".XP3 Archive", a file in xp3 format (Kiri Kiri standard archive format) will be output. Select ".EXE executable" to output an executable file. If ".EXE executable" is selected, krkr.eXe in the same folder as the releaser (krkrrel.exe) or its parent folder will be used.
+</dd>
+
+<dt>"Output File"</dt>
+<dd>
+　Specify the file to output. Click the "Browse" button to specify the file in the dialog box.
+</dd>
+</dl>
+</dd>
+
+<dt>"File" tab</dt>
+<dd>
+<img src="ReleaserFiles.png"/><r/><r/>
+　For each extension, you can select "compressed", "included in archive but not compressed", and "not included in archive". In general, you can leave the default classification.<r/>
+　When files are classified as "compressible", compression is performed and the file size is reduced. Also, if you look inside with a text editor or binary editor, you will not be able to easily decode it. However, compression has the disadvantage that it takes time to decompress. PNG, JPEG, ERI, etc. are already compressed, so compressing them is not recommended, because classifying them as "compress" will have little effect and will take extra time to decompress.
+</dd>
+
+<dt>Options tab</dt>
+<dd>
+<img src="ReleaserSettings.png"/><r/><r/>
+<dl>
+<dt>"Do not compress large files"</dt>
+<dd>
+　Even if the corresponding file is classified as "compressed", the setting is to not compress the file if it is larger than the specified size. Due to the structure of Kirikiri, compressed files must be expanded in memory, so compressing large files is expensive to run.
+</dd>
+
+<dt>"Deployment protection"</dt>
+<dd>
+　When this is checked, the "expansion protection" attribute is added to the index (list of stored files) inside the archive. This allows the archive extraction tool to indicate that the author does not want the file to be extracted.
+</dd>
+
+<dt>"Ogg Vorbis codebook sharing"</dt>
+<dd>
+　If this is checked, the codebook for vector quantization of OggVorbis files (.ogg files) will be shared. OggVorbis files often have a common codebook for multiple files, so you can save them together to save size.
+</dd>
+
+<dt>"Compress Index"</dt>
+<dd>
+　If checked, the index (list of stored files) inside the archive can be compressed to save size.
+</dd>
+</dl>
+<note>
+Checking "Deployment Protect" on the "Options" tab does not <b>encrypt or prevent the actual deployment</b>. You can only make a statement. Also, if you are writing an archive unpacking tool, consider the presence of this unpacking protection flag (if any) (such as refusing to unpack or warning you before unpacking).<r/>
+</note>
+</dd>
+
+<dt>Executable file settings tab</dt>
+<dd>
+　This is displayed only when an executable file is specified as the output format.<r/>
+　The setting screen here is the same as <link href="Configure"/>.<r/>
+<r/>
+<img src="ReleaserExeSettings.png"/><r/><r/>
+<dl>
+<dt>"option"</dt>
+<dd>
+　You can set default options for the executable.
+</dd>
+
+<dt>"icon"</dt>
+<dd>
+　You can specify an icon for the executable file.
+</dd>
+</dl>
+</dd>
+</dl>
+</para>
+
+<para>
+<ptitle>Command line options</ptitle>
+Releaser accepts the following command line options:
+
+<dl>
+
+<dt>Folder name</dt>
+<dd>Specify the target folder.</dd>
+
+<dt>-<kw>go</kw></dt>
+<dd>Create the archive immediately and exit. Please use it for batch processing. Save the options etc. in advance in the target folder with the name default.rpf (It is possible to create an archive in combination with the -nowriterpf -out option without this).</dd>
+
+<dt>-nowriterpf</dt>
+<dd>Do not write default.rpf on exit.</dd>
+
+<dt>-out filename</dt>
+<dd>Specify the output file name.</dd>
+
+<dt>-rpf filename</dt>
+<dd>Specify the profile to load.</dd>
+
+</dl>
+<r/>
+For example, specify:<r/>
+<bq>
+krkrrel project -out ..\release\data.xp3 -nowriterpf -go
+</bq>
+
+</para>
+
+</doc>
+
+

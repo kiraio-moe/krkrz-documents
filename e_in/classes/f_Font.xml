@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Font</title>
+<desc>
+　Font class is a class for managing <kw>fonts</kw>.<r/>
+</desc>
+
+
+
+<member>
+	<name>getTextWidth</name>
+	<type>method</type>
+	<shortdesc>Get the width of a string</shortdesc>
+	<arg>
+		<argitem>
+			<name>text</name>
+			<default></default>
+			<desc>
+				　Specify the character string to get the width.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Returns the width of the specified string in pixels</result>
+	<desc>
+		　In this method, you can get the required width when drawing the specified string with the current font settings.<r/>
+	</desc>
+	<ref>Font.getTextHeight</ref>
+</member>
+
+<member>
+	<name>getTextHeight</name>
+	<type>method</type>
+	<shortdesc>Get the height of a string</shortdesc>
+	<arg>
+		<argitem>
+			<name>text</name>
+			<default></default>
+			<desc>
+				　Specify the character string to get the height.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Returns the height of the specified string in pixels</result>
+	<desc>
+		　In this method, you can get the required height when drawing the specified string with this font.<r/>
+	</desc>
+	<ref>Font.getTextWidth</ref>
+</member>
+
+<member>
+	<name>getEscWidthX</name>
+	<type>method</type>
+	<shortdesc>The amount to move the X coordinate in the horizontal direction of the character</shortdesc>
+	<arg>
+		<argitem>
+			<name>text</name>
+			<default></default>
+			<desc>
+				　Specify the character string for which you want to obtain the amount of horizontal movement of the X coordinate of the character.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Returns the amount to move the character's horizontal X coordinate in pixels</result>
+	<desc>
+		　You can get the required amount of movement of the character drawing position when drawing the character specified by the current font setting.<r/>
+		　In this method, you can get the amount of movement on the X coordinate when moving laterally (left) with respect to the drawing direction of the character.<r/>
+	</desc>
+	<ref>Font.getEscWidthY</ref>
+	<ref>Font.getEscHeightX</ref>
+	<ref>Font.getEscHeightY</ref>
+</member>
+
+<member>
+	<name>getEscWidthY</name>
+	<type>method</type>
+	<shortdesc>The amount to move the Y coordinate in the horizontal direction of the character</shortdesc>
+	<arg>
+		<argitem>
+			<name>text</name>
+			<default></default>
+			<desc>
+				　Specify the character string for which you want to obtain the amount of movement of the Y coordinate in the horizontal direction of the character.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Returns the horizontal translation of the character in pixels</result>
+	<desc>
+		　You can get the required amount of movement of the character drawing position when drawing the character specified by the current font setting.<r/>
+		　In this method, you can get the amount of movement on the Y coordinate when moving to the left (left) with respect to the drawing direction of the character.<r/>
+	</desc>
+	<ref>Font.getEscWidthX</ref>
+	<ref>Font.getEscHeightX</ref>
+	<ref>Font.getEscHeightY</ref>
+</member>
+
+<member>
+	<name>getEscHeightX</name>
+	<type>method</type>
+	<shortdesc>The amount to move the X coordinate in the vertical direction of the character</shortdesc>
+	<arg>
+		<argitem>
+			<name>text</name>
+			<default></default>
+			<desc>
+				　Specify the character string for which you want to get the amount of vertical X coordinate movement for the character.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Returns the vertical X coordinate of the character in pixels</result>
+	<desc>
+		　You can get the required amount of movement of the character drawing position when drawing the character specified by the current font setting.<r/>
+		　In this method, you can obtain the amount of movement on the X coordinate when moving vertically (downward) with respect to the drawing direction of the character.<r/>
+	</desc>
+	<ref>Font.getEscWidthX</ref>
+	<ref>Font.getEscWidthY</ref>
+	<ref>Font.getEscHeightY</ref>
+</member>
+
+<member>
+	<name>getEscHeightY</name>
+	<type>method</type>
+	<shortdesc>The amount to move the Y coordinate in the vertical direction of the character</shortdesc>
+	<arg>
+		<argitem>
+			<name>text</name>
+			<default></default>
+			<desc>
+				　Specify the character string for which you want to get the vertical movement of the Y coordinate of the character.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Returns the amount of vertical movement of the character in pixels in pixels</result>
+	<desc>
+		　You can get the required amount of movement of the character drawing position when drawing the character specified by the current font setting.<r/>
+		　In this method, you can obtain the amount of movement on the Y coordinate when moving vertically (downward) with respect to the drawing direction of the character.<r/>
+	</desc>
+	<ref>Font.getEscWidthX</ref>
+	<ref>Font.getEscWidthY</ref>
+	<ref>Font.getEscHeightX</ref>
+</member>
+
+<member>
+	<name>getGlyphDrawRect</name>
+	<type>method</type>
+	<shortdesc>Actual drawing range of character string</shortdesc>
+	<arg>
+		<argitem>
+			<name>text</name>
+			<default></default>
+			<desc>
+				　Specify the character string to get the range.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Actual drawing range of character string</result>
+	<desc>
+		　You can get the area where the glyph image is drawn when drawing the character specified by the current font setting.<r/>
+		　The resulting range is an object of the Rect class based on the 0,0 coordinates.<r/>
+		　Only horizontal orientation is supported.<r/>
+	</desc>
+	<ref>Rect</ref>
+</member>
+
+<member>
+	<name>getList</name>
+	<type>method</type>
+	<shortdesc>Enumeration of font names</shortdesc>
+	<arg>
+		<argitem>
+			<name>flags</name>
+			<default></default>
+			<desc>
+				　Specifies how fonts are enumerated.<r/>
+				　Specify the combination by bitwise OR of the following values.<r/>
+				<tt><kw>fsfFixedPitch</kw>    </tt> : List only fixed pitch fonts<r/>
+				<tt><kw>fsfSameCharSet</kw>   </tt> : List only fonts with the same character set<r/>
+				<tt><kw>fsfNoVertical</kw>    </tt> : Do not enumerate vertical fonts<r/>
+				<tt><kw>fsfTrueTypeOnly</kw>  </tt> : Enumerate only TrueType fonts<r/>
+				<tt><kw>fsfIgnoreSymbol</kw>  </tt> : Exclude symbol character sets<r/>
+				　If fsfSameCharSet is specified, fonts with the same character set as the currently selected font will be enumerated.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Array where font name (character string) is stored as each element</result>
+	<desc>
+		Enumerate font names and return as an array.
+	</desc>
+</member>
+
+<member>
+	<name>mapPrerenderedFont</name>
+	<type>method</type>
+	<shortdesc>Assigning rendered fonts</shortdesc>
+	<arg>
+		<argitem>
+			<name>fontstorage</name>
+			<default></default>
+			<desc>
+				　Specifies the rendered font storage.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Assign <kw>rendered font</kw> to the currently selected font name.<r/>
+		　From now on, the specified rendered font will be used instead for fonts with the same settings.<r/>
+		　The settings are valid for all layers.<r/>
+	</desc>
+	<ref>Font.unmapPrerenderedFont</ref>
+</member>
+
+<member>
+	<name>unmapPrerenderedFont</name>
+	<type>method</type>
+	<shortdesc>Unassign rendered fonts</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Unassigns the <kw>rendered font</kw> for the currently selected font name.<r/>
+	</desc>
+	<ref>Font.mapPrerenderedFont</ref>
+</member>
+
+
+<member>
+	<name>face</name>
+	<type>property</type>
+	<shortdesc>Font name</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the font name. You can also set a value.<r/>
+		　You can specify multiple candidates separated by commas. In this case, the font that actually exists is used, and the one written first takes precedence. Whether the font actually exists is determined by referring to the list of fonts in the OS. If no match is found, the default font will be used (currently fixed to "MS PGothic").<r/>
+		　If you put a comma at the beginning and write the font name immediately after, the OS will try to specify the font without actually listing the font (for example, ", My Original Font"). This allows you to use non-enumerable fonts registered with AddFontResource Win32 API, etc.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>height</name>
+	<type>property</type>
+	<shortdesc>Font height</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　The height of the drawn character in pixels. You can also set a value.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>bold</name>
+	<type>property</type>
+	<shortdesc>bold</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether it is bold (bold). You can also set a value.<r/>
+		　Specifying true results in bold.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>italic</name>
+	<type>property</type>
+	<shortdesc>italic</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether italic (italic). You can also set a value.<r/>
+		　Specify true to make italic.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>strikeout</name>
+	<type>property</type>
+	<shortdesc>Strikethrough</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether to draw a strikethrough. You can also set a value.<r/>
+		　Specifying true draws a strikethrough on the character.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>underline</name>
+	<type>property</type>
+	<shortdesc>Underline</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether to draw underline (underline or underline). You can also set a value.<r/>
+		　Specifying true draws an underline.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>angle</name>
+	<type>property</type>
+	<shortdesc>Character drawing angle</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates the character drawing angle. You can also set a value.<r/>
+		　The unit is 10 times the angle (degree). Takes a value between 0 and 3600.<r/>
+		　When performing vertical writing, specify the font name for vertical writing in the font name, and then specify 2700 in this property.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>rasterizer</name>
+	<type>property</type>
+	<shortdesc>String drawing method</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates the character string drawing method. You can also set a value.<r/>
+		　Specify one of the following values.<r/>
+		<tt><kw>frGDI</kw>      </tt> : Draw characters using GDI<r/>
+		<tt><kw>frFreeType</kw> </tt> : Draw characters using FreeType<r/>
+		When FreeType is specified, only horizontal writing is supported. Others are not supported.<r/>
+		This property is static. Set the value using Font.rasterizer.<r/>
+	</desc>
+</member>
+
+</doc>

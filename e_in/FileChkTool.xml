@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>File corruption check tool</title>
+
+<para>
+<ptitle>About file corruption check tool</ptitle>
+　The data will be <kw>damaged</kw> due to malfunction of the computer at the time of installation or after installation.<r/>
+　"File Corruption Check Tool" is a tool to detect such "corrupted" files.<r/>
+<r/>
+　In order to detect file corruption, the distribution file must be signed in advance with <link href="SignTool"/>.<r/>
+　The file corruption check tool also checks the validity of the <kw>digital signature</kw> (a file that cannot be validated is treated as "damaged" by this tool).<r/>
+　The files to be checked are the files under the folder where the file corruption check tool is located (the folders below the folder where the file corruption check tool is located are also searched). Therefore, place this tool in the installation folder.<r/>
+　This tool checks only signed files and does not check unsigned files. However, in exceptional cases, only the Kirikiri body (or executable file created with Releaser) always checks the signature, so the Kirikiri body must be signed.<r/>
+<note>
+The file corruption checker can detect file corruption, but cannot detect the "file does not exist" condition by itself.<r />
+If you think the missing file is the cause of the error, you can copy the list of files checked by this tool to the clipboard by "Copy result" of this tool, and send it from the end user Please investigate.<r/>
+</note>
+
+</para>
+
+
+<para>
+<ptitle>Configuration file of the file corruption check tool</ptitle>
+　"File corruption check tool.exe" in the enduser-tools folder is the main body of the file corruption check tool, but its setting file is "File corruption check tool.ini".<r/>
+　It is necessary to write the settings of the file corruption check tool here and distribute it with the main body of the check tool.<r/>
+<note>
+　If you change the name of "File corruption check tool.exe", also change the name of the setting file. For example, if "Signature Confirmation Tool.exe" is selected, the setting file should be "Signature Confirmation Tool.ini".
+</note>
+The items that can be set are described below.<r/>
+
+<dl>
+<dt>[message]Section - notice</dt>
+<dd>
+　Specify the message to be displayed at the top of the screen.<r/>
+　notice= Lines starting with must be written on a single line (without line breaks), but you can put a line break there by writing [cr].
+</dd>
+
+<dt>[message]Section - caption</dt>
+<dd>
+　Specify a character string to be displayed in the title bar of the window.<r/>
+</dd>
+
+<dt>[key]Section - publickey</dt>
+<dd>
+　Specify the <kw>public key</kw> to use for verifying the electronic signature.<r/>
+　Specify the public key here directly (without writing something like 'setting name =') by copying &amp; paste.<r/>
+</dd>
+
+</dl>
+　For an example, please refer to the standard "File Corruption Check Tool.ini" (in the Kirikiri 2 SDK distribution file).
+</para>
+
+<para>
+<ptitle>How to use</ptitle>
+<r/>
+　When the file corruption check tool .exe is started, the following screen is displayed.<r/>
+<img src="sigchk.png"/><r/><r/>
+<r/>
+<dl>
+<dt>File name list</dt>
+<dd>
+　A list of files to be checked is displayed.<r/>
+　One of "Checking", "Unchecked", "Normal", and "Damage" is displayed in the "Status" column.<r/>
+　If the file was damaged, the file will be displayed as "damaged."<r/>
+</dd>
+
+<dt>check</dt>
+<dd>
+　Start checking.<r/>
+　Checking large files takes time.
+</dd>
+
+<dt>Copy result</dt>
+<dd>
+　Copy the result to the clipboard.<r />
+　This is useful when the end user sends the result of the check.<r />
+　When the check is completed, it will be enabled (button can be pressed).<r/>
+　The result is tab-separated data, from left to right: file name, file date, file size, and check result.<r/>
+　Also, a list of all files and directories in the target directory is copied. If there is a possibility that some unexpected files exist, you can check this output to check.<r/>
+</dd>
+
+<dt>close</dt>
+<dd>
+Close the window.
+</dd>
+</dl>
+
+</para>
+
+
+</doc>
+
+

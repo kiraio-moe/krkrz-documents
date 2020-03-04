@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<anchor target="main"/>
+<keywords/>
+<title>Kirikiri Z Contents</title>
+<para>
+<ptitle>Overview and functions</ptitle>
+<link href="about"/><r/>
+<link href="Copyrights"/><r/>
+<r/>
+<link href="Startup"/><r/>
+<link href="CommandLine"/><r/>
+<r/>
+<link href="Console"/><r/>
+<r/>
+<link href="StorageSystem"/><r/>
+<link href="EventSystem"/><r/>
+<link href="GraphicSystem"/><r/>
+<link href="SoundSystem"/><r/>
+<link href="Transition"/><r/>
+<link href="Plugins"/><r/>
+<r/>
+<link href="Debug"/><r/>
+<r/>
+<link href="Files"/><r/>
+<r/>
+<link href="ComputerDependentProblems"/><r/>
+</para>
+<para>
+<ptitle>Class reference</ptitle>
+<at href="f_System.html">System class</at><r/>
+<at href="f_Storages.html">Storages class</at><r/>
+<at href="f_Debug.html">Debug class</at><r/>
+<at href="f_Scripts.html">Scripts class</at><r/>
+<at href="f_Plugins.html">Plugins class</at><r/>
+<at href="f_Timer.html">Timer class</at><r/>
+<at href="f_AsyncTrigger.html">AsyncTrigger class</at><r/>
+<at href="f_Rect.html">Rect class</at><r/>
+<at href="f_Window.html">Window class</at><r/>
+<at href="f_Window.BasicDrawDevice.html">Window.BasicDrawDevice class</at><r/>
+<at href="f_Layer.html">Layer class</at><r/>
+<at href="f_Font.html">Font class</at><r/>
+<at href="f_Bitmap.html">Bitmap class</at><r/>
+<at href="f_BitmapLayerTreeOwner.html">BitmapLayerTreeOwner class</at><r/>
+<at href="f_ImageFunction.html">ImageFunction class</at><r/>
+<at href="f_Clipboard.html">Clipboard class</at><r/>
+<at href="f_WaveSoundBuffer.html">WaveSoundBuffer class</at><r/>
+<at href="f_WaveSoundBuffer.PhaseVocoder.html">WaveSoundBuffer.PhaseVocoder class</at><r/>
+<at href="f_VideoOverlay.html">VideoOverlay class</at><r/>
+</para>
+
+<para>
+<ptitle>How to use the attached tools</ptitle>
+<!-- <link href="Releaser"/><r/> -->
+<!-- <link href="FontMaker"/><r/> -->
+<link href="Configure"/><r/>
+<!-- <link href="TPC"/><r/> -->
+<!-- <link href="SignTool"/><r/> -->
+<!-- <link href="FileChkTool"/><r/> -->
+<!-- <link href="LoopTuner"/><r/> -->
+</para>
+
+<para>
+<ptitle>Appendix</ptitle>
+<link href="KeyCodes"/><r/>
+<link href="ColorCodes"/><r/>
+<link href="MouseCursors"/><r/>
+</para>
+
+</doc>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Storage system</title>
+
+<para>
+<ptitle>About storage systems</ptitle>
+　Kirikiri refers to files, files in archives, and other resources as "storage" rather than files.<r/>
+</para>
+
+
+<para>
+<ptitle>Unified storage name</ptitle>
+　A unified storage name is a name that represents storage that is used only within Kirikiri and represents storage in a manner similar to URI.<r/>
+　Notation is<r/>
+<r/>
+<tt>media://domain/path</tt><r/>
+<r/>
+　It is done in the form Use / (slash) as a path separator.<r/>
+</para>
+
+<para>
+<ptitle>Local storage</ptitle>
+　The unified storage name for local storage (local file) uses file for media and . (dot) for domain. In Windows, the path starts with a drive letter.<r/>
+<r/>
+　For example, C:\Program Files\Game\game.exe becomes <r/>
+<tt>file://./c/program files/game/game.exe</tt><r/>
+　<r/>
+<r/>
+　The <at href="f_Storages_getFullPath.html">Storages.getFullPath</at> method can convert the file name used by the OS to a unified storage name. During this process, all uppercase letters in the file name are converted to lowercase (local storage is not case sensitive). If \ is used as a path separator, it is converted to /.<r/>
+　The <at href="f_Storages_getLocalName.html">Storages.getLocalName</at> method can convert the unified storage name to the file name used by the OS. You need to use this method when passing the storage name to applications other than Kirikiri.<r/>
+</para>
+
+<para>
+<ptitle>Archive storage</ptitle>
+　When specifying the storage in the archive, separate with &gt;, specify the storage name of the archive storage before &gt; and the path in the archive after &gt;.<r/>
+<r/>
+　For example, storage image/base.jpg in file://./c/program files/game/game.xp3 would be<r/>
+<tt>file://./c/program files/game/game.xp3&gt;image/base.jpg</tt><r/>
+　<r/>
+　Starting from 2.19 beta 14, the archive delimiter has changed from '#' to '&gt;'.<r/>
+<r/>
+　Kirikiri can handle the Kirikiri unique archive storage called XP3 by default (XP3 because it is the third generation format of XPK). See <link href="Releaser"/> for how to create an XP3 archive.<r/>
+</para>
+
+<para>
+<ptitle>Project folder</ptitle>
+　When making games and tools in Kirikiri, it is common practice to develop all necessary files in a "project folder". Kirikiri sets the project folder to the current current folder at startup.<r/>
+　If you specify everything by relative path in the project folder, you do not need to change the path specification even if it is a single executable file with Release.<r/>
+</para>
+
+<para>
+<ptitle>Data storage location</ptitle>
+　The data storage location is the folder specified by the -datapath option of <link href="CommandLine" />. You can get it in the <at href="f_System_dataPath.html">System.dataPath</at> properties.<r/>
+　Various logs output by Kirikiri and configuration files for each user are output here.<r/>
+　Also, if the user makes games, tools, etc., it is recommended that data be saved here.<r/>
+</para>
+
+
+</doc>

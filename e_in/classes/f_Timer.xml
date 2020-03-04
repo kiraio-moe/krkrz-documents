@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Timer</title>
+<desc>
+　The Timer class is a class for generating events at regular intervals.<r/>
+</desc>
+
+<member>
+	<name>Timer</name>
+	<type>constructor</type>
+	<shortdesc>Constructing a Timer object</shortdesc>
+	<arg>
+		<argitem>
+			<name>owner</name>
+			<default></default>
+			<desc>
+				　Specify where the event occurs.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>actionname</name>
+			<default>"action"</default>
+			<desc>
+				　In the object where the event specified by owner occurs, specify the name of the method that receives the event. If an empty string is specified, owner will be considered as a method, and owner will be called directly for each event cycle.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Constructs a Timer class object.<r/>
+		　Initially, the interval property is 1000 and the enabled property is false.<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>onTimer</name>
+	<type>event</type>
+	<shortdesc>Timer period has come</shortdesc>
+	<arg></arg>
+	<result></result>
+	<desc>
+		　Called every timer period.
+	</desc>
+</member>
+
+
+
+<member>
+	<name>interval</name>
+	<type>property</type>
+	<shortdesc>Event occurrence cycle</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates the occurrence <kw>cycle</kw> of the event. You can also set a value.<r/>
+		　The unit is ms (milliseconds), and an event occurs every specified time.<r/>
+		　The occurrence period can be specified by a real number. In the current version, it can be specified with 1/65536 millisecond precision (numbers after the decimal point are rounded to this precision).<r/>
+		　Even if there is a precision of 1/65536 milliseconds, there is no guarantee that the event handler will actually be called with this precision.
+		Actually, there is a fluctuation of about 3 to 10ms at the timing when the event is called.
+		However, in the long term, the event is automatically adjusted so that the event occurs at the cycle specified by this property.
+	</desc>
+</member>
+
+<member>
+	<name>capacity</name>
+	<type>property</type>
+	<shortdesc>Maximum allowable amount of events</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Specify how many events can be raised at any one time. You can also set a value.<r/>
+		　In some cases, such as when processing longer than the timer cycle is performed, the timer event cannot be processed.
+		At this time, the timer stores events in the event queue, but there is an upper limit to the number of events stored in the event queue.
+		This property specifies the maximum number.<r/>
+		　When it is time to process the events, Kirikiri tries to process the number of events in the queue at one time.<r/>
+		　If 1 is specified, only one event will be stored in the event queue. If you specify 0, there is no limit on the number of events that can be stored in the event queue.<r/>
+		　The default is 6.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>enabled</name>
+	<type>property</type>
+	<shortdesc>Whether to fire the event</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether to raise an event. You can also set a value.<r/>
+		　If true, the event will fire. If false, no event occurs.
+	</desc>
+</member>
+
+<member>
+	<name>mode</name>
+	<type>property</type>
+	<shortdesc>mode</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates the mode of operation. You can also set a value.<r/>
+		　Specify one of the following values:<r/>
+		<tt><kw>atmNormal</kw>    : </tt> Events are delivered at the normal event delivery priority.<r/>
+		<tt><kw>atmExclusive</kw> : </tt> Delivered in preference to other asynchronous events<r/>
+		<tt><kw>atmAtIdle</kw>    : </tt> Delivered when idle (no more events to deliver).<r/>
+	</desc>
+	<ref>AsyncTrigger.mode</ref>
+</member>
+
+</doc>

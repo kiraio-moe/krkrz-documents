@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Plugins</title>
+<desc>
+　Plugins class is a class that manages <kw>plugins</kw>. Objects cannot be created from this class.<r/>
+</desc>
+
+<member>
+	<name>link</name>
+	<type>method</type>
+	<shortdesc>Plug-in connection</shortdesc>
+	<arg>
+		<argitem>
+			<name>name</name>
+			<default></default>
+			<desc>
+				　Specify the plug-in to connect.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Connect the specified plug-in to Kirikiri body (read).<r/>
+	</desc>
+</member>
+
+<member>
+	<name>unlink</name>
+	<type>method</type>
+	<shortdesc>Detach plugin</shortdesc>
+	<arg>
+		<argitem>
+			<name>name</name>
+			<default></default>
+			<desc>
+				　Specify the plug-in to be detached.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>　True if successful, false if unsuccessful</result>
+	<desc>
+		　Detach the specified plug-in.<r/>
+		　Some plug-ins do not respond to release (for example, when an object is in use). It does not respond to release and returns false if it fails.<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>getList</name>
+	<type>method</type>
+	<shortdesc>Get list</shortdesc>
+	<arg>
+	</arg>
+	<result>Array containing the names of the linked plugins</result>
+	<desc>
+		　Get a list of plugins. The returned array is a list of plugin names in the order in which they were linked.<r/>
+	</desc>
+</member>
+
+
+</doc>

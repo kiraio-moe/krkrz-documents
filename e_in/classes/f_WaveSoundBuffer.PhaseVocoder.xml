@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>WaveSoundBuffer.PhaseVocoder</title>
+<desc>
+　The WaveSoundBuffer.PhaseVocoder class is a filter that registers this instance in <ref>WaveSoundBuffer.filters</ref> and provides the function of Phase Vocoder (phase vocoder).<r/>
+　With Phase Vocoder, you can change the pitch while maintaining the playback speed (pitch shifter) or change the playback speed while maintaining the pitch (time shifter).<r/>
+</desc>
+
+
+<member>
+	<name>PhaseVocoder</name>
+	<type>constructor</type>
+	<shortdesc>Construct PhaseVocoder object</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Constructs an object of the WaveSoundBuffer.PhaseVocoder class.<r/>
+		　Please register the created instance to WaveSoundBuffer instance with <ref>WaveSoundBuffer.filters</ref>.
+	</desc>
+</member>
+
+
+<member>
+	<name>interface</name>
+	<type>property</type>
+	<shortdesc>Get interface object</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Used internally. Do not use from a script.
+	</desc>
+</member>
+
+<member>
+	<name>time</name>
+	<type>property</type>
+	<shortdesc>Time axis scale</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the scale in the time axis direction. You can also set a value.<r/>
+		　The number that can be specified is a real number greater than 0. However, if the value is too small, the CPU load increases, and in the worst case, playback may not be possible. In addition, the sound quality becomes worse from around 1.95, and the sound quality may not be improved even if the overlap is increased (due to the characteristics of the internal algorithm).<r/>
+		　If you specify 1.0, the time axis scale does not change (the playback speed does not change).<r/>
+		　For example, if you specify 1.5, the scale in the time axis direction will be 1.5 times, and it will play slower (it will take 1.5 times longer to play).<r/>
+		　For example, if you specify 0.5, the time axis scale will be 0.5 times faster and will play faster (play at double speed).
+		　Even if both the time and pitch properties are 1, the Phase Vocoder filter works, the sound quality is slightly degraded, and it uses CPU time. If you want to keep both at 1, you may want to remove this filter from the filter array.<r/>
+		　Changes to this property take effect in real time, but due to buffering, it may take up to two seconds for it to actually play. Also, noise may occur when switching.
+	</desc>
+</member>
+
+<member>
+	<name>pitch</name>
+	<type>property</type>
+	<shortdesc>Scale in frequency axis direction</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the scale in the frequency axis direction. You can also set a value.<r/>
+		　The number that can be specified is a number greater than 0.0.<r/>
+		　Specifying 1.0 does not change the scale in the frequency axis direction (the pitch does not change).<r/>
+		　For example, if you specify 1.0594630943593, the pitch will increase by a semitone.<r/>
+		　For example, if you specify 0.9438743126817, the pitch will be lowered by a semitone.<r/>
+		　Even if both the time and pitch properties are 1, the Phase Vocoder filter works, the sound quality is slightly degraded, and it uses CPU time. If you want to keep both at 1, you may want to remove this filter from the filter array.<r/>
+		　Changes to this property take effect in real time, but due to buffering, it may take up to two seconds for it to actually play.
+	</desc>
+</member>
+
+
+<member>
+	<name>window</name>
+	<type>property</type>
+	<shortdesc>Window size</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates the window size (frame size) of FFT (Fast Fourier Transform) used inside PhaseVocoder.
+		　Specify a number that is a power of 2 between 64 and 32768. The default is 4096.<r/>
+		　Increasing this value will increase the resolution in the frequency axis (the pitch will be less likely to be out of order), but will decrease the resolution in the time axis (the sound will be more pronounced).<r/>
+		　Higher values use more CPU. Look for the lowest value that does not reduce the sound quality.<r/>
+		　For a 44.1KHz audio, a window size of about 256 is better. For music, window size = about 4096 would be better.<r/>
+		　Changes to this property take effect when the <ref>WaveSoundBuffer.open</ref> method is executed.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>overlap</name>
+	<type>property</type>
+	<shortdesc>Overlap count</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the overlap count (oversampling factor).<r/>
+		　Specify 0 or a power of 2 number between 2 and 32. Default is 0.<r/>
+		　If 0 is specified, an appropriate value will be set according to the current value of the time property.<r/>
+		　Increasing this value will increase the resolution in the time axis direction. Especially if you want to slow down the playback speed, it is better to set a higher value.<r/>
+		　Higher values use more CPU.<r/>
+		　Changes to this property take effect in real time, but due to buffering, it may take up to two seconds for it to actually play. Also, noise may occur when switching.
+	</desc>
+</member>
+
+
+</doc>

@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>About transitions</title>
+
+<para>
+<ptitle>What is a transition?</ptitle>
+　Transitions are things that take the time to swap screens. The transition of Kirikiri Z can be performed on the layer alone or on the layer tree.<r/>
+　If you switch to a layer and specify the source, the two layers will be swapped.<r/>
+　In the former case, the corresponding layer is replaced, and in the latter case, the tree structure of the layer is completely replaced.<r/>
+　See <at href="f_Layer_beginTransition.html">Layer.beginTransition</at> method.<r/>
+<r/>
+　Kirikiri Z manages transitions with something called "<kw>transition handler</kw>". These are specified by the name argument of the Layer.beginTransition method. In the current version, there are three in the body of Kirikiri. It can also be extended with plugins.<r/>
+<r/>
+　The following describes the transition handler built into the main body of Kirikiri and the transition handler that can be used with the extended transition plug-in (extrans.dll).<r/>
+</para>
+
+<para>
+<ptitle>Specifying options</ptitle>
+<r/>
+<dl>
+<dt>When using from TJS2</dt>
+<dd>
+　Specify in the options argument of Layer.beginTransition method in the form of a dictionary array. For example, to specify a "universal" transition with vague=100 time=2000 rule=rule1.png, specify the options argument as follows:<r/>
+<r/>
+<tt>%[vague:100, time:2000, rule:"rule1.png"]</tt>
+</dd>
+<dt>When using from KAG</dt>
+<dd>
+　In the case of KAG, the option is directly described as an attribute in the trans tag. However, there are other attributes (layer, children, method attributes) to specify in addition to the options. You will specify options with these attributes.<r/>
+　For example, to make a "universal" transition of vague=100 time=2000 rule=rule1.png, including the child layer in the background layer, do as follows.<r/>
+<r/>
+<tt>@trans layer=base children=true method=universal vague=100 time=2000 rule=rule1.png</tt><r/>
+<r/>
+　Or, for example, if you want to use the "wave" transition with maxomega=0.1 maxh=20:<r/>
+<r/>
+<tt>@trans layer=base children=true method=wave maxomega=0.1 maxh=20</tt>
+</dd>
+</dl>
+</para>
+
+<para>
+<ptitle>Built-in transition handler</ptitle>
+　Kirikiri has the following three transition handlers in the main body.<r/>
+<r/>
+<dl>
+<dt><kw>crossfade</kw></dt>
+<dd>
+　The "crossfade" transition (the crossfade transition) is the simplest transition, performing a simple crossfade.<r/>
+　The options are as follows:<r/>
+<r/>
+<dl>
+<dt>time (required)</dt>
+<dd>
+　Specifies the duration of the transition in milliseconds.
+</dd>
+</dl>
+
+</dd>
+
+<dt><kw>universal</kw></dt>
+<dd>
+　"universal" transitions (universal transitions) are transitions that follow a grayscale image, called a rule image. The rule image is specified by the rule option, and it switches from the darker part of this image faster to the original (back screen in KAG).<r/>
+　If the rule image is smaller than the screen where the transition was attempted, it will be tiled, and if it is larger than the screen where the transition was attempted, only the upper left part will be used.<r/>
+　See the KAG reference for more information.<r/>
+　The options are as follows:<r/>
+<r/>
+<dl>
+<dt>time (required)</dt>
+<dd>
+　Specifies the duration of the transition in milliseconds.
+</dd>
+
+<dt>rule (required)</dt>
+<dd>
+　Specify the rule image file name. The rule image must be a 256-level grayscale image. If you specify another image, it will be forcibly converted to grayscale.
+</dd>
+
+<dt>vague</dt>
+<dd>Specify "Ambiguous area value". If a small value (such as 0) is specified, the boundary between the part before and after the screen change is clear. If you specify a large value (such as 128), this border will be blurry and smooth. There is an optimal value depending on the rule image. If omitted, 64 is assumed.
+</dd>
+</dl>
+
+</dd>
+
+<dt><kw>scroll</kw></dt>
+<dd>
+　The "scroll" transition (scroll transition) is a transition that allows you to slide the source or the destination, or both, to create a scroll effect.<r/>
+　The options are as follows:<r/>
+<r/>
+<dl>
+<dt>time (required)</dt>
+<dd>
+　Specifies the duration of the transition in milliseconds.
+</dd>
+
+<dt>from</dt>
+<dd>
+　Specifies the direction from which the layer to be switched (back page in KAG) appears.<r/>
+　When specifying in TJS, sttLeft will appear from the left (default), sttTop will appear from the top, sttRight will appear from the right, and sttBottom will appear from the bottom.<r/>
+　When specifying with KAG trans tag, "left" appears from the left (default), "top" appears from the top, "right" appears from the right, and "bottom" appears from the bottom. .
+</dd>
+
+<dt>stay</dt>
+<dd>
+　Specify how the source and destination images move.<r/>
+　When specifying in TJS, if ststNoStay is specified, the image at the switching destination will be pushed so as to be pressed by the original image, and will come out (default). You can create the effect of connecting two screens and scrolling them. When ststStaySrc is specified, the destination image moves and moves out, and the source image appears from behind. If ststStayDest is specified, the destination image will be frozen and the original image will enter there.<r/>
+　When specifying in KAG, "nostay" indicates ststNoStay, "stayback" indicates ststStaySrc, and "stayfore" indicates ststStayDest.
+</dd>
+</dl>
+
+</dd>
+</dl>
+</para>
+
+
+<para>
+<ptitle>Extended transition plugin</ptitle>
+　The extended transition plug-in (extrans.dll) is a plug-in for Kirikiri Z that allows you to use some transitions that are not built into the main unit.<r/>
+　To be usable, you need to connect with <at href="f_Plugins_link.html">Plugins.link</at> method like other plugins (loadplugin tag for KAG). Once connected, the following transition handlers can be used.<r/>
+<r/>
+<dl>
+<dt>wave</dt>
+<dd>
+The "wave" transition is a transition that represents and switches between the waves of a raster scroll.<r/>
+<r/>
+<img src="wave_trans.jpg"/><r/>
+<r/>
+　You have the following options:<r/>
+<r/>
+<dl>
+<dt>time (required)</dt>
+<dd>
+　Specifies the duration of the transition in milliseconds.
+</dd>
+
+<dt>wavetype</dt>
+<dd>
+　Specifies the wave movement. If you specify 0, the wave is fine at the beginning and end of the transition, and the wave is soft at the middle. A value of 1 will make the waves finer and softer at first. A value of 2 initially makes the waves softer and progressively finer. Default is 0.
+</dd>
+
+<dt>maxh</dt>
+<dd>
+　Specifies the maximum width of the wave in pixels. Higher values result in deeper waves. The default is 50.
+</dd>
+
+<dt>maxomega</dt>
+<dd>
+　Specify the maximum value of the wave angular velocity (rad / pixel). The higher the value, the finer the waves. The smaller the size, the softer the waves. Default is 0.2.
+</dd>
+
+<dt>bgcolor1</dt>
+<dd>
+　Specify the initial background color in 0xRRGGBB format.
+</dd>
+
+<dt>bgcolor2</dt>
+<dd>
+　Specify the final background color in 0xRRGGBB format. The background color starts with the initial background color and gradually changes to the final background color.
+</dd>
+</dl>
+
+</dd>
+
+
+<dt>mosaic</dt>
+<dd>
+A "mosaic" transition is a transition that looks like a rectangular mosaic.<r/>
+<r/>
+<img src="mosaic_trans.png"/><r/>
+<r/>
+　You have the following options:<r/>
+<r/>
+<dl>
+<dt>time (required)</dt>
+<dd>
+　Specifies the duration of the transition in milliseconds.
+</dd>
+
+<dt>maxsize</dt>
+<dd>
+　Specifies the maximum size of the mosaic rectangle. Default is 30. The higher the value, the rougher the mosaic.
+</dd>
+</dl>
+
+</dd>
+
+
+<dt>turn</dt>
+<dd>
+A "turn" transition is a transition in which a number of small cards are turned over.<r/>
+<r/>
+<img src="turn_trans.jpg"/><r/>
+<r/>
+　You have the following options:<r/>
+<r/>
+<dl>
+<dt>time (required)</dt>
+<dd>
+　Specifies the duration of the transition in milliseconds.
+</dd>
+
+<dt>bgcolor</dt>
+<dd>
+　Specify the background color in 0xRRGGBB format.
+</dd>
+</dl>
+
+</dd>
+
+
+<dt>rotatezoom</dt>
+<dd>
+The "rotatezoom" transition is a transition that zooms in or out while rotating the transition source (back screen in KAG).<r/>
+<r/>
+<img src="rotatezoom_trans.jpg"/><r/>
+<r/>
+　You have the following options:<r/>
+<r/>
+<dl>
+<dt>time (required)</dt>
+<dd>
+　Specifies the duration of the transition in milliseconds.
+</dd>
+
+<dt>factor</dt>
+<dd>
+　Specify the initial magnification. If you specify 0, it will not be visible at first. Zoom in while rotating from the center. If 2 is specified, the camera zooms out while rotating from 2x magnification to 1x magnification. You can specify more than 3 numbers and real numbers. The default is 1 (actual size).
+</dd>
+
+<dt>accel</dt>
+<dd>
+　Specify whether to perform the scaling operation at an accelerated rate. If you specify a negative number less than or equal to -2, the beginning will be early and slow down. If you specify a positive number greater than 1, it is slow at first and gradually faster. Specify 0 for a linear movement. But it may not look linear with visual effects. Default is 0.
+</dd>
+
+<dt>twist</dt>
+<dd>
+　Specify which direction and how much to rotate. Specify a positive number to rotate counterclockwise. Specify a negative number to rotate clockwise. The value specified is the number of revolutions. Default is 2.
+</dd>
+
+<dt>twistaccel</dt>
+<dd>
+　Specify whether to perform the rotation motion at an accelerated rate. If you specify a negative number less than or equal to -2, the beginning will be early and slow down. If you specify a positive number greater than 1, it is slow at first and gradually faster. Specify 0 for a linear movement. The default is -2.
+</dd>
+</dl>
+
+</dd>
+
+
+<dt>rotatevanish</dt>
+<dd>
+The "rotatevanish" transition is a transition that zooms out while rotating the transition destination (the front screen in KAG).<r/>
+<r/>
+<img src="rotatevanish_trans.jpg"/><r/>
+<r/>
+　You have the following options:<r/>
+<r/>
+<dl>
+<dt>time (required)</dt>
+<dd>
+　Specifies the duration of the transition in milliseconds.
+</dd>
+
+<dt>accel</dt>
+<dd>
+　Specify whether to perform the scaling operation at an accelerated rate. If you specify a negative number less than or equal to -2, the beginning will be early and slow down. If you specify a positive number greater than 1, it is slow at first and gradually faster. Specify 0 for a linear movement. But it may not look linear with visual effects. Default is 2.
+</dd>
+
+<dt>twist</dt>
+<dd>
+　Specify which direction and how much to rotate. Specify a positive number to rotate counterclockwise. Specify a negative number to rotate clockwise. The value specified is the number of revolutions. Default is 2.
+</dd>
+
+<dt>twistaccel</dt>
+<dd>
+　Specify whether to perform the rotation motion at an accelerated rate. If you specify a negative number less than or equal to -2, the beginning will be early and slow down. If you specify a positive number greater than 1, it is slow at first and gradually faster. Specify 0 for a linear movement. Default is 2.
+</dd>
+</dl>
+
+</dd>
+
+
+<dt>rotateswap</dt>
+<dd>
+The "rotateswap" transition is a transition in which the transition destination and the transition source are swapped while rotating. The transition destination (front screen in KAG) rotates to the back while rotating, while the transition source (back screen in KAG) comes to the front while rotating.<r/>
+<r/>
+<img src="rotateswap_trans.jpg"/><r/>
+<r/>
+　You have the following options:<r/>
+<r/>
+<dl>
+<dt>time (required)</dt>
+<dd>
+　Specifies the duration of the transition in milliseconds.
+</dd>
+
+<dt>twist</dt>
+<dd>
+　Specify which direction and how much to rotate. Specify a positive number to rotate counterclockwise. Specify a negative number to rotate clockwise. The value specified is the number of revolutions. Default is 1.
+</dd>
+
+<dt>bgcolor</dt>
+<dd>
+　Specify the background color in 0xRRGGBB format.
+</dd>
+</dl>
+
+</dd>
+
+
+<dt>ripple</dt>
+<dd>
+The "ripple" transition is a transition in which the ripples are exchanged while giving an expression that spreads.<r/>
+<r/>
+<img src="ripple_trans.jpg"/><r/>
+<r/>
+　You have the following options:<r/>
+<r/>
+<dl>
+<dt>time (required)</dt>
+<dd>
+　Specifies the duration of the transition in milliseconds.
+</dd>
+
+<dt>centerx</dt>
+<dd>
+　Specifies the center X coordinate of the ripple. If omitted, it will be the center of the image.
+</dd>
+
+<dt>centery</dt>
+<dd>
+　Specifies the center Y coordinate of the ripple. If omitted, it will be the center of the image.
+</dd>
+
+<dt>rwidth</dt>
+<dd>
+　Specifies the fineness of the ripples. You can specify any of 16, 32, 64, 128, and the smaller the number, the finer the ripples. If omitted, 128 is assumed.
+</dd>
+
+<dt>roundness</dt>
+<dd>
+　Specifies whether the ripple is a long vertical ellipse, a perfect circle, or a long horizontal ellipse. If you specify a number in the range 0.0 1.0 (but not including 0.0) (for example, 0.5), the result is a vertically long ellipse. Specifying 1.0 results in a perfect circle. If you specify a number greater than 1.0 (for example, 2), the result is a long ellipse. If omitted, 1.0 is assumed.
+</dd>
+
+<dt>speed</dt>
+<dd>
+　Specifies the speed at which the waves spread. If omitted, 6.0 is assumed.
+</dd>
+
+<dt>maxdrift</dt>
+<dd>
+　Specifies the intensity of the waves. If omitted, 24 is assumed.
+</dd>
+</dl>
+<r/>
+<note>
+　The ripple transition allocates a fair amount of memory the first time it is run (about 0.5 to 4MB, depending on options),
+Complete the numerical calculation to execute the transition smoothly and store it in its memory.
+This may take some time (about 0.01 to 0.5 seconds).<r/>
+　If the size of the image to be transitioned, centerx, centery, rwidth, roundness, and maxdrift, are all the same, the information from the previous numerical calculation is reused. The results of numerical calculations for the last four conditions are retained (cached).
+When a numerical calculation is requested for new conditions beyond that, the oldest information is deleted.<r/>
+　Based on these, if you use this transition often, you can execute the transition once with a dummy before execution to avoid the subsequent numerical calculations.<r/>
+</note>
+
+</dd>
+</dl>
+<r/>
+
+
+</para>
+</doc>
+
+

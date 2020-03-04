@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>console</title>
+
+<para>
+<ptitle>About the console</ptitle>
+　When launched from the command line, a message is displayed on the command line.<r/>
+　In the console, you can display various messages for debugging, such as Kirikiri's system and user scripts using the <at href="f_Debug_message.html">Debug.message</at> method.<r/>
+</para>
+
+<para>
+<ptitle>Screen description</ptitle>
+<img src="Console.png"/><r/><r/>
+The command line itself.<r/>
+</para>
+
+</doc>

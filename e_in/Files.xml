@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>File / Folder List</title>
+
+<para>
+<ptitle>File / Folder List</ptitle>
+This section describes files and folders related to Kirikiri.<r/>
+It does not cover all files. Most of the files require special attention. Please refer to readme.txt for the folder structure of the Kirikiri Z SDK distribution archive.<r/>
+For your convenience, files related to KAG are also posted.<r/>
+</para>
+
+<para>
+<ptitle>folder</ptitle>
+<dl>
+  <dt><kw>plugin</kw> and <kw>plugin64</kw></dt>
+  <dd>This is the folder where Kirikiri looks for plugins. Kirikiri refers to the plug-ins located in the folder where the Kirikiri executable file is located.→ <link href="Plugins"/></dd>
+
+  <dt><kw>data</kw> and <kw>content-data</kw></dt>
+  <dd>If this folder is in the folder where the executable file of Kiriri Kiriri is located, the folder is regarded as the project folder and executed.→ <link href="Startup"/></dd>
+
+</dl>
+</para>
+
+<para>
+<ptitle>File</ptitle>
+<dl>
+  <dt>*.<kw>xp3</kw></dt>
+  <dd>It is an archive file for Kirikiri.→ <link href="Releaser"/></dd>
+
+  <dt><kw>data.xp3</kw> and <kw>data.exe</kw></dt>
+  <dd>Kirikiri will execute this file if it is in the same folder as Kirikiri's executable file, assuming that it is a project folder.→ <link href="Startup"/></dd>
+
+  <dt>*.<kw>tpm</kw></dt>
+  <dd>A plug-in for Kirikiri, which is automatically loaded at startup.→ <link href="Plugins"/></dd>
+
+  <dt><kw>krdevui.dll</kw></dt>
+  <dd>This is a DLL commonly used by Kirikiri's development tools. You do not need to include this file in your end-user distribution.</dd>
+
+  <dt><kw>krmovie.dll</kw></dt>
+  <dd>Necessary when playing WMV / MPG in Kirikiri. If you do not want to play video, you do not need to include this in the end user distribution.→ <at href="f_VideoOverlay.html">VideoOverlay class</at></dd>
+
+  <dt>*.<kw>dll</kw></dt>
+  <dd>For Kirikiri plug-ins, they must be included in the distribution for end users. Of course, you don't need to include unnecessary plugins.→ <link href="Plugins"/></dd>
+
+  <dt><kw>krkr.eXe</kw></dt>
+  <dd>It is Kirikiri body. You can change the file name when distributing to end users.</dd>
+
+  <dt>*.<kw>cf</kw> and *.<kw>cfu</kw></dt>
+  <dd>This file contains the options for the Kirikiri body. To enable the options specified to Kirikiri body (including -datapath option, etc.) in "Kirikiri settings" (-userconf), the same applies to the distribution for end users. Must be packed.→ <link href="Configure"/></dd>
+
+  <dt><kw>File corruption check tool.exe</kw> and its .<kw>ini</kw> file</dt>
+  <dd>File corruption check tool. You can change the file name when distributing it to end users, but you must make sure that both the .exe and .ini files have the same name. When you distribute the Kirikiri Z SDK, it is included in enduser-tools, but when distributing to end users, it is usually necessary to place it in the same folder as the Kirikiri executable file.→ <link href="FileChkTool"/></dd>
+
+  <dt><kw>startup.tjs</kw></dt>
+  <dd>TJS script file. Kirikiri looks for this file directly under the project folder and executes it first.→ <link href="Startup"/></dd>
+
+  <dt>*.<kw>tjs</kw></dt>
+  <dd>TJS script file.</dd>
+
+  <dt><kw>msgmap.tjs</kw></dt>
+  <dd>Message map file. If you haven't created it, you don't need to include this file in the end-user distribution.→ <link href="Controller"/></dd>
+
+  <dt>*.<kw>sig</kw></dt>
+  <dd>The signature file output by the key / signature tool. Refer to a file corruption check tool.→ <link href="SignTool"/></dd>
+
+  <dt>*.<kw>rpf</kw></dt>
+  <dd>Releaser's profile. Releaser setting information is recorded. This file does not need to be included in the end-user distribution (Releaser automatically excludes this file).→ <link href="Releaser"/></dd>
+
+  <dt><kw>hwexcept.log</kw></dt>
+  <dd>When the Kirikiri body crashes, it may be created at the location specified by the -datapath option. There are various situations that can be said to be a crash, but if this file was created it is a very severe crash, so please collect it from the end user and send it to the author of Kirikiri if necessary. This file does not need to be included in the end user distribution.</dd>
+
+  <dt>*.<kw>console.log</kw></dt>
+  <dd>It is a log file of the console of Kirikiri. Normally, when Kirikiri crashes, it may be created at the location specified by the -datapath option. The log that this file records is almost always the result of script mistakes. During application development or after distribution to end users, collect them from end users for debugging. You do not need to include this file in your end-user distribution.</dd>
+
+  <dt>*.<kw>dump.txt</kw></dt>
+  <dd>TJS dump file. You do not need to include this file in your end-user distribution.→ <link href="Controller"/></dd>
+
+  <dt>*.<kw>sli</kw></dt>
+  <dd>This is a loop definition file output by the loop tuner.→ <link href="LoopTuner"/></dd>
+
+  <dt>*.<kw>tft</kw></dt>
+  <dd>Rendered font data output by the rendered font data creation tool.→ <link href="FontMaker"/></dd>
+
+  <dt>*.png *.jpeg *.jpg *.tlg *.bmp *.jxr</dt>
+  <dd>This is an image file.→ <link href="GraphicSystem"/></dd>
+
+  <dt>*.wav *.tcw *.ogg *.opus</dt>
+  <dd>This is an audio file.→ <link href="SoundSystem"/></dd>
+
+  <dt>*.wmv *.mpg *.mp4 *.ogv</dt>
+  <dd>This is a video file.→ <at href="f_VideoOverlay.html">VideoOverlay class</at></dd>
+
+  <dt>*.ks</dt>
+  <dd>This is a KAG scenario file.</dd>
+
+  <dt>*.ksd *.kdt</dt>
+  <dd>These are KAG save data.</dd>
+
+  <dt>*.asd</dt>
+  <dd>This is a KAG animation definition file.</dd>
+ 
+  <dt>*.ma</dt>
+  <dd>This is the KAG area action definition file.</dd>
+ 
+
+</dl>
+</para>
+
+</doc>

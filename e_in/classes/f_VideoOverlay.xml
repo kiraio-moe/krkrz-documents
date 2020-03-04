@@ -1,0 +1,970 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>VideoOverlay</title>
+<desc>
+　The VideoOverlay class creates a display area for displaying MPEG I, WMV, H.264, theora, etc. You can also display on the Kirikiri layer.<r/>
+　Before 1.3.0, when playing WMV / MPEG I, krmovie.dll is needed in the same location as the Kirikiri executable file.<r/>
+　Since 1.3.0, krmovie.dll has been integrated into the main unit, so there is no need to attach it separately. To play theora, you need krdstheora.dll.<r/>
+<r/>
+　Except for playback in layers, when playing with overlays, the display area of the VideoOverlay class is displayed in front of all layers and cannot be transparent.<r/>
+　Playback in layers tends to be more processor-intensive during playback than playback in overlays.<r/>
+</desc>
+
+<member>
+	<name>VideoOverlay</name>
+	<type>constructor</type>
+	<shortdesc>Construct VideoOverlay object</shortdesc>
+	<arg>
+		<argitem>
+			<name>window</name>
+			<default></default>
+			<desc>
+				　Specify the window (object of class <ref>Window</ref>) that will hold this layer.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Constructs an object of class VideoOverlay.<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>onStatusChanged</name>
+	<type>event</type>
+	<shortdesc>Status changed</shortdesc>
+	<arg>
+		<argitem>
+			<name>status</name>
+			<default></default>
+			<desc>
+				　Represents a status string.<r/>
+				　One of the following:<r/>
+				<tt>"<kw>unload</kw>"   : </tt> Media not open<r/>
+				<tt>"<kw>ready</kw>"    : </tt> Media is ready<r/>
+				<tt>"<kw>play</kw>"     : </tt> Media is playing<r/>
+				<tt>"<kw>stop</kw>"     : </tt> Media is down<r/>
+				<tt>"<kw>pause</kw>"    : </tt> Media is paused<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		Occurs when the status of this object changes.<r/>
+		ready occurs only in vomMFEVR mode.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onPeriod</name>
+	<type>event</type>
+	<shortdesc>Period event has occurred</shortdesc>
+	<arg>
+		<argitem>
+			<name>type</name>
+			<default></default>
+			<desc>
+				　Represents the type of Period event.<r/>
+				　One of the following:<r/>
+				<tt><kw>perLoop</kw>    : </tt> End of (normal) loop<r/>
+				<tt><kw>perSegLoop</kw> : </tt> End of segment loop reached<r/>
+				<tt><kw>perPeriod</kw>  : </tt> The frame specified by the setPeriodEvent method has been reached<r/>
+				<tt><kw>perPrepare</kw> : </tt> Playback preparation by the prepare method is completed.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		This method is called when the end of the loop, when the frame specified by setPeriodEvent is reached, or when the prepare method is ready for playback.<r/>
+		At the end of the loop or when this event is called when the frame specified by setPeriodEvent is reached, the playback position may already be beyond the specified position, depending on the playback situation. See the frame property to get the current actual playback position.<r/>
+	</desc>
+	<ref>VideoOverlay.setPeriodEvent</ref>
+	<ref>VideoOverlay.prepare</ref>
+	<ref>VideoOverlay.frame</ref>
+</member>
+
+<member>
+	<name>onFrameUpdate</name>
+	<type>event</type>
+	<shortdesc>Video frame updated</shortdesc>
+	<arg>
+		<argitem>
+			<name>frame</name>
+			<default></default>
+			<desc>
+				Video frame number<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		Method called after the video frame has been updated.<r/>
+		The frame argument is not always exactly the same as the currently displayed video frame.<r/>
+		Available only in layer drawing mode and mixer mode.<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>open</name>
+	<type>method</type>
+	<shortdesc>Open media</shortdesc>
+	<arg>
+		<argitem>
+			<name>storage</name>
+			<default></default>
+			<desc>
+				　Opens the specified media.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		Opens the specified media.<r/>
+		The current version can play MPEG I (extension .mpeg or .mpg or .mpv) and WMV.<r/>
+		Video-only (non-multiplexed with audio) MPEG I streams should have a .mpv extension.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>play</name>
+	<type>method</type>
+	<shortdesc>Start playback</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Start playing the media.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>stop</name>
+	<type>method</type>
+	<shortdesc>Stop playback</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Stop playing the media.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>pause</name>
+	<type>method</type>
+	<shortdesc>pause</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Pauses media playback.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>rewind</name>
+	<type>method</type>
+	<shortdesc>Rewind</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		Move the media playback position to the beginning.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>prepare</name>
+	<type>method</type>
+	<shortdesc>Preparation for playback</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		Draws the first frame of the media on the specified layer, and generates an onPeriod event when the drawing ends.
+		Please wait for the onPeriod event before playing after the prepare method call.<r/>
+	</desc>
+	<ref>VideoOverlay.onPeriod</ref>
+</member>
+
+<member>
+	<name>setSegmentLoop</name>
+	<type>method</type>
+	<shortdesc>Setting the loop between frames</shortdesc>
+	<arg>
+		<argitem>
+			<name>comeFrame</name>
+			<default></default>
+			<desc>
+				　Loop destination frame (start frame of loop). When playback reaches the goFrame, the playhead moves to this frame.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>goFrame</name>
+			<default></default>
+			<desc>
+				　Loop end frame (end frame of loop). When the display of the frame before this frame ends, the playhead moves to comeFrame.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		Performs loop processing between specified frames.<r/>
+		At the end of the loop (goFrame), an onPeriod event occurs.<r/>
+		It is necessary to set a key frame in the movie file for the comeFrame frame.<r/>
+		If not set, the playback position will move to the key frame closest to the specified frame when moving from the loop end point to the start point.<r/>
+	</desc>
+	<ref>VideoOverlay.cancelSegmentLoop</ref>
+	<ref>VideoOverlay.onPeriod</ref>
+	<ref>VideoOverlay.segmentLoopStartFrame</ref>
+	<ref>VideoOverlay.segmentLoopEndFrame</ref>
+</member>
+
+<member>
+	<name>cancelSegmentLoop</name>
+	<type>method</type>
+	<shortdesc>Canceling loop between frames</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		Releases the loop between segments specified by the setSegmentLoop method.<r/>
+	</desc>
+	<ref>VideoOverlay.setSegmentLoop</ref>
+</member>
+
+<member>
+	<name>close</name>
+	<type>method</type>
+	<shortdesc>Close media</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		Close the media.<r/>
+		It also releases any resources reserved for playing the media.<r/>
+	</desc>
+	<ref>VideoOverlay.setSegmentLoop</ref>
+</member>
+
+<member>
+	<name>setPeriodEvent</name>
+	<type>method</type>
+	<shortdesc>Specifying event occurrence at specified frame</shortdesc>
+	<arg>
+		<argitem>
+			<name>eventFrame</name>
+			<default></default>
+			<desc>
+				Specify the frame that generates the onPeriod event.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		Raises an onPeriod event at the specified frame.<r/>
+		The onPeriod event is released once it has occurred. If you want it to occur again, set this method again.<r/>
+	</desc>
+	<ref>VideoOverlay.cancelPeriodEvent</ref>
+	<ref>VideoOverlay.onPeriod</ref>
+</member>
+
+<member>
+	<name>cancelPeriodEvent</name>
+	<type>method</type>
+	<shortdesc>Release event occurrence at specified frame</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		Releases the event occurrence set by the setPeriodEvent method.<r/>
+	</desc>
+	<ref>VideoOverlay.setPeriodEvent</ref>
+</member>
+
+<member>
+	<name>setPos</name>
+	<type>method</type>
+	<shortdesc>Specify the upper left position of the playback rectangle</shortdesc>
+	<arg>
+		<argitem>
+			<name>left</name>
+			<default></default>
+			<desc>
+				　Specify the left edge of the rectangular area for playing media.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>top</name>
+			<default></default>
+			<desc>
+				　Specify the top position of the rectangular area for playing media.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Specifies the upper left position of the rectangular area for playing media.<r/>
+		　Coordinates are coordinates in the window's client (the area where the layer can be displayed) and are specified in pixels.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>setSize</name>
+	<type>method</type>
+	<shortdesc>Specify the size of the playback rectangle</shortdesc>
+	<arg>
+		<argitem>
+			<name>width</name>
+			<default></default>
+			<desc>
+				　Specify the width of the rectangular area for playing media.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>height</name>
+			<default></default>
+			<desc>
+				　Specifies the vertical width of the rectangular area for playing media.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Specifies the size of the rectangular area for playing media in pixels.<r/>
+		　In the current version, this method cannot be used during layer playback.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>setBounds</name>
+	<type>method</type>
+	<shortdesc>Specify the position and size of the playback rectangle</shortdesc>
+	<arg>
+		<argitem>
+			<name>left</name>
+			<default></default>
+			<desc>
+				　Specify the left edge of the rectangular area for playing media.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>top</name>
+			<default></default>
+			<desc>
+				　Specify the top position of the rectangular area for playing media.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>width</name>
+			<default></default>
+			<desc>
+				　Specify the width of the rectangular area for playing media.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>height</name>
+			<default></default>
+			<desc>
+				　Specifies the vertical width of the rectangular area for playing media.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Specify the position and size of the rectangular area for playing the media.<r/>
+		　Coordinates are coordinates in the window's client (the area where the layer can be displayed) specified in pixels.<r/>
+		　In the current version, when playing a layer, this method can specify only the position, and ignores the size.<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>selectAudioStream</name>
+	<type>method</type>
+	<shortdesc>Select audio stream</shortdesc>
+	<arg>
+		<argitem>
+			<name>streamNumber</name>
+			<default></default>
+			<desc>
+				Specify the audio stream number.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		Enables the specified audio stream number.<r/>
+		Not available for videos that do not contain multiple audio streams.
+	</desc>
+	<ref>VideoOverlay.numberOfAudioStream</ref>
+	<ref>VideoOverlay.enabledAudioStream</ref>
+</member>
+
+
+<member>
+	<name>setMixingLayer</name>
+	<type>method</type>
+	<shortdesc>Setting the layer to be mixed</shortdesc>
+	<arg>
+		<argitem>
+			<name>layer</name>
+			<default></default>
+			<desc>
+				layer<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		Performs mixing of the specified layer and video.<r/>
+		Mixing is done with the layer image when this method is called.<r/>
+		You must call this method again to reflect the layer image update.<r/>
+		Use <ref>VideOverlay.OnFrameUpdate</ref> to check that the layer image has been updated and call this method so that the update is automatically reflected. If you call this method every frame in onFrameUpdate, it will be quite expensive, so you should avoid it.<r/>
+		Only available in mixer mode.
+	</desc>
+</member>
+
+<member>
+	<name>resetMixingLayer</name>
+	<type>method</type>
+	<shortdesc>Release the setting of the layer to be mixed</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		Unmix video and layers.<r/>
+		Only available in mixer mode.
+	</desc>
+</member>
+
+
+<member>
+	<name>position</name>
+	<type>property</type>
+	<shortdesc>Play position</shortdesc>
+	<access>r/w</access>
+	<desc>
+		Indicates the playback position of the media in ms. You can also set a value.<r/>
+	</desc>
+	<ref>VideoOverlay.frame</ref>
+	<ref>VideoOverlay.totalTime</ref>
+</member>
+
+<member>
+	<name>frame</name>
+	<type>property</type>
+	<shortdesc>Current frame</shortdesc>
+	<access>r/w</access>
+	<desc>
+		Represents the media playback position in frame units. You can also set a value.<r/>
+	</desc>
+	<ref>VideoOverlay.position</ref>
+	<ref>VideoOverlay.numberOfFrame</ref>
+</member>
+
+<member>
+	<name>loop</name>
+	<type>property</type>
+	<shortdesc>Whether to play loops</shortdesc>
+	<access>r/w</access>
+	<desc>
+		Indicates whether loop playback is enabled or disabled. You can also set a value.<r/>
+		Loop if true, non-loop if false.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>width</name>
+	<type>property</type>
+	<shortdesc>Width of playback rectangle</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the width of the playback rectangle. You can also set a value.<r/>
+		　This property is not available for layer playback in the current version (the size is always the same as the video size).<r/>
+	</desc>
+	<ref>VideoOverlay.height</ref>
+	<ref>VideoOverlay.setSize</ref>
+</member>
+
+<member>
+	<name>height</name>
+	<type>property</type>
+	<shortdesc>Vertical width of playback rectangle</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the height of the playback rectangle. You can also set a value.<r/>
+		　This property is not available for layer playback in the current version (the size is always the same as the video size).<r/>
+
+	</desc>
+	<ref>VideoOverlay.width</ref>
+	<ref>VideoOverlay.setSize</ref>
+</member>
+
+<member>
+	<name>left</name>
+	<type>property</type>
+	<shortdesc>Left edge of playback rectangle</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the left edge of the playback rectangle. You can also set a value.<r/>
+	</desc>
+	<ref>VideoOverlay.top</ref>
+	<ref>VideoOverlay.setPos</ref>
+</member>
+
+<member>
+	<name>top</name>
+	<type>property</type>
+	<shortdesc>Top position of playback rectangle</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the top position of the playback rectangle. You can also set a value.<r/>
+	</desc>
+	<ref>VideoOverlay.left</ref>
+	<ref>VideoOverlay.setPos</ref>
+</member>
+
+<member>
+	<name>visible</name>
+	<type>property</type>
+	<shortdesc>Visible</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Specifies whether the playback area is visible. You can also set a value.<r/>
+		　Visible if true, invisible if false.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>fps</name>
+	<type>property</type>
+	<shortdesc>frame rate</shortdesc>
+	<access>r</access>
+	<desc>
+		Indicates the frame rate (frames / second).<r/>
+	</desc>
+</member>
+
+<member>
+	<name>numberOfFrame</name>
+	<type>property</type>
+	<shortdesc>Total number of frames</shortdesc>
+	<access>r</access>
+	<desc>
+		Indicates the total number of frames.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>totalTime</name>
+	<type>property</type>
+	<shortdesc>total time</shortdesc>
+	<access>r</access>
+	<desc>
+		Represents the total time in ms.<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>layer1</name>
+	<type>property</type>
+	<shortdesc>Drawing layer specification 1</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates the layer to be drawn in layer drawing mode. You can also set a value.<r/>
+		　By setting the layer1 and layer2 properties to different layers, the same video can be displayed on two layers at the same time.<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>layer2</name>
+	<type>property</type>
+	<shortdesc>Drawing layer specification 2</shortdesc>
+	<access>r/w</access>
+	<desc>
+		Indicates the layer to be drawn in layer drawing mode. You can also set a value.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>mode</name>
+	<type>property</type>
+	<shortdesc>Specify overlay or layer drawing</shortdesc>
+	<access>r/w</access>
+	<desc>
+		Indicates whether the mode is overlay mode, layer drawing mode, or mixer mode. You can also set a value.<r/>
+		<kw>vomOverlay</kw> for overlay mode, <kw>vomLayer</kw> for layer drawing mode, <kw>vomMixer</kw> for mixer mode, and <kw>vomMFEVR</kw> for Media Foundation mode.<r/>
+		vomMFEVR mode is only available in 1.2.0 and later.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>playRate</name>
+	<type>property</type>
+	<shortdesc>Playback speed</shortdesc>
+	<access>r/w</access>
+	<desc>
+		Set the media playback speed.<r/>
+		Specifying 1.0 means normal playback speed, 0.5 means half playback speed, and 2 means double playback speed.<r/>
+		Possible values are determined by the DirectShow filter.<r/>
+		NOTE: For MPEG files with audio, values between 0.0 and 2.0 can be set. In the case of MPEG files without audio, it can be set within the range of double (maybe) from a value greater than 0.0, but the actual playback speed is limited by the processing speed.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>segmentLoopStartFrame</name>
+	<type>property</type>
+	<shortdesc>Start frame of segment loop</shortdesc>
+	<access>r</access>
+	<desc>
+		The start frame of the segment loop.<r/>
+	</desc>
+	<ref>VideoOverlay.setSegmentLoop</ref>
+	<ref>VideoOverlay.cancelSegmentLoop</ref>
+</member>
+
+<member>
+	<name>segmentLoopEndFrame</name>
+	<type>property</type>
+	<shortdesc>Start frame of segment loop</shortdesc>
+	<access>r</access>
+	<desc>
+		The start frame of the segment loop.
+	</desc>
+	<ref>VideoOverlay.setSegmentLoop</ref>
+</member>
+
+<member>
+	<name>periodEventFrame</name>
+	<type>property</type>
+	<shortdesc>Period event frame</shortdesc>
+	<access>r/w</access>
+	<desc>
+		The frame that fires the period event.<r/>
+		If not set, the value will be negative.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>audioBalance</name>
+	<type>property</type>
+	<shortdesc>Voice balance (panning)</shortdesc>
+	<access>r/w</access>
+	<desc>
+		Indicates pan (sound image position). You can also set a value.<r/>
+		You can specify the left and right positions where you can hear the sound.<r/>
+		Specify a number from -100000 to 0 to 100000, where -100000 is completely left, 0 is center, and 100000 is completely right.<r/>
+		When playing back a stereo source, panning is achieved by attenuating either the left or right channel (specifying 0 outputs both channels, and specifying -100000 outputs only the left channel).<r/>
+	</desc>
+</member>
+
+<member>
+	<name>audioVolume</name>
+	<type>property</type>
+	<shortdesc>Audio volume</shortdesc>
+	<access>r/w</access>
+	<desc>
+		Indicates the playback volume. You can also set a value.<r/>
+		Specify a number between 0 and 100000, with 0 being completely muted and 100000 being 100% volume.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>numberOfAudioStream</name>
+	<type>property</type>
+	<shortdesc>Number of audio streams</shortdesc>
+	<access>r</access>
+	<desc>
+		Available for MPEG files only.
+		You can get the number of audio streams.
+	</desc>
+	<ref>VideoOverlay.selectAudioStream</ref>
+	<ref>VideoOverlay.enabledAudioStream</ref>
+</member>
+
+<member>
+	<name>enabledAudioStream</name>
+	<type>property</type>
+	<shortdesc>Playback target audio stream number</shortdesc>
+	<access>r</access>
+	<desc>
+		Available for MPEG files only.
+		You can get the audio stream number to be played.
+		Returns -1 if no audio stream is found.
+	</desc>
+	<ref>VideoOverlay.selectAudioStream</ref>
+	<ref>VideoOverlay.numberOfAudioStream</ref>
+</member>
+
+<member>
+	<name>mixingMovieAlpha</name>
+	<type>property</type>
+	<shortdesc>Video transparency</shortdesc>
+	<access>r/w</access>
+	<desc>
+		Represents the transparency of the video, ranging from 0.0 (fully transparent) to 1.0 (fully opaque).<r/>
+		Only available in mixer mode.
+	</desc>
+</member>
+
+<member>
+	<name>mixingMovieBGColor</name>
+	<type>property</type>
+	<shortdesc>Video background color</shortdesc>
+	<access>r/w</access>
+	<desc>
+		Represents the background color of the video.<r/>
+		Only available in mixer mode.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>contrastRangeMin</name>
+	<type>property</type>
+	<shortdesc>Minimum video contrast range</shortdesc>
+	<access>r</access>
+	<desc>
+		Represents the minimum contrast width.<r/>
+		Only available in mixer mode.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>contrastRangeMax</name>
+	<type>property</type>
+	<shortdesc>Maximum video contrast range</shortdesc>
+	<access>r</access>
+	<desc>
+		Represents the maximum value of contrast width.<r/>
+		Only available in mixer mode.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>contrastDefaultValue</name>
+	<type>property</type>
+	<shortdesc>Video contrast default</shortdesc>
+	<access>r</access>
+	<desc>
+		Represents the default value of contrast.<r/>
+		Only available in mixer mode.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>contrastStepSize</name>
+	<type>property</type>
+	<shortdesc>Video contrast increase / decrease step value</shortdesc>
+	<access>r</access>
+	<desc>
+		Represents a valid increment from contrastRangeMin to contrastRangeMax.<r/>
+		You can change the contrast in units of this value.<r/>
+		Only available in mixer mode.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>contrast</name>
+	<type>property</type>
+	<shortdesc>Video contrast</shortdesc>
+	<access>r/w</access>
+	<desc>
+		Represents the contrast of the video.<r/>
+		Only available in mixer mode.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>brightnessRangeMin</name>
+	<type>property</type>
+	<shortdesc>Minimum video luminance range</shortdesc>
+	<access>r</access>
+	<desc>
+		Represents the minimum value of the brightness range.<r/>
+		Only available in mixer mode.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>brightnessRangeMax</name>
+	<type>property</type>
+	<shortdesc>Maximum video brightness range</shortdesc>
+	<access>r</access>
+	<desc>
+		Represents the maximum value of the brightness range.<r/>
+		Only available in mixer mode.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>brightnessDefaultValue</name>
+	<type>property</type>
+	<shortdesc>Video brightness default</shortdesc>
+	<access>r</access>
+	<desc>
+		Represents the default value of luminance.<r/>
+		Only available in mixer mode.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>brightnessStepSize</name>
+	<type>property</type>
+	<shortdesc>Video brightness increase / decrease step value</shortdesc>
+	<access>r</access>
+	<desc>
+		Represents a valid increment from brightnessRangeMin to brightnessRangeMax.<r/>
+		You can change the brightness in units of this value.<r/>
+		Only available in mixer mode.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>brightness</name>
+	<type>property</type>
+	<shortdesc>Video brightness</shortdesc>
+	<access>r/w</access>
+	<desc>
+		Represents the brightness of the video.<r/>
+		Only available in mixer mode.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>hueRangeMin</name>
+	<type>property</type>
+	<shortdesc>Video hue range minimum</shortdesc>
+	<access>r</access>
+	<desc>
+		Represents the minimum value of the hue width.<r/>
+		Only available in mixer mode.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>hueRangeMax</name>
+	<type>property</type>
+	<shortdesc>Maximum hue range of video</shortdesc>
+	<access>r</access>
+	<desc>
+		Represents the maximum value of the hue width.<r/>
+		Only available in mixer mode.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>hueDefaultValue</name>
+	<type>property</type>
+	<shortdesc>Video hue default</shortdesc>
+	<access>r</access>
+	<desc>
+		Represents the default value of hue.<r/>
+		Only available in mixer mode.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>hueStepSize</name>
+	<type>property</type>
+	<shortdesc>Video hue increase / decrease step value</shortdesc>
+	<access>r</access>
+	<desc>
+		Represents a valid increment from hueRangeMin to hueRangeMax.<r/>
+		You can change the hue in units of this value.<r/>
+		Only available in mixer mode.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>hue</name>
+	<type>property</type>
+	<shortdesc>Video hue</shortdesc>
+	<access>r/w</access>
+	<desc>
+		Represents the hue of the video.<r/>
+		Only available in mixer mode.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>saturationRangeMin</name>
+	<type>property</type>
+	<shortdesc>Minimum video saturation range</shortdesc>
+	<access>r</access>
+	<desc>
+		Represents the minimum value of the saturation range.<r/>
+		Only available in mixer mode.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>saturationRangeMax</name>
+	<type>property</type>
+	<shortdesc>Maximum video saturation range</shortdesc>
+	<access>r</access>
+	<desc>
+		Represents the maximum value of the saturation range.<r/>
+		Only available in mixer mode.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>saturationDefaultValue</name>
+	<type>property</type>
+	<shortdesc>Video saturation default</shortdesc>
+	<access>r</access>
+	<desc>
+		Represents the default value of saturation.<r/>
+		Only available in mixer mode.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>saturationStepSize</name>
+	<type>property</type>
+	<shortdesc>Video saturation increase / decrease step value</shortdesc>
+	<access>r</access>
+	<desc>
+		Represents a valid increment from saturationRangeMin to saturationRangeMax.<r/>
+		You can change the saturation in units of this value.<r/>
+		Only available in mixer mode.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>saturation</name>
+	<type>property</type>
+	<shortdesc>Video saturation</shortdesc>
+	<access>r/w</access>
+	<desc>
+		Represents the saturation of the video.<r/>
+		Only available in mixer mode.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>originalWidth</name>
+	<type>property</type>
+	<shortdesc>The actual width of the video</shortdesc>
+	<access>r</access>
+	<desc>
+		The width of the stored video.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>originalHeight</name>
+	<type>property</type>
+	<shortdesc>The actual height of the video</shortdesc>
+	<access>r</access>
+	<desc>
+		The height of the stored video.<r/>
+	</desc>
+</member>
+
+</doc>

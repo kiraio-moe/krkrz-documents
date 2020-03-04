@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>List of color constants</title>
+
+<para>
+<ptitle>List of color constants</ptitle>
+<r/>
+　These constants can be used in various color specification situations. These values may change the actual colors depending on the Windows settings.<r/>
+<r/>
+<bq>
+<colorbox color="Scrollbar"			/>clScrollBar           : Scrollbar color<r/>
+<colorbox color="Background"		/>clBackground          : Desktop background color<r/>
+<colorbox color="ActiveCaption"		/>clActiveCaption       : Active window title bar color<r/>
+<colorbox color="InactiveCaption"	/>clInactiveCaption     : Inactive window title bar color<r/>
+<colorbox color="Menu"				/>clMenu                : Menu background color<r/>
+<colorbox color="Window"			/>clWindow              : Window background color<r/>
+<colorbox color="WindowFrame"		/>clWindowFrame         : Window border color<r/>
+<colorbox color="MenuText"			/>clMenuText            : Menu text color<r/>
+<colorbox color="WindowText"		/>clWindowText          : Text color in window<r/>
+<colorbox color="CaptionText"		/>clCaptionText         : Active window title bar text color<r/>
+<colorbox color="ActiveBorder"		/>clActiveBorder        : Active window border color<r/>
+<colorbox color="InactiveBorder"	/>clInactiveBorder      : Inactive window border color<r/>
+<colorbox color="AppWorkspace"		/>clAppWorkSpace        : Application workspace color<r/>
+<colorbox color="Highlight"			/>clHighlight           : Background color of selected character<r/>
+<colorbox color="HighlightText"		/>clHighlightText       : Selected character color<r/>
+<colorbox color="ButtonFace"		/>clBtnFace             : 3D object face color<r/>
+<colorbox color="ButtonShadow"		/>clBtnShadow           : 3D object shadow color<r/>
+<colorbox color="GrayText"			/>clGrayText            : Dimmed text color<r/>
+<colorbox color="ButtonText"		/>clBtnText             : 3D object text color<r/>
+<colorbox color="InactiveCaption"	/>clInactiveCaptionText : Inactive window title bar text color<r/>
+<colorbox color="ButtonHighlight"	/>clBtnHighlight        : Button highlight color<r/>
+<colorbox color="ThreeDDarkShadow"	/>cl3DDkShadow          : 3D object dark shadow<r/>
+<colorbox color="ThreeDHighlight"	/>cl3DLight             : Edge color of bright side of 3D object<r/>
+<colorbox color="InfoText"			/>clInfoText            : Tooltip text color<r/>
+<colorbox color="InfoBackground"	/>clInfoBk              : Tooltip background color<r/>
+</bq>
+<note>The above color samples (such as <colorbox color="red" /> to the left of each color) may not be displayed properly depending on the browser.</note>
+</para>
+
+</doc>

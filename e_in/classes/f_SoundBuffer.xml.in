@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title><classname/></title>
+<desc>
+　<classname/> class is a class that manages <midi>MIDI playback</midi><wave>PCM playback</wave><cdda>CD-DA playback</cdda>.<r/>
+<wave>
+　The WaveSoundBuffer class can read and process .sli files created with <link href="LoopTuner" />. See the description of the loop tuner for details.<r/>
+</wave>
+</desc>
+
+<member>
+	<name><classname/></name>
+	<type>constructor</type>
+	<shortdesc>Construction of <classname/> object</shortdesc>
+	<arg>
+		<argitem>
+			<name>owner</name>
+			<default></default>
+			<desc>
+				　Specify where the event occurs.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Construct an object of class <classname/>.<r/>
+		　When the event occurs, it calls the action method of the object specified by owner. If null is specified for owner, the action method will not be called. Usually, an object of class <ref>Window</ref> is specified as owner.<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>onStatusChanged</name>
+	<type>event</type>
+	<shortdesc>Status changed</shortdesc>
+	<arg>
+		<argitem>
+			<name>status</name>
+			<default></default>
+			<desc>
+				　New status.<r/>
+				　See <ref><classname/>.status</ref> properties.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when the playback status (state) changes.<r/>
+	</desc>
+</member>
+
+<wave>
+<member>
+	<name>onLabel</name>
+	<type>event</type>
+	<shortdesc>Passed the label</shortdesc>
+	<arg>
+		<argitem>
+			<name>name</name>
+			<default></default>
+			<desc>
+				　The label name that passed.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when the playback position passes the label.<r/>
+	</desc>
+</member>
+</wave>
+
+<member>
+	<name>onFadeCompleted</name>
+	<type>event</type>
+	<shortdesc>The fade has ended</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when a fade started by a <ref><classname/>.fade</ref> method ends.<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>open</name>
+	<type>method</type>
+	<shortdesc>Open media</shortdesc>
+	<arg>
+		<argitem>
+			<name>storage</name>
+			<default></default>
+			<desc>
+				<midi>　Specify the storage you want to play.<r/></midi>
+				<wave>　Specify the storage you want to play.<r/></wave>
+				<cdda>　Specify the track you want to play.
+				If you specify a number, that track will be played. If a character string in the format "drive letter: track number" is specified, the specified track number of that drive will be played (example: "e:5").</cdda>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Opens the specified media. This method does not start playback.<r/>
+		<wave>　If there is a file name with .sli added to the specified storage name, it is read as sound loop information.<r/></wave>
+	</desc>
+</member>
+
+<member>
+	<name>play</name>
+	<type>method</type>
+	<shortdesc>Play media</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Start playing the media.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>stop</name>
+	<type>method</type>
+	<shortdesc>Stop media</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Stop the media.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>fade</name>
+	<type>method</type>
+	<shortdesc>Start fade</shortdesc>
+	<arg>
+		<argitem>
+			<name>to</name>
+			<default></default>
+			<desc>
+				　Specify the volume to reach.<r/>
+				　Please refer to <ref><classname/>.volume</ref> property for specification of volume.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>time</name>
+			<default></default>
+			<desc>
+				　Specifies the time to fade in ms.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>delay</name>
+			<default>0</default>
+			<desc>
+				　Specify the wait time before the fade starts in ms.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Starts a fade (continuous volume change).<r/>
+	</desc>
+</member>
+
+<member>
+	<name>stopFade</name>
+	<type>method</type>
+	<shortdesc>Stop fading</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Forces the fade started by the <ref><classname/>.fade</ref> method to stop.<r/>
+		　The volume remains as it was when you stopped it.<r/>
+	</desc>
+</member>
+
+<wave>
+<member>
+	<name>freeDirectSound</name>
+	<type>method</type>
+	<shortdesc>Release DirectSound</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Releases a DirectSound. All objects of the WaveSoundBuffer class are stopped.<r/>
+		　Use this method to release DirectSound in an environment where playback by DirectSound and WaveMapper (such as MCI) cannot be performed simultaneously.<r/>
+		　This method exists only on the WaveSoundBuffer class (it does not exist on objects created from WaveSoundBuffer). Please use WaveSoundBuffer.freeDirectSound (); when using.<r/>
+	</desc>
+</member>
+</wave>
+
+<midi>
+<member>
+	<name>midiOut</name>
+	<type>method</type>
+	<shortdesc>Output of arbitrary MIDI data</shortdesc>
+	<arg>
+		<argitem>
+			<name>data</name>
+			<default></default>
+			<desc>
+				　Specify the output MIDI data in octet format.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Outputs arbitrary MIDI data.<r/>
+		　If ff 00 is included in the data, a wait of 50 ms will be inserted at that point.<r/>
+	</desc>
+</member>
+</midi>
+
+<wave>
+<member>
+	<name>getVisBuffer</name>
+	<type>method</type>
+	<shortdesc>Acquisition of data for visualization</shortdesc>
+	<arg>
+		<argitem>
+			<name>buffer</name>
+			<default></default>
+			<desc>
+				　Specify the buffer to write the output data.<r/>
+				　The buffer must be an array of 16-bit signed integers, with enough buffers (more than numsamples * channels) to write the samples specified by the numsamples and channels arguments.<r/>
+				　If a value other than 1 is specified for channels, the samples of each channel are interleaved (in the case of stereo, stored in the order of right, left, right, left, ...).<r/>
+				　You must specify a pointer to the first element of the array, but pass it as an integral type.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>numsamples</name>
+			<default></default>
+			<desc>
+				　Specify the number of samples to get.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>channel</name>
+			<default></default>
+			<desc>
+				　Specify the number of channels to get.<r/>
+				　If you specify 1, you can get the data downmixed to 1 channel if it is not monaural.<r/>
+				　If you specify a number other than 1, you must specify the same number of channels as the sound that is playing. In this case, you can get the data as it is.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>ahead</name>
+			<default>0</default>
+			<desc>
+				　Specify the number of samples to look ahead.<r/>
+				　You can get from the sample that is the number of samples specified by this argument from the current playback position.<r/>
+				　If you specify 0 or omit this argument, it will be obtained from the current playback position.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Returns the number of samples obtained.</result>
+	<desc>
+		　Get PCM data for visualization.<r/>
+		　Reads PCM data from the current playback position and writes it to the array specified by the buffer argument.<r/>
+		　However, data may not be read properly depending on the buffer status and playback format.<r/>
+		　Since this method is assumed to be used from plugins written in C or C++, it is not possible to specify an array of TJS in the buffer argument, for example.<r/>
+		　To use this method, you must specify the <ref><classname/>.useVisBuffer</ref> property as true.<r/>
+	</desc>
+</member>
+</wave>
+
+<member>
+	<name>position</name>
+	<type>property</type>
+	<shortdesc>Play position</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates the playback position in ms units. When a value is set, it moves to that position.<r/>
+		<midi>　Not implemented in the current version.<r/></midi>
+		<cdda>　Not implemented in the current version.<r/></cdda>
+	</desc>
+</member>
+
+<wave>
+<member>
+	<name>samplePosition</name>
+	<type>property</type>
+	<shortdesc>Play position</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates the playback position in sample number units. When a value is set, it moves to that position.<r/>
+	</desc>
+</member>
+</wave>
+<member>
+	<name>paused</name>
+	<type>property</type>
+	<shortdesc>Whether it is paused</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether it is in the pause state. You can also set a value.<r/>
+		　If true, paused.<r/>
+		<midi>　Not implemented in the current version.<r/></midi>
+		<cdda>　Not implemented in the current version.<r/></cdda>
+	</desc>
+</member>
+
+<member>
+	<name>totalTime</name>
+	<type>property</type>
+	<shortdesc>Media playback time</shortdesc>
+	<access>r</access>
+	<desc>
+		　Represents the total playback time of the media in ms.<r/>
+		<midi>　Not implemented in the current version.<r/></midi>
+		<cdda>　Not implemented in the current version.<r/></cdda>
+	</desc>
+</member>
+
+<member>
+	<name>looping</name>
+	<type>property</type>
+	<shortdesc>Whether to perform loop playback</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether to perform loop playback. You can also set a value.<r/>
+		　If you specify true, loop playback will be performed.<r/>
+		<wave>　Even if false is specified, if the playing media has loop information, the loop information is used.<r/></wave>
+	</desc>
+</member>
+
+<member>
+	<name>volume</name>
+	<type>property</type>
+	<shortdesc>Volume</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates the playback volume. You can also set a value.<r/>
+		Specify a number between 0 and 100000, with 0 being completely muted and 100000 being 100% volume.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>volume2</name>
+	<type>property</type>
+	<shortdesc>2nd volume</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates the playback volume. You can set the value.<r/>
+		　Unlike the <ref><classname/>.volume</ref> property, this property does not change with the <ref><classname/>.fade</ref> method.<r/>
+		　The final volume is determined by the product of the volume property and this property. If the volume property is 100000 (100%) and the volume2 property is also 100000 (100%), 100% x 100% = 100% will be played at 100% volume. If the volume property is 50000 (50%) and the volume2 property is 75000 (75%), it will be played at 37.5% with 50% x 75% = 37.5%.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>status</name>
+	<type>property</type>
+	<shortdesc>status</shortdesc>
+	<access>r</access>
+	<desc>
+		　Represents the current state.<r/>
+		　The state is represented by a string and has the following values:<r/>
+		<tt>"<kw>unload</kw>"   : </tt> Media not open<r/>
+		<tt>"<kw>play</kw>"     : </tt> Media is playing<r/>
+		<tt>"<kw>stop</kw>"     : </tt> Media is down<r/>
+	</desc>
+</member>
+
+<wave>
+<member>
+	<name>useVisBuffer</name>
+	<type>property</type>
+	<shortdesc>Whether to use the visualization buffer</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether to use the visualization buffer. You can also set a value.<r/>
+		　If true, the visualization buffer will be available and the <ref><classname/>.getVisBuffer</ref> methods will be available.<r/>
+		　The default is false. Note that specifying true consumes more memory and CPU time than specifying false.<r/>
+	</desc>
+</member>
+</wave>
+
+<wave>
+<member>
+	<name>channels</name>
+	<type>property</type>
+	<shortdesc>Number of channels</shortdesc>
+	<access>r</access>
+	<desc>
+		　Represents the number of channels of the currently playing sound.<r/>
+		　1 for monaural, 2 for stereo.<r/>
+		　If the media is not opened, it may not return the correct value.<r/>
+	</desc>
+</member>
+</wave>
+
+<wave>
+<member>
+	<name>frequency</name>
+	<type>property</type>
+	<shortdesc>Sampling frequency</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the sampling frequency of the currently playing sound. You can also set a value.<r/>
+		　44100 for the same sampling frequency as CD.<r/>
+		　If the media is not opened, it may not return the correct value.<r/>
+		　If you set a value, it will play at that frequency.<r/>
+	</desc>
+</member>
+</wave>
+
+<wave>
+<member>
+	<name>bits</name>
+	<type>property</type>
+	<shortdesc>Number of quantization bits</shortdesc>
+	<access>r</access>
+	<desc>
+		　Represents the quantization bit depth of the currently playing sound.<r/>
+		　16 if the quantization bit rate is the same as CD.<r/>
+		　If the media is not opened, it may not return the correct value.<r/>
+	</desc>
+</member>
+</wave>
+
+<wave>
+<member>
+	<name>flags</name>
+	<type>property</type>
+	<shortdesc>flag</shortdesc>
+	<access>r</access>
+	<desc>
+		　You can get the object that represents the flag.<r/>
+		　This object has 0 to 15 properties, each representing the value of each flag. Properties can be accessed using the indirect member selection operator (the '[]' operator). You can also set values for these properties. Values range from 0 to 9999 and cannot be less than or greater than this.<r/>
+		　The count property of this object always returns 16.<r/>
+		　This object has a reset method, which will reset all flags to 0.<r/>
+		　If you do not open the media, any values you set for the properties of this object are ignored.<r/>
+		　At first glance, this object looks like an array object, but it is not a so-called TJS array object (an object of the 'Array' class).<r/>
+		　The flags are all reset to 0 by the <ref>WaveSoundBuffer.open</ref> method.<r/>
+<example>
+var buf = new WaveSoundBuffer(window);<r/>
+(Omitted)<r/>
+buf.flags.reset(); // Reset all flags to 0<r/>
+var cnt = buf.flags.count; // cnt contains 16<r/>
+buf.flags[4] = 34; // Assign 34 to flag 4<r/>
+</example>
+	</desc>
+</member>
+</wave>
+
+<wave>
+<member>
+	<name>labels</name>
+	<type>property</type>
+	<shortdesc>label</shortdesc>
+	<access>r</access>
+	<desc>
+		　You can get an object representing the label.<r/>
+		　This object is a dictionary array, each containing an element whose name is the name of the label in the loop information. Each element is also a dictionary array, the name member represents the label name, the position member represents the label position in milliseconds, and samplePosition represents the label position in samples.<r/>
+		　Think of this dictionary array as read-only. Assigning a value or creating a new member has no effect.<r/>
+<example>
+var buf = new WaveSoundBuffer(window);<r/>
+(Omitted)<r/>
+debug.message(buf.labels['start'].position); // The position of the label name 'start' in milliseconds<r/>
+debug.message(buf.labels['start'].samplePosition); // The position of the label name 'start' in units of samples<r/>
+</example>
+	</desc>
+</member>
+</wave>
+
+<wave>
+<member>
+	<name>pan</name>
+	<type>property</type>
+	<shortdesc>Bread</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates pan (sound image position). You can also set a value.<r/>
+		　You can specify the left and right positions where you can hear the sound.<r/>
+		　Specify a number from -100000 to 0 to 100000, where -100000 is completely left, 0 is center, and 100000 is completely right.<r/>
+	</desc>
+</member>
+</wave>
+
+<wave>
+<member>
+	<name>globalVolume</name>
+	<type>property</type>
+	<shortdesc>Global volume</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the global volume (master volume). You can also set a value.<r/>
+		　This volume affects all WaveSoundBuffers.<r/>
+		　Specify a number between 0 and 100000, with 0 being completely muted and 100000 being 100% volume. The default value is 100000.<r/>
+		　This property only exists on the WaveSoundBuffer class (there is no property on objects created from WaveSoundBuffer). Please use WaveSoundBuffer.globalVolume when using.<r/>
+	</desc>
+</member>
+</wave>
+
+<wave>
+<member>
+	<name>globalFocusMode</name>
+	<type>property</type>
+	<shortdesc>Focus mode</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates the focus mode. You can also set a value.<r/>
+		　Focus mode is a mode to mute when the application is minimized or inactive.<r/>
+		　Specifying <tt><kw>sgfmNeverMute</kw></tt> will not mute the application in any state.<r/>
+		　Specifying <tt><kw>sgfmMuteOnMinimize</kw></tt> will mute the application when minimized.<r/>
+		　Specify <tt><kw>sgfmMuteOnDeactivate</kw></tt> to mute when the application is deactivated.<r/>
+		　This property only exists on the WaveSoundBuffer class (there is no property on objects created from WaveSoundBuffer). Please use WaveSoundBuffer.globalFocusMode when using.<r/>
+		　The setting of '-wsmute' (DirectSound mute) specified by the command line option has priority over the setting of this property.<r/>
+	</desc>
+</member>
+</wave>
+
+<wave>
+<member>
+	<name>filters</name>
+	<type>property</type>
+	<shortdesc>Filter array</shortdesc>
+	<access>r</access>
+	<desc>
+		　An array (an instance of the Array class) that holds the insertion filter object.<r/>
+		　By registering filter objects in this array, you can apply various effects to the sound in real time during playback.<r/>
+		　Changes to the filter array only take effect when the <ref>WaveSoundBuffer.open</ref> method is executed. Until then, changes to this array will not be reflected.<r/>
+<example>
+var buf = new WaveSoundBuffer(window);<r/>
+(Omitted)<r/>
+buf.filters.clear(); // Clear filter array<r/>
+buf.filters.add(new WaveSoundBuffer.PhaseVocoder()); // Added PhaseVocoder filter<r/>
+buf.filters[0].time = 0.5; // Double speed playback<r/>
+</example>
+	</desc>
+</member>
+</wave>
+
+
+
+</doc>

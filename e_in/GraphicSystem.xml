@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Graphic system</title>
+
+<para>
+<ptitle>About graphic system</ptitle>
+　Kirikiri has a graphic display mechanism using layers.<r/>
+　Each layer has transparency superimposition by alpha blending and hierarchical structure management function. In addition, it has a mechanism (focus) for receiving input from the user so that the layer can be operated as a GUI part (widget).<r/>
+<r/>
+　The superimposed layers are drawn in the window using a mechanism called a drawing device. By default, a device called BasicDrawDevice is used that simply draws the output of the layer into the window. The drawing device can be freely replaced by manipulating the <at href="f_Window_drawDevice.html">Window.drawDevice</at> property, and the user can define his own rendering effects etc. (in the form of a plug-in) according to the application. Kirikiri Z has only the above-mentioned BasicDrawDevice.
+</para>
+
+<para>
+<ptitle>Readable and writable image formats</ptitle>
+　In the standard state Kirikiri, the format that can be read into the layer with <at href="f_Layer_loadImages.html">Layer.loadImages</at> and can be written to the layer is as follows.<r/>
+<r/>
+<dl>
+<dt>BMP</dt>
+<dd>
+　Windows standard bitmap format. A 32 bpp BMP is considered a bitmap with an alpha channel.<r/>
+　RLE compressed bitmaps cannot be read.
+</dd>
+
+<dt>PNG</dt>
+<dd>
+　Portable Network Graphic format can be read. You can also import bitmap PNGs with an alpha channel.
+</dd>
+
+<dt>JPEG</dt>
+<dd>
+　JPEG format can be read. Arithmetic-compressed or lossless-compressed ones cannot be read, but I rarely see them in the first place.
+</dd>
+
+<dt>TLG5</dt>
+<dd>
+　Kiriri is a unique lossless compression format. The extension is .tlg. You can also load those with an alpha channel. The compression ratio is not very high, but the feature is that it can be expanded at high speed. This format cannot be used for <b>mask images (_m) or region images (_p)</b>. Only full color images without alpha channel or full color images with alpha channel can be handled.
+</dd>
+
+<dt>TLG6</dt>
+<dd>
+　Kiriri is a unique lossless compression format. The extension is .tlg like TLG5. TLG6 features a high compression ratio. Decompression speed is slightly less than twice as fast as TLG5, but it can still be decompressed more than twice as fast as PNG, and its size is 2-40% smaller than PNG.
+</dd>
+
+<dt>JPEG XR</dt>
+<dd>
+　JPEG XR format can be read. It is lossy but has higher quality than JPEG and supports alpha channel.<r/>
+　Compressing with priority on image quality makes it difficult to distinguish from lossless compressed images, and is useful when the size is important because the file size is small.<r/>
+　Supported from Ver 1.1.0, currently only supports reading.<r/>
+　Ver. 1.3.0 also supports saving.<r/>
+</dd>
+
+<dt>Main / mask separation format</dt>
+<dd>
+　The main / mask separation format is a format in which the color information image (main) and the alpha channel (mask) image are separated, and the mask image is the main image file name with _m appended (abc_m.jpeg for abc.jpeg).<r/>
+　The format of the main / mask image can be different.
+</dd>
+</dl>
+<r/>
+　In addition, you can increase the number of image formats that can be loaded using Susie Plug-in. Susie plug-in can be read by <at href="f_Plugins_link.html">Plugins.link</at> method.<r/>
+　If a 32bpp bitmap is passed from Susie Plug-in, it is considered a bitmap with an alpha channel.<r/>
+<r/>
+</para>
+
+<para>
+<ptitle>Layer type</ptitle>
+　The Kirikiri layer can be displayed in various composite modes (layer types).<r/>
+　The following compositing modes are available, and layer type constants starting with lt can be specified in the <at href="f_Layer_type.html">Layer.type</at> property.<r/>
+　In the formula, <i>result</i> is the result, <i>dest</i> is the luminance of the image to be superimposed, <i>src</i> is the luminance of the image to be superimposed, <i>α</i> is the alpha value for each pixel of the image to be superimposed, and the range of all values is 0.0 to 1.0.<r/>
+　In addition, the following functions are defined here for explanation.<r/>
+<ul>
+<li>abs(<i>a</i>) : Absolute value of <i>a</i></li>
+<li>max(<i>a</i>, <i>b</i>) : <i>a</i> and <i>b</i>, whichever is greater</li>
+<li>min(<i>a</i>, <i>b</i>) : <i>a</i> and <i>b</i>, whichever is lesser</li>
+<li>blend(<i>a</i>, <i>b</i>, <i>r</i>) = <i>a</i> × (1.0 - <i>r</i>) + <i>b</i> × <i>r</i></li>
+</ul>
+
+<r/>
+
+<dl>
+
+<dt><kw>ltOpaque</kw> (<kw>ltCoverRect</kw>)</dt>
+<dd>
+　ltOpaque is a display without transparency. The entire rectangle of the layer is always fully opaque (not limited to this layer type, but if <at href="f_Layer_opacity.html">Layer.opacity</at> is used to reduce opacity).<r/>
+<r/>
+Formula: <i>result</i> = <i>src</i><r/>
+<note>
+The same is true for ltCoverRect, but it is an older name before 2.23 beta 2.
+</note>
+</dd>
+
+<dt><kw>ltAlpha</kw> (<kw>ltTransparent</kw>)</dt>
+<dd>
+　ltAlpha performs alpha compositing. This is the most basic type when performing transmission. The following equation is also used for alpha channel input from BMP and Susie plug-in.<r/>
+<r/>
+Formula: <i>result</i> = blend(<i>dest</i>, <i>src</i>, <i>α</i>)<r/>
+<note>
+ltTransparent has the same meaning, but is an older name before 2.23 beta 2.
+</note>
+</dd>
+
+<dt><kw>ltAddAlpha</kw></dt>
+<dd>
+　ltAddAlpha performs additive alpha compositing.<r/>
+　<link href="TPC" /> can output images suitable for this format. You can also convert from ltAlpha to this format with the <at href="f_Layer_convertType.html">Layer.convertType</at> method.<r/>
+　The ltAddAlpha layer will not display properly if it is a direct child of the ltAlpha layer.<r/>
+<r/>
+Formula: <i>result</i> = min(1.0, <i>dest</i> × ( 1.0 - <i>α</i> ) + <i>src</i>)<r/>
+</dd>
+
+<dt><kw>ltAdditive</kw></dt>
+<dd>
+　ltAdditive performs additive composition. Suitable for expressing glow. Dodge (linear) in Photoshop, but if you want to get the same effect as Photoshop, use ltPsAdditive described later. Unlike ltPsAdditive, <i>α</i> is ignored in ltAdditive.<r/>
+　Neutral colors (colors that do not change when superimposed) are black.<r/>
+<r/>
+Formula: <i>result</i> = min(1.0, <i>dest</i> + <i>src</i>)<r/>
+</dd>
+
+<dt><kw>ltSubtractive</kw></dt>
+<dd>
+　ltSubtractive performs subtractive composition. <i>α</i> is ignored.<r/>
+　Neutral color is white.<r/>
+<r/>
+Formula: <i>result</i> = max(0.0, <i>dest</i> + <i>src</i> - 1.0)<r/>
+<note>
+　The only difference from <i>result</i> = <i>dest</i> - <i>src</i> is whether src is inverted or not.
+</note>
+</dd>
+
+<dt><kw>ltMultiplicative</kw></dt>
+<dd>
+　ltMultiplicative performs multiplicative synthesis. <i>α</i> is ignored.<r/>
+　Neutral color is white.<r/>
+<r/>
+Formula <i>result</i> = <i>dest</i> × <i>src</i>
+</dd>
+
+<dt><kw>ltDodge</kw></dt>
+<dd>
+　ltDodge performs "dodging" compositing. Suitable for expressing objects illuminated by light. <i>α</i> is ignored.<r/>
+　Neutral color is black.<r/>
+<r/>
+Formula: <i>result</i> = min(1.0, <i>dest</i> ÷ ( 1.0 -  <i>src</i> ) )<r/>
+</dd>
+
+<dt><kw>ltLighten</kw></dt>
+<dd>
+　ltLighten performs "comparison (light)" synthesis. <i>α</i> is ignored.<r/>
+　Neutral color is black.<r/>
+<r/>
+Formula: <i>result</i> = max(<i>dest</i>, <i>src</i>)<r/>
+</dd>
+
+<dt><kw>ltDarken</kw></dt>
+<dd>
+　ltDarken performs a "compare (dark)" synthesis. <i>α</i> is ignored.<r/>
+　Neutral color is white.<r/>
+<r/>
+Formula: <i>result</i> = min(<i>dest</i>, <i>src</i>)<r/>
+</dd>
+
+<dt><kw>ltScreen</kw></dt>
+<dd>
+　ltLighten performs "screen multiplication" synthesis. <i>α</i> is ignored.<r/>
+　Neutral color is black.<r/>
+<r/>
+Formula: <i>result</i> = 1.0 - ( 1.0 - <i>dest</i> ) × ( 1.0 - <i>src</i> )<r/>
+</dd>
+
+
+
+<dt><kw>ltPsNormal</kw></dt>
+<dd>
+　ltPsNormal has the same effect as ltAlpha. For historical reasons, it has a different routine and name than ltAlpha.
+</dd>
+
+
+<dt><kw>ltPsAdditive</kw></dt>
+<dd>
+　ltPsAdditive performs Photoshop-compatible "dodging (linear)" synthesis (additional synthesis). Unlike ltAdditive, <i>α</i> is not ignored.<r/>
+　Neutral color is black.<r/>
+<r/>
+Formula: <i>result</i> = blend(<i>dest</i>, min(1.0, <i>dest</i> + <i>src</i>), <i>α</i>)<r/>
+</dd>
+
+<dt><kw>ltPsSubtractive</kw></dt>
+<dd>
+　ltPsSubtractive performs Photoshop-compatible "burn-in (linear)" synthesis (subtraction synthesis). Unlike ltSubtractive, <i>α</i> is not ignored.<r/>
+　Neutral color is white.<r/>
+<r/>
+Formula: <i>result</i> = blend(<i>dest</i>, max(0.0, <i>dest</i> + <i>src</i> - 1.0), <i>α</i>)<r/>
+</dd>
+
+<dt><kw>ltPsMultiplicative</kw></dt>
+<dd>
+　ltPsMultiplicative provides Photoshop compatible "multiply" compositing. Unlike ltMultiplicative, <i>α</i> is not ignored.<r/>
+　Neutral color is white.<r/>
+<r/>
+Formula: <i>result</i> = blend(<i>dest</i>, <i>dest</i> × <i>src</i>, <i>α</i>)<r/>
+</dd>
+
+<dt><kw>ltPsScreen</kw></dt>
+<dd>
+　ltPsScreen provides Photoshop compatible "screen" compositing. Unlike ltScreen, <i>α</i> is not ignored.<r/>
+　Neutral color is black.<r/>
+<r/>
+Formula: <i>result</i> = blend(<i>dest</i>, 1.0 - (1.0 - <i>dest</i>) × (1.0 - <i>src</i>), <i>α</i>)<r/>
+</dd>
+
+
+<dt><kw>ltPsOverlay</kw></dt>
+<dd>
+　ltPsOverlay provides Photoshop compatible "overlay" compositing.<r/>
+　Neutral color is 50% gray.<r/>
+<r/>
+Formula: <i>result</i> = blend(<i>dest</i>, overlay(<i>dest</i>, <i>src</i>), <i>α</i>)<r/>
+Where overlay(<i>a</i>, <i>b</i>) = <r/>
+　<i>a</i> × <i>b</i> × 2.0  ( When <i>a</i> &lt; 0.5 )<r/>
+　1.0 - (1.0 - <i>a</i>) × (1.0 - <i>b</i>) × 2.0 (At other times)<r/>
+</dd>
+
+<dt><kw>ltPsHardLight</kw></dt>
+<dd>
+　ltPsHardLight provides Photoshop compatible "hard light" compositing.<r/>
+　Neutral color is 50% gray.<r/>
+<r/>
+Formula: <i>result</i> = blend(<i>dest</i>, hardlight(<i>dest</i>, <i>src</i>), <i>α</i>)<r/>
+Where hardlight(<i>a</i>, <i>b</i>) = <r/>
+　<i>a</i> × <i>b</i> × 2.0  ( When <i>b</i> &lt; 0.5 )<r/>
+　1.0 - (1.0 - <i>a</i>) × (1.0 - <i>b</i>) × 2.0 (At other times)<r/>
+</dd>
+
+
+<dt><kw>ltPsSoftLight</kw></dt>
+<dd>
+　ltPsSoftLight provides Photoshop compatible "soft light" compositing.<r/>
+　Neutral color is 50% gray.<r/>
+<r/>
+Formula: <i>result</i> = blend(<i>dest</i>, softlight(<i>dest</i>, <i>src</i>), <i>α</i>)<r/>
+When softlight(<i>a</i>, <i>b</i>) = <r/>
+　<i>a</i><sup>(0.5 ÷ <i>b</i>)</sup>  ( When <i>b</i> &gt; 0.5 )<r/>
+　<i>a</i><sup>((1.0 - <i>b</i>) × 2)</sup>  (At other times)<r/>
+</dd>
+
+
+<dt><kw>ltPsColorDodge</kw></dt>
+<dd>
+　ltPsColorDodge provides Photoshop compatible "dodge color" compositing. Unlike ltDodge, <i>α</i> is not ignored.<r/>
+　Neutral color is black.<r/>
+<r/>
+Formula: <i>result</i> = blend(<i>dest</i>, min(1.0, <i>dest</i> ÷ ( 1.0 -  <i>src</i> ) ), <i>α</i>)<r/>
+</dd>
+
+<dt><kw>ltPsColorDodge5</kw></dt>
+<dd>
+　ltPsColorDodge provides "dodging color" compositing compatible with Photoshop versions 5.x and below. The formula is slightly different from ltPsColorDodge.<r/>
+　Neutral color is black.<r/>
+<r/>
+Formula: <i>result</i> = min(1.0, <i>dest</i> ÷ ( 1.0 - <i>src</i> × <i>α</i>) )<r/>
+</dd>
+
+<dt><kw>ltPsColorBurn</kw></dt>
+<dd>
+　ltPsColorBurn provides Photoshop compatible "burn-in color" compositing.<r/>
+　Neutral color is white.<r/>
+<r/>
+Formula: <i>result</i> = blend(<i>dest</i>, max(0.0, 1.0 - (1.0 - <i>dest</i>) ÷ <i>src</i>), <i>α</i>)<r/>
+</dd>
+
+<dt><kw>ltPsLighten</kw></dt>
+<dd>
+　ltPsLighten performs Photoshop-compatible "comparison (light)" compositing. Unlike ltLighten, <i>α</i> is not ignored.<r/>
+　Neutral color is black.<r/>
+<r/>
+Formula: <i>result</i> = blend(<i>dest</i>, max(<i>dest</i>, <i>src</i>), <i>α</i>)<r/>
+</dd>
+
+<dt><kw>ltPsDarken</kw></dt>
+<dd>
+　ltPsDarken performs Photoshop-compatible "compare (dark)" compositing. Unlike ltDarken, <i>α</i> is not ignored.<r/>
+　Neutral color is white.<r/>
+<r/>
+Formula: <i>result</i> = blend(<i>dest</i>, min(<i>dest</i>, <i>src</i>), <i>α</i>)<r/>
+</dd>
+
+<dt><kw>ltPsDifference</kw></dt>
+<dd>
+　ltPsDifference provides Photoshop compatible "absolute difference" compositing.<r/>
+　Neutral color is black.<r/>
+<r/>
+Formula: <i>result</i> = blend(<i>dest</i>, abs(<i>dest</i> - <i>src</i>), <i>α</i>)<r/>
+</dd>
+
+<dt><kw>ltPsDifference5</kw></dt>
+<dd>
+　ltPsDifference5 provides "absolute difference" compositing compatible with Photoshop versions 5.x and below. The formula is slightly different from ltPsDifference.<r/>
+　Neutral color is black.<r/>
+<r/>
+Formula: <i>result</i> = abs(<i>dest</i> - <i>src</i> × <i>α</i>)<r/>
+</dd>
+
+<dt><kw>ltPsExclusion</kw></dt>
+<dd>
+　ltPsExclusion performs Photoshop-compatible "exclusion" compositing.<r/>
+　Neutral color is black.<r/>
+<r/>
+Formula: <i>result</i> = blend(<i>dest</i>,  <i>dest</i> + <i>src</i> - 2.0 × <i>src</i> × <i>dest</i>, <i>α</i>)<r/>
+</dd>
+
+
+
+</dl>
+
+</para>
+
+
+
+
+
+
+<para>
+<ptitle>Alpha compositing and additive alpha compositing</ptitle>
+　Kirikiri has two alpha compositing modes.<r/>
+<dl>
+<dt>Alpha compositing</dt>
+<dd>
+Specifying <kw>ltAlpha</kw> in the <at href="f_Layer_type.html">Layer.type</at> property makes this display type.<r/>
+ltAlpha is an alpha compositing mode used by many graphic software. This mode is suitable for directly reading data output by other graphic software.<r/>
+</dd>
+
+<dt>Additive alpha synthesis</dt>
+<dd>
+Specifying <kw>ltAddAlpha</kw> in the <at href="f_Layer_type.html">Layer.type</at> property makes this display type.<r/>
+　This format has the following advantages and disadvantages compared to alpha compositing.<r/>
+<ul>
+<li>Since the formula is simpler than alpha compositing, it can be displayed quickly and many drawing methods can draw fast.</li>
+<li>Additive composition can be expressed together with alpha composition</li>
+<li>Few graphics software support this format</li>
+</ul>
+<r/>
+Graphic software that supports the same composition mode as ltAddAlpha does not think so, so to handle the output of other software in this format with Kirikiri, output this type of image with <link href="TPC" /> or use the <at href="f_Layer_convertType.html">Layer.convertType</at> method. You need to convert from ltAlpha to this format.<r/>
+　The image format converter can accept a combined input of a "normal" layer and a "dodging (linear)" layer in Photoshop format as an input for additive alpha compositing images.<r/>
+</dd>
+
+</dl>
+
+</para>
+
+
+
+
+
+
+<para>
+<ptitle>Layer type, drawing method and calculation mode</ptitle>
+　Kirikiri has a layer type (specified with a constant starting with lt), a drawing method (specified with a constant starting with df), and a calculation mode (specified with a constant starting with om).<r/>
+　Although each has a similar name, the uses are divided as follows.<r/>
+<dl>
+
+<dt>Layer type</dt>
+<dd>
+　The layer type is a value specified by the <at href="f_Layer_type.html">Layer.type</at> property, which specifies how the layer is displayed.
+</dd>
+
+<dt>Drawing method</dt>
+<dd>
+　The drawing method is the value specified by the <at href="f_Layer_face.html">Layer.face</at> property, and specifies how to draw on the layer. If dfAuto is specified, the appropriate drawing method will be determined according to the layer type. You can also draw with a different drawing method than the best drawing method for the layer type.<r/>
+　Methods that copy between layers, such as <at href="f_Layer_copyRect.html">Layer.copyRect</at> methods, are also used to select which information to copy. dfBoth (or dfAlpha or dfAddAlpha) copies both the main and the mask. For dfMain (or dfOpaque), only the main is copied. For dfMask, only the mask is copied; for dfProvince, only the area image is copied.<r/>
+　Similarly, <at href="f_Layer_fillRect.html">Layer.fillRect</at> methods are used to select which information to fill. dfBoth (or dfAlpha or dfAddAlpha) fills both the main and the mask. In the case of dfMain (or dfOpaque), only the main is copy filled. For dfMask, only the mask is filled, and for dfProvince, only the area image is filled.<r/>
+</dd>
+
+<dt>Calculation mode</dt>
+<dd>
+　The calculation mode is a value specified by an argument such as the <at href="f_Layer_operateRect.html">Layer.operateRect</at> method, and a value that specifies how to handle the calculation source (layer to be overlaid). If omAuto is specified, the appropriate mode is determined according to the layer type of the calculation source.
+</dd>
+
+</dl>
+</para>
+
+
+<para>
+<ptitle>Alpha channel protection</ptitle>
+　If the drawing method specified by the <at href="f_Layer_face.html">Layer.face</at> property is <kw>dfOpaque</kw>, the <at href="f_Layer_holdAlpha.html">Layer.holdAlpha</at> property can specify whether to protect the alpha channel of the drawing destination (the layer on which the method is to be executed).<r/>
+　Protecting the alpha channel protects the alpha channel (opacity) and leaves transparent areas transparent.<r/>
+　If you do not protect the alpha channel, the alpha channel (opacity) will be destroyed. Destruction means that you don't know what state it will be in.<r/>
+　However, if the <at href="f_Layer_type.html">Layer.type</at> property is not <kw>ltAlpha</kw> or <kw>ltAddAlpha</kw>, the layer's alpha channel is not used, so setting the Layer.holdAlpha property to false is usually fine. If false, many methods will draw faster than true.<r/>
+</para>
+
+
+</doc>

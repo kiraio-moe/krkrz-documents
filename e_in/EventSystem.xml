@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Event system</title>
+
+<para>
+<ptitle>About the event system</ptitle>
+　When writing TJS scripts in Kirikiri, it is necessary to adopt an event-driven programming model.<r/>
+　Events are fired when something has happened to notify other objects or within your own objects. In the event handler, you will write a process that responds to this.<r/>
+　In Kirikiri, it is not preferable that one event handler takes longer than necessary. We recommend that you use the <at href="f_Timer.html">Timer</at> class when you want to wait.<r/>
+</para>
+
+<para>
+<ptitle>Synchronous and asynchronous events</ptitle>
+　Synchronous events are events that occur on the fly as soon as you manipulate an object, for example, when you start playing in the sound buffer, the onStatusChanged event occurs in its play method.<r/>
+　On the other hand, asynchronous events are temporarily stored in the event queue inside the Kirikiri (the place where the events to be generated are temporarily stored). This event will not be fired until all other event handlers have been processed, and will not be fired inside other event handlers (see note below for exceptions). All events that occur due to user input, such as the onTimer event that occurs after a timer period, are asynchronous events.<r/>
+<note>
+　Some features, such as Window.showModal, that try to get input from the user may activate the event queue (distribute events). This can cause another asynchronous event to occur in the event handler.
+</note>
+　There is <at href="f_AsyncTrigger.html">AsyncTrigger</at> class to generate asynchronous events by script operation.<r/>
+</para>
+
+<para>
+<ptitle>Screen reflection timing</ptitle>
+　The timing of screen reflection to display the layer in the window is the same as the asynchronous event, after all other event handlers have been processed. No matter how many times you draw in one event handler, it is drawn in the internal image buffer, but is not immediately reflected on the screen. The content is drawn and reflected in the window only when Kirikiri gets the timing of drawing, leaving the event handler.<r/>
+</para>
+
+<para>
+<ptitle>Event handler in class</ptitle>
+　Events that occur in a class can be handled in that class by overriding the superclass event handler.<r/>
+　For example, you can create a subclass from the Timer class and create an event handler as follows:<r/>
+<bq>
+class MyTimer extends Timer<r/>
+{<r/>
+	function MyTimer()<r/>
+	{<r/>
+		super.Timer(...);<r/>
+	}<r/>
+<r/>
+	function onTimer()<r/>
+	{<r/>
+		// (Here is the processing of onTimer)<r/>
+		super.onTimer(...); // Call the super class method once<r/>
+	}<r/>
+}<r/>
+</bq>
+　Superclass methods do not need to be called, but are typically called. Also, if the method of the super class is not called, event handling by the action method described later cannot be performed.<r/>
+</para>
+
+<para>
+<ptitle>action method</ptitle>
+　The <at href="f_Layer.html">Layer</at> class and <at href="f_WaveSoundBuffer.html">WaveSoundBuffer</at> class have a function to generate an event in the action method of the owner specified in the constructor.<r/>
+　The action method is passed a single argument of a dictionary array object, which contains event information.<r/>
+　Of the members of the dictionary array, target represents the object that caused the event. type indicates the event name.<r/>
+　Other members depend on the event. For example, in the case of the <at href="f_Layer_onClick.html">Layer.onClick</at> event, there are x and y members that indicate where the user clicked on the layer.<r/>
+<bq>
+Example:<r/>
+class MyWindow extends Window<r/>
+{<r/>
+	var layer;<r/>
+	(Omitted)<r/>
+	function MyWindow()<r/>
+	{<r/>
+		super.Window(...);<r/>
+		add(layer = new Layer(this /* this = owner */, null));<r/>
+		layer.visible = true;<r/>
+	}<r/>
+	(Omitted)<r/>
+	function action(ev)<r/>
+	{<r/>
+		if(ev.type == "onClick" &amp;&amp; ev.target == layer)<r/>
+		{<r/>
+			// layer clicked<r/>
+			System.inform(ev.x, ev.y);<r/>
+		}<r/>
+	}<r/>
+}<r/>
+</bq>
+</para>
+
+</doc>

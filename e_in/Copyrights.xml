@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Copyright etc.</title>
+
+<para>
+<ptitle>Copyright / License</ptitle>
+　See license.txt included with the SDK.<r/>
+　Here are some copyright and licensing FAQs or things that many will ask.<r/>
+　The principle is as described in license.txt, so be sure to read license.txt.<r/>
+　If there is a conflict between what is written here and what is written in license.txt, what is written in license.txt takes precedence.<r/>
+<r/>
+<dl>
+<dt>Do I have to pay the creator of Kirikiri?</dt>
+<dd>
+　You don't have to.
+</dd>
+
+<dt>I want to use it for commercial use (including shareware) ...</dt>
+<dd>
+　Also available for commercial use.<r/>
+　No license fee is required for commercial use. Available free of charge.
+</dd>
+
+<dt>I would like to borrow a name from the work...</dt>
+<dd>
+　In particular, there is no need to write in the documentation that you used Kirikiri.<r/>
+　Of course, you can write it (^^;<r/>
+　Unless otherwise stated, the license indication displayed in -about cannot be deleted.<r/>
+　When the license indication is described in the document etc. according to the modified BSD license, the license indication displayed by -about can be deleted.
+</dd>
+
+<dt>When the work is completed, do I need to inform the author of Kirikiri?</dt>
+<dd>
+　There is no obligation to notify that you used Kirikiri. There is no obligation to notify you, even for commercial use.<r/>
+　But I'm glad to say a word, yes.
+</dd>
+
+<dt>I would like to modify the Kirikiri source...</dt>
+<dd>
+　Kirikiri Z is a modified BSD license. Sources can also be modified under the modified BSD license.
+</dd>
+</dl>
+</para>
+
+<para>
+<ptitle>Acknowledgments</ptitle>
+　Kirikiri 2 and Kirikiri Z are established with the cooperation of many people. Thank you for your kindness.<r/>
+　In particular, Mr. PIA received a lot of advice regarding Kirikiri / KAG. Thank you very much.<r/>
+<r/>
+　Kirikiri Z was developed by crowdfunding and with the financial support of many people.<r/>
+　The people who helped me (in no particular order) are W.Dee, casper, MCF, Biscrat, Blue Cat, nagai, Lou, Masayuki Takagiwa, Eternity, Yun Yun Detective, Ryogo , AZ-UME, Akito Kyo, Katsumasa Tsuneyoshi, Jun Koike, miahmie, Circle Baku, Azanashi, Hashi, Tananaka, Waffle / waffle, Wamsoft, TYPE-MOON, M2.<r/>
+<r/>
+　Go Watanabe provided various plugins including the Win32Ole plugin. Thank you very much.<r/>
+<r/>
+　Kenjo provided Photoshop-compatible blend functions. Thank you very much.<r/>
+<r/>
+　The gamepad code was provided by Kiyobee. Thank you very much.<r/>
+<r/>
+　Kouhei Yanagita provided the KAGParser class documentation and KAG extensions. Thank you very much.<r/>
+<r/>
+　The Kirikiri icon is by MIK. Thank you very much.<r/>
+<r/>
+　Various functions related to movie playback, such as layer-based movie playback, incorporate "movie expansion" by Takemoto Imoto. Thank you very much.<r/>
+<at target="_top" href="http://www.kaede-software.com/">http://www.kaede-software.com/</at><r/>
+<r/>
+　The blur implementation is based on the code provided by yun. Thank you very much.<r/>
+<r/>
+　Mr. mey provided pad-related enhancement patches, String.reverse(), etc. Thank you very much.<r/>
+<r/>
+　The following is a list of programming libraries / support software used by Kirikiri (in no particular order, without titles). Thanks to those who have published useful libraries.<r/>
+<r/>
+<dl>
+<dt>IJG JPEG Library (Independent JPEG Group)</dt>
+<dd>
+    <at target="_top"  href="http://www.ijg.org/">http://www.ijg.org/</at><r/>
+    This software is based in part on the work of the Independent JPEG Group.
+</dd>
+
+<dt>libpng (Guy Eric Schalnat, Andreas Dilger, Glenn Randers-Pehrson,  and others)</dt>
+<dd>
+    <at target="_top"  href="http://www.libpng.org/pub/png/libpng.html">http://www.libpng.org/pub/png/libpng.html</at>
+</dd>
+
+<dt>zlib (Jean-loup Gailly, Mark Adler)</dt>
+<dd>
+    <at target="_top"  href="http://www.gzip.org/zlib/">http://www.gzip.org/zlib/</at>
+</dd>
+
+<dt>ERINA-Library (L.Entis)</dt>
+<dd>
+    <at target="_top"  href="http://www.entis.jp/eri/">http://www.entis.jp/eri/</at><r/>
+    ERINA-Library Copyright (C) 2001 Leshade Entis, Entis-soft.
+</dd>
+
+<dt>Regex++ (Dr John Maddock)</dt>
+<dd>
+    <at target="_top"  href="http://ourworld.compuserve.com/homepages/John_Maddock/regexpp.htm">http://ourworld.compuserve.com/homepages/John_Maddock/regexpp.htm</at><r/>
+    Regex++ Copyright (c) 1998-2000 Dr John Maddock
+</dd>
+
+<dt>UPX (Markus F.X.J. Oberhumer &amp; Laszlo Molnar)</dt>
+<dd>
+    <at target="_top"  href="http://upx.sourceforge.net/">http://upx.sourceforge.net/</at>
+</dd>
+
+<dt>Shell Component Library (Takashi Ito)</dt>
+<dd>
+    <at target="_top"  href="http://www.bekkoame.ne.jp/~itotaka/">http://www.bekkoame.ne.jp/~itotaka/</at>
+</dd>
+
+<dt>NASM, The Netwide Assembler (Simon Tatham, Julian Hall and others)</dt>
+<dd>
+    <at target="_top"  href="http://nasm.sourceforge.net/">http://nasm.sourceforge.net/</at>
+</dd>
+
+<dt>alink (Anthony A.J. Williams)</dt>
+<dd>
+    <at target="_top"  href="http://alink.home.dhs.org/">http://alink.home.dhs.org/</at>
+</dd>
+
+<dt>md5.c (L. Peter Deutsch)</dt>
+<dd>
+    Copyright (C) 1999, 2000, 2002 Aladdin Enterprises.  All rights reserved.
+</dd>
+
+<dt>libogg/libvorbis (Xiph.Org Foundation)</dt>
+<dd>
+    <at target="_top"  href="http://www.xiph.org/">http://www.xiph.org/</at><r/>
+    <r/>
+Copyright (c) 2002, Xiph.org Foundation<r/>
+<r/>
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:<r/>
+<r/>
+- Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.<r/>
+<r/>
+- Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions and the following disclaimer in the
+documentation and/or other materials provided with the distribution.<r/>
+<r/>
+- Neither the name of the Xiph.org Foundation nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.<r/>
+<r/>
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</dd>
+
+
+<dt>Ogg Vorbis Acceleration project</dt>
+<dd>
+Kirikiri 2 uses the SSE-compatible FFT calculation code published in Ogg Vorbis Acceleration Project by blacksword inside Phase Vocoder.
+<at target="_top" href="http://homepage3.nifty.com/blacksword/">http://homepage3.nifty.com/blacksword/</at><r/>
+</dd>
+
+<dt>A C-program for MT19937 (Makoto Matsumoto and Takuji Nishimura)</dt>
+<dd>
+    <at target="_top"  href="http://www.math.keio.ac.jp/matumoto/emt.html">http://www.math.keio.ac.jp/matumoto/emt.html</at><r/>
+    <r/>
+Copyright (C) 1997 - 2002, Makoto Matsumoto and Takuji Nishimura,
+   All rights reserved.     <r/>
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:<r/>
+<ol>
+<li> Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.</li>
+
+<li> Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions and the following disclaimer in the
+documentation and/or other materials provided with the distribution.</li>
+
+<li> The names of its contributors may not be used to endorse or promote 
+products derived from this software without specific prior written 
+permission.</li>
+</ol>
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.<r/>
+
+</dd>
+
+
+<dt>LibTomCrypt (Tom St Denis)</dt>
+<dd>
+    <at target="_top"  href="http://libtomcrypt.org/">http://libtomcrypt.org/</at><r/>
+</dd>
+
+
+
+
+
+<dt>AGG (Anti-Grain Geometry)</dt>
+<dd>
+    <at target="_top"  href="http://antigrain.com/">http://antigrain.com/</at><r/>
+<r/>
+The Anti-Grain Geometry Project<r/>
+A high quality rendering engine for C++<r/>
+http://antigrain.com<r/>
+<r/>
+Anti-Grain Geometry - Version 2.3 <r/>
+Copyright (C) 2002-2005 Maxim Shemanarev (McSeem) <r/>
+<r/>
+Permission to copy, use, modify, sell and distribute this software 
+is granted provided this copyright notice appears in all copies. 
+This software is provided "as is" without express or implied
+warranty, and with no claim as to its suitability for any purpose.
+</dd>
+
+
+
+<dt>Expat</dt>
+<dd>
+    <at target="_top"  href="http://expat.sourceforge.net/">http://expat.sourceforge.net/</at><r/>
+<r/>
+Copyright (c) 1998, 1999, 2000 Thai Open Source Software Center Ltd
+                               and Clark Cooper<r/>
+Copyright (c) 2001, 2002, 2003, 2004, 2005, 2006 Expat maintainers.<r/>
+<r/>
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:<r/>
+<r/>
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.<r/>
+<r/>
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+</dd>
+
+
+
+<dt>Oniguruma</dt>
+<dd>
+    <at target="_top"  href="http://www.geocities.jp/kosako3/oniguruma/index_ja.html">http://www.geocities.jp/kosako3/oniguruma/index_ja.html</at><r/>
+<r/>
+Copyright (c) 2002-2007  K.Kosako ( sndgk393 AT ybb DOT ne DOT jp )
+All rights reserved.<r/>
+<r/>
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:<r/>
+<ol>
+<li> Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.</li>
+
+<li> Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.</li>
+</ol>
+THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+SUCH DAMAGE.
+</dd>
+
+
+
+
+<dt>FreeType</dt>
+<dd>
+    <at target="_top"  href="http://www.freetype.org/">http://www.freetype.org/</at><r/>
+Copyright 1996-2002, 2006 by David Turner, Robert Wilhelm, and Werner Lemberg
+</dd>
+
+
+
+<dt>picojson</dt>
+<dd>
+    <at target="_top"  href="https://github.com/kazuho/picojson">https://github.com/kazuho/picojson</at><r/>
+<r/>
+Copyright 2009 Cybozu Labs, Inc.<r/>
+<r/>
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:<r/>
+<ol>
+<li> Redistributions of source code must retain the above copyright notice,
+    this list of conditions and the following disclaimer.</li>
+
+<li> Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.</li>
+</ol>
+THIS SOFTWARE IS PROVIDED BY CYBOZU LABS, INC. ``AS IS'' AND ANY EXPRESS OR
+IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+EVENT SHALL CYBOZU LABS, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.<r/>
+<r/>
+The views and conclusions contained in the software and documentation are
+those of the authors and should not be interpreted as representing official
+policies, either expressed or implied, of Cybozu Labs, Inc.
+</dd>
+
+
+</dl>
+</para>
+
+</doc>
+
+

@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Bitmap</title>
+<desc>
+　The Bitmap class is a class that holds image information.<r/>
+</desc>
+
+<member>
+	<name>Bitmap</name>
+	<type>constructor</type>
+	<shortdesc>Construct Bitmap object</shortdesc>
+	<arg></arg>
+	<result></result>
+	<desc>
+		　Constructs an object of class Bitmap.<r/>
+		　Initially the width and height are 32 pixels.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>Bitmap</name>
+	<type>constructor</type>
+	<shortdesc>Construct Bitmap object</shortdesc>
+	<arg>
+		<argitem>
+			<name>width</name>
+			<default></default>
+			<desc>
+				　Specify the width of the image.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>height</name>
+			<default></default>
+			<desc>
+				　Specify the height of the image.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>bpp</name>
+			<default>32</default>
+			<desc>
+				　Specifies the number of bits for each pixel in the image.<r/>
+				Specify either 32 or 8.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Constructs a Bitmap class object with the specified size.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>Bitmap</name>
+	<type>constructor</type>
+	<shortdesc>Construct Bitmap object</shortdesc>
+	<arg>
+		<argitem>
+			<name>filename</name>
+			<default></default>
+			<desc>
+				　Specify the image file name.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>colorkey</name>
+			<default>clNone</default>
+			<desc>
+				　Specify the color key.<r/>
+				Values are the same as <ref>Layer.loadImages</ref>.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Constructs a Bitmap class object from a file.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>onLoaded</name>
+	<type>event</type>
+	<shortdesc>Asynchronous read completed</shortdesc>
+	<arg>
+		<argitem>
+			<name>meta</name>
+			<default></default>
+			<desc>
+				　Tag information of the loaded image.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>async</name>
+			<default></default>
+			<desc>
+				　Whether it was read asynchronously.<r/>
+				　If the image data is in the cache, this event occurs during <ref>Bitmap.loadAsync</ref> execution.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>error</name>
+			<default></default>
+			<desc>
+				　Whether an error occurred during image reading.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>message</name>
+			<default></default>
+			<desc>
+				　This is the error message.<r/>
+				　If an error occurs, an error message is passed.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Occurs when asynchronous read has completed.<r/>
+		　The loaded image can be copied to Layer with <ref>Layer.copyFromBitmapToMainImage</ref>.<r/>
+		　Since the reading process is asynchronous, when the reading is completed, the layer that passes the image may have been invalidated.<r/>
+		　If you want to access other objects in this event, make sure that they are not invalidated.<r/>
+		　Or make sure that the target object is not invalidated until this event is completed.<r/>
+	</desc>
+	<ref>Bitmap.loadAsync</ref>
+	<ref>Layer.copyFromBitmapToMainImage</ref>
+</member>
+
+<member>
+	<name>getPixel</name>
+	<type>method</type>
+	<shortdesc>Get pixel value</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　Specifies the x coordinate value to get in pixels.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　Specify the y coordinate value to get in pixels.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Pixel value</result>
+	<desc>
+		　Gets the pixel value of the image.<r/>
+	</desc>
+	<ref>Bitmap.setPixel</ref>
+</member>
+
+<member>
+	<name>setPixel</name>
+	<type>method</type>
+	<shortdesc>Setting pixel values</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　Specifies the x coordinate value to set in pixels.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　Specifies the y coordinate value to set in pixels.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>value</name>
+			<default></default>
+			<desc>
+				　Specifies the pixel value to set.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Set the pixel value of the image.<r/>
+	</desc>
+	<ref>Bitmap.getPixel</ref>
+</member>
+
+<member>
+	<name>getMaskPixel</name>
+	<type>method</type>
+	<shortdesc>Get the alpha value of a pixel</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　Specifies the x coordinate value to get in pixels.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　Specify the y coordinate value to get in pixels.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>The alpha value of the pixel</result>
+	<desc>
+		　Gets the alpha value of a pixel in the image.<r/>
+	</desc>
+	<ref>Bitmap.setMaskPixel</ref>
+</member>
+
+<member>
+	<name>setMaskPixel</name>
+	<type>method</type>
+	<shortdesc>Get the alpha value of a pixel</shortdesc>
+	<arg>
+		<argitem>
+			<name>x</name>
+			<default></default>
+			<desc>
+				　Specifies the x coordinate value to set in pixels.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>y</name>
+			<default></default>
+			<desc>
+				　Specifies the y coordinate value to set in pixels.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>value</name>
+			<default></default>
+			<desc>
+				　Specifies the alpha value of the pixel to set.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Sets the alpha value of an image pixel.<r/>
+	</desc>
+	<ref>Bitmap.getMaskPixel</ref>
+</member>
+
+<member>
+	<name>independ</name>
+	<type>method</type>
+	<shortdesc>Unsharing an image</shortdesc>
+	<arg>
+		<argitem>
+			<name>copy</name>
+			<default>true</default>
+			<desc>
+				　Specify whether to copy the original image when unsharing.<r/>
+				　Specifying true copies the original image. If false is specified, the original image will not be copied and the contents of the image will be undefined.
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Forcibly unsharing the image.<r/>
+		　Kirikiri will share the same image without actually copying the image buffer when copying the entire image with assignImages.<r/>
+		　Normally, this sharing state is automatically released just before trying to make changes to the image, but this method can be forcibly released.<r/>
+		　If you specify false for the copy argument, the sharing of the image will be canceled, but it will not be guaranteed to inherit the original image (the contents of the image will be undefined), but the sharing will be canceled faster can do. When rewriting the entire image, it is not necessary to inherit the original image, so it may be more efficient to call this method with false specified before drawing.<r/>
+		　This method does nothing if the image is not shared.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>setSize</name>
+	<type>method</type>
+	<shortdesc>Setting the image size</shortdesc>
+	<arg>
+		<argitem>
+			<name>width</name>
+			<default></default>
+			<desc>
+				　Specifies the width of the image in pixels.<r/>
+				　This value can also be obtained and set using the <ref>Bitmap.width</ref> property.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>height</name>
+			<default></default>
+			<desc>
+				　Specifies the height of the image in pixels.<r/>
+				　This value can also be obtained and set using the <ref>Bitmap.height</ref> property.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Specify the image size.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>copyFrom</name>
+	<type>method</type>
+	<shortdesc>Copy image</shortdesc>
+	<arg>
+		<argitem>
+			<name>src</name>
+			<default></default>
+			<desc>
+				　Specify the source Bitmap object.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Copy the image.<r/>
+		　This method requires almost no execution time, because it is just a state where the same image is shared by two or more objects.<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>save</name>
+	<type>method</type>
+	<shortdesc>Saving images</shortdesc>
+	<arg>
+		<argitem>
+			<name>name</name>
+			<default></default>
+			<desc>
+				　Specify the storage name to save.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>type</name>
+			<default>"bmp"</default>
+			<desc>
+				　Specify the image format to save as a character string. In the current version, the following formats can be specified.<r/>
+				<r/>
+				<dl>
+				<dt>"<kw>bmp</kw>" or "<kw>bmp32</kw>"</dt>
+				<dd>
+					　32bpp BMP. Also save the alpha channel (mask).<r/>
+				</dd>
+				<r/>
+				<dt>"<kw>bmp24</kw>"</dt>
+				<dd>
+					　24bpp BMP. Alpha channels (masks) are not saved.<r/>
+				</dd>
+				<r/>
+				<dt>"<kw>bmp8</kw>"</dt>
+				<dd>
+					　8bpp BMP. Alpha channels (masks) are not saved. Images are color reduced using 4x4 organized dithering with a fixed palette of 252 colors.<r/>
+				</dd>
+				<r/>
+				<dt>"<kw>jpg</kw>"</dt>
+				<dd>
+					　JPEG. Alpha channels (masks) are not saved. Images are stored at 90% quality.<r/>
+				</dd>
+				<r/>
+				<dt>"<kw>jpg###</kw>"</dt>
+				<dd>
+					　JPEG. Alpha channels (masks) are not saved. Images are saved with the quality specified by ###. "jpg010" is 10%, "jpg100" is 100%, and "jpg080" is 80%.<r/>
+				</dd>
+				<r/>
+				<dt>"<kw>png</kw>"</dt>
+				<dd>
+					　32bpp PNG. Also save the alpha channel (mask).<r/>
+				</dd>
+				<r/>
+				<dt>"<kw>png24</kw>"</dt>
+				<dd>
+					　24bpp PNG. Alpha channels (masks) are not saved.<r/>
+				</dd>
+				<r/>
+				<dt>"<kw>tlg5</kw>"</dt>
+				<dd>
+					　It is TLG5 of 32bpp. Also save the alpha channel (mask).<r/>
+				</dd>
+				<r/>
+				<dt>"<kw>tlg524</kw>"</dt>
+				<dd>
+					　It is TLG5 of 24bpp. Alpha channels (masks) are not saved.<r/>
+				</dd>
+				<r/>
+				<dt>"<kw>tlg6</kw>"</dt>
+				<dd>
+					　It is TLG6 of 32bpp. Also save the alpha channel (mask).<r/>
+				</dd>
+				<r/>
+				<dt>"<kw>tlg624</kw>"</dt>
+				<dd>
+					　It is TLG6 of 24bpp. Alpha channels (masks) are not saved.<r/>
+				</dd>
+				<r/>
+				</dl>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>meta</name>
+			<default>null</default>
+			<desc>
+				　For TLG format, specify the tag information to be saved in dictionary format.<r/>
+				　For other formats, specify additional options (1.3.0 or later).<r/>
+				　Options that can be specified can be obtained with getSaveOption.<r/>
+			</desc>
+		</argitem>
+		
+	</arg>
+	<result></result>
+	<desc>
+		　Saves a file in the image format specified by type to the storage (file) specified by name.<r/>
+	</desc>
+	<ref>Bitmap.getSaveOption</ref>
+</member>
+
+<member>
+	<name>load</name>
+	<type>method</type>
+	<shortdesc>Loading images</shortdesc>
+	<arg>
+		<argitem>
+			<name>image</name>
+			<default></default>
+			<desc>
+				　Specify the image storage to load.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>colorkey</name>
+			<default>clNone</default>
+			<desc>
+				　Specify the color key (transparent color) of the image to be read.<r/>
+				　If a color is specified in 0xRRGGBB format, that color will be used as the color key.<r/>
+				　If you specify a numerical value that adds any palette index to <tt><kw>clPalIdx</kw></tt>, that palette index becomes transparent (for images with 256 colors or less).<r/>
+				　If you specify <tt><kw>clAdapt</kw></tt>, the most frequently used color in the top line of the image will automatically be transparent.<r/>
+				　If you specify a value obtained by adding a value representing a color in the form of 0xRRGGBB to <tt><kw>clAlphaMat</kw></tt>, the image will be superimposed on that color using alpha blending (ltAlpha method).
+				For example, (clAlphaMat + 0xffffff) will overlay the imported image over the white color.
+				All images will be opaque (all images will be opaque, but note that tag information is not changed in this mode).<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Dictionary array of tag information</result>
+	<desc>
+		　Load an image.<r/>
+		　A dictionary array of tag information (information about the image itself, such as the layer type and display position of the image) is returned as the return value.<r/>
+		　If the image has no tag information, null is returned.<r/>
+		　In the current version, tag information can only be held in PNG and TLG5 / 6 formats. See <link href="TPC"/> for available information.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>loadAsync</name>
+	<type>method</type>
+	<shortdesc>Asynchronous loading of images</shortdesc>
+	<arg>
+		<argitem>
+			<name>image</name>
+			<default></default>
+			<desc>
+				　Specify the image storage to load.<r/>
+				　Note that the file name specified here includes the extension.<r/>
+				　If there is no extension, the file will not be found and an error will occur.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Loads an image asynchronously.<r/>
+		　The completion of reading can be received by <ref>Bitmap.onLoaded</ref>.<r/>
+		　You can check whether it is being read asynchronously with <ref>Bitmap.loading</ref>.<r/>
+		　During asynchronous reading, accessing members other than <ref>Bitmap.loading</ref> will cause an exception.<r/>
+		　Also check the description of <ref>Bitmap.onLoaded</ref>.<r/>
+	</desc>
+	<ref>Bitmap.onLoaded</ref>
+	<ref>Bitmap.loading</ref>
+	<ref>Layer.copyFromBitmapToMainImage</ref>
+</member>
+
+<member>
+	<name>loadHeader</name>
+	<type>method</type>
+	<shortdesc>Load image information (1.3.0 or later)</shortdesc>
+	<arg>
+		<argitem>
+			<name>image</name>
+			<default></default>
+			<desc>
+				　Specify the image storage to load.<r/>
+				　Note that the file name specified here includes the extension.<r/>
+				　If there is no extension, the file will not be found and an error will occur.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Dictionary array of information</result>
+	<desc>
+		　Loads only image information.<r/>
+		　The image is not read, so if you want to get only the information, it can be read at high speed.<r/>
+		　The width and height of the returned dictionary are required, other information depends on the image format.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>getSaveOption</name>
+	<type>method</type>
+	<shortdesc>Acquisition of additional information for image storage (1.3.0 or later)</shortdesc>
+	<arg>
+		<argitem>
+			<name>type</name>
+			<default></default>
+			<desc>
+				　Specify the image format.<r/>
+				　The specification method is the same as that of the save method.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>Dictionary array of additional information</result>
+	<desc>
+		　Acquires additional information that can be specified when saving images.<r/>
+	</desc>
+	<ref>Bitmap.save</ref>
+</member>
+
+
+<member>
+	<name>width</name>
+	<type>property</type>
+	<shortdesc>Image width</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Specifies the width of the image in pixels.<r/>
+		　You can also set a value.<r/>
+	</desc>
+	<ref>Bitmap.setSize</ref>
+</member>
+
+<member>
+	<name>height</name>
+	<type>property</type>
+	<shortdesc>Image vertical width</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Specifies the height of the image in pixels.<r/>
+		　You can also set a value.<r/>
+	</desc>
+	<ref>Bitmap.setSize</ref>
+</member>
+
+<member>
+	<name>buffer</name>
+	<type>property</type>
+	<shortdesc>Image buffer pointer</shortdesc>
+	<access>r</access>
+	<desc>
+		　Represents a pointer to the upper left corner of the image buffer of the image (a 32bpp bitmap containing color and mask (opacity) information).<r/>
+		　This property is to provide a means of direct access to the image buffer for plugins etc.<r/>
+		　It is returned as an integer type, but please use it by casting it to an appropriate type (such as const unsigned long *) in plug-ins.<r/>
+		　Do not write a value to the pointer obtained by this property.
+		Any pointer obtained with <ref>Bitmap.bufferForWrite</ref> can be written.<r/>
+		　The image size is represented by the <ref>Bitmap.width</ref> and <ref>Bitmap.height</ref> properties.<r/>
+		　See <ref>Bitmap.bufferPitch</ref> for pointer calculation.<r/>
+	</desc>
+	<ref>Bitmap.bufferForWrite</ref>
+	<ref>Bitmap.bufferPitch</ref>
+</member>
+
+<member>
+	<name>bufferForWrite</name>
+	<type>property</type>
+	<shortdesc>Image buffer pointer (for writing)</shortdesc>
+	<access>r</access>
+	<desc>
+		　Represents a pointer to the upper left corner of the image buffer of the image (a 32bpp bitmap containing color and mask (opacity) information).<r/>
+		　This property is to provide a means of direct access to the image buffer for plugins etc.<r/>
+		　It is returned as an integer type, but please use it by casting it to an appropriate type (unsigned long * etc.) in plug-ins.<r/>
+		　Unlike <ref>Bitmap.buffer</ref>, the pointer obtained by this property can be written with a value. The same image is shared between multiple objects inside Kirikiri, but if you refer to this property, the sharing state will be released.<r/>
+		　The image size is represented by the <ref>Bitmap.width</ref> and <ref>Bitmap.height</ref> properties.<r/>
+		　See <ref>Bitmap.bufferPitch</ref> for pointer calculation.<r/>
+	</desc>
+	<ref>Bitmap.buffer</ref>
+	<ref>Bitmap.bufferPitch</ref>
+</member>
+
+<member>
+	<name>bufferPitch</name>
+	<type>property</type>
+	<shortdesc>Image buffer pitch</shortdesc>
+	<access>r</access>
+	<desc>
+		　Represents the pitch of the image buffer (the number of bytes to the next lower scanline) of the image (a 32 bpp bitmap containing color and mask (opacity) information).<r/>
+		　This property is to provide a means of direct access to the image buffer for plugins etc.<r/>
+		　Assuming that tjs_uint32 is a 32-bit integer type and tjs_uint8 is an 8-bit (1 byte) integer type, the pointer to the image position (x, y) can be calculated as follows by writing in C language.<r/>
+		<tt>( (tjs_uint32*)( (tjs_uint8*)buffer + y*bufferPitch )) + x</tt><r/>
+		　Note that this property returns the number of bytes, not the number of pixels until the next scanline. This number may be slightly larger than the exact number of bytes required for the image width.<r/>
+		　Note that this property can be negative.<r/>
+	</desc>
+	<ref>Bitmap.buffer</ref>
+	<ref>Bitmap.bufferForWrite</ref>
+</member>
+
+<member>
+	<name>loading</name>
+	<type>property</type>
+	<shortdesc>Confirmation during asynchronous reading</shortdesc>
+	<access>r</access>
+	<desc>
+		　Indicates whether asynchronous reading is in progress.<r/>
+		　When this value is true, asynchronous reading is in progress.<r/>
+		　Note that accessing another member during asynchronous reading will result in an exception.<r/>
+	</desc>
+	<ref>Bitmap.buffer</ref>
+	<ref>Bitmap.bufferPitch</ref>
+</member>
+
+
+</doc>

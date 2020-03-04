@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>AsyncTrigger</title>
+<desc>
+　The AsyncTrigger class is a class for generating events at the timing of event distribution immediately after control has returned to Kirikiri. This function is called <kw>Asynchronous trigger</kw> (asynchronous trigger).<r/>
+　In a script that uses an event-driven programming model, such as Kirikiri, a process that cannot be executed in an event handler (for example, trying to invalidate the object that caused the event in the event handler) is executed by the event. Useful when you want to do it outside the handler.<r/>
+</desc>
+
+<member>
+	<name>AsyncTrigger</name>
+	<type>constructor</type>
+	<shortdesc>Construct AsyncTriger object</shortdesc>
+	<arg>
+		<argitem>
+			<name>owner</name>
+			<default></default>
+			<desc>
+				　Specify where the event occurs.<r/>
+			</desc>
+		</argitem>
+		<argitem>
+			<name>actionname</name>
+			<default>"action"</default>
+			<desc>
+				　In the object where the event specified by owner occurs, specify the name of the method that receives the event. If an empty string is specified, owner is regarded as a method, and owner is called directly every time an event occurs.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result></result>
+	<desc>
+		　Constructs an object of the AsyncTrigger class.<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>onFire</name>
+	<type>event</type>
+	<shortdesc>When firing</shortdesc>
+	<arg></arg>
+	<result></result>
+	<desc>
+		　Occurs after trigger is pulled by <ref>AsyncTrigger.trigger</ref> method.<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>trigger</name>
+	<type>method</type>
+	<shortdesc>Pull trigger</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Raises an event.<r/>
+		　After calling this method, control returns to the Kirikiri body, and when the Kirikiri body reaches the stage of delivering the accumulated asynchronous events, an <ref>AsyncTrigger.onFire</ref> event is generated.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>cancel</name>
+	<type>method</type>
+	<shortdesc>Cancel trigger</shortdesc>
+	<arg>
+	</arg>
+	<result></result>
+	<desc>
+		　Cancels the trigger triggered by the <ref>AsyncTrigger.trigger</ref> method.<r/>
+		　You can cancel at any time before firing.<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>cached</name>
+	<type>property</type>
+	<shortdesc>Whether to cache events</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates whether to cache events. You can also set a value.<r/>
+		　If set to true, only one firing will occur regardless of how many times the <ref>AsyncTrigger.trigger</ref> method is called before firing.<r/>
+		　If false is specified, the shots will be fired the number of times called before firing.<r/>
+	</desc>
+</member>
+
+<member>
+	<name>mode</name>
+	<type>property</type>
+	<shortdesc>mode</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Indicates the mode of operation. You can also set a value.<r/>
+		　Specify one of the following values:<r/>
+		<tt><kw>atmNormal</kw>    : </tt> Fired during normal event delivery.<r/>
+		<tt><kw>atmExclusive</kw> : </tt> Fired over other asynchronous events<r/>
+		<tt><kw>atmAtIdle</kw>    : </tt> Fired when idle (no more events to broadcast).<r/>
+		　When the trigger is fired at the same time, the firing order is atmExclusive, atmNormal, atmIdle.<r/>
+		　If multiple triggers of the same mode are fired, fire in the order in which the triggers were fired.<r/>
+	</desc>
+	<ref>Timer.mode</ref>
+</member>
+
+</doc>

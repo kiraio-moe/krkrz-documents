@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Clipboard</title>
+<desc>
+　Clipboard class is a class that provides the function to access the OS <kw>clipboard</kw>. Objects cannot be created from this class.<r/>
+</desc>
+
+<member>
+	<name>hasFormat</name>
+	<type>method</type>
+	<shortdesc>Whether the specified format exists in the clipboard</shortdesc>
+	<arg>
+		<argitem>
+			<name>format</name>
+			<default></default>
+			<desc>
+				　Specify the format whose existence you want to check.<r/>
+				　In the current version, only cbfText can be specified. By specifying this, you can check whether there is any text data in the clipboard.<r/>
+			</desc>
+		</argitem>
+	</arg>
+	<result>True if the specified format exists in the clipboard, false otherwise</result>
+	<desc>
+		　You can check whether the specified <kw>format</kw> exists in the clipboard.<r/>
+		　Since the clipboard provided by the OS can have multiple formats at the same time, you can use this method to check whether a specific format is among them.<r/>
+	</desc>
+</member>
+
+
+<member>
+	<name>asText</name>
+	<type>property</type>
+	<shortdesc>Text format</shortdesc>
+	<access>r/w</access>
+	<desc>
+		　Represents the textual data currently on the clipboard. You can also write a value.<r/>
+		　Reading the value gives you the textual data currently on the clipboard. If there is no textual data on the clipboard, void is returned.<r/>
+		　By writing the value, you can store the data in text format on the clipboard.<r/>
+	</desc>
+</member>
+
+
+
+</doc>
