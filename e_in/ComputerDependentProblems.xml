@@ -82,7 +82,7 @@ If the end user is worried, either uncheck the "Check for revocation of the issu
 In this case, refer to the hardware manual and make settings so that the image can be enlarged (full screen display) while maintaining the aspect ratio.<r/>
 Some liquid crystal displays have a function to enlarge the display while maintaining the aspect ratio on the liquid crystal display side, so please set according to the manual.<r/>
 Also, depending on the graphic card (graphic chip), the driver can enlarge the image while keeping the aspect ratio, so please set according to the manual.<r/>
-Even with the functions of the Kirikiri body, full screen can be achieved while maintaining the aspect ratio. If you set "Graphic-Screen resolution at full screen" to "Do not change screen resolution" in the engine settings, you can switch to full screen while maintaining the aspect ratio.<r/>
+Even with the functions of the Kirikiri core, full screen can be achieved while maintaining the aspect ratio. If you set "Graphic-Screen resolution at full screen" to "Do not change screen resolution" in the engine settings, you can switch to full screen while maintaining the aspect ratio.<r/>
 </dd>
 -->
 

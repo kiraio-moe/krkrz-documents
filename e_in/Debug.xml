@@ -45,7 +45,7 @@ Console: kag.saveSystemVariables = (object)(object 0x0279E130[(function) KAGWind
 <dt>Object leak detection function</dt>
 <dd>
 　Enables a function to warn on termination of objects that have not been deleted (not released).<r/>
-　Originally, created objects are automatically deleted by the garbage collection function in TJS2, and there is no need to explicitly specify the deletion. However, due to bugs in plugins, the Kirikiri body, and circular references, objects may be left undeleted (leaked).<r/>
+　Originally, created objects are automatically deleted by the garbage collection function in TJS2, and there is no need to explicitly specify the deletion. However, due to bugs in plugins, the Kirikiri core, and circular references, objects may be left undeleted (leaked).<r/>
 　In debug mode, objects that have not yet been freed at the end are written to the console log file.<r/>
 　Note that even if only one object is not released, the log file can be huge because all objects related to that object are detected.<r/>
 <r/>

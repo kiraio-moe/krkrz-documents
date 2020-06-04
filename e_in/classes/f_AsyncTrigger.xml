@@ -54,7 +54,7 @@
 	<result></result>
 	<desc>
 		　Raises an event.<r/>
-		　After calling this method, control returns to the Kirikiri body, and when the Kirikiri body reaches the stage of delivering the accumulated asynchronous events, an <ref>AsyncTrigger.onFire</ref> event is generated.<r/>
+		　After calling this method, control returns to the Kirikiri core, and when the Kirikiri core reaches the stage of delivering the accumulated asynchronous events, an <ref>AsyncTrigger.onFire</ref> event is generated.<r/>
 	</desc>
 </member>
 

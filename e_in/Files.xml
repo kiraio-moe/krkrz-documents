@@ -43,10 +43,10 @@ For your convenience, files related to KAG are also posted.<r/>
   <dd>For Kirikiri plug-ins, they must be included in the distribution for end users. Of course, you don't need to include unnecessary plugins.→ <link href="Plugins"/></dd>
 
   <dt><kw>krkr.eXe</kw></dt>
-  <dd>It is Kirikiri body. You can change the file name when distributing to end users.</dd>
+  <dd>It is Kirikiri core. You can change the file name when distributing to end users.</dd>
 
   <dt>*.<kw>cf</kw> and *.<kw>cfu</kw></dt>
-  <dd>This file contains the options for the Kirikiri body. To enable the options specified to Kirikiri body (including -datapath option, etc.) in "Kirikiri settings" (-userconf), the same applies to the distribution for end users. Must be packed.→ <link href="Configure"/></dd>
+  <dd>This file contains the options for the Kirikiri core. To enable the options specified to Kirikiri core (including -datapath option, etc.) in "Kirikiri settings" (-userconf), the same applies to the distribution for end users. Must be packed.→ <link href="Configure"/></dd>
 
   <dt><kw>File corruption check tool.exe</kw> and its .<kw>ini</kw> file</dt>
   <dd>File corruption check tool. You can change the file name when distributing it to end users, but you must make sure that both the .exe and .ini files have the same name. When you distribute the Kirikiri Z SDK, it is included in enduser-tools, but when distributing to end users, it is usually necessary to place it in the same folder as the Kirikiri executable file.→ <link href="FileChkTool"/></dd>
@@ -67,7 +67,7 @@ For your convenience, files related to KAG are also posted.<r/>
   <dd>Releaser's profile. Releaser setting information is recorded. This file does not need to be included in the end-user distribution (Releaser automatically excludes this file).→ <link href="Releaser"/></dd>
 
   <dt><kw>hwexcept.log</kw></dt>
-  <dd>When the Kirikiri body crashes, it may be created at the location specified by the -datapath option. There are various situations that can be said to be a crash, but if this file was created it is a very severe crash, so please collect it from the end user and send it to the author of Kirikiri if necessary. This file does not need to be included in the end user distribution.</dd>
+  <dd>When the Kirikiri core crashes, it may be created at the location specified by the -datapath option. There are various situations that can be said to be a crash, but if this file was created it is a very severe crash, so please collect it from the end user and send it to the author of Kirikiri if necessary. This file does not need to be included in the end user distribution.</dd>
 
   <dt>*.<kw>console.log</kw></dt>
   <dd>It is a log file of the console of Kirikiri. Normally, when Kirikiri crashes, it may be created at the location specified by the -datapath option. The log that this file records is almost always the result of script mistakes. During application development or after distribution to end users, collect them from end users for debugging. You do not need to include this file in your end-user distribution.</dd>

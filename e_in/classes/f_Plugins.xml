@@ -20,7 +20,7 @@
 	</arg>
 	<result></result>
 	<desc>
-		　Connect the specified plug-in to Kirikiri body (read).<r/>
+		　Connect the specified plug-in to Kirikiri core (read).<r/>
 	</desc>
 </member>
 

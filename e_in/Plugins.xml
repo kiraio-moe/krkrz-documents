@@ -22,20 +22,20 @@
 　The <at href="f_Plugins_link.html">Plugins.link</at> method looks for the specified plug-in in the following order:<r/>
 <ol>
 <li>The same folder as the Kirikiri core</li>
-<li>In the plugin (plugin64 for 64bit version) folder in the same folder as the Kirikiri body and below</li>
+<li>In the plugin (plugin64 for 64bit version) folder in the same folder as the Kirikiri core and below</li>
 <li>Automatic search path</li>
 </ol>
 <r/>
-　If the automatic search path is in a location that is not accessible as a local file, such as in an archive, Kirikiri tries to extract the plug-in to the same folder as the <b>Kirikiri core</b>. Since this may cause problems, it is <b>strongly recommended</b> that plugins be placed in "the same folder as Kirikiri body" or "in the plugin folder in the same folder as Kirikiri body".
+　If the automatic search path is in a location that is not accessible as a local file, such as in an archive, Kirikiri tries to extract the plug-in to the same folder as the <b>Kirikiri core</b>. Since this may cause problems, it is <b>strongly recommended</b> that plugins be placed in "the same folder as Kirikiri core" or "in the plugin folder in the same folder as Kirikiri core".
 <r/>
 　It is important to place them in the plugin / plugin64 folder in order to distinguish plug-ins in the 32-bit / 64-bit versions.<r/>
 　In addition, Kirikiri's configuration tool (Releaser and -userconf option) looks for plug-ins to collect embedded option information for each plug-in, but in the following order.<r/>
 <ol>
-<li>The same folder as the Kirikiri body</li>
-<li>In the plugin folder in the same folder as the Kirikiri body and below</li>
+<li>The same folder as the Kirikiri core</li>
+<li>In the plugin folder in the same folder as the Kirikiri core and below</li>
 </ol>
 <r/>
-　Since the Kirikiri setting tool does not search up to the automatic search path, plug-ins including setting items must be placed in the "same folder as Kirikiri body" or "in the plugin folder in the same folder as Kirikiri body and below" not.<r/>
+　Since the Kirikiri setting tool does not search up to the automatic search path, plug-ins including setting items must be placed in the "same folder as Kirikiri core" or "in the plugin folder in the same folder as Kirikiri core and below" not.<r/>
 </para>
 
 <para>
@@ -43,8 +43,8 @@
 　Kirikiri has a function to automatically search for plugins and load them at startup. If you want the plugin to load automatically, you need to change the extension of the plugin from dll to tpm.<r/>
 　At startup (just before running startup.tjs), Kirikiri looks for a file with the extension tpm from the following folder and automatically loads it as a plugin.<r />
 <ul>
-<li>The same folder as the Kirikiri body</li>
-<li>In the plugin (plugin64 for 64bit version) folder in the same folder as the Kirikiri body and below</li>
+<li>The same folder as the Kirikiri core</li>
+<li>In the plugin (plugin64 for 64bit version) folder in the same folder as the Kirikiri core and below</li>
 </ul>
 <r/>
 　Kirikiri sorts the plug-ins you look ed in ascending order by name and loads them in that order. For example, aaa.tpm is loaded before aab.tpm. This does not affect the folder where the plug-in is, only the name of the plug-in is affected (even if z.tpm is in the same folder as Kirikiri, a.tpm is loaded first if there is a.tpm in the plugin folder). If you want to specify the order in which plug-ins are loaded, you must change the file name of the plug-in.<r/>
@@ -96,7 +96,7 @@
 
 <dt><kw>extrans.dll</kw></dt>
 <dd>
-　It is a plug-in to extend the kind of transition of Kirikiri body, and some transitions can be used when connected to Kirikiri body.<r/>
+　It is a plug-in to extend the kind of transition of Kirikiri core, and some transitions can be used when connected to Kirikiri core.<r/>
 　See <link href="Transition"/> for how to use this plugin.
 </dd>
 

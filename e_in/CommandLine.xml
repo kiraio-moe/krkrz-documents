@@ -316,7 +316,7 @@ Specifies the pad (joystick) key repeat interval in milliseconds. The smaller th
 <dd>
 　It is a setting whether to use _inmm.dll of irori.<r/>
 　Possible values are <b>'yes'(use)</b> or <b>'no' (do not use)</b>. If this option is not specified, 'no' is specified Is considered to have been<r/>
-　Mr. irori's _inmm.dll is useful, but Kirikiri cannot be patched by the _inmm.dll patch program due to its structure. Therefore, it is supported by Kirikiri body itself.<r/>
+　Mr. irori's _inmm.dll is useful, but Kirikiri cannot be patched by the _inmm.dll patch program due to its structure. Therefore, it is supported by Kirikiri core itself.<r/>
 　If you specify 'yes', you can perform the same operation as applying a patch.
 </dd>
 -->
@@ -445,7 +445,7 @@ Specifies the pad (joystick) key repeat interval in milliseconds. The smaller th
 　The following options have all possible values: <b>'yes' (use if available)</b>, <b>'no' (do not use if available)</b> , <b>'force'</b>, if no options are specified, 'yes' is assumed.<r/>
 　If you set it to 'no' when CPU recognition trouble occurs, that function will not be used.<r/>
 　'force' will force the use of the CPU feature even if it is not detected, but will not work properly if the CPU does not have that feature.<r/>
-　Only the -cpummx -cpucmov -cpusse -cpuemmx options affect the Kirikiri body. The OggVorbis decoder (wuvorbis.dll) is affected by the -cpusse, -cpummx and -cpu3dn options. Some other (third-party) plug-ins may also be affected by CPU feature settings.<r/>
+　Only the -cpummx -cpucmov -cpusse -cpuemmx options affect the Kirikiri core. The OggVorbis decoder (wuvorbis.dll) is affected by the -cpusse, -cpummx and -cpu3dn options. Some other (third-party) plug-ins may also be affected by CPU feature settings.<r/>
 <r/>
 <ul>
 <li>-<kw>cpummx</kw> (MMX)</li>

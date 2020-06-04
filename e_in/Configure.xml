@@ -8,7 +8,7 @@
 　This is so that end users (secondary users) can do some troubleshooting and performance tuning themselves.<r/>
 　The engine settings are started by adding -userconf to the Kirikiri executable file itself.<r/>
 <r/>
-　The name of the option, the value that can be set, and the description of the option use the information built into the Kirikiri body.<r/>
+　The name of the option, the value that can be set, and the description of the option use the information built into the Kirikiri core.<r/>
 </para>
 
 <para>

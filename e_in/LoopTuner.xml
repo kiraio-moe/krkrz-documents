@@ -64,7 +64,7 @@
 <li>Ogg Vorbis (extension .ogg)</li>
 </ul>
 <r/>
-The loop tuner uses the same plugin as the Kirikiri body. In the standard distribution configuration, each plug-in is automatically detected, so no special settings are required.<r/>
+The loop tuner uses the same plugin as the Kirikiri core. In the standard distribution configuration, each plug-in is automatically detected, so no special settings are required.<r/>
 </para>
 
 

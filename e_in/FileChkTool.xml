@@ -10,7 +10,7 @@
 　In order to detect file corruption, the distribution file must be signed in advance with <link href="SignTool"/>.<r/>
 　The file corruption check tool also checks the validity of the <kw>digital signature</kw> (a file that cannot be validated is treated as "damaged" by this tool).<r/>
 　The files to be checked are the files under the folder where the file corruption check tool is located (the folders below the folder where the file corruption check tool is located are also searched). Therefore, place this tool in the installation folder.<r/>
-　This tool checks only signed files and does not check unsigned files. However, in exceptional cases, only the Kirikiri body (or executable file created with Releaser) always checks the signature, so the Kirikiri body must be signed.<r/>
+　This tool checks only signed files and does not check unsigned files. However, in exceptional cases, only the Kirikiri core (or executable file created with Releaser) always checks the signature, so the Kirikiri core must be signed.<r/>
 <note>
 The file corruption checker can detect file corruption, but cannot detect the "file does not exist" condition by itself.<r />
 If you think the missing file is the cause of the error, you can copy the list of files checked by this tool to the clipboard by "Copy result" of this tool, and send it from the end user Please investigate.<r/>
