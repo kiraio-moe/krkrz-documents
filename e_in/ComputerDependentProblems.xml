@@ -47,7 +47,7 @@ If you are using "nView Desktop Manager", a utility that comes with your nVIDIA 
 
 <dt>Screen drawing is abnormally slow</dt>
 <dd>
-In particular, when the image is enlarged and displayed by Kiriri when full screen, or when double buffering is explicitly enabled, if the screen drawing is abnormally slow, use the "double buffering method" in "Engine Settings". Changing the setting of "Waiting for vertical synchronization" may improve the situation.<r/>
+In particular, when the image is enlarged and displayed by Kirikiri when full screen, or when double buffering is explicitly enabled, if the screen drawing is abnormally slow, use the "double buffering method" in "Engine Settings". Changing the setting of "Waiting for vertical synchronization" may improve the situation.<r/>
 Also, if the enlargement is performed on the engine side instead of on the monitor side, performance may degrade with the enlargement. In this case, if you set "Screen resolution at full screen" to "Nearest resolution" in the engine settings, enlargement will be performed on the display side, but depending on the display, images may not be displayed with the correct aspect ratio there is.
 </dd>
 
@@ -67,7 +67,7 @@ Alternatively, it may be improved by changing the setting of "Double buffering m
 <!--
  ###This disappeared because the driver information was not seen just by loading DirectDraw###
 <dt>Kirikiri core tries to connect to the network when trying to make it full screen</dt>
-<dd>If you try to make it full screen, security software may warn you when Kiriri Kiri core tries to connect to the Internet.<r/>
+<dd>If you try to make it full screen, security software may warn you when Kirikiri core tries to connect to the Internet.<r/>
 Kirikiri loads DirectDraw for the first time when going to full screen, but then checks the DirectDraw driver version. At this time, we may connect to crl.microsoft.com to confirm the validity of the driver signature. This is done when "Check for revocation of issuer certificate" in the "Advanced" tab of Internet Options ([Tools]-[Internet Options] from Internet Explorer) is checked.<r/>
 This symptom occurs when the OS refers to information on the Internet to verify the validity of the driver's digital signature. It is the OS that actually makes the connection, but as that function of the OS operates within Kirikiri's program, it may appear that Kirikiri is trying to connect to the Internet as a result. Please be assured that these are not spyware-like processes.<r/>
 If the end user is worried, either uncheck the "Check for revocation of the issuer certificate" mentioned above, or prohibit connection to the address using security software. There is no effect on the operation of Kirikiri itself.<r/>

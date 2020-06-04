@@ -33,12 +33,12 @@
 
 <dt>TLG5</dt>
 <dd>
-　Kiriri is a unique lossless compression format. The extension is .tlg. You can also load those with an alpha channel. The compression ratio is not very high, but the feature is that it can be expanded at high speed. This format cannot be used for <b>mask images (_m) or region images (_p)</b>. Only full color images without alpha channel or full color images with alpha channel can be handled.
+　Kirikiri is a unique lossless compression format. The extension is .tlg. You can also load those with an alpha channel. The compression ratio is not very high, but the feature is that it can be expanded at high speed. This format cannot be used for <b>mask images (_m) or region images (_p)</b>. Only full color images without alpha channel or full color images with alpha channel can be handled.
 </dd>
 
 <dt>TLG6</dt>
 <dd>
-　Kiriri is a unique lossless compression format. The extension is .tlg like TLG5. TLG6 features a high compression ratio. Decompression speed is slightly less than twice as fast as TLG5, but it can still be decompressed more than twice as fast as PNG, and its size is 2-40% smaller than PNG.
+　Kirikiri is a unique lossless compression format. The extension is .tlg like TLG5. TLG6 features a high compression ratio. Decompression speed is slightly less than twice as fast as TLG5, but it can still be decompressed more than twice as fast as PNG, and its size is 2-40% smaller than PNG.
 </dd>
 
 <dt>JPEG XR</dt>

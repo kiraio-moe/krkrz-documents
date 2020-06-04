@@ -16,7 +16,7 @@ For your convenience, files related to KAG are also posted.<r/>
   <dd>This is the folder where Kirikiri looks for plugins. Kirikiri refers to the plug-ins located in the folder where the Kirikiri executable file is located.→ <link href="Plugins"/></dd>
 
   <dt><kw>data</kw> and <kw>content-data</kw></dt>
-  <dd>If this folder is in the folder where the executable file of Kiriri Kiriri is located, the folder is regarded as the project folder and executed.→ <link href="Startup"/></dd>
+  <dd>If this folder is in the folder where the executable file of Kirikiri is located, the folder is regarded as the project folder and executed.→ <link href="Startup"/></dd>
 
 </dl>
 </para>

@@ -334,7 +334,7 @@
 	<result>Returns true if the ID exists and the message was successfully allocated, false otherwise.</result>
 	<desc>
 		　Change the message assignment.<r/>
-		　You can use this method to change the message that Kiriri has built in to another message.<r/>
+		　You can use this method to change the message that Kirikiri has built in to another message.<r/>
 		　Usually, it is described in the message map file (see <link href="Startup" />).<r/>
 		　To get a list of IDs that can be set and messages currently assigned to them, execute "Create a message map file" from <link href="Controller" />.
 	</desc>
@@ -711,7 +711,7 @@
 		　The handler function takes one argument, which is the exception object.<r/>
 		　If no handler function is specified, if the handler function is null, or if the handler function returns false, the default action will be taken.<r/>
 		　If the handler function returns true, the above default action will not be taken.<r/>
-		　Consider the possibility of asynchronous events occurring while executing the handler function. If the Kirikiri core can handle the asynchronous event, an unexpected exception may occur again while executing the exception handler. In order to avoid this, usually, when performing processing that waits for something in the handler function (when Kiriri has a chance to process the asynchronous event), stop the occurrence of the asynchronous event.<r/>
+		　Consider the possibility of asynchronous events occurring while executing the handler function. If the Kirikiri core can handle the asynchronous event, an unexpected exception may occur again while executing the exception handler. In order to avoid this, usually, when performing processing that waits for something in the handler function (when Kirikiri has a chance to process the asynchronous event), stop the occurrence of the asynchronous event.<r/>
 		<example>
 System.exceptionHandler = function (e)<r/>
 {<r/>
