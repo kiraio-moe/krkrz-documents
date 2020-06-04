@@ -4,6 +4,7 @@ use XML::DOM;
 use Image::Size;
 
 use utf8;
+use open ":utf8";
 
 my $image_dir;
 
@@ -380,8 +381,7 @@ sub member
 
 	$curplace = $curtitle . '.' . $name;
 
-	open OH, ">$outfile";
-	binmode(OH, ":utf8");
+	open OH, ">:crlf:utf8", "$outfile";
 
 	&write_html_header($name . ' - ' . getdata($node, 'shortdesc'), $orgfile, "f_${curtitle}.html", "${curtitle}クラス");
 
@@ -578,8 +578,7 @@ sub document
 
 	;# create class summary
 
-	open OH, ">$outfile";
-	binmode(OH, ":utf8");
+	open OH, ">:crlf:utf8", "$outfile";
 
 	&write_html_header($curtitle, $orgfile, '', '');
 
@@ -802,8 +801,7 @@ foreach my $each (@list)
 	&process($each);
 }
 
-open OH, ">keys.txt";
-binmode(FH, ":utf8");
+open OH, ">:crlf:utf8", "keys.txt";
 print OH join("\n", @keywords);
 print OH "\n";
 
