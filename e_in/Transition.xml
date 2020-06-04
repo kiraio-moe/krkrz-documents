@@ -9,9 +9,9 @@
 　In the former case, the corresponding layer is replaced, and in the latter case, the tree structure of the layer is completely replaced.<r/>
 　See <at href="f_Layer_beginTransition.html">Layer.beginTransition</at> method.<r/>
 <r/>
-　Kirikiri Z manages transitions with something called "<kw>transition handler</kw>". These are specified by the name argument of the Layer.beginTransition method. In the current version, there are three in the body of Kirikiri. It can also be extended with plugins.<r/>
+　Kirikiri Z manages transitions with something called "<kw>transition handler</kw>". These are specified by the name argument of the Layer.beginTransition method. In the current version, there are three in the Kirikiri core. It can also be extended with plugins.<r/>
 <r/>
-　The following describes the transition handler built into the main body of Kirikiri and the transition handler that can be used with the extended transition plug-in (extrans.dll).<r/>
+　The following describes the transition handler built into the Kirikiri core and the transition handler that can be used with the extended transition plug-in (extrans.dll).<r/>
 </para>
 
 <para>
@@ -40,7 +40,7 @@
 
 <para>
 <ptitle>Built-in transition handler</ptitle>
-　Kirikiri has the following three transition handlers in the main body.<r/>
+　Kirikiri has the following three transition handlers in the core.<r/>
 <r/>
 <dl>
 <dt><kw>crossfade</kw></dt>

@@ -21,8 +21,8 @@ If you think the missing file is the cause of the error, you can copy the list o
 
 <para>
 <ptitle>Configuration file of the file corruption check tool</ptitle>
-　"File corruption check tool.exe" in the enduser-tools folder is the main body of the file corruption check tool, but its setting file is "File corruption check tool.ini".<r/>
-　It is necessary to write the settings of the file corruption check tool here and distribute it with the main body of the check tool.<r/>
+　"File corruption check tool.exe" in the enduser-tools folder is the core of the file corruption check tool, but its setting file is "File corruption check tool.ini".<r/>
+　It is necessary to write the settings of the file corruption check tool here and distribute it with the core of the check tool.<r/>
 <note>
 　If you change the name of "File corruption check tool.exe", also change the name of the setting file. For example, if "Signature Confirmation Tool.exe" is selected, the setting file should be "Signature Confirmation Tool.ini".
 </note>

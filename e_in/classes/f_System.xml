@@ -727,7 +727,7 @@ System.exceptionHandler = function (e)<r/>
 		System.inform(e.message);<r/>
 		System.eventDisabled = event_disabled;<r/>
 			// Whether or not to fire the event<r/>
-		return true; // If true is returned, exception processing will not be performed on the body side<r/>
+		return true; // If true is returned, exception processing will not be performed on the core side<r/>
 	}<r/>
 	else<r/>
 	{<r/>
