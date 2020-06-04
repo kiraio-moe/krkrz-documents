@@ -40,8 +40,7 @@
 <dd>　JPEG XR形式を読み込むことができます。不可逆ですが JPEG よりも高画質でアルファチャンネルもサポートされています。<br />
 　画質を優先して圧縮すると可逆圧縮画像と見分けがつきづらく、ファイルサイズも小さいためサイズが重要な時は有用です。<br />
 　Ver 1.1.0 からサポートされ、現在読み込みのみ対応しています。<br />
-　Ver 1.3.0 から保存にも対応しました。<br />
-</dd>
+　Ver 1.3.0 から保存にも対応しました。</dd>
 <dt>メイン/マスク分離形式</dt>
 <dd>　メイン/マスク分離形式は、色情報の画像(メイン) とアルファチャネル(マスク) の画像が分離している形式で、マスク画像は、メイン画像のファイル名に _m が付加されたものとなります ( たとえば、abc.jpeg に対して abc_m.jpeg )。<br />
 　メイン/マスク画像の形式が異なっていてもかまいません。</dd></dl><br />
@@ -76,14 +75,12 @@ ltTransparent でも同じ意味になりますが、2.23 beta 2 未満におけ
 　<a target="main" class="jump" href="TPC.html">画像フォーマットコンバータ</a>でこの形式に適した画像を出力できます。また、<a target="main" class="jump" href="f_Layer_convertType.html">Layer.convertType</a> メソッドで ltAlpha からこの形式に変換することができます。<br />
 　ltAddAlphaのレイヤは、ltAlpha のレイヤの直接の子になると正常に表示できません。<br />
 <br />
-式 : <span class="i">result</span> = min(1.0, <span class="i">dest</span> × ( 1.0 - <span class="i">α</span> ) + <span class="i">src</span>)<br />
-</dd>
+式 : <span class="i">result</span> = min(1.0, <span class="i">dest</span> × ( 1.0 - <span class="i">α</span> ) + <span class="i">src</span>)</dd>
 <dt><a id="id150" name="id150" class="targanchor"><dfn>ltAdditive</dfn></a></dt>
 <dd>　ltAdditive は加算合成を行います。光彩の表現に適しています。Photoshopにおける「覆い焼き(リニア)」ですが、Photoshopと同じ効果を得たい場合は後述の ltPsAdditive を使用してください。ltPsAdditive と違い、ltAdditive では <span class="i">α</span>は無視されます。<br />
 　中性色 (重ね合わせても変化のない色) は黒です。<br />
 <br />
-式 : <span class="i">result</span> = min(1.0, <span class="i">dest</span> + <span class="i">src</span>)<br />
-</dd>
+式 : <span class="i">result</span> = min(1.0, <span class="i">dest</span> + <span class="i">src</span>)</dd>
 <dt><a id="id151" name="id151" class="targanchor"><dfn>ltSubtractive</dfn></a></dt>
 <dd>　ltSubtractive は減算合成を行います。<span class="i">α</span>は無視されます。<br />
 　中性色は白です。<br />
@@ -101,26 +98,22 @@ ltTransparent でも同じ意味になりますが、2.23 beta 2 未満におけ
 <dd>　ltDodge は「覆い焼き」合成を行います。光に照らされたものの表現に適しています。<span class="i">α</span>は無視されます。<br />
 　中性色は黒です。<br />
 <br />
-式 : <span class="i">result</span> = min(1.0, <span class="i">dest</span> ÷ ( 1.0 -  <span class="i">src</span> ) )<br />
-</dd>
+式 : <span class="i">result</span> = min(1.0, <span class="i">dest</span> ÷ ( 1.0 -  <span class="i">src</span> ) )</dd>
 <dt><a id="id154" name="id154" class="targanchor"><dfn>ltLighten</dfn></a></dt>
 <dd>　ltLighten は「比較(明)」合成を行います。<span class="i">α</span>は無視されます。<br />
 　中性色は黒です。<br />
 <br />
-式 : <span class="i">result</span> = max(<span class="i">dest</span>, <span class="i">src</span>)<br />
-</dd>
+式 : <span class="i">result</span> = max(<span class="i">dest</span>, <span class="i">src</span>)</dd>
 <dt><a id="id155" name="id155" class="targanchor"><dfn>ltDarken</dfn></a></dt>
 <dd>　ltDarken は「比較(暗)」合成を行います。<span class="i">α</span>は無視されます。<br />
 　中性色は白です。<br />
 <br />
-式 : <span class="i">result</span> = min(<span class="i">dest</span>, <span class="i">src</span>)<br />
-</dd>
+式 : <span class="i">result</span> = min(<span class="i">dest</span>, <span class="i">src</span>)</dd>
 <dt><a id="id156" name="id156" class="targanchor"><dfn>ltScreen</dfn></a></dt>
 <dd>　ltLighten は「スクリーン乗算」合成を行います。<span class="i">α</span>は無視されます。<br />
 　中性色は黒です。<br />
 <br />
-式 : <span class="i">result</span> = 1.0 - ( 1.0 - <span class="i">dest</span> ) × ( 1.0 - <span class="i">src</span> )<br />
-</dd>
+式 : <span class="i">result</span> = 1.0 - ( 1.0 - <span class="i">dest</span> ) × ( 1.0 - <span class="i">src</span> )</dd>
 
 
 <dt><a id="id157" name="id157" class="targanchor"><dfn>ltPsNormal</dfn></a></dt>
@@ -130,26 +123,22 @@ ltTransparent でも同じ意味になりますが、2.23 beta 2 未満におけ
 <dd>　ltPsAdditive はPhotoshop互換の「覆い焼き(リニア)」合成(加算合成)を行います。ltAdditive と違い、<span class="i">α</span>は無視されません。<br />
 　中性色は黒です。<br />
 <br />
-式 : <span class="i">result</span> = blend(<span class="i">dest</span>, min(1.0, <span class="i">dest</span> + <span class="i">src</span>), <span class="i">α</span>)<br />
-</dd>
+式 : <span class="i">result</span> = blend(<span class="i">dest</span>, min(1.0, <span class="i">dest</span> + <span class="i">src</span>), <span class="i">α</span>)</dd>
 <dt><a id="id159" name="id159" class="targanchor"><dfn>ltPsSubtractive</dfn></a></dt>
 <dd>　ltPsSubtractive はPhotoshop互換の「焼き込み(リニア)」合成(減算合成)を行います。ltSubtractive と違い、<span class="i">α</span>は無視されません。<br />
 　中性色は白です。<br />
 <br />
-式 : <span class="i">result</span> = blend(<span class="i">dest</span>, max(0.0, <span class="i">dest</span> + <span class="i">src</span> - 1.0), <span class="i">α</span>)<br />
-</dd>
+式 : <span class="i">result</span> = blend(<span class="i">dest</span>, max(0.0, <span class="i">dest</span> + <span class="i">src</span> - 1.0), <span class="i">α</span>)</dd>
 <dt><a id="id160" name="id160" class="targanchor"><dfn>ltPsMultiplicative</dfn></a></dt>
 <dd>　ltPsMultiplicative はPhotoshop互換の「乗算」合成を行います。ltMultiplicative と違い、<span class="i">α</span>は無視されません。<br />
 　中性色は白です。<br />
 <br />
-式 : <span class="i">result</span> = blend(<span class="i">dest</span>, <span class="i">dest</span> × <span class="i">src</span>, <span class="i">α</span>)<br />
-</dd>
+式 : <span class="i">result</span> = blend(<span class="i">dest</span>, <span class="i">dest</span> × <span class="i">src</span>, <span class="i">α</span>)</dd>
 <dt><a id="id161" name="id161" class="targanchor"><dfn>ltPsScreen</dfn></a></dt>
 <dd>　ltPsScreen はPhotoshop互換の「スクリーン」合成を行います。ltScreen と違い、<span class="i">α</span>は無視されません。<br />
 　中性色は黒です。<br />
 <br />
-式 : <span class="i">result</span> = blend(<span class="i">dest</span>, 1.0 - (1.0 - <span class="i">dest</span>) × (1.0 - <span class="i">src</span>), <span class="i">α</span>)<br />
-</dd>
+式 : <span class="i">result</span> = blend(<span class="i">dest</span>, 1.0 - (1.0 - <span class="i">dest</span>) × (1.0 - <span class="i">src</span>), <span class="i">α</span>)</dd>
 
 <dt><a id="id162" name="id162" class="targanchor"><dfn>ltPsOverlay</dfn></a></dt>
 <dd>　ltPsOverlay はPhotoshop互換の「オーバーレイ」合成を行います。<br />
@@ -158,8 +147,7 @@ ltTransparent でも同じ意味になりますが、2.23 beta 2 未満におけ
 式 : <span class="i">result</span> = blend(<span class="i">dest</span>, overlay(<span class="i">dest</span>, <span class="i">src</span>), <span class="i">α</span>)<br />
 ここで overlay(<span class="i">a</span>, <span class="i">b</span>) = <br />
 　<span class="i">a</span> × <span class="i">b</span> × 2.0  ( <span class="i">a</span> &lt; 0.5 のとき)<br />
-　1.0 - (1.0 - <span class="i">a</span>) × (1.0 - <span class="i">b</span>) × 2.0 (それ以外のとき)<br />
-</dd>
+　1.0 - (1.0 - <span class="i">a</span>) × (1.0 - <span class="i">b</span>) × 2.0 (それ以外のとき)</dd>
 <dt><a id="id163" name="id163" class="targanchor"><dfn>ltPsHardLight</dfn></a></dt>
 <dd>　ltPsHardLight はPhotoshop互換の「ハードライト」合成を行います。<br />
 　中性色は50%灰色です。<br />
@@ -167,8 +155,7 @@ ltTransparent でも同じ意味になりますが、2.23 beta 2 未満におけ
 式 : <span class="i">result</span> = blend(<span class="i">dest</span>, hardlight(<span class="i">dest</span>, <span class="i">src</span>), <span class="i">α</span>)<br />
 ここで hardlight(<span class="i">a</span>, <span class="i">b</span>) = <br />
 　<span class="i">a</span> × <span class="i">b</span> × 2.0  (<span class="i">b</span> &lt; 0.5 のとき)<br />
-　1.0 - (1.0 - <span class="i">a</span>) × (1.0 - <span class="i">b</span>) × 2.0 (それ以外のとき)<br />
-</dd>
+　1.0 - (1.0 - <span class="i">a</span>) × (1.0 - <span class="i">b</span>) × 2.0 (それ以外のとき)</dd>
 
 <dt><a id="id164" name="id164" class="targanchor"><dfn>ltPsSoftLight</dfn></a></dt>
 <dd>　ltPsSoftLight はPhotoshop互換の「ソフトライト」合成を行います。<br />
@@ -177,57 +164,48 @@ ltTransparent でも同じ意味になりますが、2.23 beta 2 未満におけ
 式 : <span class="i">result</span> = blend(<span class="i">dest</span>, softlight(<span class="i">dest</span>, <span class="i">src</span>), <span class="i">α</span>)<br />
 ここで softlight(<span class="i">a</span>, <span class="i">b</span>) = <br />
 　<span class="i">a</span><sup>(0.5 ÷ <span class="i">b</span>)</sup>  (<span class="i">b</span> &gt; 0.5 のとき)<br />
-　<span class="i">a</span><sup>((1.0 - <span class="i">b</span>) × 2)</sup>  (それ以外のとき)<br />
-</dd>
+　<span class="i">a</span><sup>((1.0 - <span class="i">b</span>) × 2)</sup>  (それ以外のとき)</dd>
 
 <dt><a id="id165" name="id165" class="targanchor"><dfn>ltPsColorDodge</dfn></a></dt>
 <dd>　ltPsColorDodge はPhotoshop互換の「覆い焼きカラー」合成を行います。ltDodge と違い、<span class="i">α</span>は無視されません。<br />
 　中性色は黒です。<br />
 <br />
-式 : <span class="i">result</span> = blend(<span class="i">dest</span>, min(1.0, <span class="i">dest</span> ÷ ( 1.0 -  <span class="i">src</span> ) ), <span class="i">α</span>)<br />
-</dd>
+式 : <span class="i">result</span> = blend(<span class="i">dest</span>, min(1.0, <span class="i">dest</span> ÷ ( 1.0 -  <span class="i">src</span> ) ), <span class="i">α</span>)</dd>
 <dt><a id="id166" name="id166" class="targanchor"><dfn>ltPsColorDodge5</dfn></a></dt>
 <dd>　ltPsColorDodge はPhotoshopのバージョン 5.x 以下と互換の「覆い焼きカラー」合成を行います。ltPsColorDodge とは式が若干異なります。<br />
 　中性色は黒です。<br />
 <br />
-式 : <span class="i">result</span> = min(1.0, <span class="i">dest</span> ÷ ( 1.0 - <span class="i">src</span> × <span class="i">α</span>) )<br />
-</dd>
+式 : <span class="i">result</span> = min(1.0, <span class="i">dest</span> ÷ ( 1.0 - <span class="i">src</span> × <span class="i">α</span>) )</dd>
 <dt><a id="id167" name="id167" class="targanchor"><dfn>ltPsColorBurn</dfn></a></dt>
 <dd>　ltPsColorBurn はPhotoshop互換の「焼き込みカラー」合成を行います。<br />
 　中性色は白です。<br />
 <br />
-式 : <span class="i">result</span> = blend(<span class="i">dest</span>, max(0.0, 1.0 - (1.0 - <span class="i">dest</span>) ÷ <span class="i">src</span>), <span class="i">α</span>)<br />
-</dd>
+式 : <span class="i">result</span> = blend(<span class="i">dest</span>, max(0.0, 1.0 - (1.0 - <span class="i">dest</span>) ÷ <span class="i">src</span>), <span class="i">α</span>)</dd>
 <dt><a id="id168" name="id168" class="targanchor"><dfn>ltPsLighten</dfn></a></dt>
 <dd>　ltPsLighten はPhotoshop互換の「比較(明)」合成を行います。ltLighten と違い、<span class="i">α</span>は無視されません。<br />
 　中性色は黒です。<br />
 <br />
-式 : <span class="i">result</span> = blend(<span class="i">dest</span>, max(<span class="i">dest</span>, <span class="i">src</span>), <span class="i">α</span>)<br />
-</dd>
+式 : <span class="i">result</span> = blend(<span class="i">dest</span>, max(<span class="i">dest</span>, <span class="i">src</span>), <span class="i">α</span>)</dd>
 <dt><a id="id169" name="id169" class="targanchor"><dfn>ltPsDarken</dfn></a></dt>
 <dd>　ltPsDarken はPhotoshop互換の「比較(暗)」合成を行います。ltDarken と違い、<span class="i">α</span>は無視されません。<br />
 　中性色は白です。<br />
 <br />
-式 : <span class="i">result</span> = blend(<span class="i">dest</span>, min(<span class="i">dest</span>, <span class="i">src</span>), <span class="i">α</span>)<br />
-</dd>
+式 : <span class="i">result</span> = blend(<span class="i">dest</span>, min(<span class="i">dest</span>, <span class="i">src</span>), <span class="i">α</span>)</dd>
 <dt><a id="id170" name="id170" class="targanchor"><dfn>ltPsDifference</dfn></a></dt>
 <dd>　ltPsDifference はPhotoshop互換の「差の絶対値」合成を行います。<br />
 　中性色は黒です。<br />
 <br />
-式 : <span class="i">result</span> = blend(<span class="i">dest</span>, abs(<span class="i">dest</span> - <span class="i">src</span>), <span class="i">α</span>)<br />
-</dd>
+式 : <span class="i">result</span> = blend(<span class="i">dest</span>, abs(<span class="i">dest</span> - <span class="i">src</span>), <span class="i">α</span>)</dd>
 <dt><a id="id171" name="id171" class="targanchor"><dfn>ltPsDifference5</dfn></a></dt>
 <dd>　ltPsDifference5 はPhotoshopのバージョン 5.x 以下と互換の「差の絶対値」合成を行います。ltPsDifference とは式が若干異なります。<br />
 　中性色は黒です。<br />
 <br />
-式 : <span class="i">result</span> = abs(<span class="i">dest</span> - <span class="i">src</span> × <span class="i">α</span>)<br />
-</dd>
+式 : <span class="i">result</span> = abs(<span class="i">dest</span> - <span class="i">src</span> × <span class="i">α</span>)</dd>
 <dt><a id="id172" name="id172" class="targanchor"><dfn>ltPsExclusion</dfn></a></dt>
 <dd>　ltPsExclusion はPhotoshop互換の「除外」合成を行います。<br />
 　中性色は黒です。<br />
 <br />
-式 : <span class="i">result</span> = blend(<span class="i">dest</span>,  <span class="i">dest</span> + <span class="i">src</span> - 2.0 × <span class="i">src</span> × <span class="i">dest</span>, <span class="i">α</span>)<br />
-</dd>
+式 : <span class="i">result</span> = blend(<span class="i">dest</span>,  <span class="i">dest</span> + <span class="i">src</span> - 2.0 × <span class="i">src</span> × <span class="i">dest</span>, <span class="i">α</span>)</dd>
 
 </dl></div></div>
 
@@ -241,15 +219,13 @@ ltTransparent でも同じ意味になりますが、2.23 beta 2 未満におけ
 <dl>
 <dt>アルファ合成</dt>
 <dd><a target="main" class="jump" href="f_Layer_type.html">Layer.type</a> プロパティで <a id="id174" name="id174" class="targanchor"><dfn>ltAlpha</dfn></a> を指定するとこの表示タイプになります。<br />
-ltAlphaは多くのグラフィックソフトが採用しているアルファ合成モードです。他のグラフィックソフトで出力したデータをそのまま読み込む場合はこのモードが適しています。<br />
-</dd>
+ltAlphaは多くのグラフィックソフトが採用しているアルファ合成モードです。他のグラフィックソフトで出力したデータをそのまま読み込む場合はこのモードが適しています。</dd>
 <dt>加算アルファ合成</dt>
 <dd><a target="main" class="jump" href="f_Layer_type.html">Layer.type</a> プロパティで <a id="id175" name="id175" class="targanchor"><dfn>ltAddAlpha</dfn></a> を指定するとこの表示タイプになります。<br />
 　この形式はアルファ合成に比べて以下のメリット・デメリットがあります。<br />
 <ul><li>式がアルファ合成よりも単純なため、表示が高速に行え、多くの描画メソッドでも高速な描画が可能です</li><li>アルファ合成と一緒に加算合成も表現できます</li><li>この形式に対応しているグラフィックソフトがほとんどありません</li></ul><br />
 ltAddAlphaと同じ合成モードに対応しているグラフィックソフトはそうはないと思いますので、他ソフトの出力を吉里吉里でこの形式で扱うには、<a target="main" class="jump" href="TPC.html">画像フォーマットコンバータ</a> でこのタイプの画像を出力するか、<a target="main" class="jump" href="f_Layer_convertType.html">Layer.convertType</a> メソッドで ltAlpha からこの形式に変換する必要があります。<br />
-　画像フォーマットコンバータでは、Photoshop形式で、「通常」レイヤーと「覆い焼き(リニア)」レイヤーの組み合わさった入力を、加算アルファ合成用画像の入力として受け付けることができます。<br />
-</dd></dl></div></div>
+　画像フォーマットコンバータでは、Photoshop形式で、「通常」レイヤーと「覆い焼き(リニア)」レイヤーの組み合わさった入力を、加算アルファ合成用画像の入力として受け付けることができます。</dd></dl></div></div>
 
 
 
@@ -265,8 +241,7 @@ ltAddAlphaと同じ合成モードに対応しているグラフィックソフ�
 <dt>描画方式</dt>
 <dd>　描画方式は <a target="main" class="jump" href="f_Layer_face.html">Layer.face</a> プロパティで指定する値で、レイヤにどのように描画するかを指定します。dfAutoを指定すると、レイヤタイプに従って適切な描画方式が決定されます。レイヤタイプに最適な描画方法とは異なる描画方式で描画することもできます。<br />
 　<a target="main" class="jump" href="f_Layer_copyRect.html">Layer.copyRect</a> メソッドのようなレイヤ間のコピーを行うメソッドでは、どの情報をコピーするかの選択にも用いられます。dfBoth (あるいは dfAlpha あるいは dfAddAlpha の場合) は、メインとマスクの両方がコピーされます。dfMain (あるいは dfOpaque) の場合はメインのみがコピーされます。dfMask の場合はマスクのみ、dfProvince の場合は領域画像のみがコピーされます。<br />
-　同様に、<a target="main" class="jump" href="f_Layer_fillRect.html">Layer.fillRect</a> メソッドでは、どの情報を塗りつぶすかの選択に用いられます。dfBoth (あるいは dfAlpha あるいは dfAddAlpha の場合) は、メインとマスクの両方が塗りつぶされます。dfMain (あるいは dfOpaque) の場合はメインのみがコピー塗りつぶされます。dfMask の場合はマスクのみ、dfProvince の場合は領域画像のみが塗りつぶされます。<br />
-</dd>
+　同様に、<a target="main" class="jump" href="f_Layer_fillRect.html">Layer.fillRect</a> メソッドでは、どの情報を塗りつぶすかの選択に用いられます。dfBoth (あるいは dfAlpha あるいは dfAddAlpha の場合) は、メインとマスクの両方が塗りつぶされます。dfMain (あるいは dfOpaque) の場合はメインのみがコピー塗りつぶされます。dfMask の場合はマスクのみ、dfProvince の場合は領域画像のみが塗りつぶされます。</dd>
 <dt>演算モード</dt>
 <dd>　演算モードは <a target="main" class="jump" href="f_Layer_operateRect.html">Layer.operateRect</a> メソッドなどの引数で指定する値で、演算元(重ね合わせるレイヤ) をどのように扱うかを指定する値です。omAuto を指定すると、演算元のレイヤタイプに従って適切なモードが決定されます。</dd></dl></div></div>
 
