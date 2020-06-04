@@ -161,7 +161,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 <dt>Ogg Vorbis 高速化プロジェクト</dt>
 <dd>
 吉里吉里２は、blacksword 氏による Ogg Vorbis 高速化プロジェクトで公開されている、 SSE 対応の FFT 演算コードを Phase Vocoder の内部で使用しています。
-<at target="_top" href="http://homepage3.nifty.com/blacksword/">http://homepage3.nifty.com/blacksword/</at><r/>
+<at target="_top" href="http://homepage3.nifty.com/blacksword/">http://homepage3.nifty.com/blacksword/</at>
 </dd>
 
 <dt>A C-program for MT19937 (Makoto Matsumoto and Takuji Nishimura)</dt>
@@ -197,14 +197,14 @@ PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
 PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
 LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.<r/>
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 </dd>
 
 
 <dt>LibTomCrypt (Tom St Denis)</dt>
 <dd>
-    <at target="_top"  href="http://libtomcrypt.org/">http://libtomcrypt.org/</at><r/>
+    <at target="_top"  href="http://libtomcrypt.org/">http://libtomcrypt.org/</at>
 </dd>
 
 
