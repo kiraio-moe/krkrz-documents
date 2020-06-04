@@ -316,7 +316,7 @@ Specifies the pad (joystick) key repeat interval in milliseconds. The smaller th
 <dd>
 　It is a setting whether to use _inmm.dll of irori.<r/>
 　Possible values are <b>'yes'(use)</b> or <b>'no' (do not use)</b>. If this option is not specified, 'no' is specified Is considered to have been<r/>
-　Mr. irori's _inmm.dll is useful, but Kiriri Kiri cannot be patched by the _inmm.dll patch program due to its structure. Therefore, it is supported by Kirikiri body itself.<r/>
+　Mr. irori's _inmm.dll is useful, but Kirikiri cannot be patched by the _inmm.dll patch program due to its structure. Therefore, it is supported by Kirikiri body itself.<r/>
 　If you specify 'yes', you can perform the same operation as applying a patch.
 </dd>
 -->
@@ -381,7 +381,7 @@ Specifies the pad (joystick) key repeat interval in milliseconds. The smaller th
 <dd>
 　Sets whether to perform image calculation in finely divided units.<r/>
 　Possible values are <b>'yes' (do)</b>, <b>'int' (interlace split)</b>, <b>'bidi' (bidirectional split)</b>, <b>'no'</b> If you do not specify this option for any of, 'yes' is assumed.<r/>
-　In order to use the CPU's memory cache effectively, Kiri Kiri performs calculations while dividing the image into small areas. Depending on the environment, this may lead to screen flicker. In such environments, specifying 'no' may reduce flickering, but may degrade drawing performance. If double buffering is enabled, it does not make sense to not perform the splitting process, so it is recommended that you set it to perform the splitting process.<r/>
+　In order to use the CPU's memory cache effectively, Kirikiri performs calculations while dividing the image into small areas. Depending on the environment, this may lead to screen flicker. In such environments, specifying 'no' may reduce flickering, but may degrade drawing performance. If double buffering is enabled, it does not make sense to not perform the splitting process, so it is recommended that you set it to perform the splitting process.<r/>
 　If 'int' is specified, the image will be processed every other unit, but stripes may be seen when updating the screen. When 'bidi' is selected, the order of image operations is repeated from top to bottom, bottom to top (when 'yes', always top to bottom).
 </dd>
 

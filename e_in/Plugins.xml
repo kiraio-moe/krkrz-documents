@@ -41,7 +41,7 @@
 <para>
 <ptitle>Automatic loading of plugins</ptitle>
 　Kirikiri has a function to automatically search for plugins and load them at startup. If you want the plugin to load automatically, you need to change the extension of the plugin from dll to tpm.<r/>
-　At startup (just before running startup.tjs), Kiri Kiri looks for a file with the extension tpm from the following folder and automatically loads it as a plugin.<r />
+　At startup (just before running startup.tjs), Kirikiri looks for a file with the extension tpm from the following folder and automatically loads it as a plugin.<r />
 <ul>
 <li>The same folder as the Kirikiri body</li>
 <li>In the plugin (plugin64 for 64bit version) folder in the same folder as the Kirikiri body and below</li>

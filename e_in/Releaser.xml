@@ -60,7 +60,7 @@
 <dl>
 <dt>"Output format"</dt>
 <dd>
-　If you select ".XP3 Archive", a file in xp3 format (Kiri Kiri standard archive format) will be output. Select ".EXE executable" to output an executable file. If ".EXE executable" is selected, krkr.eXe in the same folder as the releaser (krkrrel.exe) or its parent folder will be used.
+　If you select ".XP3 Archive", a file in xp3 format (Kirikiri standard archive format) will be output. Select ".EXE executable" to output an executable file. If ".EXE executable" is selected, krkr.eXe in the same folder as the releaser (krkrrel.exe) or its parent folder will be used.
 </dd>
 
 <dt>"Output File"</dt>
