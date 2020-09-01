@@ -387,7 +387,7 @@ Specifies the pad (joystick) key repeat interval in milliseconds. The smaller th
 
 <dt>-<kw>smoothzoom</kw> (Smoothing in enlarged display)</dt>
 <dd>
-　Set whether to perform smoothing (interpolation at the time of enlargement) when performing enlargement display of the display contents with Window.setZoom, etc., or when Kirari Kiris enlarges (reduces) the screen with the -fsres option. (It has nothing to do with scaling in Layer.affineCopy etc.)<r/>
+　Set whether to perform smoothing (interpolation at the time of enlargement) when performing enlargement display of the display contents with Window.setZoom, etc., or when Kirikiri enlarges (reduces) the screen with the -fsres option. (It has nothing to do with scaling in Layer.affineCopy etc.)<r/>
 　Possible values are <b>'no' (do not do)</b> or <b>'yes' (do)</b>. If this option is not specified, 'yes' is specified. Will be considered<r/>
 　Smoothing makes the image smoother but slightly blurry. Without smoothing, the image will be sharper but jagged.<r/>
 　In some environments, performance may degrade without smoothing. Also, there may be environments where smoothing does not work.<r/>

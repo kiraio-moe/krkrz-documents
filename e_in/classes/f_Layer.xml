@@ -1515,7 +1515,7 @@
 	<result></result>
 	<desc>
 		　Forcibly cancels the sharing state of the layer image.<r/>
-		　Kirari Kirari will share the same image without actually copying the image buffer if the entire image is copied to another layer using assignImages.<r/>
+		　Kirikiri will share the same image without actually copying the image buffer if the entire image is copied to another layer using assignImages.<r/>
 		　Normally, this sharing state is automatically released just before trying to make changes to the image, but this method can be forcibly released.<r/>
 		　If you specify false for the copy argument, the sharing of the image will be canceled, but it will not be guaranteed to inherit the original image (the contents of the image will be undefined), but the sharing will be canceled faster can do. When rewriting the entire layer image, it is not necessary to inherit the original image, so it may be more efficient to call this method with false specified before drawing.<r/>
 		　This method does nothing if the image is not shared.<r/>
@@ -1539,7 +1539,7 @@
 	<result></result>
 	<desc>
 		　Forcibly cancels the sharing status of the area image.<r/>
-		　Kirari Kirari will share the same image without actually copying the image buffer if the entire image is copied to another layer using assignImages.<r/>
+		　Kirikiri will share the same image without actually copying the image buffer if the entire image is copied to another layer using assignImages.<r/>
 		　Normally, this sharing state is automatically released just before trying to make changes to the image, but this method can be forcibly released.<r/>
 		　If you specify false for the copy argument, the sharing of the image will be canceled, but it will not be guaranteed to inherit the original image (the contents of the image will be undefined), but the sharing will be canceled faster can do. When rewriting the entire layer image, it is not necessary to inherit the original image, so it may be more efficient to call this method with false specified before drawing.<r/>
 		　This method does nothing if the image is not shared.<r/>
