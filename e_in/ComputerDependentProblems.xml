@@ -109,7 +109,7 @@ If you are using a third-party mouse driver, you may not be able to type on the 
 <dt>Frequent thrashing</dt>
 <dd>Thrashing (a lot of swap-in / swap-out) can occur frequently due to lack of memory.<r/>
 It may be improved by setting "General-Memory usage" to "Low" in the engine settings.<r/>
-However, performance will be reduced, so do not change the option for "General System-Memory Usage" and set "Graphics-Image Cache Limit" to a relatively low value such as "4 MB" or "8 MB" And may be able to reduce memory usage without significantly degrading performance.<r/>
+However, performance will be reduced, so do not change the option for "General System-Memory Usage" and set "Graphics-Image Cache Limit" to a relatively low value such as "4 MB" or "8 MB" so memory usage may be reduced without significantly degrading performance.<r/>
 </dd>
 
 
