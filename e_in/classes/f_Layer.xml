@@ -2446,22 +2446,22 @@
 				　If you specify true, each of the six parameters is interpreted as follows:<r/>
 				<tt>A   : A of the 2D affine transformation matrix</tt><r/>
 				<tt>B   : B of the 2D affine transformation matrix</tt><r/>
-				<tt>C   : C of 2D affine transformation matrix</tt><r/>
-				<tt>D   : D of 2D affine transformation matrix</tt><r/>
-				<tt>E   : Tx of 2D affine transformation matrix</tt><r/>
-				<tt>F   : Ty of 2D affine transformation matrix</tt><r/>
+				<tt>C   : C of the 2D affine transformation matrix</tt><r/>
+				<tt>D   : D of the 2D affine transformation matrix</tt><r/>
+				<tt>E   : Tx of the 2D affine transformation matrix</tt><r/>
+				<tt>F   : Ty of the 2D affine transformation matrix</tt><r/>
 				<r/>
-				　By the affine transformation, the image position (x, y) of the copy source (where the upper left corner of the copy source rectangle is (0, 0)) is calculated by the following equation using the image position (x ', y') of the copy destination. Is converted to<r/>
+				　By the affine transformation, the image position (x, y) of the copy source (where the upper left corner of the copy source rectangle is (0, 0)) is calculated by the following equation using the image position (x', y') of the copy destination.<r/>
 				x' =  a*x + c*y + tx<r/>
 				y' =  b*x + d*y + ty<r/>
 				<r/>
 				　If false is specified, each of the six parameters is interpreted as follows: These parameters also accept real numbers.<r/>
 				<tt>A   : X coordinate position (x0) of the upper left corner of the source rectangle in the image position at the destination</tt><r/>
 				<tt>B   : Y coordinate position (y0) of the upper left corner of the source rectangle in the image position at the destination</tt><r/>
-				<tt>C   : X coordinate position (x1) of the upper right corner point of the source rectangle in the image position at the destination</tt><r/>
-				<tt>D   : Y coordinate position (y1) of the point at the upper right corner of the copy source rectangle in the image position at the copy destination</tt><r/>
-				<tt>E   : X coordinate position (x2) of the lower left corner point of the source rectangle in the image position at the destination</tt><r/>
-				<tt>F   : Y coordinate position of the lower left corner point of the source rectangle in the image position at the destination (y2)</tt><r/>
+				<tt>C   : X coordinate position (x1) of the upper right corner of the source rectangle in the image position at the destination</tt><r/>
+				<tt>D   : Y coordinate position (y1) of the upper right corner of the source rectangle in the image position at the destination</tt><r/>
+				<tt>E   : X coordinate position (x2) of the lower left corner of the source rectangle in the image position at the destination</tt><r/>
+				<tt>F   : Y coordinate position (y2) of the lower left corner of the source rectangle in the image position at the destination</tt><r/>
 				<r/>
 				　If false is specified, the copy destination position (x3, y3) corresponding to the lower right corner of the copy source is automatically calculated by the following formula.<r/>
 				x3 = x1 - x0 + x2<r/>
@@ -2599,22 +2599,22 @@
 				　If you specify true, each of the six parameters is interpreted as follows:<r/>
 				<tt>A   : A of the 2D affine transformation matrix</tt><r/>
 				<tt>B   : B of the 2D affine transformation matrix</tt><r/>
-				<tt>C   : C of 2D affine transformation matrix</tt><r/>
-				<tt>D   : D of 2D affine transformation matrix</tt><r/>
-				<tt>E   : Tx of 2D affine transformation matrix</tt><r/>
-				<tt>F   : Ty of 2D affine transformation matrix</tt><r/>
+				<tt>C   : C of the 2D affine transformation matrix</tt><r/>
+				<tt>D   : D of the 2D affine transformation matrix</tt><r/>
+				<tt>E   : Tx of the 2D affine transformation matrix</tt><r/>
+				<tt>F   : Ty of the 2D affine transformation matrix</tt><r/>
 				<r/>
-				　By the affine transformation, the image position (x, y) of the superimposition source (where the upper left corner of the rectangle of the superimposition source is (0, 0)) is calculated by the following equation using the image position (x ', y ').<r/>
+				　By the affine transformation, the image position (x, y) of the superimposition source (where the upper left corner of the rectangle of the superimposition source is (0, 0)) is calculated by the following equation using the image position (x', y').<r/>
 				x' =  a*x + c*y + tx<r/>
 				y' =  b*x + d*y + ty<r/>
 				<r/>
 				　If false is specified, each of the six parameters is interpreted as follows:<r/>
-				<tt>A   : X coordinate position (x0) of the upper left corner point of the source rectangle in the image position at the destination</tt><r/>
+				<tt>A   : X coordinate position (x0) of the upper left corner of the source rectangle in the image position at the destination</tt><r/>
 				<tt>B   : Y coordinate position (y0) of the upper left corner of the source rectangle in the image position at the destination</tt><r/>
-				<tt>C   : X coordinate position (x1) of the upper right corner point of the source rectangle in the image position at the destination</tt><r/>
-				<tt>D   : Y coordinate position (y1) of the point at the upper right corner of the copy source rectangle in the image position at the copy destination</tt><r/>
-				<tt>E   : X coordinate position (x2) of the lower left corner point of the source rectangle in the image position at the destination</tt><r/>
-				<tt>F   : Y coordinate position of the lower left corner point of the source rectangle in the image position at the destination (y2)</tt><r/>
+				<tt>C   : X coordinate position (x1) of the upper right corner of the source rectangle in the image position at the destination</tt><r/>
+				<tt>D   : Y coordinate position (y1) of the upper right corner of the source rectangle in the image position at the destination</tt><r/>
+				<tt>E   : X coordinate position (x2) of the lower left corner of the source rectangle in the image position at the destination</tt><r/>
+				<tt>F   : Y coordinate position (y2) of the lower left corner of the source rectangle in the image position at the destination</tt><r/>
 				<r/>
 				　If false is specified, the overlay destination position (x3, y3) corresponding to the lower right corner of the overlay source is automatically calculated by the following formula.<r/>
 				x3 = x1 - x0 + x2<r/>
