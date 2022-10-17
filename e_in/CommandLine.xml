@@ -484,14 +484,14 @@ Specifies the pad (joystick) key repeat interval in milliseconds. The smaller th
 <dt>-<kw>forcelog</kw> (Log to file)</dt>
 <dd>
 　Specify whether to output the console log to a file.<r/>
-　Available values are <b>'no' (do not output)</b>, <b>'yes' (output by adding to existing file)</b>, <b>'clear' (clearing existing output then creating a new file). If you do not specify this option, it is assumed that 'no' is specified.
+　Available values are <b>'no' (do not output)</b>, <b>'yes' (output by adding to existing file)</b>, <b>'clear' (clearing existing output then creating a new file)</b>. If you do not specify this option, it is assumed that 'no' is specified.
 
 </dd>
 
 <dt>-<kw>logerror</kw> (Log to file on error)</dt>
 <dd>
 　Specify whether to output the console log to a file when an error occurs.<r/>
-　Available values are <b>'no' (do not output)</b>, <b>'yes' (output by adding to existing file)</b>, <b>'clear' (clearing existing output then creating a new file). If you do not specify this option, it is assumed that 'no' is specified.
+　Available values are <b>'no' (do not output)</b>, <b>'yes' (output by adding to existing file)</b>, <b>'clear' (clearing existing output then creating a new file)</b>. If you do not specify this option, it is assumed that 'no' is specified.
 
 </dd>
 </dl>
